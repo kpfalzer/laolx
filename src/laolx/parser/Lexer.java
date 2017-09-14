@@ -54,6 +54,7 @@ public class Lexer {
     private Lexer(InputStream input, String filename) {
         this.input = new BufferedReader(new InputStreamReader(input));
         this.filename = filename;
+        readLine();
     }
 
     /**
@@ -87,11 +88,9 @@ public class Lexer {
      * @return array of n lookahead tokens.
      */
     public Token[] peekn(int n) {
-        return IntStream
-                .range(0, n)
-                .map(Lexer::next)
-                .collect(Collectors.toList())
-                .toArray(new Token[0]);
+        peek(n);
+        assert tokens.size() >= n;
+        return tokens.subList(0, n).toArray(new Token[0]);
     }
 
     public Token accept() {
@@ -112,56 +111,87 @@ public class Lexer {
     }
 
     private Token next() {
-        char ch = 0;
-        while (true) {
-            if (isNull(line)) {
-                col = 0;
-                try {
-                    line = input.readLine();
-                } catch (IOException ex) {
-                    //todo: for now, convert to runtime
-                    throw new RuntimeException(ex);
-                }
-                if (isNull(line)) {
-                    final Token lastToken = tokens.peekLast();
-                    if (tokens.isEmpty() || (lastToken.code != Token.Code.EOF)) {
-                        lineNumber += 1;
-                        text = new StringBuilder(EOF);
-                        return push(Token.Code.EOF);
-                    }
-                    assert lastToken.code == Token.Code.EOF;
-                    return lastToken;
-                }
-                lineNumber += 1;
-                resetText();
+        if (isNull(line)) {
+            if (!tokens.isEmpty() && (Token.Code.EOF != tokens.getLast().code)) {
+                text = new StringBuilder(EOF);
+                push(Token.Code.EOF);
             }
-            if (col >= line.length()) {
-                text.append(EOLN);
-                line = null;
-                return push(Token.Code.EOLN);
-            }
-            ch = line.charAt(col);
-            //todo
+            return tokens.getLast();
         }
+        char ch = 0;
+        
         return null;
+    }
+
+    /**
+     * Match current position with to. 
+     * @param to match to.
+     * @return true if match; else false.
+     */
+    private boolean matchTo(String to) {
+        //todo
+        return false;
+    }
+    
+    private void readLine() {
+        assert isNull(line) || (col >= line.length());
+        try {
+            line = input.readLine();
+        } catch (IOException ex) {
+            //todo: for now, convert to runtime
+            throw new RuntimeException(ex);
+        }
+        lineNumber += 1;
+        col = 0;
+        resetText();
     }
 
     private void resetText() {
         text.setLength(0);
     }
-    
+
     private Token push(Token.Code code) {
-        tokens.add(new Token(new Location(filename, lineNumber, col), code, text.toString()));
+        tokens.add(new Token(new Location(filename, startLineNumber, startCol), code, text.toString()));
         return tokens.getLast();
     }
 
     private static final String EOF = "<EOF>";
     private static final String EOLN = System.lineSeparator();
 
+    /**
+     * Name of file being processed; or null if no filename specified.
+     */
     private final String filename;
+    /**
+     * Buffered reader for efficient input processing.
+     */
     private final BufferedReader input;
+    /**
+     * Current line being processed.
+     */
     private String line = null;
-    private int lineNumber = 0, col = 0;
+    /**
+     * Current line number of line.
+     */
+    private int lineNumber = 0;
+    /**
+     * Current position in line.
+     */
+    private int col = 0;
+    /**
+     * Starting line number of current token.
+     */
+    private int startLineNumber;
+    /**
+     * Starting column number of current token.
+     */
+    private int startCol;
+    /**
+     * Ordered collection of tokens.
+     */
     private LinkedList<Token> tokens = new LinkedList<>();
+    /**
+     * Text of current token.
+     */
     private StringBuilder text = new StringBuilder();
 }
