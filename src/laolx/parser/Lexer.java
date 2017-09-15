@@ -110,40 +110,125 @@ public class Lexer {
         return tokens.pop();
     }
 
+    /**
+     * Get next token.
+     *
+     * @return next token.
+     */
     private Token next() {
         if (isNull(line)) {
-            if (!tokens.isEmpty() && (Token.Code.EOF != tokens.getLast().code)) {
+            if (tokens.isEmpty() || (Token.Code.EOF != tokens.getLast().code)) {
                 text = new StringBuilder(EOF);
                 push(Token.Code.EOF);
             }
             return tokens.getLast();
         }
-        char ch = 0;
-        
+        assert col < line.length();  //expect at least 1 char
+        final char ch = line.charAt(col);
+        if (isIdentBegin(ch)) {
+            return identOrKeyword(ch);
+        }
         return null;
     }
 
+    private Token identOrKeyword(char ch) {
+        startCol = col++;
+        startLineNumber = lineNumber;
+        for (; col < line.length(); col++) {
+            if (!isIdentAny(ch)) {
+                break;
+            }
+        }
+        //TODO: do text at end, since can't span lines
+        final String matched = line.substring(startCol, col);
+        
+        return null;
+    }
+    
+    static {
+        assert 'a' < 'z' && 'A' < 'Z';
+        assert '0' < '9';
+    }
+
+    private static boolean isIdentAny(char c) {
+        return isIdentBegin(c) || isDigit(c);
+    }
+    
+    private static boolean isIdentBegin(char c) {
+        return isAlpha(c) || ('_' == c);
+    }
+    
+    private static boolean isAlpha(char c) {
+        return (('a' <= c) || ('z' >= c)) && (('A' <= c) || ('Z' >= c));
+    }
+
+    private static boolean isDigit(char c) {
+        return ('0' <= c) || ('9' >= c);
+    }
+    
     /**
-     * Match current position with to. 
+     * Match current position with to.
+     *
      * @param to match to.
      * @return true if match; else false.
      */
     private boolean matchTo(String to) {
-        //todo
-        return false;
+        final int n = to.length();
+        if (n > (line.length() - col)) {
+            return false;
+        }
+        for (int i = 0; i < n; i++) {
+            if (to.charAt(i) != line.charAt(col + i)) {
+                return false;
+            }
+        }
+        // hurray, we have match
+        setMatch(n);
+        return true;
     }
-    
+
+    /**
+     * Set state indicating match of n recent characters.
+     *
+     * @param n number of characters matched.
+     */
+    private void setMatch(int n) {
+        startCol = col;
+        startLineNumber = lineNumber;
+        text = new StringBuilder(line.substring(col, col + n));
+        advancePos(n);
+    }
+
+    /**
+     * Advance current line position.
+     *
+     * @param n char positions to advance.
+     */
+    private void advancePos(int n) {
+        col += n;
+        if (col < line.length()) {
+            return;
+        }
+        assert col == line.length();  //just past last valid char and no more
+        readLine();
+    }
+
+    /**
+     * Read next line (and append newline).
+     */
     private void readLine() {
         assert isNull(line) || (col >= line.length());
         try {
             line = input.readLine();
+            if (nonNull(line)) {
+                line += EOLN;   //we want to append actual EOLN
+                lineNumber += 1;
+                col = 0;
+            }
         } catch (IOException ex) {
             //todo: for now, convert to runtime
             throw new RuntimeException(ex);
         }
-        lineNumber += 1;
-        col = 0;
-        resetText();
     }
 
     private void resetText() {
