@@ -118,7 +118,7 @@ public class Lexer {
     private Token next() {
         if (isNull(line)) {
             if (tokens.isEmpty() || (Token.Code.EOF != tokens.getLast().code)) {
-                text = new StringBuilder(EOF);
+                text = EOF;
                 push(Token.Code.EOF);
             }
             return tokens.getLast();
@@ -128,9 +128,32 @@ public class Lexer {
         if (isIdentBegin(ch)) {
             return identOrKeyword(ch);
         }
+        if (matchTo(EOLN)) {
+            return getToken(Token.Code.EOLN);
+        }
+        if (matchTo("//")) {
+            return lineComment();
+        }
+        if (matchTo("/*")) {
+            return blockComment();
+        }
         return null;
     }
 
+    private Token blockComment() {
+        return null;//todo
+    }
+    
+    private Token lineComment() {
+        int lastPos = line.length();
+        //don't grab EOLN with text: but skip over it all the same.
+        lastPos -= line.endsWith(EOLN) ? EOLN.length() : 0;
+        text = line.substring(startCol, lastPos);
+        col = line.length();
+        advancePos();
+        return getToken(Token.Code.LINE_COMMENT);
+    }
+    
     private Token identOrKeyword(char ch) {
         startCol = col++;
         startLineNumber = lineNumber;
@@ -139,11 +162,21 @@ public class Lexer {
                 break;
             }
         }
-        //TODO: do text at end, since can't span lines
-        final String matched = line.substring(startCol, col);
-        
-        return null;
+        text = line.substring(startCol, col);
+        advancePos();
+        return getToken(isKeyword() ? keyword : Token.Code.IDENT);
     }
+    
+    private boolean isKeyword() {
+        return isKeyword(text);
+    }
+    
+    private boolean isKeyword(String matched) {
+        keyword = Token.isKeyword(matched);
+        return nonNull(keyword);
+    }
+    
+    private Token.Code keyword;
     
     static {
         assert 'a' < 'z' && 'A' < 'Z';
@@ -195,7 +228,7 @@ public class Lexer {
     private void setMatch(int n) {
         startCol = col;
         startLineNumber = lineNumber;
-        text = new StringBuilder(line.substring(col, col + n));
+        text = line.substring(col, col + n);
         advancePos(n);
     }
 
@@ -213,6 +246,13 @@ public class Lexer {
         readLine();
     }
 
+    /**
+     * If we have advanced past line, then read next line.
+     */
+    private void advancePos() {
+        advancePos(0);
+    }
+    
     /**
      * Read next line (and append newline).
      */
@@ -232,11 +272,15 @@ public class Lexer {
     }
 
     private void resetText() {
-        text.setLength(0);
+        text = null;
     }
 
+    private Token getToken(Token.Code code) {
+        return new Token(new Location(filename, startLineNumber, startCol), code, text);
+    }
+    
     private Token push(Token.Code code) {
-        tokens.add(new Token(new Location(filename, startLineNumber, startCol), code, text.toString()));
+        tokens.add(getToken(code));
         return tokens.getLast();
     }
 
@@ -278,5 +322,5 @@ public class Lexer {
     /**
      * Text of current token.
      */
-    private StringBuilder text = new StringBuilder();
+    private String text = null;
 }
