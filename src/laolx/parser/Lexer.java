@@ -116,7 +116,7 @@ public class Lexer {
      * @return next token.
      */
     private Token next() {
-        if (isNull(line)) {
+        if (isEOF()) {
             if (tokens.isEmpty() || (Token.Code.EOF != tokens.getLast().code)) {
                 text = EOF;
                 push(Token.Code.EOF);
@@ -128,6 +128,9 @@ public class Lexer {
         if (isIdentBegin(ch)) {
             return identOrKeyword(ch);
         }
+        if (matchTo(' ') || matchTo('\t')) {
+            return getToken(Token.Code.WS);
+        }
         if (matchTo(EOLN)) {
             return getToken(Token.Code.EOLN);
         }
@@ -137,11 +140,84 @@ public class Lexer {
         if (matchTo("/*")) {
             return blockComment();
         }
+        if (('"' == ch) || ('\'' == ch)) {
+            return quoted(ch);
+        }
+        if (':' == ch) {
+            return symbolOrOther();
+        }
         return null;
     }
 
+    private Token symbolOrOther() {
+        startCol = col++;
+        startLineNumber = lineNumber;
+        if ((col < line.length()) && isIdentBegin(line.charAt(col))) {
+            Token ident = identOrKeyword(line.charAt(col));
+            startCol = ident.location.col - 1; //backup to :
+            text = ":" + ident.text;
+            return getToken(Token.Code.SYMBOL);
+        }
+        col--; //rollback to ':'
+        return getSymbolStartingWith(':');
+    }
+    
+    private Token getSymbolStartingWith(char ch) {
+        assert Token.SYMBOLS.containsKey(ch);
+        for (Token.Code sym : Token.SYMBOLS.get(ch)) {
+            if (matchTo(sym.text)) {
+                return getToken(sym);
+            }
+        }
+        assert false; //never
+        return null;
+    }
+    
+    private Token quoted(char quote) {
+        startCol = col++;
+        startLineNumber = lineNumber;
+        char ch;
+        for (; col < line.length(); col++) {
+            ch = line.charAt(col);
+            if (('\\' != ch) && (ch == quote)) {
+                break;
+            }
+        }
+        if (col >= line.length()) {
+            throw new Exception("Unterminated string");
+        }
+        text = line.substring(startCol, col);
+        advancePos();
+        return getToken(('"' == quote) ? Token.Code.DQSTRING : Token.Code.SQSTRING);
+    }
+    
+    private static final String END_BLOCK_COMMENT = "*/";
+    
     private Token blockComment() {
-        return null;//todo
+        StringBuilder buf = new StringBuilder(text);
+        int end;
+        while (true) { //todo: corner case: EOF
+            end = line.indexOf(END_BLOCK_COMMENT, col);
+            if (0 > end) {
+                buf.append(line.substring(col));
+                advancePos(line.length() - col);  //force nextLine
+            } else {
+                end += END_BLOCK_COMMENT.length();
+                buf.append(line.substring(col, end));
+                advancePos(end - col);
+                break; //while
+            }
+            if (isEOF()) {
+                throw new Exception("Unterminated block comment");
+            }
+        }
+        text = buf.toString();
+        advancePos();
+        return getToken(Token.Code.BLOCK_COMMENT);
+    }
+    
+    public boolean isEOF() {
+        return isNull(line);
     }
     
     private Token lineComment() {
@@ -220,6 +296,14 @@ public class Lexer {
         return true;
     }
 
+    private boolean matchTo(char ch) {
+        if (line.charAt(col) != ch) {
+            return false;
+        }
+        setMatch(1);
+        return true;
+    }
+    
     /**
      * Set state indicating match of n recent characters.
      *
@@ -257,7 +341,7 @@ public class Lexer {
      * Read next line (and append newline).
      */
     private void readLine() {
-        assert isNull(line) || (col >= line.length());
+        assert isEOF() || (col >= line.length());
         try {
             line = input.readLine();
             if (nonNull(line)) {
@@ -323,4 +407,11 @@ public class Lexer {
      * Text of current token.
      */
     private String text = null;
+    
+    public class Exception extends RuntimeException {
+        public Exception(String reason) {
+            //todo: since we're inner class: add location.
+            super(reason);
+        }
+    }
 }
