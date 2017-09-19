@@ -92,7 +92,6 @@ public class Token {
         IDENT,
         DQSTRING, //double-quoted string
         SQSTRING, //single-quoted string
-        SYMBOL, //e.g. :foobar
         REGEXP, //%r{...}
         //
         // K_xxx are keywords

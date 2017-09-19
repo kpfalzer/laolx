@@ -24,7 +24,6 @@
 package laolx.parser;
 
 import java.io.StringReader;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -65,8 +64,9 @@ public class LexerTest {
         assertTrue(Token.Code.EOLN == tok.code);
         {
             /* 2*/
-            Token[] toks = dut.peekn(7);
-            assertTrue(toks[1].code == Token.Code.SYMBOL);
+            Token[] toks = dut.peekn(8);
+            assertTrue(toks[1].code == Token.Code.S_COLON);
+            assertTrue(toks[2].code == Token.Code.IDENT);
             dut.accept(toks.length - 1);
         }
         {
@@ -97,6 +97,7 @@ public class LexerTest {
                 caughtException = true;
             }
             assertTrue(caughtException);
+            dut.advanceToNextLine();
         }
         {
             /* 9*/

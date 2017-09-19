@@ -116,6 +116,15 @@ public class Lexer {
     }
 
     /**
+     * For use during error recovery: skip to beginning of next line;
+     * and reset all existing tokens.
+     */
+    public void advanceToNextLine() {
+        tokens.clear();
+        readLine(true);
+    }
+    
+    /**
      * Get next token.
      *
      * @return next token.
@@ -148,26 +157,10 @@ public class Lexer {
         if (('"' == ch) || ('\'' == ch)) {
             return quoted(ch);
         }
-        if (':' == ch) {
-            return symbolOrOther();
-        }
         if (matchTo("%r{", false)) {
             return regexp();
         }
         return getSymbolStartingWith(ch);
-    }
-    
-    private Token symbolOrOther() {
-        startCol = col++;
-        startLineNumber = lineNumber;
-        if ((col < line.length()) && isIdentBegin(line.charAt(col))) {
-            Token ident = identOrKeyword();
-            startCol = ident.location.col - 1; //backup to :
-            text = ":" + ident.text;
-            return getToken(Token.Code.SYMBOL);
-        }
-        col--; //rollback to ':'
-        return getSymbolStartingWith(':');
     }
     
     private Token getSymbolStartingWith(char ch) {
@@ -418,9 +411,10 @@ public class Lexer {
 
     /**
      * Read next line (and append newline).
+     * @param force force read line.
      */
-    private void readLine() {
-        assert isEmpty() || (col >= line.length());
+    private void readLine(boolean force) {
+        assert force || isEmpty() || (col >= line.length());
         try {
             line = input.readLine();
             if (nonNull(line)) {
@@ -432,6 +426,10 @@ public class Lexer {
             //todo: for now, convert to runtime
             throw new RuntimeException(ex);
         }
+    }
+    
+    private void readLine() {
+        readLine(false);
     }
     
     private void resetText() {
