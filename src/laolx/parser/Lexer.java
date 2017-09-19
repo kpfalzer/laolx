@@ -34,6 +34,7 @@ import java.util.LinkedList;
 import java.util.stream.IntStream;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import java.util.function.Predicate;
 
 /**
  *
@@ -160,7 +161,17 @@ public class Lexer {
         if (matchTo("%r{", false)) {
             return regexp();
         }
+        //todo: number -> INT | FLOAT
+        if (isDigit(ch));
         return getSymbolStartingWith(ch);
+    }
+    
+    private Token getNumber() {
+        
+    }
+    
+    private boolean ifNextChar(Predicate<Character> test) {
+       return (col < line.length()-1) ? test.test(line.charAt(col+1)) : false;
     }
     
     private Token getSymbolStartingWith(char ch) {

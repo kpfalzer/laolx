@@ -93,6 +93,8 @@ public class Token {
         DQSTRING, //double-quoted string
         SQSTRING, //single-quoted string
         REGEXP, //%r{...}
+        INT,
+        FLOAT,
         //
         // K_xxx are keywords
         K_CASE("case"),
