@@ -23,6 +23,8 @@
  */
 package laolx.parser;
 
+import java.util.Objects;
+
 /**
  * @author kwpfalzer
  */
@@ -35,6 +37,19 @@ public class Location {
         this.filename = filename;
         this.line = line;
         this.col = col;
+    }
+    
+    @Override
+    public String toString() {
+       StringBuilder loc;
+       if (Objects.nonNull(filename)) {
+           loc = new StringBuilder(filename);
+           loc.append(":");
+       } else {
+           loc = new StringBuilder();
+       }
+       loc.append(line).append(":").append(col);
+       return loc.toString();
     }
     
     public final String filename;

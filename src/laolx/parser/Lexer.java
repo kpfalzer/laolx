@@ -29,30 +29,36 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.LinkedList;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author kwpfalzer
  */
 public class Lexer {
-
+    
     public Lexer(String filename) throws FileNotFoundException {
         this(new FileInputStream(filename), filename);
     }
-
+    
     public Lexer(InputStream input) {
         this(input, null);
     }
-
+    
+    public Lexer(Reader rdr) {
+        this(rdr, null);
+    }
+    
     private Lexer(InputStream input, String filename) {
-        this.input = new BufferedReader(new InputStreamReader(input));
+        this(new InputStreamReader(input), filename);
+    }
+    
+    private Lexer(Reader rdr, String filename) {
+        this.input = new BufferedReader(rdr);
         this.filename = filename;
         readLine();
     }
@@ -70,13 +76,11 @@ public class Lexer {
      * Peek at n-th lookahead token.
      *
      * @param n lookahead position.
-     * @return b-th lookahead token.
+     * @return n-th lookahead token.
      */
     public Token peek(int n) {
-        if (n >= tokens.size()) {
-            IntStream
-                    .rangeClosed(0, n)
-                    .forEach($ -> tokens.add(next()));
+        while (tokens.size() <= n) {
+            push(next());
         }
         return tokens.get(n);
     }
@@ -89,12 +93,12 @@ public class Lexer {
      */
     public Token[] peekn(int n) {
         peek(n);
-        assert tokens.size() >= n;
+        assert tokens.size() > n;
         return tokens.subList(0, n).toArray(new Token[0]);
     }
-
+    
     public Token accept() {
-        return tokens.pop();
+        return accept(0);
     }
 
     /**
@@ -104,9 +108,10 @@ public class Lexer {
      * @return n-th/last token.
      */
     public Token accept(int n) {
-        IntStream
-                .range(1, n) //nothing if n <= 1
-                .forEach($ -> tokens.pop());
+        peek(n);
+        while (0 < n--) {
+            tokens.pop();
+        }
         return tokens.pop();
     }
 
@@ -116,20 +121,20 @@ public class Lexer {
      * @return next token.
      */
     private Token next() {
-        if (isEOF()) {
+        if (isEmpty()) {
             if (tokens.isEmpty() || (Token.Code.EOF != tokens.getLast().code)) {
                 text = EOF;
-                push(Token.Code.EOF);
+                return getToken(Token.Code.EOF);
             }
             return tokens.getLast();
         }
         assert col < line.length();  //expect at least 1 char
         final char ch = line.charAt(col);
         if (isIdentBegin(ch)) {
-            return identOrKeyword(ch);
+            return identOrKeyword();
         }
-        if (matchTo(' ') || matchTo('\t')) {
-            return getToken(Token.Code.WS);
+        if ((' ' == ch) || ('\t' == ch)) {
+            return whiteSpace();
         }
         if (matchTo(EOLN)) {
             return getToken(Token.Code.EOLN);
@@ -146,14 +151,17 @@ public class Lexer {
         if (':' == ch) {
             return symbolOrOther();
         }
-        return null;
+        if (matchTo("%r{", false)) {
+            return regexp();
+        }
+        return getSymbolStartingWith(ch);
     }
-
+    
     private Token symbolOrOther() {
         startCol = col++;
         startLineNumber = lineNumber;
         if ((col < line.length()) && isIdentBegin(line.charAt(col))) {
-            Token ident = identOrKeyword(line.charAt(col));
+            Token ident = identOrKeyword();
             startCol = ident.location.col - 1; //backup to :
             text = ":" + ident.text;
             return getToken(Token.Code.SYMBOL);
@@ -173,22 +181,87 @@ public class Lexer {
         return null;
     }
     
+    private Token whiteSpace() {
+        return whileOnLine(
+                (char ch1) -> ((' ' != ch1) && ('\t' != ch1)),
+                () -> getToken(Token.Code.WS)
+        );
+    }
+    
     private Token quoted(char quote) {
+        return whileOnLine(
+                (char ch) -> (quote == ch),
+                () -> getToken(('"' == quote) ? Token.Code.DQSTRING : Token.Code.SQSTRING),
+                1,
+                true,
+                () -> {
+                    throw new Exception("Unterminated string");
+                }
+        );
+    }
+    
+    private Token regexp() {
+        col += 2;   //past %r of %r{
+        return whileOnLine(
+                (char ch) -> ('}' == ch),
+                () -> getToken(Token.Code.REGEXP),
+                1,
+                true,
+                () -> {
+                    throw new Exception("Unterminated regexp");
+                }
+        );
+    }
+    
+    private Token identOrKeyword() {
+        return whileOnLine(
+                (char ch1) -> !isIdentAny(ch1),
+                () -> getToken(isKeyword() ? keyword : Token.Code.IDENT)
+        );
+    }
+    
+    private interface BreakPredicate {
+        
+        boolean cond(char ch);
+    }
+    
+    private interface CreateToken {
+        
+        Token create();
+    }
+    
+    private interface Unterminated {
+        
+        void onCondition();
+    }
+    
+    private Token whileOnLine(BreakPredicate breaker, CreateToken creator, int colAdj, boolean allowEsc, Unterminated unterminated) {
         startCol = col++;
         startLineNumber = lineNumber;
         char ch;
         for (; col < line.length(); col++) {
             ch = line.charAt(col);
-            if (('\\' != ch) && (ch == quote)) {
+            if (allowEsc) {
+                if (ch == '\\') {
+                    col++;
+                } else if (breaker.cond(ch)) {
+                    break;
+                }
+            } else if (breaker.cond(ch)) {
                 break;
             }
         }
-        if (col >= line.length()) {
-            throw new Exception("Unterminated string");
+        if (nonNull(unterminated) && (col >= line.length())) {
+            unterminated.onCondition();
         }
+        col += colAdj;
         text = line.substring(startCol, col);
         advancePos();
-        return getToken(('"' == quote) ? Token.Code.DQSTRING : Token.Code.SQSTRING);
+        return creator.create();
+    }
+    
+    private Token whileOnLine(BreakPredicate breaker, CreateToken creator) {
+        return whileOnLine(breaker, creator, 0, false, null);
     }
     
     private static final String END_BLOCK_COMMENT = "*/";
@@ -207,7 +280,7 @@ public class Lexer {
                 advancePos(end - col);
                 break; //while
             }
-            if (isEOF()) {
+            if (isEmpty()) {
                 throw new Exception("Unterminated block comment");
             }
         }
@@ -217,6 +290,18 @@ public class Lexer {
     }
     
     public boolean isEOF() {
+        if (tokens.isEmpty()) {
+            push(next());
+        }
+        return (Token.Code.EOF == tokens.getFirst().code);
+    }
+
+    /**
+     * Check if input stream is empty. NOTE: Public API uses isEmpty().
+     *
+     * @return true on empty stream.
+     */
+    private boolean isEmpty() {
         return isNull(line);
     }
     
@@ -228,19 +313,6 @@ public class Lexer {
         col = line.length();
         advancePos();
         return getToken(Token.Code.LINE_COMMENT);
-    }
-    
-    private Token identOrKeyword(char ch) {
-        startCol = col++;
-        startLineNumber = lineNumber;
-        for (; col < line.length(); col++) {
-            if (!isIdentAny(ch)) {
-                break;
-            }
-        }
-        text = line.substring(startCol, col);
-        advancePos();
-        return getToken(isKeyword() ? keyword : Token.Code.IDENT);
     }
     
     private boolean isKeyword() {
@@ -258,7 +330,7 @@ public class Lexer {
         assert 'a' < 'z' && 'A' < 'Z';
         assert '0' < '9';
     }
-
+    
     private static boolean isIdentAny(char c) {
         return isIdentBegin(c) || isDigit(c);
     }
@@ -268,20 +340,21 @@ public class Lexer {
     }
     
     private static boolean isAlpha(char c) {
-        return (('a' <= c) || ('z' >= c)) && (('A' <= c) || ('Z' >= c));
-    }
-
-    private static boolean isDigit(char c) {
-        return ('0' <= c) || ('9' >= c);
+        return (('a' <= c) && (c <= 'z')) || (('A' <= c) && (c <= 'Z'));
     }
     
+    private static boolean isDigit(char c) {
+        return ('0' <= c) && (c <= '9');
+    }
+
     /**
      * Match current position with to.
      *
      * @param to match to.
+     * @param setMatch true if adjust positions upon match.
      * @return true if match; else false.
      */
-    private boolean matchTo(String to) {
+    private boolean matchTo(String to, boolean setMatch) {
         final int n = to.length();
         if (n > (line.length() - col)) {
             return false;
@@ -292,10 +365,16 @@ public class Lexer {
             }
         }
         // hurray, we have match
-        setMatch(n);
+        if (setMatch) {
+            setMatch(n);
+        }
         return true;
     }
-
+    
+    private boolean matchTo(String to) {
+        return matchTo(to, true);
+    }
+    
     private boolean matchTo(char ch) {
         if (line.charAt(col) != ch) {
             return false;
@@ -303,7 +382,7 @@ public class Lexer {
         setMatch(1);
         return true;
     }
-    
+
     /**
      * Set state indicating match of n recent characters.
      *
@@ -336,12 +415,12 @@ public class Lexer {
     private void advancePos() {
         advancePos(0);
     }
-    
+
     /**
      * Read next line (and append newline).
      */
     private void readLine() {
-        assert isEOF() || (col >= line.length());
+        assert isEmpty() || (col >= line.length());
         try {
             line = input.readLine();
             if (nonNull(line)) {
@@ -354,20 +433,24 @@ public class Lexer {
             throw new RuntimeException(ex);
         }
     }
-
+    
     private void resetText() {
         text = null;
     }
-
+    
     private Token getToken(Token.Code code) {
-        return new Token(new Location(filename, startLineNumber, startCol), code, text);
+        return new Token(getLocation(), code, text);
     }
     
-    private Token push(Token.Code code) {
-        tokens.add(getToken(code));
+    private Location getLocation() {
+        return new Location(filename, startLineNumber, startCol + 1);
+    }
+    
+    private Token push(Token token) {
+        tokens.add(token);
         return tokens.getLast();
     }
-
+    
     private static final String EOF = "<EOF>";
     private static final String EOLN = System.lineSeparator();
 
@@ -409,9 +492,10 @@ public class Lexer {
     private String text = null;
     
     public class Exception extends RuntimeException {
+        
         public Exception(String reason) {
             //todo: since we're inner class: add location.
-            super(reason);
+            super(getLocation() + ": " + reason);
         }
     }
 }

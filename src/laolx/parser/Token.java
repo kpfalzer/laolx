@@ -49,16 +49,24 @@ public class Token {
     public final String text;
 
     /**
+     * Force class to load and static initialize.
+     */
+    public static void initialize() {
+    }
+
+    /**
      * Check if text matches a keyword.
+     *
      * @param text text to check.
      * @return Code of matching keyword or null if not a keyword.
      */
     public static Code isKeyword(String text) {
         return KEYWORDS.get(text);
     }
-    
+
     /**
      * Check is text matches a keyword.
+     *
      * @param text text to check.
      * @param ref set to keyword code iff text is a keyword; else do nothing.
      * @return true if text matches keyword (and ref[0] updated); else false;
@@ -71,7 +79,7 @@ public class Token {
         }
         return Objects.nonNull(kwrd);
     }
-    
+
     /**
      * Token codes.
      */
@@ -85,31 +93,33 @@ public class Token {
         DQSTRING, //double-quoted string
         SQSTRING, //single-quoted string
         SYMBOL, //e.g. :foobar
+        REGEXP, //%r{...}
         //
         // K_xxx are keywords
-        K_CLASS("class"),
-        K_INTERFACE("interface"),
-        K_EXTENDS("extends"),
-        K_IMPLEMENTS("implements"),
-        K_DEFAULT("default"),
-        K_STATIC("static"),
-        K_FOR("for"),
-        K_WHILE("while"),
-        K_UNTIL("until"),
         K_CASE("case"),
-        K_WHEN("when"),
-        K_IF("if"),
+        K_CATCH("catch"),
+        K_CLASS("class"),
+        K_DEFAULT("default"),
         K_ELSE("else"),
         K_ELSIF("elsif"),
-        K_THROW("throw"),
-        K_CATCH("catch"),
-        K_PUBLIC("public"),
-        K_PROTECTED("protected"),
-        K_PRIVATE("private"),
-        K_NIL("nil"),
-        K_INT("int"),
+        K_EXTENDS("extends"),
         K_FLOAT("float"),
+        K_FOR("for"),
+        K_IF("if"),
+        K_IMPLEMENTS("implements"),
+        K_INT("int"),
+        K_INTERFACE("interface"),
+        K_NIL("nil"),
+        K_PRIVATE("private"),
+        K_PROTECTED("protected"),
+        K_PUBLIC("public"),
+        K_STATIC("static"),
         K_STRING("string"),
+        K_THROW("throw"),
+        K_UNLESS("unless"),
+        K_UNTIL("until"),
+        K_WHEN("when"),
+        K_WHILE("while"),
         //
         // S_xxx are symbols
         S_TIDLE("~"),
@@ -118,6 +128,9 @@ public class Token {
         S_POUND("#"),
         S_DOLLAR("$"),
         S_PCNT("%"),
+        S_PCNTEQ("%="),
+        S_WORDS("%w{"), //start list of words
+        S_SYMBOLS("%s{"), //start list of symbols
         S_CARET("^"),
         S_AND("&"),
         S_ANDEQ("&="),
@@ -212,18 +225,13 @@ public class Token {
             Code[] value = e
                     .getValue()
                     .stream()
-                    .sorted(CODE_COMPARATOR)
+                    .sorted((Code o1, Code o2) -> {
+                        final int len1 = o1.text.length(), len2 = o2.text.length();
+                        return (len1 < len2) ? 1 : ((len1 == len2) ? 0 : -1);
+                    })
                     .toArray(Code[]::new);
             SYMBOLS.put(e.getKey(), value);
         });
     }
-
-    /**
-     * Lambda for descending order (by text.length).
-     */
-    private static final Comparator<Code> CODE_COMPARATOR = (Code o1, Code o2) -> {
-        final int len1 = o1.text.length(), len2 = o2.text.length();
-        return (len1 < len2) ? 1 : ((len1 == len2) ? 0 : -1);
-    };
 
 }
