@@ -35,29 +35,31 @@ import java.util.stream.IntStream;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author kwpfalzer
  */
 public class Lexer {
-    
+
     public Lexer(String filename) throws FileNotFoundException {
         this(new FileInputStream(filename), filename);
     }
-    
+
     public Lexer(InputStream input) {
         this(input, null);
     }
-    
+
     public Lexer(Reader rdr) {
         this(rdr, null);
     }
-    
+
     private Lexer(InputStream input, String filename) {
         this(new InputStreamReader(input), filename);
     }
-    
+
     private Lexer(Reader rdr, String filename) {
         this.input = new BufferedReader(rdr);
         this.filename = filename;
@@ -97,7 +99,7 @@ public class Lexer {
         assert tokens.size() > n;
         return tokens.subList(0, n).toArray(new Token[0]);
     }
-    
+
     public Token accept() {
         return accept(0);
     }
@@ -117,14 +119,14 @@ public class Lexer {
     }
 
     /**
-     * For use during error recovery: skip to beginning of next line;
-     * and reset all existing tokens.
+     * For use during error recovery: skip to beginning of next line; and reset
+     * all existing tokens.
      */
     public void advanceToNextLine() {
         tokens.clear();
         readLine(true);
     }
-    
+
     /**
      * Get next token.
      *
@@ -161,19 +163,51 @@ public class Lexer {
         if (matchTo("%r{", false)) {
             return regexp();
         }
-        //todo: number -> INT | FLOAT
-        if (isDigit(ch));
+        if (isDigit(ch)
+                || (('-' == ch || '+' == ch)
+                && testNextChar((Character t) -> isDigit(t)))) {
+            return getNumber();
+        }
         return getSymbolStartingWith(ch);
     }
-    
+
+    private static final Pattern NUMBER_REX = Pattern.compile("^[\\-\\+]?\\d+(\\.\\d+)?([eE][\\-\\+]?\\d+)?");
+
     private Token getNumber() {
-        
+        startLineNumber = lineNumber;
+        startCol = col;
+        Matcher matcher = NUMBER_REX.matcher(line.substring(col));
+        assert matcher.find();
+        col += matcher.end();
+        text = line.substring(startCol, col);
+        advancePos();
+        return getToken(contains(FLOATER) ? Token.Code.FLOAT : Token.Code.INT);
     }
-    
-    private boolean ifNextChar(Predicate<Character> test) {
-       return (col < line.length()-1) ? test.test(line.charAt(col+1)) : false;
+
+    private static final char[] FLOATER = new char[]{'.', 'e', 'E'};
+
+    private boolean contains(char[] set) {
+        for (char ch : set) {
+            if (0 <= text.indexOf(ch)) {
+                return true;
+            }
+        }
+        return false;
     }
-    
+
+    private boolean charIn(char[] set, char ch) {
+        for (char c : set) {
+            if (c == ch) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean testNextChar(Predicate<Character> test) {
+        return (col < line.length() - 1) ? test.test(line.charAt(col + 1)) : false;
+    }
+
     private Token getSymbolStartingWith(char ch) {
         assert Token.SYMBOLS.containsKey(ch);
         for (Token.Code sym : Token.SYMBOLS.get(ch)) {
@@ -184,14 +218,14 @@ public class Lexer {
         assert false; //never
         return null;
     }
-    
+
     private Token whiteSpace() {
         return whileOnLine(
                 (char ch1) -> ((' ' != ch1) && ('\t' != ch1)),
                 () -> getToken(Token.Code.WS)
         );
     }
-    
+
     private Token quoted(char quote) {
         return whileOnLine(
                 (char ch) -> (quote == ch),
@@ -203,7 +237,7 @@ public class Lexer {
                 }
         );
     }
-    
+
     private Token regexp() {
         col += 2;   //past %r of %r{
         return whileOnLine(
@@ -216,29 +250,29 @@ public class Lexer {
                 }
         );
     }
-    
+
     private Token identOrKeyword() {
         return whileOnLine(
                 (char ch1) -> !isIdentAny(ch1),
                 () -> getToken(isKeyword() ? keyword : Token.Code.IDENT)
         );
     }
-    
+
     private interface BreakPredicate {
-        
+
         boolean cond(char ch);
     }
-    
+
     private interface CreateToken {
-        
+
         Token create();
     }
-    
+
     private interface Unterminated {
-        
+
         void onCondition();
     }
-    
+
     private Token whileOnLine(BreakPredicate breaker, CreateToken creator, int colAdj, boolean allowEsc, Unterminated unterminated) {
         startCol = col++;
         startLineNumber = lineNumber;
@@ -263,13 +297,13 @@ public class Lexer {
         advancePos();
         return creator.create();
     }
-    
+
     private Token whileOnLine(BreakPredicate breaker, CreateToken creator) {
         return whileOnLine(breaker, creator, 0, false, null);
     }
-    
+
     private static final String END_BLOCK_COMMENT = "*/";
-    
+
     private Token blockComment() {
         StringBuilder buf = new StringBuilder(text);
         int end;
@@ -292,7 +326,7 @@ public class Lexer {
         advancePos();
         return getToken(Token.Code.BLOCK_COMMENT);
     }
-    
+
     public boolean isEOF() {
         if (tokens.isEmpty()) {
             push(next());
@@ -308,7 +342,7 @@ public class Lexer {
     private boolean isEmpty() {
         return isNull(line);
     }
-    
+
     private Token lineComment() {
         int lastPos = line.length();
         //don't grab EOLN with text: but skip over it all the same.
@@ -318,35 +352,35 @@ public class Lexer {
         advancePos();
         return getToken(Token.Code.LINE_COMMENT);
     }
-    
+
     private boolean isKeyword() {
         return isKeyword(text);
     }
-    
+
     private boolean isKeyword(String matched) {
         keyword = Token.isKeyword(matched);
         return nonNull(keyword);
     }
-    
+
     private Token.Code keyword;
-    
+
     static {
         assert 'a' < 'z' && 'A' < 'Z';
         assert '0' < '9';
     }
-    
+
     private static boolean isIdentAny(char c) {
         return isIdentBegin(c) || isDigit(c);
     }
-    
+
     private static boolean isIdentBegin(char c) {
         return isAlpha(c) || ('_' == c);
     }
-    
+
     private static boolean isAlpha(char c) {
         return (('a' <= c) && (c <= 'z')) || (('A' <= c) && (c <= 'Z'));
     }
-    
+
     private static boolean isDigit(char c) {
         return ('0' <= c) && (c <= '9');
     }
@@ -374,11 +408,11 @@ public class Lexer {
         }
         return true;
     }
-    
+
     private boolean matchTo(String to) {
         return matchTo(to, true);
     }
-    
+
     private boolean matchTo(char ch) {
         if (line.charAt(col) != ch) {
             return false;
@@ -422,6 +456,7 @@ public class Lexer {
 
     /**
      * Read next line (and append newline).
+     *
      * @param force force read line.
      */
     private void readLine(boolean force) {
@@ -438,28 +473,28 @@ public class Lexer {
             throw new RuntimeException(ex);
         }
     }
-    
+
     private void readLine() {
         readLine(false);
     }
-    
+
     private void resetText() {
         text = null;
     }
-    
+
     private Token getToken(Token.Code code) {
         return new Token(getLocation(), code, text);
     }
-    
+
     private Location getLocation() {
         return new Location(filename, startLineNumber, startCol + 1);
     }
-    
+
     private Token push(Token token) {
         tokens.add(token);
         return tokens.getLast();
     }
-    
+
     private static final String EOF = "<EOF>";
     private static final String EOLN = System.lineSeparator();
 
@@ -499,9 +534,9 @@ public class Lexer {
      * Text of current token.
      */
     private String text = null;
-    
+
     public class Exception extends RuntimeException {
-        
+
         public Exception(String reason) {
             //todo: since we're inner class: add location.
             super(getLocation() + ": " + reason);

@@ -48,7 +48,8 @@ public class LexerTest {
             /* 6*/ + "... * */ interface\n"
             /* 7*/ + "'single quote(\\')' and \"double\\\" \"\n"
             /* 8*/ + "an >> \"unterminated string\n"
-            /* 9*/ + "regexp %r{:\\w+\\$}\n";
+            /* 9*/ + "regexp %r{:\\w+\\$}\n"
+            /*10*/ + "1234+-456.678*89.0e-09\n";
     private final Lexer dut;
 
     @Test
@@ -103,6 +104,11 @@ public class LexerTest {
             /* 9*/
             Token[] toks = dut.peekn(4);
             assertTrue(toks[2].code == Token.Code.REGEXP);
+            dut.accept(toks.length - 1);
+        }
+        {
+            /*10*/
+            Token[] toks = dut.peekn(6);
             dut.accept(toks.length - 1);
         }
     }
