@@ -23,7 +23,6 @@
  */
 package laolx.parser;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,9 +96,11 @@ public class Token {
         FLOAT,
         //
         // K_xxx are keywords
+        K_ASSERT("assert"),
         K_CASE("case"),
         K_CATCH("catch"),
         K_CLASS("class"),
+        K_CONST("const"),
         K_DEFAULT("default"),
         K_ELSE("else"),
         K_ELSIF("elsif"),
@@ -108,8 +109,11 @@ public class Token {
         K_FOR("for"),
         K_IF("if"),
         K_IMPLEMENTS("implements"),
+        K_INCLUDE("include"),
         K_INT("int"),
         K_INTERFACE("interface"),
+        K_NAMESPACE("namespace"),
+        K_NEW("new"),
         K_NIL("nil"),
         K_PRIVATE("private"),
         K_PROTECTED("protected"),
@@ -147,6 +151,7 @@ public class Token {
         S_PLUS("+"),
         S_PLUS2("++"),
         S_EQ("="),
+        S_EQGT("=>"),
         S_PLUSEQ("+="),
         S_MINUSEQ("-="),
         S_LCURLY("{"),
@@ -173,6 +178,7 @@ public class Token {
         S_GT2EQ(">>="),
         S_COMMA(","),
         S_DOT("."),
+        S_DOT2(".."),
         S_QMARK("?"),
         S_DIV("/"),
         S_BACKTIC(",");

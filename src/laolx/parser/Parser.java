@@ -29,6 +29,19 @@ import java.io.Reader;
 /**
  * Parse a single file.
  * 
+ * File: IncludeStatement* (Declaration Statement)* EOF
+ * IncludeStatement: K_INCLUDE (String | StringList)
+ * String: SQSTRING | DQSTRING
+ * StringList: String (COMMA String)+
+ * Declaration: ClassDeclaration
+ *            | InterfaceDeclaration
+ *            | EnumDeclaration
+ *            | VariableDeclaration
+ *            | TypedefDeclaration
+ *            | ConstantDeclaration
+ *            | MethodDeclaration
+ *            | NamespaceDeclaration
+ *
  * @author kwpfalzer
  */
 public class Parser {
