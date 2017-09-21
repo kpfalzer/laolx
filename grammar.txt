@@ -1,0 +1,19 @@
+
+XFile: IncludeStatement* (Declaration | Statement)* EOF
+
+IncludeStatement: K_INCLUDE StringList
+
+XString: SQSTRING | DQSTRING
+
+StringList: XString (COMMA XString)+
+
+Declaration: ClassDeclaration 
+           | InterfaceDeclaration
+           | VariableDeclaration 
+           | TypedefDeclaration 
+           | ConstantDeclaration 
+           | MethodDeclaration 
+           | NamespaceDeclaration
+
+// Like Crystal
+UnionType: S_LPAREN TypeName (S_OR TypeName)* S_RPAREN

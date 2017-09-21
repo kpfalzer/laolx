@@ -5,18 +5,25 @@
             <url>src/laolx/parser/Lexer.java</url>
             <bookmark id="1">
                 <name/>
-                <line>138</line>
+                <line>142</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/ast/XFile.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/CommentCollector.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/ast/XString.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Lexer.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/ast/Comment.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/AstNode.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Location.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/test/laolx/parser/LexerTest.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Parser.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/grammar.txt</file>
             <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Token.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/ast/StringList.java</file>
         </group>
     </open-files>
 </project-private>

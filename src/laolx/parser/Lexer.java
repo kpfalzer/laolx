@@ -127,6 +127,10 @@ public class Lexer {
         readLine(true);
     }
 
+    public int getLineNumber() {
+        return lineNumber;
+    }
+    
     /**
      * Get next token.
      *
@@ -343,6 +347,10 @@ public class Lexer {
         return isNull(line);
     }
 
+    /**
+     * Match line comment (and skip over EOLN, if present).
+     * @return line comment (without EOLN).
+     */
     private Token lineComment() {
         int lastPos = line.length();
         //don't grab EOLN with text: but skip over it all the same.
