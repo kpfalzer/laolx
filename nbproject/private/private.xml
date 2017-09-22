@@ -5,7 +5,7 @@
             <url>src/laolx/parser/Lexer.java</url>
             <bookmark id="1">
                 <name/>
-                <line>142</line>
+                <line>141</line>
                 <key/>
             </bookmark>
         </file>
@@ -20,6 +20,7 @@
             <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Parser.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/grammar.txt</file>
             <file>file:/Users/kwpfalzer/projects/laolx/test/laolx/parser/ast/IncludeStatementTest.java</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/src/laolx/parser/Token.java</file>
             <file>file:/Users/kwpfalzer/projects/laolx/test/laolx/parser/ast/StringListTest.java</file>
         </group>
     </open-files>

@@ -89,6 +89,10 @@ public class Token {
         LINE_COMMENT,
         BLOCK_COMMENT,
         IDENT,
+        SYMBOL,
+        ATTR_DECL, //@-IDENT
+        ATTR_DECL_RO, //@IDENT
+        ATTR_DECL_RW, //@+IDENT
         DQSTRING, //double-quoted string
         SQSTRING, //single-quoted string
         REGEXP, //%r{...}

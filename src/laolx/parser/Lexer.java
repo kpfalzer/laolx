@@ -31,7 +31,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.LinkedList;
-import java.util.stream.IntStream;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import java.util.function.Predicate;
@@ -172,9 +171,32 @@ public class Lexer {
                 && testNextChar((Character t) -> isDigit(t)))) {
             return getNumber();
         }
+        if (':' == ch) {
+            return symbolOrOther();
+        }
+        if ('@' == ch) {
+            return attrDeclOrOther();
+        }
         return getSymbolStartingWith(ch);
     }
 
+    private Token attrDeclOrOther() {
+        return null;//todo: use regexp?
+    }
+    
+    private Token symbolOrOther() {
+        startCol = col++;
+        startLineNumber = lineNumber;
+        if ((col < line.length()) && isIdentBegin(line.charAt(col))) {
+            Token ident = identOrKeyword();
+            startCol = ident.location.col - 1; //backup to :
+            text = ":" + ident.text;
+            return getToken(Token.Code.SYMBOL);
+        }
+        col--; //rollback to ':'
+        return getSymbolStartingWith(':');
+    }
+    
     private static final Pattern NUMBER_REX = Pattern.compile("^[\\-\\+]?\\d+(\\.\\d+)?([eE][\\-\\+]?\\d+)?");
 
     private Token getNumber() {
