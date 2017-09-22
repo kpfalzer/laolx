@@ -129,7 +129,7 @@ public class Lexer {
     public int getLineNumber() {
         return lineNumber;
     }
-    
+
     /**
      * Get next token.
      *
@@ -180,34 +180,60 @@ public class Lexer {
         return getSymbolStartingWith(ch);
     }
 
-    private Token attrDeclOrOther() {
-        return null;//todo: use regexp?
-    }
-    
-    private Token symbolOrOther() {
-        startCol = col++;
-        startLineNumber = lineNumber;
-        if ((col < line.length()) && isIdentBegin(line.charAt(col))) {
-            Token ident = identOrKeyword();
-            startCol = ident.location.col - 1; //backup to :
-            text = ":" + ident.text;
-            return getToken(Token.Code.SYMBOL);
-        }
-        col--; //rollback to ':'
-        return getSymbolStartingWith(':');
-    }
-    
-    private static final Pattern NUMBER_REX = Pattern.compile("^[\\-\\+]?\\d+(\\.\\d+)?([eE][\\-\\+]?\\d+)?");
+    private static final Pattern ATTR_REX = Pattern.compile("^@(\\-|\\+)?([a-zA-Z_]\\w*)?");
 
-    private Token getNumber() {
+    private Token attrDeclOrOther() {
+        return regexMatcher(
+                ATTR_REX,
+                () -> {
+                    if (1 == text.length()) {
+                        col--;
+                        return getSymbolStartingWith('@');
+                    }
+                    char ch = text.charAt(1);
+                    Token.Code code = ('-' == ch)
+                            ? Token.Code.ATTR_DECL
+                            : (('+' == ch)
+                                    ? Token.Code.ATTR_DECL_RW
+                                    : Token.Code.ATTR_DECL_RO);
+                    return getToken(code);
+                }
+        );
+    }
+
+    private Token regexMatcher(Pattern patt, CreateToken creator) {
         startLineNumber = lineNumber;
         startCol = col;
-        Matcher matcher = NUMBER_REX.matcher(line.substring(col));
+        Matcher matcher = patt.matcher(line.substring(col));
         assert matcher.find();
         col += matcher.end();
         text = line.substring(startCol, col);
         advancePos();
-        return getToken(contains(FLOATER) ? Token.Code.FLOAT : Token.Code.INT);
+        return creator.create();
+    }
+
+    private static final Pattern SYMBOL_REX = Pattern.compile("^:([a-zA-Z_]\\w*)?");
+
+    private Token symbolOrOther() {
+        return regexMatcher(
+                SYMBOL_REX,
+                () -> {
+                    if (1 == text.length()) {
+                        col--;
+                        return getSymbolStartingWith(':');
+                    }
+                    return getToken(Token.Code.SYMBOL);
+                }
+        );
+    }
+
+    private static final Pattern NUMBER_REX = Pattern.compile("^[\\-\\+]?\\d+(\\.\\d+)?([eE][\\-\\+]?\\d+)?");
+
+    private Token getNumber() {
+        return regexMatcher(
+                NUMBER_REX,
+                () -> getToken(contains(FLOATER) ? Token.Code.FLOAT : Token.Code.INT)
+        );
     }
 
     private static final char[] FLOATER = new char[]{'.', 'e', 'E'};
@@ -371,6 +397,7 @@ public class Lexer {
 
     /**
      * Match line comment (and skip over EOLN, if present).
+     *
      * @return line comment (without EOLN).
      */
     private Token lineComment() {

@@ -65,9 +65,9 @@ public class LexerTest {
         assertTrue(Token.Code.EOLN == tok.code);
         {
             /* 2*/
-            Token[] toks = dut.peekn(8);
-            assertTrue(toks[1].code == Token.Code.S_COLON);
-            assertTrue(toks[2].code == Token.Code.IDENT);
+            Token[] toks = dut.peekn(7);
+            assertTrue(toks[1].code == Token.Code.SYMBOL);
+            assertTrue(toks[2].code == Token.Code.WS);
             dut.accept(toks.length - 1);
         }
         {
