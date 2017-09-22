@@ -28,5 +28,11 @@ package laolx.parser;
  * @author kwpfalzer
  */
 public interface AstNode {
+    public default boolean isStatement() {
+        return false;
+    }
     
+    public default boolean isDeclaration() {
+        return false;
+    }
 }

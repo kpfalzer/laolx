@@ -24,25 +24,13 @@
 package laolx.parser.ast;
 
 import laolx.parser.AstNode;
-import laolx.parser.Parser;
 import laolx.parser.Token;
-import static laolx.parser.Token.Code.LINE_COMMENT;
-import static laolx.parser.Token.Code.BLOCK_COMMENT;
 
 /**
  *
  * @author kwpfalzer
  */
 public class Comment implements AstNode {
-     public static Comment matches(Parser parser) {
-        Token la = parser.la0();
-        if (LINE_COMMENT != la.code && BLOCK_COMMENT != la.code) {
-            return null;
-        }
-        parser.skipOverWhitespace();
-        return new Comment(la);
-    }
-    
     public Comment(Token comment) {
         this.comment = comment;
     }

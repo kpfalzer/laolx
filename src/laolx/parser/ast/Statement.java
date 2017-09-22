@@ -23,44 +23,22 @@
  */
 package laolx.parser.ast;
 
-import java.util.LinkedList;
-import java.util.Objects;
 import laolx.parser.AstNode;
 import laolx.parser.Parser;
-import static laolx.parser.Token.Code.EOF;
-import static laolx.parser.Token.Code.K_INCLUDE;
 
 /**
  *
  * @author kwpfalzer
  */
-public class XFile implements AstNode {
+public class Statement implements AstNode {
 
-    public static XFile match(Parser parser) {
-        XFile contents = new XFile();
-        while (K_INCLUDE == parser.la0Code()) {
-            contents.includes.add(IncludeStatement.match(parser));
-        }
-        Statement stmt;
-        Declaration decl;
-        while (true) {
-            stmt = Statement.match(parser);
-            if (Objects.nonNull(stmt)) {
-                contents.stmtsAndDecls.add(stmt);
-            }
-            decl = Declaration.match(parser);
-            if (Objects.nonNull(decl)) {
-                contents.stmtsAndDecls.add(decl);
-            } else if (Objects.isNull(stmt)) {
-                break;
-            }
-        }
-        if (EOF != parser.la0Code()) {
-            throw parser.error();
-        }
-        return contents;
+    @Override
+    public boolean isStatement() {
+        return true;
     }
 
-    private final LinkedList<IncludeStatement> includes = new LinkedList<>();
-    private final LinkedList<AstNode> stmtsAndDecls = new LinkedList<>();
+    public static Statement match(Parser parser) {
+        return null; //todo
+    }
+
 }

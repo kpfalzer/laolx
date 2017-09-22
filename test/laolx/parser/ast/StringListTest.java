@@ -23,44 +23,29 @@
  */
 package laolx.parser.ast;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import laolx.parser.AstNode;
+import java.io.StringReader;
 import laolx.parser.Parser;
-import static laolx.parser.Token.Code.EOF;
-import static laolx.parser.Token.Code.K_INCLUDE;
+import static laolx.parser.Token.Code.S_COMMA;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author kwpfalzer
  */
-public class XFile implements AstNode {
-
-    public static XFile match(Parser parser) {
-        XFile contents = new XFile();
-        while (K_INCLUDE == parser.la0Code()) {
-            contents.includes.add(IncludeStatement.match(parser));
-        }
-        Statement stmt;
-        Declaration decl;
-        while (true) {
-            stmt = Statement.match(parser);
-            if (Objects.nonNull(stmt)) {
-                contents.stmtsAndDecls.add(stmt);
-            }
-            decl = Declaration.match(parser);
-            if (Objects.nonNull(decl)) {
-                contents.stmtsAndDecls.add(decl);
-            } else if (Objects.isNull(stmt)) {
-                break;
-            }
-        }
-        if (EOF != parser.la0Code()) {
-            throw parser.error();
-        }
-        return contents;
+public class StringListTest {
+    
+    private static final String TEXT 
+            = "'a string1' , 'another string2' , //not me\n"
+            + " /* block comment\n"
+            + "foobar*/ \"a dqstring\" ,123";
+    
+    @Test
+    public void testMatches() {
+        Parser parser = new Parser(new StringReader(TEXT));
+        StringList stringList = StringList.match(parser);
+        assertNotNull(stringList);
+        assertTrue(S_COMMA == parser.la0Code());
     }
-
-    private final LinkedList<IncludeStatement> includes = new LinkedList<>();
-    private final LinkedList<AstNode> stmtsAndDecls = new LinkedList<>();
+    
 }

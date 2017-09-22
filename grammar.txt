@@ -17,3 +17,8 @@ Declaration: ClassDeclaration
 
 // Like Crystal
 UnionType: S_LPAREN TypeName (S_OR TypeName)* S_RPAREN
+
+ScopedName: Ident (COLON2 Ident)*
+
+// todo: templates???  <???,???>
+TypeName: ScopedName

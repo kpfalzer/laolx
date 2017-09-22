@@ -23,44 +23,33 @@
  */
 package laolx.parser.ast;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import laolx.parser.AstNode;
+import java.io.StringReader;
 import laolx.parser.Parser;
-import static laolx.parser.Token.Code.EOF;
-import static laolx.parser.Token.Code.K_INCLUDE;
+import static laolx.parser.Token.Code.K_CLASS;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author kwpfalzer
  */
-public class XFile implements AstNode {
-
-    public static XFile match(Parser parser) {
-        XFile contents = new XFile();
-        while (K_INCLUDE == parser.la0Code()) {
-            contents.includes.add(IncludeStatement.match(parser));
-        }
-        Statement stmt;
-        Declaration decl;
-        while (true) {
-            stmt = Statement.match(parser);
-            if (Objects.nonNull(stmt)) {
-                contents.stmtsAndDecls.add(stmt);
-            }
-            decl = Declaration.match(parser);
-            if (Objects.nonNull(decl)) {
-                contents.stmtsAndDecls.add(decl);
-            } else if (Objects.isNull(stmt)) {
-                break;
-            }
-        }
-        if (EOF != parser.la0Code()) {
-            throw parser.error();
-        }
-        return contents;
+public class IncludeStatementTest {
+    
+    private static final String TEXT
+            = "  include 'pkg1', \n"
+            + " 'pkg2', 'pkg3' include 'pkg4',\n"
+            + " 'pkg5' \n"
+            + ", 'pkg6'\n"
+            + "class foo {}//todo";
+    
+    @Test
+    public void testMatches() {
+        Parser parser = new Parser(new StringReader(TEXT));
+        IncludeStatement stmt = IncludeStatement.match(parser);
+        assertNotNull(stmt);
+        stmt = IncludeStatement.match(parser);
+        assertNotNull(stmt);
+        assertTrue(K_CLASS == parser.la0Code());
     }
-
-    private final LinkedList<IncludeStatement> includes = new LinkedList<>();
-    private final LinkedList<AstNode> stmtsAndDecls = new LinkedList<>();
+    
 }

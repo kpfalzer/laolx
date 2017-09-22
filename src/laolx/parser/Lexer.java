@@ -504,7 +504,7 @@ public class Lexer {
     }
 
     private static final String EOF = "<EOF>";
-    private static final String EOLN = System.lineSeparator();
+    public static final String EOLN = System.lineSeparator();
 
     /**
      * Name of file being processed; or null if no filename specified.

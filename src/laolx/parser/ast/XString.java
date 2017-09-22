@@ -34,13 +34,12 @@ import static laolx.parser.Token.Code.DQSTRING;
  * @author kwpfalzer
  */
 public class XString implements AstNode {
-    public static XString matches(Parser parser) {
+    public static XString match(Parser parser) {
         Token la = parser.la0();
         if (SQSTRING != la.code && DQSTRING != la.code) {
             return null;
         }
-        parser.skipOverWsCommentsEOLN();
-        return new XString(la);
+        return new XString(parser.accept());
     }
     
     private XString(Token string) {

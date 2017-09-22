@@ -34,12 +34,14 @@ import static laolx.parser.Token.Code.S_COMMA;
  * @author kwpfalzer
  */
 public class StringList implements AstNode {
-    public static StringList matches(Parser parser) {
+    public static StringList match(Parser parser) {
         StringList stringList = null;
         XString string;
+        int mark = parser.getMark();
         while (true) {
-            string = XString.matches(parser);
+            string = XString.match(parser);
             if (Objects.isNull(string)) {
+                parser.setMark(mark);
                 return stringList;
             }
             if (Objects.isNull(stringList)) {
@@ -48,14 +50,11 @@ public class StringList implements AstNode {
                 stringList.add(string);
             }
             if (S_COMMA != parser.la0Code()) {
-                break; //while
-            } else {
-                parser.accept();
-                parser.skipOverWsCommentsEOLN();
+                return stringList;
             }
+            //mark at comma then accept
+            mark = parser.getMarkThenAccept();
         }
-        parser.skipOverWsCommentsEOLN();
-        return stringList;
     }
     
     private StringList(XString string) {

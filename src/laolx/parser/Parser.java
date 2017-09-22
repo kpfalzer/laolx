@@ -27,6 +27,10 @@ import java.io.FileNotFoundException;
 import java.io.Reader;
 import java.util.LinkedList;
 import java.util.Objects;
+import static laolx.parser.Token.Code.BLOCK_COMMENT;
+import static laolx.parser.Token.Code.EOF;
+import static laolx.parser.Token.Code.EOLN;
+import static laolx.parser.Token.Code.LINE_COMMENT;
 import static laolx.parser.Token.Code.WS;
 import laolx.parser.ast.Comment;
 import laolx.parser.ast.XFile;
@@ -40,10 +44,12 @@ public class Parser implements CommentCollector {
 
     public Parser(String filename) throws FileNotFoundException {
         lexer = new Lexer(filename);
+        getAllTokens();
     }
 
     public Parser(Reader rdr) {
         lexer = new Lexer(rdr);
+        getAllTokens();
     }
 
     /**
@@ -52,8 +58,44 @@ public class Parser implements CommentCollector {
      * @return true on success, false if errors.
      */
     public boolean parse() {
-        xfile = XFile.matches(this);
+        xfile = XFile.match(this);
         return Objects.nonNull(xfile);
+    }
+
+    private void getAllTokens() {
+        LinkedList<Token> xtokens = new LinkedList<>();
+        Token la;
+        Token.Code code;
+        while (true) {
+            la = lexer.accept();
+            code = la.code;
+            if (LINE_COMMENT == code || BLOCK_COMMENT == code) {
+                add(new Comment(la));
+            } else if (EOF == code) {
+                xtokens.add(la);
+                break;
+            } else if (WS != code && EOLN != code) {
+                xtokens.add(la);
+            }
+        }
+        this.tokens = xtokens.toArray(new Token[0]);
+    }
+
+    private Token[] tokens = null;
+    private int tokpos = 0;
+
+    public int getMark() {
+        return tokpos;
+    }
+
+    public int getMarkThenAccept() {
+        int mark = getMark();
+        accept();
+        return mark;
+    }
+
+    public void setMark(int pos) {
+        tokpos = pos;
     }
 
     /**
@@ -63,66 +105,51 @@ public class Parser implements CommentCollector {
      * @return true if lookahead matches (else false).
      */
     public boolean hasMatch(Token.Code... codes) {
-        Token lookahead[] = lexer.peekn(codes.length - 1);
         for (int i = 0; i < codes.length; i++) {
-            if (codes[i] != lookahead[i].code) {
+            if (codes[i] != tokens[tokpos + i].code) {
                 return false;
             }
         }
         return true;
     }
 
+    public static boolean hasEOLN(Token from, Token to) {
+        return (from.location.line != to.location.line);
+    }
+
+    public Token la(int n) {
+        return tokens[tokpos + n];
+    }
+
     public Token la0() {
-        return lexer.peek();
+        return la(0);
     }
 
     public Token.Code la0Code() {
         return la0().code;
     }
-    
+
     public Token accept() {
-        return lexer.accept();
+        return (la0Code() != EOF) ? tokens[tokpos++] : la0();
     }
 
-    public boolean skipOverWhitespace() {
-        if (WS == la0().code) {
-            accept();
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Skip over whitespace and comments.
-     * Accumulate comments and also mark if we crossed onto another line;
-     * i.e., EOLN detection.
-     * @return true if we detected EOLN.
-     */
-    public boolean skipOverWsCommentsEOLN() {
-        final int startingLine = lexer.getLineNumber();
-        for (boolean stay = true; stay;) {
-            switch (la0Code()) {
-                case WS:
-                    accept();
-                    break;
-                case LINE_COMMENT: case BLOCK_COMMENT:
-                    add(new Comment(accept()));
-                    break;
-                default:
-                    stay = false;
-            }
-        }
-        detectedEOLN = (lexer.getLineNumber() > startingLine);
-        return detectedEOLN;
-    }
-    
     private final Lexer lexer;
     private XFile xfile;
     private final LinkedList<Comment> comments = new LinkedList<>();
-    private boolean detectedEOLN = false;
 
     @Override
     public void add(Comment comment) {
         comments.add(comment);
+    }
+    
+    public Exception error() {
+        return new Exception();
+    }
+    
+    public class Exception extends RuntimeException {
+
+        public Exception() {
+            super(la0().location.toString() + ": error at '" + la0().text + "'");
+        }
     }
 }
