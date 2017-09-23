@@ -15,10 +15,54 @@ Declaration: ClassDeclaration
            | MethodDeclaration 
            | NamespaceDeclaration
 
-// Like Crystal
-UnionType: S_LPAREN TypeName (S_OR TypeName)* S_RPAREN
+UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
 
-ScopedName: Ident (COLON2 Ident)*
+Type: UnionType | PrimitiveType | SimpleType | ScopedType
 
-// todo: templates???  <???,???>
-TypeName: ScopedName
+SimpleType: IDENT TypeModifier?
+
+PrimitiveType: K_SYMBOL | K_STRING | K_INT | K_FLOAT
+
+TypeModifier: ActualTypeParameters? ArrayTypeModifier?
+
+ArrayTypeModifier: LBRACK RBRACK
+
+ScopedType: ScopeName (COLON2 ScopeName)+ ArrayTypeModifier?
+
+ScopeName: IDENT ActualTypeParameters?
+
+TypeParameters: LT IDENT (COMMA IDENT)* GT
+
+ActualTypeParameters: LT Type (COMMA Type)* GT
+
+Visibility: K_PUBLIC | K_PROTECTED | K_PRIVATE
+
+//example of class:
+class foo<T1,T2>(int @p1, string @p2) extends C1, C2 implements I1 {
+}
+
+ClassDeclaration: K_CLASS IDENT TypeParameters? 
+				  ParameterDeclarationList?
+				  ExtendsDeclaration?
+				  ImplementsDeclaration?
+				  LCURLY ClassBody? RCURLY
+
+Mutability: K_VAR | K_VAL
+
+ParameterDeclaration: Visibility? Mutability? Type ParameterName
+
+ParameterName: IDENT | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
+
+ParameterDeclarationList: LPAREN ParameterName (COMMA ParameterName) RPAREN
+
+BaseName: IDENT (COLON2 IDENT)* ActualTypeParameters?
+
+ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
+
+ImplementsDeclaration: K_IMPLEMENTS BaseName (COMMA BaseName)*
+
+ClassBody: ???
+	+ how to specify visibility
+	+ initial statement/decls are part of default constructor
+	+ method return values?
+	+ other attributes

@@ -183,6 +183,7 @@ public class Token {
         S_COMMA(","),
         S_DOT("."),
         S_DOT2(".."),
+        S_DOT3("..."),
         S_QMARK("?"),
         S_DIV("/"),
         S_BACKTIC(",");
