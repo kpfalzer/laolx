@@ -56,7 +56,7 @@ public class XFile implements AstNode {
             }
         }
         if (EOF != parser.la0Code()) {
-            throw parser.error();
+            parser.error();
         }
         return contents;
     }

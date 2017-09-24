@@ -19,11 +19,13 @@ UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
 
 Type: UnionType | PrimitiveType | SimpleType | ScopedType
 
-SimpleType: IDENT TypeModifier?
+SimpleType: TypeName TypeModifier?
+
+TypeName: IDENT
 
 PrimitiveType: K_SYMBOL | K_STRING | K_INT | K_FLOAT
 
-TypeModifier: ActualTypeParameters? ArrayTypeModifier?
+TypeModifier: ActualTypeParameters? ArrayTypeModifier? K_DOT3?
 
 ArrayTypeModifier: LBRACK RBRACK
 
@@ -37,9 +39,15 @@ ActualTypeParameters: LT Type (COMMA Type)* GT
 
 Visibility: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
+/**
 //example of class:
 class foo<T1,T2>(int @p1, string @p2) extends C1, C2 implements I1 {
+	int +a = 14;	// '+' implies mutable
+	T v = 17;       // const T v = 17;
 }
+//TODO: eventually add multiple decl
+class A(int p1, p1; T p2, p3; T2 p2, T3 p4) {}
+**/
 
 ClassDeclaration: K_CLASS IDENT TypeParameters? 
 				  ParameterDeclarationList?
@@ -47,13 +55,15 @@ ClassDeclaration: K_CLASS IDENT TypeParameters?
 				  ImplementsDeclaration?
 				  LCURLY ClassBody? RCURLY
 
-Mutability: K_VAR | K_VAL
+Mutability: K_CONST
 
 ParameterDeclaration: Visibility? Mutability? Type ParameterName
 
 ParameterName: IDENT | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
 
-ParameterDeclarationList: LPAREN ParameterName (COMMA ParameterName) RPAREN
+ParameterDeclarationList: 
+	LPAREN ParameterDeclaration 
+    (COMMA ParameterDeclaration) RPAREN
 
 BaseName: IDENT (COLON2 IDENT)* ActualTypeParameters?
 

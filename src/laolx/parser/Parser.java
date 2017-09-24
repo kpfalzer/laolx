@@ -142,8 +142,8 @@ public class Parser implements CommentCollector {
         comments.add(comment);
     }
     
-    public Exception error() {
-        return new Exception();
+    public void error() {
+        throw new Exception();
     }
     
     public class Exception extends RuntimeException {
