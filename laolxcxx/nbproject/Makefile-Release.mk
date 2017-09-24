@@ -35,7 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/object.o
+	${OBJECTDIR}/object.o \
+	${OBJECTDIR}/regex.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
@@ -46,7 +47,7 @@ TESTFILES= \
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/maptest.o
+	${TESTDIR}/tests/test1.o
 
 # C Compiler Flags
 CFLAGS=
@@ -79,6 +80,11 @@ ${OBJECTDIR}/object.o: object.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/object.o object.cxx
 
+${OBJECTDIR}/regex.o: regex.cxx
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/regex.o regex.cxx
+
 # Subprojects
 .build-subprojects:
 
@@ -86,15 +92,15 @@ ${OBJECTDIR}/object.o: object.cxx
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/maptest.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/test1.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   
 
 
-${TESTDIR}/tests/maptest.o: tests/maptest.cxx 
+${TESTDIR}/tests/test1.o: tests/test1.cxx 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/maptest.o tests/maptest.cxx
+	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test1.o tests/test1.cxx
 
 
 ${OBJECTDIR}/object_nomain.o: ${OBJECTDIR}/object.o object.cxx 
@@ -108,6 +114,19 @@ ${OBJECTDIR}/object_nomain.o: ${OBJECTDIR}/object.o object.cxx
 	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/object_nomain.o object.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/object.o ${OBJECTDIR}/object_nomain.o;\
+	fi
+
+${OBJECTDIR}/regex_nomain.o: ${OBJECTDIR}/regex.o regex.cxx 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/regex.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/regex_nomain.o regex.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/regex.o ${OBJECTDIR}/regex_nomain.o;\
 	fi
 
 # Run Test Targets

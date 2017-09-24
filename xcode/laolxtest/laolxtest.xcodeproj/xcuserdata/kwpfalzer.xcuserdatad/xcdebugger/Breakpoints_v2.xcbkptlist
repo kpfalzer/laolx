@@ -17,38 +17,6 @@
             endingLineNumber = "147"
             landmarkName = "test3()"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test3()"
-                  moduleName = "laolxtest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kwpfalzer/projects/laolx/laolxcxx/tests/maptest.cxx"
-                  timestampString = "527915443.498792"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "1506">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "auto test3()::$_7::operator()&lt;int&gt;(int) const"
-                  moduleName = "laolxtest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kwpfalzer/projects/laolx/laolxcxx/tests/maptest.cxx"
-                  timestampString = "527915443.501327"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -64,6 +32,22 @@
             startingLineNumber = "142"
             endingLineNumber = "142"
             landmarkName = "test3()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../laolxcxx/tests/test1.cxx"
+            timestampString = "527985493.037273"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "test5()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

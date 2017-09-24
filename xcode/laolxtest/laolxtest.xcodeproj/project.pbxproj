@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		178AFA7D1F76FE2B00DE7AC3 /* maptest.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178AFA7C1F76FE2B00DE7AC3 /* maptest.cxx */; };
+		178AFA7D1F76FE2B00DE7AC3 /* test1.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178AFA7C1F76FE2B00DE7AC3 /* test1.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		178AFA721F76FDE600DE7AC3 /* laolxtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = laolxtest; sourceTree = BUILT_PRODUCTS_DIR; };
-		178AFA7C1F76FE2B00DE7AC3 /* maptest.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = maptest.cxx; path = ../../laolxcxx/tests/maptest.cxx; sourceTree = "<group>"; };
+		178AFA7C1F76FE2B00DE7AC3 /* test1.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test1.cxx; path = ../../laolxcxx/tests/test1.cxx; sourceTree = "<group>"; };
 		178AFA7E1F76FE4400DE7AC3 /* laolx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = laolx.xcodeproj; path = ../laolx.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				178AFA7E1F76FE4400DE7AC3 /* laolx.xcodeproj */,
-				178AFA7C1F76FE2B00DE7AC3 /* maptest.cxx */,
+				178AFA7C1F76FE2B00DE7AC3 /* test1.cxx */,
 				178AFA731F76FDE600DE7AC3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -147,7 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				178AFA7D1F76FE2B00DE7AC3 /* maptest.cxx in Sources */,
+				178AFA7D1F76FE2B00DE7AC3 /* test1.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

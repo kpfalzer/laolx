@@ -23,7 +23,7 @@
  */
 
 /* 
- * File:   maptest.cxx
+ * File:   test1.cxx
  * Author: kwpfalzer
  *
  * Created on September 23, 2017, 12:05 PM
@@ -34,6 +34,7 @@
 #include <string>
 #include <memory>
 #include <cassert>
+#include <regex>
 #include "laolx/map.hxx"
 #include "laolx/array.hxx"
 #include "laolx/regex.hxx"
@@ -163,7 +164,15 @@ void test4() {
 }
 
 void test5() {
-    laolx::Regex rex("^[0-9]+$");
+    laolx::Regex rex("(\\d+).*");
+    std::string s1 = "12345", s2 = "123def";
+    unsigned long num;
+    bool matched;
+    matched = rex.match(s2);
+    std::cout << "s2.count=" << rex.getMatchCount() << "," << rex.getMatch(1) << std::endl;
+    matched = rex.match(s1);
+    assert(matched);
+    std::cout << "s1=" << rex.getMatch(1) << std::endl;
 }
 
 int main(int argc, char** argv) {

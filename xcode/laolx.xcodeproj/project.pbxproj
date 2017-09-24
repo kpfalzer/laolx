@@ -11,6 +11,8 @@
 		17C5CC991F7705FC0077BD11 /* object.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C5CC981F7705FC0077BD11 /* object.cxx */; };
 		17C5CC9C1F7706290077BD11 /* map.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17C5CC9A1F7706290077BD11 /* map.hxx */; };
 		17C5CC9D1F7706290077BD11 /* object.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17C5CC9B1F7706290077BD11 /* object.hxx */; };
+		17C69DAF1F786813004C1B71 /* regex.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C69DAD1F786813004C1B71 /* regex.cxx */; };
+		17C69DB01F786813004C1B71 /* regex.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17C69DAE1F786813004C1B71 /* regex.hxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		17C5CC981F7705FC0077BD11 /* object.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = object.cxx; path = ../laolxcxx/object.cxx; sourceTree = "<group>"; };
 		17C5CC9A1F7706290077BD11 /* map.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = map.hxx; path = ../laolxcxx/map.hxx; sourceTree = "<group>"; };
 		17C5CC9B1F7706290077BD11 /* object.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = object.hxx; path = ../laolxcxx/object.hxx; sourceTree = "<group>"; };
+		17C69DAD1F786813004C1B71 /* regex.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = regex.cxx; path = ../laolxcxx/regex.cxx; sourceTree = "<group>"; };
+		17C69DAE1F786813004C1B71 /* regex.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = regex.hxx; path = ../laolxcxx/regex.hxx; sourceTree = "<group>"; };
 		17E977681F76F6EB005669D1 /* liblaolx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblaolx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -35,6 +39,8 @@
 		17E9775F1F76F6EB005669D1 = {
 			isa = PBXGroup;
 			children = (
+				17C69DAD1F786813004C1B71 /* regex.cxx */,
+				17C69DAE1F786813004C1B71 /* regex.hxx */,
 				17AF12C51F7733FF0003E7BE /* array.hxx */,
 				17C5CC9A1F7706290077BD11 /* map.hxx */,
 				17C5CC9B1F7706290077BD11 /* object.hxx */,
@@ -60,6 +66,7 @@
 			files = (
 				17C5CC9C1F7706290077BD11 /* map.hxx in Headers */,
 				17AF12C61F7733FF0003E7BE /* array.hxx in Headers */,
+				17C69DB01F786813004C1B71 /* regex.hxx in Headers */,
 				17C5CC9D1F7706290077BD11 /* object.hxx in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C5CC991F7705FC0077BD11 /* object.cxx in Sources */,
+				17C69DAF1F786813004C1B71 /* regex.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +243,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -247,7 +255,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";

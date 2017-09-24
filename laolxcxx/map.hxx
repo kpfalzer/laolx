@@ -68,7 +68,7 @@ namespace laolx {
         }
 
         void each(const std::function<void (const K& key, const V& val)>& consume) const {
-            for (auto& i : m_map) {
+            for (const auto& i : m_map) {
                 consume(i.first, i.second);
             }
         }
@@ -96,7 +96,7 @@ namespace laolx {
         
         Array<K> keys() const {
             Array<K> keys(size());
-            for (auto& k : m_map) {
+            for (const auto& k : m_map) {
                 keys << k.first;
             }
             return keys;
@@ -104,7 +104,7 @@ namespace laolx {
 
         Array<V> values() const {
             Array<V> values(size());
-            for (auto& k : m_map) {
+            for (const auto& k : m_map) {
                 values << k.first;
             }
             return values;
