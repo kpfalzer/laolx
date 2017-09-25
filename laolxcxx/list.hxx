@@ -23,86 +23,96 @@
  */
 
 /* 
- * File:   array.hxx
+ * File:   list.hxx
  * Author: kwpfalzer
  *
  * Created on September 23, 2017, 4:11 PM
  */
 
-#ifndef LAOLX_ARRAY_HXX
-#define LAOLX_ARRAY_HXX
+#ifndef LAOLX_LIST_HXX
+#define LAOLX_LIST_HXX
 
-#include <vector>
+#include <list>
 #include <functional>
 #include "laolx/object.hxx"
+#include "object.hxx"
 
 namespace laolx {
 
     template<typename T>
-    class Array : public virtual Object {
+    class List : public virtual Object {
     public:
-        typedef std::vector<T> collection_type;
+        typedef std::list<T> collection_type;
         typedef typename collection_type::size_type size_type;
         typedef typename collection_type::reference reference;
         typedef typename collection_type::const_reference const_reference;
-        typedef long int index_type;
         
-        Array() {
+        List() {
         }
 
-        Array(size_type n) : m_array(n) {
-        }
-
-        Array& operator<<(const T& item) {
-            m_array.push_back(item);
-            return *this;
-        }
-
-        /**
-         * Return reference to element at index.
-         * @param index if 0 or positive: index from beginning.
-         *              if negative: index from end (i.e., -1 is last item).
-         * @return reference to element at index.
-         */
-        reference operator[](index_type index) {
-            return m_array.at(actual_index(index));
-        }
-
-        const_reference operator[](index_type index) const {
-            return m_array.at(actual_index(index));
+        List& operator<<(const T& item) {
+            return push_last(item);
         }
 
         reference first() {
-            return operator[](0);
+            return m_list.front();
         }
         
         const_reference first() const {
-            return operator[](0);
+            return m_list.front();
         }
         
         reference last() {
-            return operator[](-1);
+            return m_list.back();
         }
         
         const_reference last() const {
-            return operator[](-1);
+            return m_list.back();
+        }
+        
+        List& push_last(const T& item) {
+            m_list.push_back(item);
+            return *this;
+        }
+        
+        List& push_first(const T& item) {
+            m_list.push_front(item);
+            return *this;
+        }
+        
+        T pop_last() {
+            T last = last();
+            m_list.pop_back();
+            return last;
+        }
+        
+        T pop_first() {
+            T front = front();
+            m_list.pop_front();
+            return front;
         }
         
         size_type length() const {
-            return m_array.size();
+            return m_list.size();
         }
 
         void each(const std::function<void (const T& ele)>& consume) const {
-            eachImpl<T, collection_type>(m_array, consume);
+            eachImpl<T, collection_type>(m_list, consume);
         }
 
-        Array select(const std::function<bool (const T& ele)>& predicate) const {
-            return selectImpl<Array, T>(*this, predicate);
+        List select(const std::function<void (const T& ele)>& predicate) const {
+            List selected;
+            each([&](auto ele) {
+                if (predicate(ele)) {
+                    selected << ele;
+                }
+            });
+            return selected;
         }
 
         template<typename T2>
-        Array<T2> map(const std::function<const T2& (const T& ele)>& mapper) const {
-            Array<T2> mapped(length());
+        List<T2> map(const std::function<const T2& (const T& ele)>& mapper) const {
+            List<T2> mapped;
             each([&](auto ele) {
                 mapped << mapper(ele);
             });
@@ -118,15 +128,11 @@ namespace laolx {
             return reduced;
         }
         
-        virtual ~Array() {
+        virtual ~List() {
         }
 
     private:
-        size_type actual_index(index_type ix) {
-            return (0 <= ix) ? ix : (length() + ix);
-        }
-        
-        collection_type m_array;
+        collection_type m_list;
     };
 }
 

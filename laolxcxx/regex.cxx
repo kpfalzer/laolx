@@ -29,8 +29,7 @@
 namespace laolx {
 
     bool Regex::match(const std::string& text) {
-        auto flags = std::regex_constants::match_not_bol | std::regex_constants::match_not_eol;
-        return std::regex_match(text, m_matcher, m_rex);//, flags);
+        return std::regex_search(text, m_matcher, m_rex);
     }
     
     std::string Regex::getMatch(int n) const {

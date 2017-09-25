@@ -38,6 +38,7 @@
 #include "laolx/map.hxx"
 #include "laolx/array.hxx"
 #include "laolx/regex.hxx"
+#include "laolx/list.hxx"
 
 /*
  * Simple C++ Test Suite
@@ -124,10 +125,20 @@ void test2() {
 
     /**/
     laolx::Array<bool> aa;
-    aa << true;
+    aa << true << false << false;
     /**/
-    aa[0] = false;
+    aa[1] = true;
     b = aa[0];
+    int count = 0;
+    aa
+            .select([](auto e) {
+                return e;
+            })
+    .each([&count](auto e) {
+        count++;
+    });
+    assert (2 == count);
+    std::cout << "count=" << count << std::endl;
     /**/
 }
 
@@ -164,8 +175,8 @@ void test4() {
 }
 
 void test5() {
-    laolx::Regex rex("(\\d+).*");
-    std::string s1 = "12345", s2 = "123def";
+    laolx::Regex rex("^(\\d+)");
+    std::string s1 = "12345", s2 = "abc123def";
     unsigned long num;
     bool matched;
     matched = rex.match(s2);
@@ -173,6 +184,29 @@ void test5() {
     matched = rex.match(s1);
     assert(matched);
     std::cout << "s1=" << rex.getMatch(1) << std::endl;
+}
+
+void test6() {
+
+    union U {
+
+        U() {
+        }
+
+        ~U() {
+        }
+        laolx::Array<int> m_int;
+        laolx::Map<int, int> m_map;
+    } u;
+}
+
+void test7() {
+    laolx::List<int> list;
+    list << 1 << 2 << 3 << 4;
+    assert(4 == list.length());
+    list.each([](auto i) {
+        std::cout << i << std::endl;
+    });
 }
 
 int main(int argc, char** argv) {
@@ -197,6 +231,14 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% test5 (maptest)" << std::endl;
     test5();
     std::cout << "%TEST_FINISHED% test5 (maptest)" << std::endl;
+
+    std::cout << "%TEST_STARTED% test6 (maptest)" << std::endl;
+    test6();
+    std::cout << "%TEST_FINISHED% test6 (maptest)" << std::endl;
+
+    std::cout << "%TEST_STARTED% test7 (maptest)" << std::endl;
+    test7();
+    std::cout << "%TEST_FINISHED% test7 (maptest)" << std::endl;
 
     std::cout << "%SUITE_FINISHED%" << std::endl;
 

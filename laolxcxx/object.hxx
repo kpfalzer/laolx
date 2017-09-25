@@ -32,6 +32,8 @@
 #ifndef LAOLX_OBJECT_HXX
 #define LAOLX_OBJECT_HXX
 
+#include <functional>
+
 namespace laolx {
 
     class Object {
@@ -40,11 +42,26 @@ namespace laolx {
         Object() {
         }
 
-        Object(const Object&) = default;
-
-        Object& operator=(const Object&) = default;
-
         virtual ~Object() = 0;
+
+        template<typename T, typename COLL>
+        static void eachImpl(const COLL& coll, const std::function<void (const T& ele)>& consume) {
+            for (const auto e : coll) {
+                consume(e);
+            }
+        }
+        
+        template<class C, typename T>
+        C selectImpl(const C& coll, const std::function<bool (const T& ele)>& predicate) const {
+            C selected;
+            coll.each([&](auto ele) {
+                if (predicate(ele)) {
+                    selected << ele;
+                }
+            });
+            return selected;
+        }
+
     };
 }
 

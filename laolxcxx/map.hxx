@@ -47,7 +47,8 @@ namespace laolx {
     template<typename K, typename V>
     class Map : public virtual Object {
     public:
-        typedef typename std::unordered_map<K, V>::size_type size_type;
+        typedef std::unordered_map<K, V> collection_type;
+        typedef typename collection_type::size_type size_type;
 
         /**
          * Lookup value by key.
@@ -121,15 +122,11 @@ namespace laolx {
         explicit Map() {
         }
 
-        Map(const Map&) = default;
-
-        Map& operator=(const Map&) = default;
-
         virtual ~Map() {
         }
 
     private:
-        std::unordered_map<K, V> m_map;
+        collection_type m_map;
     };
 }
 

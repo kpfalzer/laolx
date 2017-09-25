@@ -45,6 +45,10 @@ namespace laolx {
         explicit Regex() {
         }
 
+        /**
+         * Construct regular expression matcher.
+         * @param patt regular expression.
+         */
         explicit Regex(const std::string& patt) 
         : m_rex(patt) {
         }
@@ -54,6 +58,11 @@ namespace laolx {
             return *this;
         }
         
+        /**
+         * Match to regular expression.
+         * @param text text to match.
+         * @return true if any part of text matches.
+         */
         bool match(const std::string& text);
         
         size_type getMatchCount() const;
@@ -65,10 +74,6 @@ namespace laolx {
          */
         std::string getMatch(int n) const;
         
-        Regex(const Regex&) = default;
-
-        Regex& operator=(const Regex&) = default;
-
         virtual ~Regex() {
         }
 
