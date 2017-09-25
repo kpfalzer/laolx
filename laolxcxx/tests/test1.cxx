@@ -115,6 +115,9 @@ void test1() {
     bool reduced = keys.reduce<bool>(true, [](auto a, auto b) {
         return a & b;
     });
+    laolx::Map<std::string, int> map2({{"key1",123},{"key2",456}});
+    assert(2 == map2.size());
+    assert(123 == map2["key1"]);
 }
 
 void test2() {
@@ -140,6 +143,9 @@ void test2() {
     assert (2 == count);
     std::cout << "count=" << count << std::endl;
     /**/
+    laolx::Array<std::string> ar2({"dog", "cat"});
+    ar2 << "bird";
+    assert(3 == ar2.length());
 }
 
 void test3() {
@@ -211,6 +217,8 @@ void test7() {
     list.select([](auto i){return i >2;}).each([](auto i) {
         std::cout << i << std::endl;
     });
+    laolx::List<int> list2({9,8,7,6,5});
+    assert(5 == list2.length());
 }
 
 int main(int argc, char** argv) {

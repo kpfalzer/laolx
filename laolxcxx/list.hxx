@@ -46,8 +46,11 @@ namespace laolx {
         typedef typename collection_type::size_type size_type;
         typedef typename collection_type::reference reference;
         typedef typename collection_type::const_reference const_reference;
-        
+
         List() {
+        }
+
+        List(std::initializer_list<T> init) : m_list(init) {
         }
 
         List& operator<<(const T& item) {
@@ -57,41 +60,41 @@ namespace laolx {
         reference first() {
             return m_list.front();
         }
-        
+
         const_reference first() const {
             return m_list.front();
         }
-        
+
         reference last() {
             return m_list.back();
         }
-        
+
         const_reference last() const {
             return m_list.back();
         }
-        
+
         List& push_last(const T& item) {
             m_list.push_back(item);
             return *this;
         }
-        
+
         List& push_first(const T& item) {
             m_list.push_front(item);
             return *this;
         }
-        
+
         T pop_last() {
             T last = last();
             m_list.pop_back();
             return last;
         }
-        
+
         T pop_first() {
             T front = front();
             m_list.pop_front();
             return front;
         }
-        
+
         size_type length() const {
             return m_list.size();
         }
@@ -121,7 +124,7 @@ namespace laolx {
             });
             return reduced;
         }
-        
+
         virtual ~List() {
         }
 

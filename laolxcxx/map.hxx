@@ -49,6 +49,13 @@ namespace laolx {
     public:
         typedef std::unordered_map<K, V> collection_type;
         typedef typename collection_type::size_type size_type;
+        typedef typename collection_type::value_type value_type;
+
+        explicit Map() {
+        }
+
+        explicit Map(std::initializer_list<value_type> init) : m_map(init) {
+        }
 
         /**
          * Lookup value by key.
@@ -83,18 +90,18 @@ namespace laolx {
             });
             return selected;
         }
-        
+
         template<typename K2, typename V2>
         Map<K2, V2>
-        map(const std::function<std::pair<K2,V2> (const K& key, const V& val)>& mapper) const {
+        map(const std::function<std::pair<K2, V2> (const K& key, const V& val)>& mapper) const {
             Map<K2, V2> mapped;
             each([&](auto key, auto val) {
-                std::pair<K2,V2> kv = mapper(key, val);
+                std::pair<K2, V2> kv = mapper(key, val);
                 mapped[kv.first] = kv.second;
             });
             return mapped;
         }
-        
+
         Array<K> keys() const {
             Array<K> keys(size());
             for (const auto& k : m_map) {
@@ -110,16 +117,13 @@ namespace laolx {
             }
             return values;
         }
-                
+
         size_type size() const {
             return m_map.size();
         }
-        
+
         bool isEmpty() const {
             return m_map.empty();
-        }
-        
-        explicit Map() {
         }
 
         virtual ~Map() {

@@ -46,11 +46,14 @@ namespace laolx {
         typedef typename collection_type::reference reference;
         typedef typename collection_type::const_reference const_reference;
         typedef long int index_type;
-        
+
         Array() {
         }
 
         Array(size_type n) : m_array(n) {
+        }
+
+        Array(std::initializer_list<T> init) : m_array(init) {
         }
 
         Array& operator<<(const T& item) {
@@ -75,19 +78,19 @@ namespace laolx {
         reference first() {
             return operator[](0);
         }
-        
+
         const_reference first() const {
             return operator[](0);
         }
-        
+
         reference last() {
             return operator[](-1);
         }
-        
+
         const_reference last() const {
             return operator[](-1);
         }
-        
+
         size_type length() const {
             return m_array.size();
         }
@@ -117,15 +120,16 @@ namespace laolx {
             });
             return reduced;
         }
-        
+
         virtual ~Array() {
         }
 
     private:
+
         size_type actual_index(index_type ix) {
             return (0 <= ix) ? ix : (length() + ix);
         }
-        
+
         collection_type m_array;
     };
 }
