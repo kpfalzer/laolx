@@ -207,6 +207,10 @@ void test7() {
     list.each([](auto i) {
         std::cout << i << std::endl;
     });
+    std::cout << "selected (i>2):" << std::endl;
+    list.select([](auto i){return i >2;}).each([](auto i) {
+        std::cout << i << std::endl;
+    });
 }
 
 int main(int argc, char** argv) {

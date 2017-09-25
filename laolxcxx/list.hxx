@@ -97,17 +97,11 @@ namespace laolx {
         }
 
         void each(const std::function<void (const T& ele)>& consume) const {
-            eachImpl<T, collection_type>(m_list, consume);
+            eachImpl(m_list, consume);
         }
 
-        List select(const std::function<void (const T& ele)>& predicate) const {
-            List selected;
-            each([&](auto ele) {
-                if (predicate(ele)) {
-                    selected << ele;
-                }
-            });
-            return selected;
+        List select(const std::function<bool (const T& ele)>& predicate) const {
+            return selectImpl(*this, predicate);
         }
 
         template<typename T2>

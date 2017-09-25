@@ -44,14 +44,14 @@ namespace laolx {
 
         virtual ~Object() = 0;
 
-        template<typename T, typename COLL>
-        static void eachImpl(const COLL& coll, const std::function<void (const T& ele)>& consume) {
+        template<typename BaseColl, typename T>
+        static void eachImpl(const BaseColl& coll, const std::function<void (const T& ele)>& consume) {
             for (const auto e : coll) {
                 consume(e);
             }
         }
         
-        template<class C, typename T>
+        template<typename C, typename T>
         C selectImpl(const C& coll, const std::function<bool (const T& ele)>& predicate) const {
             C selected;
             coll.each([&](auto ele) {

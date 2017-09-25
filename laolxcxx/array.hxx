@@ -93,11 +93,11 @@ namespace laolx {
         }
 
         void each(const std::function<void (const T& ele)>& consume) const {
-            eachImpl<T, collection_type>(m_array, consume);
+            eachImpl(m_array, consume);
         }
 
         Array select(const std::function<bool (const T& ele)>& predicate) const {
-            return selectImpl<Array, T>(*this, predicate);
+            return selectImpl(*this, predicate);
         }
 
         template<typename T2>
