@@ -73,7 +73,7 @@ namespace laolx {
             }
         }
 
-        template<typename R, typename T, typename COLL=R>
+        template<typename R, typename T, typename COLL = R>
         R selectImpl(const COLL& coll, const std::function<bool (const T& ele)>& predicate) const {
             R selected;
             coll.each([&](auto ele) {
@@ -85,13 +85,23 @@ namespace laolx {
         }
 
         template<typename R, typename TO, typename COLL, typename FROM>
-        R mapImpl(const COLL& coll, const std::function<TO (const FROM& ele)>& mapper) const {
+        R mapImpl(const COLL& coll, const std::function<TO(const FROM& ele)>& mapper) const {
             R mapped;
             coll.each([&](auto ele) {
                 mapped << mapper(ele);
             });
             return mapped;
         }
+
+        template<typename T, typename COLL, typename R=T>
+        R reduceImpl(const COLL& coll, const R& init, const std::function<void (R& reduced, const T& ele)>& reducer) const {
+            R reduced = init;
+            coll.each([&](auto ele) {
+                reducer(reduced, ele);
+            });
+            return reduced;
+        }
+
     };
 }
 

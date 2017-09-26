@@ -109,12 +109,8 @@ namespace laolx {
         }
 
         template<typename R>
-        R reduce(const R& init, const std::function<const R& (const R& a, const T& b)>& binop) const {
-            R reduced = init;
-            each([&](auto ele) {
-                reduced = binop(reduced, ele);
-            });
-            return reduced;
+        R reduce(const R& init, const std::function<void (R& reduced, const T& ele)>& reducer) const {
+            return reduceImpl<R>(*this, init, reducer);
         }
 
         bool operator==(const Array& other) const {

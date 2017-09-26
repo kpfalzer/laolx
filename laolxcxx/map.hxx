@@ -88,23 +88,10 @@ namespace laolx {
             return selectImpl<Map>(*this, predicate);
         }
 
-#if true
         template<typename K2, typename V2, typename R=Map<K2,V2> >
         R map(const std::function<std::pair<K2, V2> (const value_type& kv)>& mapper) const {
             return mapImpl<R>(*this, mapper);
         }
-#else
-        template<typename K2, typename V2, typename R=Map<K2,V2> >
-        R
-        map(const std::function<std::pair<K2, V2> (const value_type& kv)>& mapper) const {
-            Map<K2, V2> mapped;
-            each([&](auto kv) {
-                std::pair<K2, V2> nkv = mapper(kv);
-                mapped[nkv.first] = nkv.second;
-            });
-            return mapped;
-        }
-#endif
 
         Array<K> keys() const {
             Array<K> keys(size());

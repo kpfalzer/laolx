@@ -112,8 +112,8 @@ void test1() {
         std::cout << "k=" << kv.first << ",v=" << kv.second << std::endl;
     });
     laolx::Array<bool> keys = xform.keys();
-    bool reduced = keys.reduce<bool>(true, [](auto a, auto b) {
-        return a & b;
+    bool reduced = keys.reduce<bool>(true, [](auto reduced, auto b) {
+        reduced &= b;
     });
     laolx::Map<std::string, int> map2({{"key1",123},{"key2",456}});
     assert(2 == map2.size());
