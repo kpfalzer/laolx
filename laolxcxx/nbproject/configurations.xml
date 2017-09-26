@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>array.hxx</itemPath>
       <itemPath>exception.hxx</itemPath>
+      <itemPath>istream.hxx</itemPath>
       <itemPath>list.hxx</itemPath>
       <itemPath>map.hxx</itemPath>
       <itemPath>object.hxx</itemPath>
@@ -19,6 +20,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>exception.cxx</itemPath>
+      <itemPath>istream.cxx</itemPath>
       <itemPath>object.cxx</itemPath>
       <itemPath>regex.cxx</itemPath>
     </logicalFolder>
@@ -77,6 +79,10 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <item path="istream.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="istream.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="map.hxx" ex="false" tool="3" flavor2="0">
@@ -135,6 +141,10 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <item path="istream.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="istream.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="map.hxx" ex="false" tool="3" flavor2="0">

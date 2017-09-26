@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/exception.o \
+	${OBJECTDIR}/istream.o \
 	${OBJECTDIR}/object.o \
 	${OBJECTDIR}/regex.o
 
@@ -81,6 +82,11 @@ ${OBJECTDIR}/exception.o: exception.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/exception.o exception.cxx
 
+${OBJECTDIR}/istream.o: istream.cxx
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/istream.o istream.cxx
+
 ${OBJECTDIR}/object.o: object.cxx
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -120,6 +126,19 @@ ${OBJECTDIR}/exception_nomain.o: ${OBJECTDIR}/exception.o exception.cxx
 	    $(COMPILE.cc) -g -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/exception_nomain.o exception.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/exception.o ${OBJECTDIR}/exception_nomain.o;\
+	fi
+
+${OBJECTDIR}/istream_nomain.o: ${OBJECTDIR}/istream.o istream.cxx 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/istream.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/istream_nomain.o istream.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/istream.o ${OBJECTDIR}/istream_nomain.o;\
 	fi
 
 ${OBJECTDIR}/object_nomain.o: ${OBJECTDIR}/object.o object.cxx 
