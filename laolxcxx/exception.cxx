@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kwpfalzer.
+ * Copyright 2017 kpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,17 @@
  * THE SOFTWARE.
  */
 
-#include "laolx/object.hxx"
+#include <string>
 #include "laolx/exception.hxx"
 
 namespace laolx {
 
-    Object::~Object() {
+    NoMethodException::NoMethodException(const std::string& methodName)
+    : std::runtime_error("No method '" + methodName + "' defined"
+    ) {
     }
 
-    bool Object::operator<(const Object& other) const {
-        throw NoMethodException("operator <");
+    NoMethodException::~NoMethodException() {
     }
-
-    bool Object::operator>(const Object& other) const {
-        throw NoMethodException("operator >");
-    }
-
 }
+

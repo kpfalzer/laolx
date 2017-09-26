@@ -13,6 +13,8 @@
 		17C5CC9D1F7706290077BD11 /* object.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17C5CC9B1F7706290077BD11 /* object.hxx */; };
 		17C69DAF1F786813004C1B71 /* regex.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C69DAD1F786813004C1B71 /* regex.cxx */; };
 		17C69DB01F786813004C1B71 /* regex.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17C69DAE1F786813004C1B71 /* regex.hxx */; };
+		17DE00851F79BDAC00B89C9A /* exception.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17DE00831F79BDAC00B89C9A /* exception.cxx */; };
+		17DE00861F79BDAC00B89C9A /* exception.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17DE00841F79BDAC00B89C9A /* exception.hxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		17C5CC9B1F7706290077BD11 /* object.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = object.hxx; path = ../laolxcxx/object.hxx; sourceTree = "<group>"; };
 		17C69DAD1F786813004C1B71 /* regex.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = regex.cxx; path = ../laolxcxx/regex.cxx; sourceTree = "<group>"; };
 		17C69DAE1F786813004C1B71 /* regex.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = regex.hxx; path = ../laolxcxx/regex.hxx; sourceTree = "<group>"; };
+		17DE00831F79BDAC00B89C9A /* exception.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exception.cxx; path = ../laolxcxx/exception.cxx; sourceTree = "<group>"; };
+		17DE00841F79BDAC00B89C9A /* exception.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = exception.hxx; path = ../laolxcxx/exception.hxx; sourceTree = "<group>"; };
 		17E977681F76F6EB005669D1 /* liblaolx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblaolx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,6 +43,8 @@
 		17E9775F1F76F6EB005669D1 = {
 			isa = PBXGroup;
 			children = (
+				17DE00831F79BDAC00B89C9A /* exception.cxx */,
+				17DE00841F79BDAC00B89C9A /* exception.hxx */,
 				17C69DAD1F786813004C1B71 /* regex.cxx */,
 				17C69DAE1F786813004C1B71 /* regex.hxx */,
 				17AF12C51F7733FF0003E7BE /* array.hxx */,
@@ -65,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C5CC9C1F7706290077BD11 /* map.hxx in Headers */,
+				17DE00861F79BDAC00B89C9A /* exception.hxx in Headers */,
 				17AF12C61F7733FF0003E7BE /* array.hxx in Headers */,
 				17C69DB01F786813004C1B71 /* regex.hxx in Headers */,
 				17C5CC9D1F7706290077BD11 /* object.hxx in Headers */,
@@ -130,6 +137,7 @@
 			files = (
 				17C5CC991F7705FC0077BD11 /* object.cxx in Sources */,
 				17C69DAF1F786813004C1B71 /* regex.cxx in Sources */,
+				17DE00851F79BDAC00B89C9A /* exception.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

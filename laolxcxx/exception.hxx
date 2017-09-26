@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kwpfalzer.
+ * Copyright 2017 kpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,33 @@
  * THE SOFTWARE.
  */
 
-#include "laolx/object.hxx"
-#include "laolx/exception.hxx"
+/* 
+ * File:   exception.hxx
+ * Author: kpfalzer
+ *
+ * Created on September 25, 2017, 11:06 AM
+ */
+
+#ifndef LAOLX_EXCEPTION_HXX
+#define LAOLX_EXCEPTION_HXX
+
+#include <stdexcept>
+#include <string>
 
 namespace laolx {
 
-    Object::~Object() {
-    }
+    class NoMethodException : public std::runtime_error {
+    public:
 
-    bool Object::operator<(const Object& other) const {
-        throw NoMethodException("operator <");
-    }
+        explicit NoMethodException(const std::string& methodName);
 
-    bool Object::operator>(const Object& other) const {
-        throw NoMethodException("operator >");
-    }
+        explicit NoMethodException(const char* methodName)
+        : NoMethodException(std::string(methodName)) {
+        }
 
+        virtual ~NoMethodException();
+    };
 }
+
+#endif /* LAOLX_EXCEPTION_HXX */
+

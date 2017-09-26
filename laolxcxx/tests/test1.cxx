@@ -86,30 +86,30 @@ void test1() {
     Map map;
     map[6] = true;
     std::cout << "map =========" << std::endl;
-    map.each([](auto k, auto v) {
-        std::cout << "k=" << k << ",v=" << v << std::endl;
+    map.each([](auto kv) {
+        std::cout << "k=" << kv.first << ",v=" << kv.second << std::endl;
     });
     const Map& cmap = map;
     //no: cmap[7] = false;
     map[7] = false;
     map[1] = true;
     std::cout << "cmap =========" << std::endl;
-    cmap.each([](auto k, auto v) {
-        std::cout << "k=" << k << ",v=" << v << std::endl;
+    cmap.each([](auto kv) {
+        std::cout << "k=" << kv.first << ",v=" << kv.second << std::endl;
     });
-    Map smap = cmap.select([](auto k, auto v) {
-        return (k >= 6);
+    Map smap = cmap.select([](auto kv) {
+        return (kv.second >= 6);
     });
     std::cout << "smap =========" << std::endl;
-    smap.each([](auto k, auto v) {
-        std::cout << "k=" << k << ",v=" << v << std::endl;
+    smap.each([](auto kv) {
+        std::cout << "k=" << kv.first << ",v=" << kv.second << std::endl;
     });
-    laolx::Map<bool, int> xform = smap.map<bool, int>([](auto k, auto v) {
-        return std::make_pair(v, k);
+    laolx::Map<bool, int> xform = smap.map<bool, int>([](auto kv) {
+        return std::make_pair(kv.second, kv.first);
     });
     std::cout << "xform =========" << std::endl;
-    xform.each([](auto k, auto v) {
-        std::cout << "k=" << k << ",v=" << v << std::endl;
+    xform.each([](auto kv) {
+        std::cout << "k=" << kv.first << ",v=" << kv.second << std::endl;
     });
     laolx::Array<bool> keys = xform.keys();
     bool reduced = keys.reduce<bool>(true, [](auto a, auto b) {
@@ -118,6 +118,9 @@ void test1() {
     laolx::Map<std::string, int> map2({{"key1",123},{"key2",456}});
     assert(2 == map2.size());
     assert(123 == map2["key1"]);
+    assert(map2 == map2);
+    laolx::Map<std::string, int> map3(map2);
+    assert(map2 == map3);
 }
 
 void test2() {
@@ -146,6 +149,9 @@ void test2() {
     laolx::Array<std::string> ar2({"dog", "cat"});
     ar2 << "bird";
     assert(3 == ar2.length());
+    ar2.map<std::string>([](auto ele) {return ele + "***";}).each([](auto ele) {
+        std::cout << ele << std::endl;
+    });
 }
 
 void test3() {
@@ -219,6 +225,11 @@ void test7() {
     });
     laolx::List<int> list2({9,8,7,6,5});
     assert(5 == list2.length());
+#ifdef THROWS
+    //laolx::NoMethodException: No method 'operator <' defined
+    bool bb = list2 < list2;
+#endif
+    assert (list2 == list2);
 }
 
 int main(int argc, char** argv) {

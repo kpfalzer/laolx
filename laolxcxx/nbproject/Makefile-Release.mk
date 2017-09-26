@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/exception.o \
 	${OBJECTDIR}/object.o \
 	${OBJECTDIR}/regex.o
 
@@ -75,6 +76,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxcxx.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxcxx.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxcxx.a
 
+${OBJECTDIR}/exception.o: exception.cxx
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/exception.o exception.cxx
+
 ${OBJECTDIR}/object.o: object.cxx
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -102,6 +108,19 @@ ${TESTDIR}/tests/test1.o: tests/test1.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test1.o tests/test1.cxx
 
+
+${OBJECTDIR}/exception_nomain.o: ${OBJECTDIR}/exception.o exception.cxx 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/exception.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/exception_nomain.o exception.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/exception.o ${OBJECTDIR}/exception_nomain.o;\
+	fi
 
 ${OBJECTDIR}/object_nomain.o: ${OBJECTDIR}/object.o object.cxx 
 	${MKDIR} -p ${OBJECTDIR}

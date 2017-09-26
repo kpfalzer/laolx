@@ -104,16 +104,12 @@ namespace laolx {
         }
 
         List select(const std::function<bool (const T& ele)>& predicate) const {
-            return selectImpl(*this, predicate);
+            return selectImpl<List>(*this, predicate);
         }
 
-        template<typename T2>
-        List<T2> map(const std::function<const T2& (const T& ele)>& mapper) const {
-            List<T2> mapped;
-            each([&](auto ele) {
-                mapped << mapper(ele);
-            });
-            return mapped;
+        template<typename T2, typename R=List<T2> >
+        R map(const std::function<T2 (const T& ele)>& mapper) const {
+            return mapImpl<R>(*this, mapper);
         }
 
         template<typename R>
@@ -123,6 +119,18 @@ namespace laolx {
                 reduced = binop(reduced, ele);
             });
             return reduced;
+        }
+
+        bool operator==(const List& other) const {
+            return m_list == other.m_list;
+        }
+
+        bool operator>(const List& other) const {
+            return m_list > other.m_list;
+        }
+
+        bool operator<(const List& other) const {
+            return m_list < other.m_list;
         }
 
         virtual ~List() {

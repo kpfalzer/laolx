@@ -7,13 +7,13 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=gcc-4.7.4-MacOSX
-CND_ARTIFACT_DIR_Debug=dist/Debug/gcc-4.7.4-MacOSX
+CND_PLATFORM_Debug=CLang-MacOSX
+CND_ARTIFACT_DIR_Debug=dist/Debug/CLang-MacOSX
 CND_ARTIFACT_NAME_Debug=liblaolxcxx.a
-CND_ARTIFACT_PATH_Debug=dist/Debug/gcc-4.7.4-MacOSX/liblaolxcxx.a
-CND_PACKAGE_DIR_Debug=dist/Debug/gcc-4.7.4-MacOSX/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/CLang-MacOSX/liblaolxcxx.a
+CND_PACKAGE_DIR_Debug=dist/Debug/CLang-MacOSX/package
 CND_PACKAGE_NAME_Debug=laolxcxx.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/gcc-4.7.4-MacOSX/package/laolxcxx.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/CLang-MacOSX/package/laolxcxx.tar
 # Release configuration
 CND_PLATFORM_Release=gcc-4.7.4-MacOSX
 CND_ARTIFACT_DIR_Release=dist/Release/gcc-4.7.4-MacOSX

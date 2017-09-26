@@ -63,44 +63,48 @@ namespace laolx {
          * @param key index into map.
          * @return current value or (reference to) empty value.
          */
-        V& operator[](const K& key) {
+        V& operator[](const K & key) {
             return m_map[key];
         }
 
-        const V& operator[](const K& key) const {
+        const V& operator[](const K & key) const {
             return m_map[key];
         }
 
-        bool hasKey(const K& key) const {
+        Map& operator<<(const value_type& kv) {
+            m_map[kv.first] = kv.second;
+            return *this;
+        }
+        
+        bool hasKey(const K & key) const {
             return m_map.find(key) != m_map.end();
         }
 
-        void each(const std::function<void (const K& key, const V& val)>& consume) const {
-            for (const auto& i : m_map) {
-                consume(i.first, i.second);
-            }
+        void each(const std::function<void (const value_type&) >& consume) const {
+            eachImpl(m_map, consume);
         }
 
-        Map select(const std::function<bool (const K& key, const V& val)>& predicate) const {
-            Map selected;
-            each([&](auto key, auto val) {
-                if (predicate(key, val)) {
-                    selected[key] = val;
-                }
-            });
-            return selected;
+        Map select(const std::function<bool (const value_type&)>& predicate) const {
+            return selectImpl<Map>(*this, predicate);
         }
 
-        template<typename K2, typename V2>
-        Map<K2, V2>
-        map(const std::function<std::pair<K2, V2> (const K& key, const V& val)>& mapper) const {
+#if true
+        template<typename K2, typename V2, typename R=Map<K2,V2> >
+        R map(const std::function<std::pair<K2, V2> (const value_type& kv)>& mapper) const {
+            return mapImpl<R>(*this, mapper);
+        }
+#else
+        template<typename K2, typename V2, typename R=Map<K2,V2> >
+        R
+        map(const std::function<std::pair<K2, V2> (const value_type& kv)>& mapper) const {
             Map<K2, V2> mapped;
-            each([&](auto key, auto val) {
-                std::pair<K2, V2> kv = mapper(key, val);
-                mapped[kv.first] = kv.second;
+            each([&](auto kv) {
+                std::pair<K2, V2> nkv = mapper(kv);
+                mapped[nkv.first] = nkv.second;
             });
             return mapped;
         }
+#endif
 
         Array<K> keys() const {
             Array<K> keys(size());
@@ -113,7 +117,7 @@ namespace laolx {
         Array<V> values() const {
             Array<V> values(size());
             for (const auto& k : m_map) {
-                values << k.first;
+                values << k.second;
             }
             return values;
         }
@@ -124,6 +128,10 @@ namespace laolx {
 
         bool isEmpty() const {
             return m_map.empty();
+        }
+
+        bool operator==(const Map & other) const {
+            return m_map == other.m_map;
         }
 
         virtual ~Map() {

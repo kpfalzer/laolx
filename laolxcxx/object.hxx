@@ -37,6 +37,28 @@
 namespace laolx {
 
     class Object {
+    public:
+
+        virtual bool operator==(const Object& other) const {
+            return this == &other;
+        }
+
+        virtual bool operator!=(const Object& other) const {
+            return !operator==(other);
+        }
+
+        virtual bool operator<(const Object& other) const;
+
+        virtual bool operator>(const Object& other) const;
+
+        virtual bool operator<=(const Object& other) const {
+            return operator<(other) || operator==(other);
+        }
+
+        virtual bool operator>=(const Object& other) const {
+            return operator>(other) || operator==(other);
+        }
+
     protected:
 
         Object() {
@@ -44,16 +66,16 @@ namespace laolx {
 
         virtual ~Object() = 0;
 
-        template<typename BaseColl, typename T>
-        static void eachImpl(const BaseColl& coll, const std::function<void (const T& ele)>& consume) {
+        template<typename IMPL, typename T>
+        static void eachImpl(const IMPL& coll, const std::function<void (const T& ele)>& consume) {
             for (const auto e : coll) {
                 consume(e);
             }
         }
-        
-        template<typename C, typename T>
-        C selectImpl(const C& coll, const std::function<bool (const T& ele)>& predicate) const {
-            C selected;
+
+        template<typename R, typename T, typename COLL=R>
+        R selectImpl(const COLL& coll, const std::function<bool (const T& ele)>& predicate) const {
+            R selected;
             coll.each([&](auto ele) {
                 if (predicate(ele)) {
                     selected << ele;
@@ -62,6 +84,14 @@ namespace laolx {
             return selected;
         }
 
+        template<typename R, typename TO, typename COLL, typename FROM>
+        R mapImpl(const COLL& coll, const std::function<TO (const FROM& ele)>& mapper) const {
+            R mapped;
+            coll.each([&](auto ele) {
+                mapped << mapper(ele);
+            });
+            return mapped;
+        }
     };
 }
 
