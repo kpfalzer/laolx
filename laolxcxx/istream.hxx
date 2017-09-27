@@ -33,6 +33,7 @@
 #define LAOLX_ISTREAM_HXX
 
 #include <string>
+#include <fstream>
 #include "laolx/object.hxx"
 
 namespace laolx {
@@ -45,6 +46,10 @@ namespace laolx {
 
         const std::string& getLine();
         
+        /**
+         * Line number of line from prior getLine().
+         * @return line number of prior getLine().
+         */
         linenumber_type getLineNumber() const {
             return m_lineNumber;
         }
@@ -58,7 +63,7 @@ namespace laolx {
     private:
         std::string m_line;
         linenumber_type m_lineNumber;
-        const string m_filename;
+        const std::string m_filename;
         std::ifstream m_ifs;
     };
 }

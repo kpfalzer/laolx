@@ -48,6 +48,18 @@ namespace laolx {
 
         virtual ~NoMethodException();
     };
+    
+    class FileOpenException : public std::runtime_error {
+    public:
+
+        explicit FileOpenException(const std::string& filename);
+
+        explicit FileOpenException(const char* filename)
+        : FileOpenException(std::string(filename)) {
+        }
+
+        virtual ~FileOpenException();
+    };
 }
 
 #endif /* LAOLX_EXCEPTION_HXX */

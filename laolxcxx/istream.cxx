@@ -22,16 +22,56 @@
  * THE SOFTWARE.
  */
 
+#include <sstream>
+#include <cassert>
 #include "laolx/istream.hxx"
+#include "laolx/exception.hxx"
 
 namespace laolx {
 
+    static const std::string EMPTY;
+    
     FileInputStream::FileInputStream(const std::string& filename)
     : m_filename(filename), m_ifs(filename), m_lineNumber(0) {
+        if (!m_ifs) {
+            throw FileOpenException(m_filename);
+        }
     }
 
+    FileInputStream::~FileInputStream() {
+    }
+    
     void FileInputStream::close() {
         m_ifs.close();
     }
 
+    const std::string& FileInputStream::getLine() {
+        if (isEOF())     {
+            return EMPTY;
+        }
+        std::ostringstream line;
+        char ch = 0;
+        while (true) {
+            m_ifs.get(ch);
+            if (m_ifs.fail() || isEOF()) {
+                break;
+            }
+            if (ch == '\n') {
+                break;
+            }
+            if (ch != '\r') {
+                line.rdbuf()->sputc(ch);
+            }
+        }
+        assert(!(m_ifs.fail() && !isEOF()));
+        m_line = line.rdbuf()->str();
+        if (! isEOF()) {
+            m_lineNumber++;
+        }
+        return m_line;
+    }
+
+    bool FileInputStream::isEOF() const {
+        return m_ifs.eof();
+    }
 }

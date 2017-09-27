@@ -24,6 +24,7 @@
 
 #include <string>
 #include "laolx/exception.hxx"
+#include "exception.hxx"
 
 namespace laolx {
 
@@ -33,6 +34,14 @@ namespace laolx {
     }
 
     NoMethodException::~NoMethodException() {
+    }
+
+    FileOpenException::FileOpenException(const std::string& filename)
+    : std::runtime_error("Could not open file '" + filename + "'"
+    ) {
+    }
+
+    FileOpenException::~FileOpenException() {
     }
 }
 

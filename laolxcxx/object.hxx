@@ -68,7 +68,7 @@ namespace laolx {
 
         template<typename IMPL, typename T>
         static void eachImpl(const IMPL& coll, const std::function<void (const T& ele)>& consume) {
-            for (const auto e : coll) {
+            for (const auto& e : coll) {
                 consume(e);
             }
         }

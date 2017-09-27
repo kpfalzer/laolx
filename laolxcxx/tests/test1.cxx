@@ -39,6 +39,7 @@
 #include "laolx/array.hxx"
 #include "laolx/regex.hxx"
 #include "laolx/list.hxx"
+#include "laolx/istream.hxx"
 
 /*
  * Simple C++ Test Suite
@@ -115,7 +116,10 @@ void test1() {
     bool reduced = keys.reduce<bool>(true, [](auto reduced, auto b) {
         reduced &= b;
     });
-    laolx::Map<std::string, int> map2({{"key1",123},{"key2",456}});
+    laolx::Map<std::string, int> map2({
+        {"key1", 123},
+        {"key2", 456}
+    });
     assert(2 == map2.size());
     assert(123 == map2["key1"]);
     assert(map2 == map2);
@@ -143,13 +147,15 @@ void test2() {
     .each([&count](auto e) {
         count++;
     });
-    assert (2 == count);
+    assert(2 == count);
     std::cout << "count=" << count << std::endl;
     /**/
     laolx::Array<std::string> ar2({"dog", "cat"});
     ar2 << "bird";
     assert(3 == ar2.length());
-    ar2.map<std::string>([](auto ele) {return ele + "***";}).each([](auto ele) {
+    ar2.map<std::string>([](auto ele) {
+        return ele + "***";
+    }).each([](auto ele) {
         std::cout << ele << std::endl;
     });
 }
@@ -220,16 +226,29 @@ void test7() {
         std::cout << i << std::endl;
     });
     std::cout << "selected (i>2):" << std::endl;
-    list.select([](auto i){return i >2;}).each([](auto i) {
+    list.select([](auto i) {
+        return i > 2;
+    }).each([](auto i) {
         std::cout << i << std::endl;
     });
-    laolx::List<int> list2({9,8,7,6,5});
+    laolx::List<int> list2({9, 8, 7, 6, 5});
     assert(5 == list2.length());
 #ifdef THROWS
     //laolx::NoMethodException: No method 'operator <' defined
     bool bb = list2 < list2;
 #endif
-    assert (list2 == list2);
+    assert(list2 == list2);
+}
+
+void test8() {
+    laolx::FileInputStream fis("istream.cxx");
+    while (!fis.isEOF()) {
+        const std::string& line = fis.getLine();
+        if (!fis.isEOF()) {
+            std::cout << fis.getLineNumber() << ": " << line << std::endl;
+        }
+    }
+    fis.close();
 }
 
 int main(int argc, char** argv) {
@@ -262,6 +281,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% test7 (maptest)" << std::endl;
     test7();
     std::cout << "%TEST_FINISHED% test7 (maptest)" << std::endl;
+
+    std::cout << "%TEST_STARTED% test8 (maptest)" << std::endl;
+    test8();
+    std::cout << "%TEST_FINISHED% test8 (maptest)" << std::endl;
 
     std::cout << "%SUITE_FINISHED%" << std::endl;
 
