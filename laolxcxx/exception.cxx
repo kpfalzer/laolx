@@ -36,12 +36,20 @@ namespace laolx {
     NoMethodException::~NoMethodException() {
     }
 
-    FileOpenException::FileOpenException(const std::string& filename)
-    : std::runtime_error("Could not open file '" + filename + "'"
+    static std::string getReason(FileException::Type type) {
+        switch (type) {
+            case FileException::OPEN:
+                return "Could not open file";
+            default:
+                return "?";
+        }
+    }
+    FileException::FileException(const std::string& filename, Type type)
+    : std::runtime_error(getReason(type) + " '" + filename + "'"
     ) {
     }
 
-    FileOpenException::~FileOpenException() {
+    FileException::~FileException() {
     }
 }
 

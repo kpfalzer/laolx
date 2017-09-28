@@ -113,6 +113,22 @@ namespace laolx {
             return reduceImpl<R>(*this, init, reducer);
         }
 
+        /**
+         * Sort in ascending order.
+         * @param aLessThanB compare function: returns true if a < b;
+         * i.e., a before b in sorted/ascending order.
+         */
+        void sort(const std::function<bool (const T& a, const T& b)>& aLessThanB) {
+            std::sort(m_array.begin(), m_array.end(), aLessThanB);
+        }
+        
+        /**
+         * Sort in ascending order (natural ordering of T).
+         */
+        void sort() {
+            std::sort(m_array.begin(), m_array.end());
+        } 
+        
         bool operator==(const Array& other) const {
             return m_array == other.m_array;
         }

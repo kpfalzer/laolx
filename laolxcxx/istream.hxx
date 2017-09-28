@@ -38,14 +38,12 @@
 
 namespace laolx {
 
-    class FileInputStream : public virtual Object {
+    class LineReader : public virtual Object {
     public:
         typedef unsigned long int linenumber_type;
-        
-        explicit FileInputStream(const std::string& filename);
 
-        const std::string& getLine();
-        
+        virtual const std::string& getLine() = 0;
+
         /**
          * Line number of line from prior getLine().
          * @return line number of prior getLine().
@@ -53,16 +51,33 @@ namespace laolx {
         linenumber_type getLineNumber() const {
             return m_lineNumber;
         }
-        
-        bool isEOF() const;
-        
-        void close();
-        
-        virtual ~FileInputStream();
-        
-    private:
+
+        virtual bool isEOF() const = 0;
+
+    protected:
+        virtual ~LineReader() = 0;
+
+        LineReader() : m_lineNumber(0) {
+        }
+
         std::string m_line;
         linenumber_type m_lineNumber;
+    };
+
+    class FileInputStream : public virtual Object, public LineReader {
+    public:
+
+        explicit FileInputStream(const std::string& filename);
+
+        const std::string& getLine();
+        
+        bool isEOF() const;
+
+        void close();
+
+        virtual ~FileInputStream();
+
+    private:
         const std::string m_filename;
         std::ifstream m_ifs;
     };

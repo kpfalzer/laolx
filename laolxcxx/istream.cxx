@@ -26,27 +26,31 @@
 #include <cassert>
 #include "laolx/istream.hxx"
 #include "laolx/exception.hxx"
+#include "istream.hxx"
 
 namespace laolx {
 
     static const std::string EMPTY;
-    
+
+    LineReader::~LineReader() {
+    }
+
     FileInputStream::FileInputStream(const std::string& filename)
-    : m_filename(filename), m_ifs(filename), m_lineNumber(0) {
+    : m_filename(filename), m_ifs(filename) {
         if (!m_ifs) {
-            throw FileOpenException(m_filename);
+            throw FileException(m_filename);
         }
     }
 
     FileInputStream::~FileInputStream() {
     }
-    
+
     void FileInputStream::close() {
         m_ifs.close();
     }
 
     const std::string& FileInputStream::getLine() {
-        if (isEOF())     {
+        if (isEOF()) {
             return EMPTY;
         }
         std::ostringstream line;
@@ -65,7 +69,7 @@ namespace laolx {
         }
         assert(!(m_ifs.fail() && !isEOF()));
         m_line = line.rdbuf()->str();
-        if (! isEOF()) {
+        if (!isEOF()) {
             m_lineNumber++;
         }
         return m_line;

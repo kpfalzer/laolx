@@ -190,6 +190,8 @@ void test4() {
     assert(!cs[0]->name().empty());
     assert(!cs[4]);
     assert(cs[0]->vals()[-1] == cs[0]->vals().last());
+    laolx::Array<std::string> ar2({"c", "b", "a"});
+    ar2.sort();
 }
 
 void test5() {

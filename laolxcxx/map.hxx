@@ -50,6 +50,8 @@ namespace laolx {
         typedef std::unordered_map<K, V> collection_type;
         typedef typename collection_type::size_type size_type;
         typedef typename collection_type::value_type value_type;
+        typedef typename collection_type::key_type key_type;
+        typedef typename collection_type::mapped_type mapped_type;
 
         explicit Map() {
         }
