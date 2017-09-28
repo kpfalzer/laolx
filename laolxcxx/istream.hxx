@@ -32,8 +32,10 @@
 #ifndef LAOLX_ISTREAM_HXX
 #define LAOLX_ISTREAM_HXX
 
+#include <istream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "laolx/object.hxx"
 
 namespace laolx {
@@ -42,7 +44,7 @@ namespace laolx {
     public:
         typedef unsigned long int linenumber_type;
 
-        virtual const std::string& getLine() = 0;
+        virtual const std::string& getLine();
 
         /**
          * Line number of line from prior getLine().
@@ -52,33 +54,41 @@ namespace laolx {
             return m_lineNumber;
         }
 
-        virtual bool isEOF() const = 0;
+        virtual bool isEOF() const;
 
     protected:
         virtual ~LineReader() = 0;
 
-        LineReader() : m_lineNumber(0) {
+        LineReader(std::istream& ins) : m_ins(ins), m_lineNumber(0) {
         }
 
+        std::istream& m_ins;
         std::string m_line;
         linenumber_type m_lineNumber;
     };
 
+    class StringInputStream : public virtual Object, public LineReader {
+    public:
+        explicit StringInputStream(const std::string& ins);
+        
+        virtual ~StringInputStream();
+        
+    private:
+        std::istringstream m_ins;
+    };
+    
     class FileInputStream : public virtual Object, public LineReader {
     public:
 
         explicit FileInputStream(const std::string& filename);
 
-        const std::string& getLine();
-        
-        bool isEOF() const;
-
         void close();
 
         virtual ~FileInputStream();
 
+        const std::string filename;
+        
     private:
-        const std::string m_filename;
         std::ifstream m_ifs;
     };
 }

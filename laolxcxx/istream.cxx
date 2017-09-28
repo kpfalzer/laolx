@@ -32,13 +32,50 @@ namespace laolx {
 
     static const std::string EMPTY;
 
+    const std::string& LineReader::getLine() {
+        if (isEOF()) {
+            return EMPTY;
+        }
+        std::ostringstream line;
+        char ch = 0;
+        while (true) {
+            m_ins.get(ch);
+            if (m_ins.fail() || isEOF()) {
+                break;
+            }
+            if (ch == '\n') {
+                break;
+            }
+            if (ch != '\r') {
+                line.rdbuf()->sputc(ch);
+            }
+        }
+        assert(!(m_ins.fail() && !isEOF()));
+        m_line = line.rdbuf()->str();
+        if (!isEOF()) {
+            m_lineNumber++;
+        }
+        return m_line;
+    }
+
+    bool LineReader::isEOF() const {
+        return m_ins.eof();
+    }
+
     LineReader::~LineReader() {
     }
 
+    StringInputStream::StringInputStream(const std::string& ins) : LineReader(m_ins) {
+
+    }
+
+    StringInputStream::~StringInputStream() {
+    }
+
     FileInputStream::FileInputStream(const std::string& filename)
-    : m_filename(filename), m_ifs(filename) {
+    : LineReader(m_ifs), filename(filename), m_ifs(filename) {
         if (!m_ifs) {
-            throw FileException(m_filename);
+            throw FileException(filename);
         }
     }
 
@@ -49,33 +86,4 @@ namespace laolx {
         m_ifs.close();
     }
 
-    const std::string& FileInputStream::getLine() {
-        if (isEOF()) {
-            return EMPTY;
-        }
-        std::ostringstream line;
-        char ch = 0;
-        while (true) {
-            m_ifs.get(ch);
-            if (m_ifs.fail() || isEOF()) {
-                break;
-            }
-            if (ch == '\n') {
-                break;
-            }
-            if (ch != '\r') {
-                line.rdbuf()->sputc(ch);
-            }
-        }
-        assert(!(m_ifs.fail() && !isEOF()));
-        m_line = line.rdbuf()->str();
-        if (!isEOF()) {
-            m_lineNumber++;
-        }
-        return m_line;
-    }
-
-    bool FileInputStream::isEOF() const {
-        return m_ifs.eof();
-    }
 }
