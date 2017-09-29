@@ -53,7 +53,8 @@ namespace laolx {
     public:
 
         enum Type {
-            OPEN
+            OPEN,
+            READ
         };
         
         explicit FileException(const std::string& filename, Type type = OPEN);

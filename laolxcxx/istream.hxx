@@ -54,6 +54,11 @@ namespace laolx {
             return m_lineNumber;
         }
 
+        virtual const std::string& getFilename() const {
+            static const std::string UNKNOWN = "?";
+            return UNKNOWN;
+        }
+        
         virtual bool isEOF() const;
 
     protected:
@@ -83,6 +88,10 @@ namespace laolx {
         explicit FileInputStream(const std::string& filename);
 
         void close();
+
+        const std::string& getFilename() const override {
+            return filename;
+        }
 
         virtual ~FileInputStream();
 

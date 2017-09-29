@@ -60,6 +60,7 @@ public:
 
 class Token {
 public:
+    static const std::string EMPTY;
 
     enum Code {
         XEOF, //not conflict with macro/define EOF
@@ -170,6 +171,15 @@ public:
 
     explicit Token(const Location& location, Code code, const std::string& text)
     : location(location), code(code), text(text) {
+    }
+
+    /**
+     * Return true if text matches a keyword.
+     * @param text check if keyword.
+     * @return true if text matches keyword.
+     */
+    static bool isKeyword(const std::string& text) {
+        return stKeywords.hasKey(text);
     }
 
     const Location location;

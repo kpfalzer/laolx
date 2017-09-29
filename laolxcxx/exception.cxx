@@ -40,6 +40,8 @@ namespace laolx {
         switch (type) {
             case FileException::OPEN:
                 return "Could not open file";
+            case FileException::READ:
+                return "File read error";
             default:
                 return "?";
         }

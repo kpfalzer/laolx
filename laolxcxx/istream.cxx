@@ -50,7 +50,9 @@ namespace laolx {
                 line.rdbuf()->sputc(ch);
             }
         }
-        assert(!(m_ins.fail() && !isEOF()));
+        if (m_ins.fail() && !isEOF()) {
+            throw FileException(getFilename(), FileException::READ);
+        }
         m_line = line.rdbuf()->str();
         if (!isEOF()) {
             m_lineNumber++;

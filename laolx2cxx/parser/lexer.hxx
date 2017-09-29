@@ -34,19 +34,69 @@
 
 #include "laolx/istream.hxx"
 #include "token.hxx"
+#include "token.hxx"
 
 class Lexer {
 public:
     explicit Lexer(const std::string& filename);
-    
+
     explicit Lexer(laolx::LineReader& input);
-    
+
     virtual ~Lexer();
     
+    const static std::string EOLN;
+
 private:
-    laolx::LineReader&  m_input;
-    Location::linenum_type m_currLineNum;
-    Location::colnum_type m_currColNum, m_startColNum;
+
+    static bool isKeyword(const std::string& matched) {
+        return Token::isKeyword(matched);
+    }
+
+    bool isKeyword() const {
+        return isKeyword(m_line);
+    }
+
+    bool isEmpty() const {
+        return m_line.empty() && m_input.isEOF();
+    }
+    
+    /**
+     * Set state indicating match of n recent characters.
+     *
+     * @param n number of characters matched.
+     */
+    void setMatch(int n);
+
+    /**
+     * Advance current line position.
+     *
+     * @param n char positions to advance.
+     */
+    void advancePos(int n = 0);
+
+    /**
+     * Read next line (and append newline).
+     *
+     * @param force force read line.
+     */
+    void readLine(bool force = false);
+
+    static bool isIdentAny(char c);
+
+    static bool isIdentBegin(char c);
+
+    static bool isAlpha(char c);
+
+    static bool isDigit(char c);
+
+private:
+    laolx::LineReader& m_input;
+    Location::linenum_type m_currLineNumber, m_startLineNumber;
+    Location::colnum_type m_currColNumber, m_startColNumber;
+    std::string m_line; //current line
+    std::string m_text; //match text
+    static const bool stInited;
+    static bool init();
 };
 
 #endif /* LEXER_HXX */

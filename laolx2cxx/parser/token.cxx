@@ -24,7 +24,7 @@
 
 #include "parser/token.hxx"
 
-static const std::string EMPTY = "";
+const std::string Token::EMPTY = "";
 
 const Token::CodeByString Token::stKeywords({
     // K_xxx are keywords
@@ -124,13 +124,13 @@ Token::SymbolsByChar Token::stSymbolsByChar;
 bool Token::stInited = Token::init();
 
 bool Token::init() {
-    stSymbols.each([](const CodeByString::value_type& kv) {
+    stSymbols.each([](const CodeByString::value_type & kv) {
         char ch = kv.first.at(0);
         stSymbolsByChar[ch] << kv;
     });
     //sort by descending length
-    stSymbolsByChar.each([](const SymbolsByChar::value_type& kv) {
-        auto vals = const_cast<SymbolsByChar::mapped_type&>(kv.second);
+    stSymbolsByChar.each([](const SymbolsByChar::value_type & kv) {
+        auto vals = const_cast<SymbolsByChar::mapped_type&> (kv.second);
         vals.sort([](auto& a, auto& b) {
             return a.first.length() > b.first.length();
         });

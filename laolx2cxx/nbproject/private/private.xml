@@ -7,8 +7,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/kpfalzer/projects/laolx/laolx2cxx/parser/lexer.hxx</file>
-            <file>file:/Users/kpfalzer/projects/laolx/laolx2cxx/parser/token.hxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/token.cxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/main.cxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/token.hxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/lexer.cxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/lexer.hxx</file>
         </group>
     </open-files>
 </project-private>

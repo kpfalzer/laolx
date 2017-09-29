@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/parser/lexer.o \
 	${OBJECTDIR}/parser/token.o
 
 
@@ -67,6 +68,11 @@ ${OBJECTDIR}/main.o: main.cxx
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -I../laolxcxx -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cxx
+
+${OBJECTDIR}/parser/lexer.o: parser/lexer.cxx
+	${MKDIR} -p ${OBJECTDIR}/parser
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -I../laolxcxx -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/parser/lexer.o parser/lexer.cxx
 
 ${OBJECTDIR}/parser/token.o: parser/token.cxx
 	${MKDIR} -p ${OBJECTDIR}/parser
