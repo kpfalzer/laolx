@@ -64,17 +64,19 @@ namespace laolx {
     protected:
         virtual ~LineReader() = 0;
 
-        LineReader(std::istream& ins) : m_ins(ins), m_lineNumber(0) {
+        LineReader(std::istream& ins, bool keepNewLine=true) 
+                : m_ins(ins), m_lineNumber(0), m_keepNewLine(keepNewLine) {
         }
 
         std::istream& m_ins;
         std::string m_line;
         linenumber_type m_lineNumber;
+        const bool m_keepNewLine;
     };
 
     class StringInputStream : public virtual Object, public LineReader {
     public:
-        explicit StringInputStream(const std::string& ins);
+        explicit StringInputStream(const std::string& ins, bool keepNewLine=true);
         
         virtual ~StringInputStream();
         
@@ -85,7 +87,7 @@ namespace laolx {
     class FileInputStream : public virtual Object, public LineReader {
     public:
 
-        explicit FileInputStream(const std::string& filename);
+        explicit FileInputStream(const std::string& filename, bool keepNewLine);
 
         void close();
 

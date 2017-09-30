@@ -32,17 +32,22 @@
 #ifndef TOKEN_HXX
 #define TOKEN_HXX
 
-#include <string>
 #include <memory>
 #include <utility>
 #include "laolx/map.hxx"
+#include "laolx/string.hxx"
+
+class Token;
+class Location;
+
+typedef std::shared_ptr<Token>  TRcToken;
 
 class Location {
 public:
     typedef unsigned long int linenum_type;
     typedef unsigned int colnum_type;
 
-    explicit Location(const std::string& filename, linenum_type linenum, colnum_type colnum)
+    explicit Location(const laolx::String& filename, linenum_type linenum, colnum_type colnum)
     : filename(filename), linenum(linenum), colnum(colnum) {
     }
 
@@ -53,14 +58,14 @@ public:
     virtual ~Location() {
     }
 
-    const std::string filename;
+    const laolx::String filename;
     const linenum_type linenum;
     const colnum_type colnum;
 };
 
 class Token {
 public:
-    static const std::string EMPTY;
+    static const laolx::String EMPTY;
 
     enum Code {
         XEOF, //not conflict with macro/define EOF
@@ -169,7 +174,7 @@ public:
         S_BACKTIC
     };
 
-    explicit Token(const Location& location, Code code, const std::string& text)
+    explicit Token(const Location& location, Code code, const laolx::String& text)
     : location(location), code(code), text(text) {
     }
 
@@ -178,19 +183,19 @@ public:
      * @param text check if keyword.
      * @return true if text matches keyword.
      */
-    static bool isKeyword(const std::string& text) {
+    static bool isKeyword(const laolx::String& text) {
         return stKeywords.hasKey(text);
     }
 
     const Location location;
     const Code code;
-    const std::string text;
+    const laolx::String text;
 
     virtual ~Token();
 
 private:
-    typedef laolx::Map<std::string, Code> CodeByString;
-    typedef std::pair<std::string, Code> SymbolCode;
+    typedef laolx::Map<laolx::String, Code> CodeByString;
+    typedef std::pair<laolx::String, Code> SymbolCode;
     typedef laolx::Map<char, laolx::Array<SymbolCode>> SymbolsByChar;
     static const CodeByString stKeywords, stSymbols;
     static SymbolsByChar stSymbolsByChar;

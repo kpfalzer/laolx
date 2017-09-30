@@ -53,6 +53,10 @@ namespace laolx {
         List(std::initializer_list<T> init) : m_list(init) {
         }
 
+        bool isEmpty() const {
+            return m_list.empty();
+        }
+        
         List& operator<<(const T& item) {
             return push_last(item);
         }

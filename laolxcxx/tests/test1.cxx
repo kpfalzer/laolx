@@ -243,7 +243,7 @@ void test7() {
 }
 
 void test8() {
-    laolx::FileInputStream fis("istream.cxx");
+    laolx::FileInputStream fis("istream.cxx", false);
     while (!fis.isEOF()) {
         const std::string& line = fis.getLine();
         if (!fis.isEOF()) {

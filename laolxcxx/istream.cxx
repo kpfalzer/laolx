@@ -43,7 +43,7 @@ namespace laolx {
             if (m_ins.fail() || isEOF()) {
                 break;
             }
-            if (ch == '\n') {
+            if (!m_keepNewLine && (ch == '\n')) {
                 break;
             }
             if (ch != '\r') {
@@ -67,15 +67,16 @@ namespace laolx {
     LineReader::~LineReader() {
     }
 
-    StringInputStream::StringInputStream(const std::string& ins) : LineReader(m_ins) {
+    StringInputStream::StringInputStream(const std::string& ins, bool keepNewLine) 
+    : LineReader(m_ins, keepNewLine) {
 
     }
 
     StringInputStream::~StringInputStream() {
     }
 
-    FileInputStream::FileInputStream(const std::string& filename)
-    : LineReader(m_ifs), filename(filename), m_ifs(filename) {
+    FileInputStream::FileInputStream(const std::string& filename, bool keepNewLine)
+    : LineReader(m_ifs, keepNewLine), filename(filename), m_ifs(filename) {
         if (!m_ifs) {
             throw FileException(filename);
         }

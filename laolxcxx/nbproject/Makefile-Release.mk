@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=gcc-4.7.4-MacOSX
+CND_PLATFORM=GNU-MacOSX
 CND_DLIB_EXT=dylib
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/exception.o \
 	${OBJECTDIR}/istream.o \
 	${OBJECTDIR}/object.o \
-	${OBJECTDIR}/regex.o
+	${OBJECTDIR}/regex.o \
+	${OBJECTDIR}/string.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
@@ -96,6 +97,11 @@ ${OBJECTDIR}/regex.o: regex.cxx
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/regex.o regex.cxx
+
+${OBJECTDIR}/string.o: string.cxx
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/string.o string.cxx
 
 # Subprojects
 .build-subprojects:
@@ -165,6 +171,19 @@ ${OBJECTDIR}/regex_nomain.o: ${OBJECTDIR}/regex.o regex.cxx
 	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/regex_nomain.o regex.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/regex.o ${OBJECTDIR}/regex_nomain.o;\
+	fi
+
+${OBJECTDIR}/string_nomain.o: ${OBJECTDIR}/string.o string.cxx 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/string.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/string_nomain.o string.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/string.o ${OBJECTDIR}/string_nomain.o;\
 	fi
 
 # Run Test Targets

@@ -24,7 +24,7 @@
 
 #include "parser/token.hxx"
 
-const std::string Token::EMPTY = "";
+const laolx::String Token::EMPTY = "";
 
 const Token::CodeByString Token::stKeywords({
     // K_xxx are keywords
