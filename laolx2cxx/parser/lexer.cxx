@@ -25,6 +25,8 @@
 #include <cassert>
 #include <sstream>
 #include <type_traits>
+#include "laolx/regex.hxx"
+#include "laolx/array.hxx"
 #include "lexer.hxx"
 
 const laolx::String Lexer::XEOF = "<eof>";
@@ -32,6 +34,11 @@ const laolx::String Lexer::XEOF = "<eof>";
 const bool Lexer::stInited = Lexer::init();
 const std::function<void(void) > stNullUnterminated = []() {
 };
+
+Lexer::Exception::Exception(const Location& loc, const std::string& reason)
+: std::runtime_error(loc.toString() + ": " + reason) {
+
+}
 
 bool Lexer::init() {
     static_assert('0' < '9' && 'a' < 'z' && 'A' < 'Z', "Failed char assumption.");
@@ -79,8 +86,12 @@ void Lexer::readLine(bool force) {
     }
 }
 
-Location Lexer::getLocation() {
-    return Location(m_input.getFilename(), m_startLineNumber, m_startColNumber);
+Location Lexer::getLocation() const {
+    return Location(m_input.getFilename(), m_startLineNumber, m_startColNumber + 1);
+}
+
+void Lexer::error(const std::string& reason) const {
+    throw Lexer::Exception(getLocation(), reason);
 }
 
 TRcToken Lexer::getToken(Token::Code code) {
@@ -147,12 +158,12 @@ bool Lexer::matchTo(char ch) {
     return true;
 }
 
-bool Lexer::matchTo(const laolx::String& to, bool setMatch) {
+bool Lexer::matchTo(const laolx::String& to, bool doSetMatch) {
     const colnum_type n = to.length();
     if (m_line.substr(m_currColNumber, n) != to) {
         return false;
     }
-    if (setMatch) {
+    if (doSetMatch) {
         setMatch(n);
     }
     return true;
@@ -170,27 +181,139 @@ TRcToken Lexer::lineComment() {
 
 static const laolx::String END_BLOCK_COMMENT = "*/";
 
+static void append(std::stringbuf& buf, const std::string& s) {
+    buf.sputn(s.c_str(), s.length());
+}
+
 TRcToken Lexer::blockComment() {
     std::stringbuf buf(m_text);
-    colnum_type end;
+    size_t end;
     while (true) { //todo: corner case: EOF
-        end = m_line.indexOf(END_BLOCK_COMMENT, col);
-        if (0 > end) {
-            buf.append(line.substring(col));
-            advancePos(line.length() - col); //force nextLine
+        end = m_line.indexOf(END_BLOCK_COMMENT, m_currColNumber);
+        if (laolx::String::npos == end) {
+            append(buf, m_line.slice(m_currColNumber));
+            advancePos(m_line.length() - m_currColNumber); //force nextLine
         } else {
             end += END_BLOCK_COMMENT.length();
-            buf.append(line.substring(col, end));
-            advancePos(end - col);
+            append(buf, m_line.slice(m_currColNumber, end));
+            advancePos(end - m_currColNumber);
             break; //while
         }
         if (isEmpty()) {
-            throw new Exception("Unterminated block comment");
+            error("Unterminated block comment");
         }
     }
-    text = buf.toString();
+    m_text = buf.str();
     advancePos();
-    return getToken(Token.Code.BLOCK_COMMENT);
+    return getToken(Token::BLOCK_COMMENT);
+}
+
+TRcToken Lexer::quoted(char quote) {
+    return whileOnLine(
+            [quote](char ch) {
+                return quote == ch;
+            },
+    [quote, this]() {
+        return getToken(('"' == quote) ? Token::DQSTRING : Token::SQSTRING);
+    },
+    1,
+    true,
+    [this]() {
+        error("Unterminated string");
+    }
+    );
+}
+
+TRcToken Lexer::regexp() {
+    m_currColNumber += 2; //past %r of %r{
+    return whileOnLine(
+            [](char ch) {
+                return '}' == ch;
+            },
+    [this]() {
+        return getToken(Token::REGEXP);
+    },
+    1,
+    true,
+    [this]() {
+        error("Unterminated regexp");
+    }
+    );
+}
+
+bool Lexer::testNextChar(const std::function<bool(char) >& pred) {
+    return (m_currColNumber < m_line.length() - 1)
+            ? pred(m_line[m_currColNumber + 1])
+            : false;
+}
+
+static laolx::Regex NUMBER_REX("^[\\-\\+]?\\d+(\\.\\d+)?([eE][\\-\\+]?\\d+)?");
+static const std::array<char, 3> FLOATER({'.', 'e', 'E'});
+
+TRcToken Lexer::getNumber() {
+    return regexMatcher(
+            NUMBER_REX,
+            [this]() {
+                return getToken(contains(FLOATER) ? Token::FLOAT : Token::INT);
+            }
+    );
+}
+
+TRcToken Lexer::regexMatcher(laolx::Regex& patt, const std::function<TRcToken(void)>& creator) {
+    m_startLineNumber = m_currLineNumber;
+    m_startColNumber = m_currColNumber;
+    bool matches = patt.match(m_line.slice(m_currColNumber));
+    assert(matches);
+    m_text = patt.getMatch(0);
+    m_currColNumber += m_text.length();
+    advancePos();
+    return creator();
+}
+
+static laolx::Regex SYMBOL_REX("^:([a-zA-Z_]\\w*)?");
+
+TRcToken Lexer::symbolOrOther() {
+    return regexMatcher(
+            SYMBOL_REX,
+            [&]() {
+                if (1 == m_text.length()) {
+                    m_currColNumber--;
+                    return getSymbolStartingWith(':');
+                }
+                return getToken(Token::SYMBOL);
+            }
+    );
+}
+
+TRcToken Lexer::getSymbolStartingWith(char ch) {
+    assert(Token::stSymbolsByChar.hasKey(ch));
+    for (const auto& symbolCode : Token::stSymbolsByChar[ch]) {
+        if (matchTo(symbolCode.first)) {
+            return getToken(symbolCode.second);
+        }
+    }
+    assert(false);
+}
+
+static laolx::Regex ATTR_REX("^@(\\-|\\+)?([a-zA-Z_]\\w*)?");
+
+TRcToken Lexer::attrDeclOrOther() {
+    return regexMatcher(
+            ATTR_REX,
+            [this]() {
+                if (1 == m_text.length()) {
+                    m_currColNumber--;
+                    return getSymbolStartingWith('@');
+                }
+                char ch = m_text[1];
+                Token::Code code = ('-' == ch)
+                        ? Token::ATTR_DECL
+                        : (('+' == ch)
+                        ? Token::ATTR_DECL_RW
+                        : Token::ATTR_DECL_RO);
+                return getToken(code);
+            }
+    );
 }
 
 TRcToken Lexer::next() {
@@ -215,34 +338,29 @@ TRcToken Lexer::next() {
     if (matchTo("//")) {
         return lineComment();
     }
-}
-/*
-        
-        
-        
-        if (matchTo("/*")) {
-            return blockComment();
-        }
-        if (('"' == ch) || ('\'' == ch)) {
-            return quoted(ch);
-        }
-        if (matchTo("%r{", false)) {
-            return regexp();
-        }
-        if (isDigit(ch)
-                || (('-' == ch || '+' == ch)
-                && testNextChar((Character t) -> isDigit(t)))) {
-            return getNumber();
-        }
-        if (':' == ch) {
-            return symbolOrOther();
-        }
-        if ('@' == ch) {
-            return attrDeclOrOther();
-        }
-        return getSymbolStartingWith(ch);
+    if (matchTo("/*")) {
+        return blockComment();
     }
- */
-
-
-
+    if (('"' == ch) || ('\'' == ch)) {
+        return quoted(ch);
+    }
+    if (matchTo("%r{", false)) {
+        return regexp();
+    }
+    if (isDigit(ch)
+            || (('-' == ch || '+' == ch)
+            && testNextChar([this](auto c) {
+                return isDigit(c);
+            })
+    )
+    ) {
+    return getNumber();
+}
+    if (':' == ch) {
+        return symbolOrOther();
+    }
+    if ('@' == ch) {
+        return attrDeclOrOther();
+    }
+    return getSymbolStartingWith(ch);
+}

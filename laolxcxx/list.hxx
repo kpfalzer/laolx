@@ -46,6 +46,7 @@ namespace laolx {
         typedef typename collection_type::size_type size_type;
         typedef typename collection_type::reference reference;
         typedef typename collection_type::const_reference const_reference;
+        typedef typename collection_type::const_iterator const_iterator;
 
         List() {
         }
@@ -56,7 +57,7 @@ namespace laolx {
         bool isEmpty() const {
             return m_list.empty();
         }
-        
+
         List& operator<<(const T& item) {
             return push_last(item);
         }
@@ -97,6 +98,14 @@ namespace laolx {
             T front = front();
             m_list.pop_front();
             return front;
+        }
+
+        const_iterator begin() const {
+            return m_list.begin();
+        }
+
+        const_iterator end() const {
+            return m_list.end();
         }
 
         size_type length() const {

@@ -45,6 +45,7 @@ namespace laolx {
         typedef typename collection_type::size_type size_type;
         typedef typename collection_type::reference reference;
         typedef typename collection_type::const_reference const_reference;
+        typedef typename collection_type::const_iterator const_iterator;
         typedef long int index_type;
 
         Array() {
@@ -120,6 +121,14 @@ namespace laolx {
          */
         void sort(const std::function<bool (const T& a, const T& b)>& aLessThanB) {
             std::sort(m_array.begin(), m_array.end(), aLessThanB);
+        }
+        
+        const_iterator begin() const {
+            return m_array.begin();
+        }
+        
+        const_iterator end() const {
+            return m_array.end();
         }
         
         /**

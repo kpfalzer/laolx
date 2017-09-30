@@ -33,9 +33,10 @@
 #define LEXER_HXX
 
 #include <functional>
+#include <stdexcept>
+#include <array>
 #include "laolx/istream.hxx"
 #include "laolx/list.hxx"
-#include "token.hxx"
 #include "token.hxx"
 
 class Lexer {
@@ -49,7 +50,13 @@ public:
     const static laolx::String XEOF;
     const char EOLN = '\n';
 
+    class Exception : public std::runtime_error {
+    public:
+
+        explicit Exception(const Location& loc, const std::string& reason);
+    };
 private:
+    void error(const std::string& reason) const;
 
     static bool isKeyword(const laolx::String& matched) {
         return Token::isKeyword(matched);
@@ -86,7 +93,7 @@ private:
 
     TRcToken getToken(Token::Code code);
 
-    Location getLocation();
+    Location getLocation() const;
 
     TRcToken identOrKeyword();
 
@@ -106,8 +113,34 @@ private:
      * @return line comment (without EOLN).
      */
     TRcToken lineComment();
-    
+
     TRcToken blockComment();
+
+    TRcToken quoted(char quote = '"');
+
+    TRcToken regexp();
+
+    TRcToken symbolOrOther();
+
+    bool testNextChar(const std::function<bool(char) >& pred);
+
+    TRcToken getNumber();
+
+    TRcToken regexMatcher(laolx::Regex& patt, const std::function<TRcToken(void)>& creator);
+
+    TRcToken getSymbolStartingWith(char ch);
+    
+    TRcToken attrDeclOrOther();
+
+    template<std::size_t N>
+    bool contains(const std::array<char, N>& set) const {
+        for (auto c : set) {
+            if (std::string::npos != m_text.find(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Read next line (and append newline).

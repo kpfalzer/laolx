@@ -52,6 +52,7 @@ namespace laolx {
         typedef typename collection_type::value_type value_type;
         typedef typename collection_type::key_type key_type;
         typedef typename collection_type::mapped_type mapped_type;
+        typedef typename collection_type::const_iterator const_iterator;
 
         explicit Map() {
         }
@@ -77,7 +78,7 @@ namespace laolx {
             m_map[kv.first] = kv.second;
             return *this;
         }
-        
+
         bool hasKey(const K & key) const {
             return m_map.find(key) != m_map.end();
         }
@@ -86,11 +87,11 @@ namespace laolx {
             eachImpl(m_map, consume);
         }
 
-        Map select(const std::function<bool (const value_type&)>& predicate) const {
+        Map select(const std::function<bool (const value_type&) >& predicate) const {
             return selectImpl<Map>(*this, predicate);
         }
 
-        template<typename K2, typename V2, typename R=Map<K2,V2> >
+        template<typename K2, typename V2, typename R = Map<K2, V2> >
         R map(const std::function<std::pair<K2, V2> (const value_type& kv)>& mapper) const {
             return mapImpl<R>(*this, mapper);
         }
@@ -109,6 +110,14 @@ namespace laolx {
                 values << k.second;
             }
             return values;
+        }
+
+        const_iterator begin() const {
+            return m_map.begin();
+        }
+
+        const_iterator end() const {
+            return m_map.end();
         }
 
         size_type size() const {

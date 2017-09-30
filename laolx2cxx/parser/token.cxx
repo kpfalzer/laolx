@@ -24,6 +24,18 @@
 
 #include "parser/token.hxx"
 
+laolx::String Location::toString() const {
+    laolx::String loc;
+    if (! filename.empty()) {
+        loc += filename + ":";
+    }
+    loc += ":";
+    loc += linenum;
+    loc += ":";
+    loc += colnum;
+    return loc;
+}
+
 const laolx::String Token::EMPTY = "";
 
 const Token::CodeByString Token::stKeywords({

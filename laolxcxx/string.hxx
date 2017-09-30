@@ -57,6 +57,10 @@ namespace laolx {
          * @return substring [start, end).
          */
         String slice(size_t start, size_t end) const;
+        
+        String slice(size_t start) const {
+            return slice(start, length());
+        }
 
         /**
          * Search for val starting at position startPos.

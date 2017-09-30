@@ -40,7 +40,7 @@
 class Token;
 class Location;
 
-typedef std::shared_ptr<Token>  TRcToken;
+typedef std::shared_ptr<Token> TRcToken;
 
 class Location {
 public:
@@ -57,6 +57,8 @@ public:
 
     virtual ~Location() {
     }
+
+    laolx::String toString() const;
 
     const laolx::String filename;
     const linenum_type linenum;
@@ -201,6 +203,8 @@ private:
     static SymbolsByChar stSymbolsByChar;
     static bool init(void);
     static bool stInited;
+    
+    friend class Lexer;
 };
 
 #endif /* TOKEN_HXX */
