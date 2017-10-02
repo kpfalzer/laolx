@@ -68,7 +68,7 @@ namespace laolx {
     }
 
     StringInputStream::StringInputStream(const std::string& ins, bool keepNewLine) 
-    : LineReader(m_ins, keepNewLine) {
+    : LineReader(m_ins, keepNewLine), m_ins(ins) {
 
     }
 

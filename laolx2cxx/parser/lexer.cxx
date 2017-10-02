@@ -27,13 +27,32 @@
 #include <type_traits>
 #include "laolx/regex.hxx"
 #include "laolx/array.hxx"
-#include "lexer.hxx"
+#include "parser/lexer.hxx"
 
 const laolx::String Lexer::XEOF = "<eof>";
 
 const bool Lexer::stInited = Lexer::init();
-const std::function<void(void) > stNullUnterminated = []() {
+const std::function<void(void) > Lexer::stNullUnterminated = []() {
 };
+
+Lexer::Lexer(laolx::LineReader& input) 
+: m_input(input), m_currColNumber(0), m_currLineNumber(0) {
+    readLine();
+}
+
+TRcToken Lexer::accept() {
+    return next();
+}
+
+bool Lexer::isEOF() {
+    if (! m_token) {
+        next();
+    }
+    return (Token::XEOF == m_token->code);
+}
+
+Lexer::~Lexer() {
+}
 
 Lexer::Exception::Exception(const Location& loc, const std::string& reason)
 : std::runtime_error(loc.toString() + ": " + reason) {
@@ -95,7 +114,8 @@ void Lexer::error(const std::string& reason) const {
 }
 
 TRcToken Lexer::getToken(Token::Code code) {
-    return std::make_shared<Token>(getLocation(), code, m_text);
+    m_token = std::make_shared<Token>(getLocation(), code, m_text);
+    return m_token;
 }
 
 TRcToken Lexer::identOrKeyword() {
@@ -318,11 +338,11 @@ TRcToken Lexer::attrDeclOrOther() {
 
 TRcToken Lexer::next() {
     if (isEmpty()) {
-        if (m_tokens.isEmpty() || (Token::XEOF == m_tokens.last()->code)) {
+        if (!m_token || (Token::XEOF != m_token->code)) {
             m_text = XEOF;
             return getToken(Token::XEOF);
         }
-        return m_tokens.last();
+        return m_token;
     }
     assert(m_currColNumber < m_line.length());
     const char ch = m_line.at(m_currColNumber);

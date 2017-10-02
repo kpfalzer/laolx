@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kpfalzer.
+ * Copyright 2017 kwpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,44 @@
  * THE SOFTWARE.
  */
 
-#include "laolx/string.hxx"
-#include "string.hxx"
+/* 
+ * File:   parser_test.cxx
+ * Author: kwpfalzer
+ *
+ * Created on October 1, 2017, 3:05 PM
+ */
 
-namespace laolx {
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+#include "parser/parser.hxx"
 
-    String String::slice(size_t start, size_t end) const {
-        size_t n = end - start;
-        return substr(start, n);
-    }
+/*
+ * Simple C++ Test Suite
+ */
 
-    size_t String::indexOf(const std::string& val, size_t startPos) const {
-        return find(val, startPos);
-    }
+static const std::string TEST = \
+        "//line comment\n" \
+        "ident include class /*multiline\n" \
+        "comment **** /\n" \
+        "end here*/\n" \
+        ;
 
-    String::~String() {
-    }
+void test1() {
+    laolx::StringInputStream sis(TEST);
+    Parser parser(sis);
 }
+
+int main(int argc, char** argv) {
+    std::cout << "%SUITE_STARTING% parser_test" << std::endl;
+    std::cout << "%SUITE_STARTED%" << std::endl;
+
+    std::cout << "%TEST_STARTED% test1 (parser_test)" << std::endl;
+    test1();
+    std::cout << "%TEST_FINISHED% test1 (parser_test)" << std::endl;
+
+    std::cout << "%SUITE_FINISHED%" << std::endl;
+
+    return (EXIT_SUCCESS);
+}
+

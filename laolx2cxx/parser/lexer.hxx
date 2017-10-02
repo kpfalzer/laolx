@@ -37,14 +37,21 @@
 #include <array>
 #include "laolx/istream.hxx"
 #include "laolx/list.hxx"
-#include "token.hxx"
+#include "laolx/regex.hxx"
+#include "parser/token.hxx"
 
 class Lexer {
 public:
-    explicit Lexer(const laolx::String& filename);
-
     explicit Lexer(laolx::LineReader& input);
 
+    /**
+     * Get next token.
+     * @return next token;
+     */
+    TRcToken accept();
+    
+    bool isEOF();
+    
     virtual ~Lexer();
 
     const static laolx::String XEOF;
@@ -179,7 +186,7 @@ private:
     colnum_type m_currColNumber, m_startColNumber;
     laolx::String m_line; //current line
     laolx::String m_text; //match text
-    laolx::List<TRcToken> m_tokens;
+    TRcToken m_token;
     Token::Code m_keyword;
 
     static const bool stInited;

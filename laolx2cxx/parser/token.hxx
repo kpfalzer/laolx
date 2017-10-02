@@ -180,6 +180,10 @@ public:
     : location(location), code(code), text(text) {
     }
 
+    bool isComment() const {
+        return (BLOCK_COMMENT == code) || (LINE_COMMENT == code);
+    }
+    
     /**
      * Return true if text matches a keyword.
      * @param text check if keyword.

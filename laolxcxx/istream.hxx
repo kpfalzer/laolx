@@ -55,8 +55,8 @@ namespace laolx {
         }
 
         virtual const std::string& getFilename() const {
-            static const std::string UNKNOWN = "?";
-            return UNKNOWN;
+            static const std::string EMPTY = "";
+            return EMPTY;
         }
         
         virtual bool isEOF() const;
@@ -87,7 +87,7 @@ namespace laolx {
     class FileInputStream : public virtual Object, public LineReader {
     public:
 
-        explicit FileInputStream(const std::string& filename, bool keepNewLine);
+        explicit FileInputStream(const std::string& filename, bool keepNewLine = true);
 
         void close();
 

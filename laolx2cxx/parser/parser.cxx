@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kpfalzer.
+ * Copyright 2017 kwpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,37 @@
  * THE SOFTWARE.
  */
 
-#include "laolx/string.hxx"
-#include "string.hxx"
+#include "parser/parser.hxx"
 
-namespace laolx {
+Parser::Parser(const laolx::String& filename) {
+    laolx::FileInputStream fis(filename);
+    initialize(fis);
+    fis.close();
+}
 
-    String String::slice(size_t start, size_t end) const {
-        size_t n = end - start;
-        return substr(start, n);
-    }
+Parser::Parser(laolx::LineReader& input) {
+    initialize(input);
+}
 
-    size_t String::indexOf(const std::string& val, size_t startPos) const {
-        return find(val, startPos);
-    }
-
-    String::~String() {
+void Parser::initialize(laolx::LineReader& input) {
+    Lexer lexer(input);
+    TRcToken token;
+    Token::Code code;
+    while (! lexer.isEOF()) {
+        token = lexer.accept();
+        code = token->code;
+        if (Token::WS != code) {
+            if (! token->isComment()) {
+                m_tokens << token;
+            } else {
+                m_comments << token;
+            }
+        }
     }
 }
+
+Parser::~Parser() {
+
+}
+
+

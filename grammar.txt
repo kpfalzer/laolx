@@ -1,3 +1,6 @@
+//add decomposition declaration:
+// auto& [l1, l2] = expr_returns_2_elements
+
 
 XFile: IncludeStatement* (Declaration | Statement)* EOF
 
