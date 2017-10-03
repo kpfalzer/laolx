@@ -42,6 +42,9 @@
 
 class Lexer {
 public:
+    typedef Location::linenum_type linenum_type;
+    typedef Location::colnum_type colnum_type;
+    
     explicit Lexer(laolx::LineReader& input);
 
     /**
@@ -62,15 +65,16 @@ public:
 
         explicit Exception(const Location& loc, const std::string& reason);
     };
+    
 private:
     void error(const std::string& reason) const;
 
-    static bool isKeyword(const laolx::String& matched) {
-        return Token::isKeyword(matched);
+    static bool isKeyword(const laolx::String& matched, Token::Code& code) {
+        return Token::isKeyword(matched, code);
     }
 
-    bool isKeyword() const {
-        return isKeyword(m_line);
+    bool isKeyword() {
+        return isKeyword(m_text, m_keyword);
     }
 
     bool isEmpty() const {
@@ -82,14 +86,14 @@ private:
      *
      * @param n number of characters matched.
      */
-    void setMatch(int n);
+    void setMatch(colnum_type n);
 
     /**
      * Advance current line position.
      *
      * @param n char positions to advance.
      */
-    void advancePos(int n = 0);
+    void advancePos(colnum_type n = 0);
 
     /**
      * Get next token.
@@ -178,9 +182,6 @@ private:
     static bool isDigit(char c);
 
 private:
-    typedef Location::linenum_type linenum_type;
-    typedef Location::colnum_type colnum_type;
-
     laolx::LineReader& m_input;
     linenum_type m_currLineNumber, m_startLineNumber;
     colnum_type m_currColNumber, m_startColNumber;

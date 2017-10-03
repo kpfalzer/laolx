@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <cassert>
 #include "parser/parser.hxx"
 
 /*
@@ -46,6 +47,12 @@ static const std::string TEST = \
         ;
 
 void test1() {
+    Token::Code code;
+    bool isKeyword = Token::isKeyword("include", code);
+    assert(isKeyword);
+}
+
+void test2() {
     laolx::StringInputStream sis(TEST);
     Parser parser(sis);
 }
@@ -58,6 +65,10 @@ int main(int argc, char** argv) {
     test1();
     std::cout << "%TEST_FINISHED% test1 (parser_test)" << std::endl;
 
+    std::cout << "%TEST_STARTED% test2 (parser_test)" << std::endl;
+    test2();
+    std::cout << "%TEST_FINISHED% test2 (parser_test)" << std::endl;
+    
     std::cout << "%SUITE_FINISHED%" << std::endl;
 
     return (EXIT_SUCCESS);

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		178B7A941F81ADD700E5EC18 /* parser_test.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178B7A931F81ADD700E5EC18 /* parser_test.cxx */; };
+		17917AD71F8317990095A247 /* liblaol2cxx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 178B7AA21F81B27B00E5EC18 /* liblaol2cxx.a */; };
+		17917AD81F8317990095A247 /* liblaolx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 178B7A9C1F81B26100E5EC18 /* liblaolx.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +26,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 178B7A6D1F81A42300E5EC18;
 			remoteInfo = laol2cxx;
+		};
+		17917AD91F8317BA0095A247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 178B7A9D1F81B27B00E5EC18 /* laol2cxx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 178B7A6C1F81A42300E5EC18;
+			remoteInfo = laol2cxx;
+		};
+		17917ADB1F8317BA0095A247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 178B7A971F81B26100E5EC18 /* laolx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 17E977671F76F6EB005669D1;
+			remoteInfo = laolx;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -51,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17917AD71F8317990095A247 /* liblaol2cxx.a in Frameworks */,
+				17917AD81F8317990095A247 /* liblaolx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +82,7 @@
 				178B7A971F81B26100E5EC18 /* laolx.xcodeproj */,
 				178B7A931F81ADD700E5EC18 /* parser_test.cxx */,
 				178B7A8A1F81AD8200E5EC18 /* Products */,
+				17917AD41F8317990095A247 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +110,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		17917AD41F8317990095A247 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,6 +131,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				17917ADA1F8317BA0095A247 /* PBXTargetDependency */,
+				17917ADC1F8317BA0095A247 /* PBXTargetDependency */,
 			);
 			name = laol2cxxtest;
 			productName = laol2cxxtest;
@@ -180,6 +208,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17917ADA1F8317BA0095A247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = laol2cxx;
+			targetProxy = 17917AD91F8317BA0095A247 /* PBXContainerItemProxy */;
+		};
+		17917ADC1F8317BA0095A247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = laolx;
+			targetProxy = 17917ADB1F8317BA0095A247 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		178B7A8E1F81AD8200E5EC18 /* Debug */ = {

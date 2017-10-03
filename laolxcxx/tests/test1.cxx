@@ -40,6 +40,7 @@
 #include "laolx/regex.hxx"
 #include "laolx/list.hxx"
 #include "laolx/istream.hxx"
+#include "laolx/string.hxx"
 
 /*
  * Simple C++ Test Suite
@@ -116,14 +117,22 @@ void test1() {
     bool reduced = keys.reduce<bool>(true, [](auto reduced, auto b) {
         reduced &= b;
     });
-    laolx::Map<std::string, int> map2({
+    typedef laolx::String String;
+    laolx::Map<String, int> map2({
         {"key1", 123},
         {"key2", 456}
     });
     assert(2 == map2.size());
-    assert(123 == map2["key1"]);
+    size_t h;
+    map2.each([&h](auto kv) {
+        h = std::hash<String>()(kv.first);
+    });
+    String key = "key1";
+    bool hasKey = map2.hasKey(key);
+    h = std::hash<String>()(key);
+    assert(123 == map2[key]);
     assert(map2 == map2);
-    laolx::Map<std::string, int> map3(map2);
+    laolx::Map<String, int> map3(map2);
     assert(map2 == map3);
 }
 
@@ -243,7 +252,7 @@ void test7() {
 }
 
 void test8() {
-    laolx::FileInputStream fis("istream.cxx", false);
+    laolx::FileInputStream fis("/Users/kwpfalzer/projects/laolx/laolxcxx/istream.cxx", false);
     while (!fis.isEOF()) {
         const std::string& line = fis.getLine();
         if (!fis.isEOF()) {

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxcxx/tests/test1.cxx"
-            timestampString = "528673553.967713"
+            filePath = "../../laolx2cxx/tests/parser_test.cxx"
+            timestampString = "528675747.192337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "test1()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "test2()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxcxx/map.hxx"
-            timestampString = "528672737.897279"
+            filePath = "../../laolx2cxx/parser/lexer.cxx"
+            timestampString = "528674063.110755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "operator[](const K &amp; key)"
-            landmarkType = "9">
+            startingLineNumber = "358"
+            endingLineNumber = "358"
+            landmarkName = "Lexer::next()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,14 +41,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxcxx/map.hxx"
-            timestampString = "528672737.897573"
+            filePath = "../../laolx2cxx/parser/lexer.cxx"
+            timestampString = "528674098.391516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "operator[](const K &amp; key)"
-            landmarkType = "9">
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "Lexer::identOrKeyword()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,12 +57,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxcxx/tests/test1.cxx"
-            timestampString = "528673553.967832"
+            filePath = "../../laolx2cxx/tests/parser_test.cxx"
+            timestampString = "528675747.19293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "test1()"
             landmarkType = "9">
          </BreakpointContent>

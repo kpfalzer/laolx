@@ -150,5 +150,11 @@ bool Token::init() {
     return true;
 }
 
+bool Token::isKeyword(const laolx::String& text, Code& code) {
+    const bool isKeyword = stKeywords.hasKey(text);
+    code = isKeyword ? stKeywords[text] : INVALID;
+    return isKeyword;
+}
+
 Token::~Token() {
 }

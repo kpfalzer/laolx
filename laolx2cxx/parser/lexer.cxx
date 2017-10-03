@@ -35,17 +35,25 @@ const bool Lexer::stInited = Lexer::init();
 const std::function<void(void) > Lexer::stNullUnterminated = []() {
 };
 
-Lexer::Lexer(laolx::LineReader& input) 
+Lexer::Lexer(laolx::LineReader& input)
 : m_input(input), m_currColNumber(0), m_currLineNumber(0) {
     readLine();
 }
 
 TRcToken Lexer::accept() {
-    return next();
+    TRcToken token;
+    if (!m_token) {
+        next();
+    }
+    token = m_token;
+    if (! isEOF()) {
+        m_token.reset();
+    }
+    return token;
 }
 
 bool Lexer::isEOF() {
-    if (! m_token) {
+    if (!m_token) {
         next();
     }
     return (Token::XEOF == m_token->code);
@@ -80,14 +88,14 @@ bool Lexer::isDigit(char c) {
     return ('0' <= c) && (c <= '9');
 }
 
-void Lexer::setMatch(int n) {
+void Lexer::setMatch(colnum_type n) {
     m_startColNumber = m_currColNumber;
     m_startLineNumber = m_currLineNumber;
     m_text = m_line.substr(m_currColNumber, n);
     advancePos(n);
 }
 
-void Lexer::advancePos(int n) {
+void Lexer::advancePos(colnum_type n) {
     m_currColNumber += n;
     if (m_currColNumber < m_line.length()) {
         return;

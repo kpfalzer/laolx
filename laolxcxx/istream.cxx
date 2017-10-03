@@ -48,6 +48,9 @@ namespace laolx {
             }
             if (ch != '\r') {
                 line.rdbuf()->sputc(ch);
+                if ('\n' == ch) {
+                    break;
+                }
             }
         }
         if (m_ins.fail() && !isEOF()) {

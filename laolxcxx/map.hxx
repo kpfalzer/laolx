@@ -71,7 +71,11 @@ namespace laolx {
         }
 
         const V& operator[](const K & key) const {
-            return m_map[key];
+            // unordered_map does not have a const operator[] since
+            // it wants to insert if no key (thus an non-const operation.
+            // TODO: need to fix the semantics here!
+            // throw no key??
+            return const_cast<collection_type*>(&m_map)->operator[](key);
         }
 
         Map& operator<<(const value_type& kv) {

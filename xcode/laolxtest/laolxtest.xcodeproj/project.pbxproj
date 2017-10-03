@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		178AFA7D1F76FE2B00DE7AC3 /* test1.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178AFA7C1F76FE2B00DE7AC3 /* test1.cxx */; };
+		17917AE01F83183E0095A247 /* liblaolx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 178AFA831F76FE4400DE7AC3 /* liblaolx.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -16,6 +17,13 @@
 			containerPortal = 178AFA7E1F76FE4400DE7AC3 /* laolx.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 17E977681F76F6EB005669D1;
+			remoteInfo = laolx;
+		};
+		17917AE11F8318440095A247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 178AFA7E1F76FE4400DE7AC3 /* laolx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 17E977671F76F6EB005669D1;
 			remoteInfo = laolx;
 		};
 /* End PBXContainerItemProxy section */
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17917AE01F83183E0095A247 /* liblaolx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +64,7 @@
 				178AFA7E1F76FE4400DE7AC3 /* laolx.xcodeproj */,
 				178AFA7C1F76FE2B00DE7AC3 /* test1.cxx */,
 				178AFA731F76FDE600DE7AC3 /* Products */,
+				17917ADE1F83183E0095A247 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +84,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		17917ADE1F83183E0095A247 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,6 +105,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				17917AE21F8318440095A247 /* PBXTargetDependency */,
 			);
 			name = laolxtest;
 			productName = laolxtest;
@@ -152,6 +170,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17917AE21F8318440095A247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = laolx;
+			targetProxy = 17917AE11F8318440095A247 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		178AFA771F76FDE600DE7AC3 /* Debug */ = {

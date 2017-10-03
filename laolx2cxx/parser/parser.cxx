@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+#include <cassert>
 #include "parser/parser.hxx"
 
 Parser::Parser(const laolx::String& filename) {
@@ -38,9 +39,10 @@ void Parser::initialize(laolx::LineReader& input) {
     Lexer lexer(input);
     TRcToken token;
     Token::Code code;
-    while (! lexer.isEOF()) {
+    do {
         token = lexer.accept();
         code = token->code;
+        assert (Token::INVALID != code);
         if (Token::WS != code) {
             if (! token->isComment()) {
                 m_tokens << token;
@@ -48,7 +50,7 @@ void Parser::initialize(laolx::LineReader& input) {
                 m_comments << token;
             }
         }
-    }
+    } while (Token::XEOF != code);
 }
 
 Parser::~Parser() {

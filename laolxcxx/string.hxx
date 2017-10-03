@@ -70,11 +70,16 @@ namespace laolx {
          */
         size_t indexOf(const std::string& val, size_t startPos = 0) const;
 
+        // We need this for using Map<>.
+        bool operator==(const String& other) const {
+            return (static_cast<const std::string&>(*this) == static_cast<const std::string&>(other));
+        }
+        
         virtual ~String();
     };
 }
 
-// Be sure to add hash function. 
+// Be sure to add hash function.
 // (see http://marknelson.us/2011/09/03/hash-functions-for-c-unordered-containers/)
 namespace std {
 

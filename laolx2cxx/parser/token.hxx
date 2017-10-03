@@ -45,7 +45,7 @@ typedef std::shared_ptr<Token> TRcToken;
 class Location {
 public:
     typedef unsigned long int linenum_type;
-    typedef unsigned int colnum_type;
+    typedef unsigned long int colnum_type;
 
     explicit Location(const laolx::String& filename, linenum_type linenum, colnum_type colnum)
     : filename(filename), linenum(linenum), colnum(colnum) {
@@ -70,6 +70,7 @@ public:
     static const laolx::String EMPTY;
 
     enum Code {
+        INVALID,
         XEOF, //not conflict with macro/define EOF
         EOLN,
         WS, //whitespace (not including EOF or EOLN)
@@ -189,9 +190,7 @@ public:
      * @param text check if keyword.
      * @return true if text matches keyword.
      */
-    static bool isKeyword(const laolx::String& text) {
-        return stKeywords.hasKey(text);
-    }
+    static bool isKeyword(const laolx::String& text, Code& code);
 
     const Location location;
     const Code code;
