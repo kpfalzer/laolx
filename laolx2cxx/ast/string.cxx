@@ -24,13 +24,18 @@
 
 #include "ast/string.hxx"
 
-String::String(TRcToken& token) : m_token(token) {
+String::String(const TRcToken& token) : m_token(token) {
 }
 
-static TRcString stNull(nullptr);
-
 TRcString String::parse(Parser& parser) {
-    return stNull;
+    static const TRcString stNull(nullptr);
+    const TRcToken& token = parser.peek();
+    switch (token->code) {
+        case Token::SQSTRING: case Token::DQSTRING:
+            return std::make_shared<String>(token);
+        default:
+            return stNull;
+    }
 }
 
 bool String::isDoubleQuoted() const {
@@ -40,3 +45,30 @@ bool String::isDoubleQuoted() const {
 bool String::isSingleQuoted() const {
     return m_token->code == Token::SQSTRING;
 }
+
+String::~String() {
+
+}
+
+StringList::StringList(const TRcString& string) {
+    append(string);
+}
+
+void StringList::append(const TRcString& string) {
+    m_strings << string;
+}
+
+TRcStringList StringList::parse(Parser& parser) {
+    static const TRcStringList stNull(nullptr);
+    TRcString string = String::parse(parser);
+    if (!string) {
+        return stNull;
+    }
+    TRcStringList stringList = std::make_shared<StringList>(string);
+    //todo add mark to parser
+}
+
+StringList::~StringList() {
+
+}
+

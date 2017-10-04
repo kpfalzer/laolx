@@ -33,24 +33,47 @@
 #define STRING_HXX
 
 #include <memory>
+#include "laolx/list.hxx"
 #include "parser/astnode.hxx"
 #include "parser/token.hxx"
 #include "parser/parser.hxx"
 
 class String;
+class StringList;
 typedef std::shared_ptr<String> TRcString;
+typedef std::shared_ptr<StringList> TRcStringList;
 
 class String : public virtual AstNode {
 public:
     static TRcString parse(Parser& parser);
+
+    explicit String(const TRcToken& token);
 
     bool isSingleQuoted() const;
 
     bool isDoubleQuoted() const;
 
     const TRcToken m_token;
+    
+    virtual ~String();
+};
+
+class StringList : public virtual AstNode {
+public:
+    static TRcStringList parse(Parser& parser);
+
+    explicit StringList(const TRcString& string);
+
+    const laolx::List<TRcString>& getStrings() const {
+        return m_strings;
+    }
+    
+    virtual ~StringList();
+    
 private:
-    explicit String(TRcToken& token);
+    void append(const TRcString& string);
+    
+    laolx::List<TRcString> m_strings;
 };
 
 
