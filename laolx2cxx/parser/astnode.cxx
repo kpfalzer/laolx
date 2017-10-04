@@ -21,39 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#include "astnode.hxx"
 
-/* 
- * File:   parser.hxx
- * Author: kwpfalzer
- *
- * Created on September 30, 2017, 4:39 PM
- */
+AstNode::~AstNode() {
 
-#ifndef PARSER_HXX
-#define PARSER_HXX
-
-#include "laolx/list.hxx"
-#include "parser/lexer.hxx"
-
-class Parser {
-public:
-    explicit Parser(const laolx::String& filename);
-
-    explicit Parser(laolx::LineReader& input);
-
-    bool isEmpty() const;
-    
-    const TRcToken& peek() const;
-    
-    TRcToken pop();
-    
-    virtual ~Parser();
-    
-private:
-    void initialize(laolx::LineReader& input);
-    
-    laolx::List<TRcToken>  m_tokens, m_comments;
-};
-
-#endif /* PARSER_HXX */
+}
 

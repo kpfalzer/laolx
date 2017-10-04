@@ -23,37 +23,24 @@
  */
 
 /* 
- * File:   parser.hxx
+ * File:   astnode.hxx
  * Author: kwpfalzer
  *
- * Created on September 30, 2017, 4:39 PM
+ * Created on October 3, 2017, 6:15 PM
  */
 
-#ifndef PARSER_HXX
-#define PARSER_HXX
+#ifndef ASTNODE_HXX
+#define ASTNODE_HXX
 
-#include "laolx/list.hxx"
-#include "parser/lexer.hxx"
-
-class Parser {
+class AstNode {
 public:
-    explicit Parser(const laolx::String& filename);
+    virtual ~AstNode() = 0;
 
-    explicit Parser(laolx::LineReader& input);
+protected:
 
-    bool isEmpty() const;
-    
-    const TRcToken& peek() const;
-    
-    TRcToken pop();
-    
-    virtual ~Parser();
-    
-private:
-    void initialize(laolx::LineReader& input);
-    
-    laolx::List<TRcToken>  m_tokens, m_comments;
+    explicit AstNode() {
+    }
 };
 
-#endif /* PARSER_HXX */
+#endif /* ASTNODE_HXX */
 

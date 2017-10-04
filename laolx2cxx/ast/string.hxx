@@ -23,37 +23,36 @@
  */
 
 /* 
- * File:   parser.hxx
+ * File:   string.hxx
  * Author: kwpfalzer
  *
- * Created on September 30, 2017, 4:39 PM
+ * Created on October 3, 2017, 6:19 PM
  */
 
-#ifndef PARSER_HXX
-#define PARSER_HXX
+#ifndef STRING_HXX
+#define STRING_HXX
 
-#include "laolx/list.hxx"
-#include "parser/lexer.hxx"
+#include <memory>
+#include "parser/astnode.hxx"
+#include "parser/token.hxx"
+#include "parser/parser.hxx"
 
-class Parser {
+class String;
+typedef std::shared_ptr<String> TRcString;
+
+class String : public virtual AstNode {
 public:
-    explicit Parser(const laolx::String& filename);
+    static TRcString parse(Parser& parser);
 
-    explicit Parser(laolx::LineReader& input);
+    bool isSingleQuoted() const;
 
-    bool isEmpty() const;
-    
-    const TRcToken& peek() const;
-    
-    TRcToken pop();
-    
-    virtual ~Parser();
-    
+    bool isDoubleQuoted() const;
+
+    const TRcToken m_token;
 private:
-    void initialize(laolx::LineReader& input);
-    
-    laolx::List<TRcToken>  m_tokens, m_comments;
+    explicit String(TRcToken& token);
 };
 
-#endif /* PARSER_HXX */
+
+#endif /* STRING_HXX */
 

@@ -53,6 +53,15 @@ void Parser::initialize(laolx::LineReader& input) {
     } while (Token::XEOF != code);
 }
 
+bool Parser::isEmpty() const {
+    return m_tokens.isEmpty();
+}
+
+const TRcToken& Parser::peek() const {
+    assert(! isEmpty());
+    return m_tokens.first();
+}
+
 Parser::~Parser() {
 
 }

@@ -92,6 +92,10 @@ namespace laolx {
             return operator[](-1);
         }
 
+        bool isEmpty() const {
+            return m_array.empty();
+        }
+        
         size_type length() const {
             return m_array.size();
         }

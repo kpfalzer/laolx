@@ -22,38 +22,21 @@
  * THE SOFTWARE.
  */
 
-/* 
- * File:   parser.hxx
- * Author: kwpfalzer
- *
- * Created on September 30, 2017, 4:39 PM
- */
+#include "ast/string.hxx"
 
-#ifndef PARSER_HXX
-#define PARSER_HXX
+String::String(TRcToken& token) : m_token(token) {
+}
 
-#include "laolx/list.hxx"
-#include "parser/lexer.hxx"
+static TRcString stNull(nullptr);
 
-class Parser {
-public:
-    explicit Parser(const laolx::String& filename);
+TRcString String::parse(Parser& parser) {
+    return stNull;
+}
 
-    explicit Parser(laolx::LineReader& input);
+bool String::isDoubleQuoted() const {
+    return m_token->code == Token::DQSTRING;
+}
 
-    bool isEmpty() const;
-    
-    const TRcToken& peek() const;
-    
-    TRcToken pop();
-    
-    virtual ~Parser();
-    
-private:
-    void initialize(laolx::LineReader& input);
-    
-    laolx::List<TRcToken>  m_tokens, m_comments;
-};
-
-#endif /* PARSER_HXX */
-
+bool String::isSingleQuoted() const {
+    return m_token->code == Token::SQSTRING;
+}

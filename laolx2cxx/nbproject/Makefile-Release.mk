@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/parser/astnode.o \
 	${OBJECTDIR}/parser/lexer.o \
 	${OBJECTDIR}/parser/parser.o \
 	${OBJECTDIR}/parser/token.o
@@ -75,10 +77,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/laolx2cxx: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/laolx2cxx ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/ast/string.o: ast/string.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -I../laolxcxx -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/string.o ast/string.cxx
+
 ${OBJECTDIR}/main.o: main.cxx
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -I../laolxcxx -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cxx
+
+${OBJECTDIR}/parser/astnode.o: parser/astnode.cxx
+	${MKDIR} -p ${OBJECTDIR}/parser
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -I../laolxcxx -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/parser/astnode.o parser/astnode.cxx
 
 ${OBJECTDIR}/parser/lexer.o: parser/lexer.cxx
 	${MKDIR} -p ${OBJECTDIR}/parser
@@ -113,6 +125,19 @@ ${TESTDIR}/tests/parser_test.o: tests/parser_test.cxx
 	$(COMPILE.cc) -O2 -I. -I../laolxcxx -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/parser_test.o tests/parser_test.cxx
 
 
+${OBJECTDIR}/ast/string_nomain.o: ${OBJECTDIR}/ast/string.o ast/string.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/string.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -I. -I../laolxcxx -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/string_nomain.o ast/string.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/string.o ${OBJECTDIR}/ast/string_nomain.o;\
+	fi
+
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cxx 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/main.o`; \
@@ -124,6 +149,19 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cxx
 	    $(COMPILE.cc) -O2 -I. -I../laolxcxx -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
+	fi
+
+${OBJECTDIR}/parser/astnode_nomain.o: ${OBJECTDIR}/parser/astnode.o parser/astnode.cxx 
+	${MKDIR} -p ${OBJECTDIR}/parser
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/parser/astnode.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -I. -I../laolxcxx -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/parser/astnode_nomain.o parser/astnode.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/parser/astnode.o ${OBJECTDIR}/parser/astnode_nomain.o;\
 	fi
 
 ${OBJECTDIR}/parser/lexer_nomain.o: ${OBJECTDIR}/parser/lexer.o parser/lexer.cxx 

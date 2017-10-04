@@ -6,11 +6,16 @@ XFile: IncludeStatement* (Declaration | Statement)* EOF
 
 IncludeStatement: K_INCLUDE StringList
 
-XString: SQSTRING | DQSTRING
+String: SQSTRING | DQSTRING
 
-StringList: XString (COMMA XString)+
+StringList: String (COMMA String)+
 
-Declaration: ClassDeclaration 
+Declaration: Linkage? ActualDeclaration
+
+// extern linkage declarations do not have bodies, etc.
+Linkage: K_EXTERN String
+
+ActualDeclaration: ClassDeclaration 
            | InterfaceDeclaration
            | VariableDeclaration 
            | TypedefDeclaration 
@@ -44,8 +49,9 @@ Visibility: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
 //example of class:
+// p1 and p2 are readonly attributes
 class foo<T1,T2>(int @p1, string @p2) extends C1, C2 implements I1 {
-	int +a = 14;	// '+' implies mutable
+	int @a = 14;	// a is an attribute
 	T v = 17;       // const T v = 17;
 }
 //TODO: eventually add multiple decl
