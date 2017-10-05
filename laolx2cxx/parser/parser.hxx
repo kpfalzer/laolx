@@ -33,14 +33,13 @@
 #define PARSER_HXX
 
 #include <initializer_list>
-#include "laolx/list.hxx"
 #include "laolx/map.hxx"
 #include "parser/lexer.hxx"
 
 class Parser {
 public:
     typedef long int index_type;
-    
+
     explicit Parser(const laolx::String& filename);
 
     explicit Parser(laolx::LineReader& input);
@@ -48,43 +47,45 @@ public:
     bool hasMore() const {
         return m_pos < m_tokens.length();
     }
-    
+
     bool isEmpty() const {
         return !hasMore();
     }
-    
+
     const TRcToken& peek(index_type offset = 0) const;
-    
+
     /**
      * Accept (position) n tokens and return value at n-1.
      * @param n number of tokens to advance.
      * @return current token at [n-1].
      */
     TRcToken accept(index_type n = 1);
-    
+
     index_type getMark() const {
         return m_pos;
     }
-    
+
     void setMark(index_type mark) {
         m_pos = mark;
     }
-    
+
+    /**
+     * Check for proper end of statement.
+     * @param skipOverSemi skip S_SEMI if next token.
+     * @return if next token is eof(), on next line or is S_SEMI.
+     */
+    bool isEndOfStatement(bool skipOverSemi = true);
+
     bool accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes);
-    
+
     virtual ~Parser();
-    
+
 private:
     void initialize(laolx::LineReader& input);
-    
-    // Track tokens, comments and EOLNs separately.
-    laolx::Array<TRcToken>  m_tokens;
-    
-    // Track EOLNs and comments by line number.
-    typedef laolx::LineReader::linenumber_type linenumber_type;
-    laolx::Map<linenumber_type, TRcToken> m_eolns;
-    laolx::Map<linenumber_type, laolx::List<TRcToken>> m_comments;
-    
+
+    // Track tokens, comments separately.
+    laolx::Array<TRcToken> m_tokens, m_comments;
+
     index_type m_pos;
 };
 

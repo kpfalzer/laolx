@@ -44,19 +44,18 @@ void Parser::initialize(laolx::LineReader& input) {
         token = lexer.accept();
         code = token->code;
         assert(Token::INVALID != code);
-        if (Token::WS != code) {
+        if ((Token::WS != code) && (Token::EOLN != code)) {
             if (!token->isComment()) {
-                if (Token::EOLN != code) {
-                    m_tokens << token;
-                } else {
-                    m_eolns[token->location.linenum] = token;
-                }
+                m_tokens << token;
             } else {
-                m_comments[token->location.linenum] << token;
+                m_comments << token;
             }
         }
     } while (Token::XEOF != code);
+    assert(Token::XEOF == code);
+    m_tokens << token; //add XEOF
     m_tokens.compact();
+    m_comments.compact();
 }
 
 const TRcToken& Parser::peek(index_type offset) const {
@@ -85,6 +84,26 @@ bool Parser::accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token:
         return true;
     }
     setMark(start);
+    return false;
+}
+
+bool Parser::isEndOfStatement(bool skipOverSemi) {
+    auto code = peek()->code;
+    if (Token::XEOF == code) {
+        return true;
+    }
+    auto prevLineNum = peek(-1)->location.linenum;
+    auto nextLineNum = peek()->location.linenum;
+    if (nextLineNum != prevLineNum) {
+        assert(nextLineNum > prevLineNum);
+        return true;
+    }
+    if (Token::S_SEMI == code) {
+        if (skipOverSemi) {
+            accept();
+        }
+        return true;
+    }
     return false;
 }
 
