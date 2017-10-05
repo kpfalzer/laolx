@@ -33,7 +33,8 @@
 #define PARSER_HXX
 
 #include <initializer_list>
-#include "laolx/array.hxx"
+#include "laolx/list.hxx"
+#include "laolx/map.hxx"
 #include "parser/lexer.hxx"
 
 class Parser {
@@ -76,7 +77,14 @@ public:
 private:
     void initialize(laolx::LineReader& input);
     
-    laolx::Array<TRcToken>  m_tokens, m_comments;
+    // Track tokens, comments and EOLNs separately.
+    laolx::Array<TRcToken>  m_tokens;
+    
+    // Track EOLNs and comments by line number.
+    typedef laolx::LineReader::linenumber_type linenumber_type;
+    laolx::Map<linenumber_type, TRcToken> m_eolns;
+    laolx::Map<linenumber_type, laolx::List<TRcToken>> m_comments;
+    
     index_type m_pos;
 };
 

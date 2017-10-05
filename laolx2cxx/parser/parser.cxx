@@ -43,26 +43,29 @@ void Parser::initialize(laolx::LineReader& input) {
     do {
         token = lexer.accept();
         code = token->code;
-        assert (Token::INVALID != code);
+        assert(Token::INVALID != code);
         if (Token::WS != code) {
-            if (! token->isComment()) {
-                m_tokens << token;
+            if (!token->isComment()) {
+                if (Token::EOLN != code) {
+                    m_tokens << token;
+                } else {
+                    m_eolns[token->location.linenum] = token;
+                }
             } else {
-                m_comments << token;
+                m_comments[token->location.linenum] << token;
             }
         }
     } while (Token::XEOF != code);
     m_tokens.compact();
-    m_comments.compact();
 }
 
 const TRcToken& Parser::peek(index_type offset) const {
-    assert(! isEmpty());
+    assert(!isEmpty());
     return m_tokens[m_pos + offset];
 }
 
 TRcToken Parser::accept(index_type n) {
-    const TRcToken& curr = peek(n-1);
+    const TRcToken& curr = peek(n - 1);
     m_pos += n;
     return curr;
 }
@@ -84,7 +87,6 @@ bool Parser::accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token:
     setMark(start);
     return false;
 }
-
 
 Parser::~Parser() {
 
