@@ -23,61 +23,32 @@
  */
 
 /* 
- * File:   string.hxx
+ * File:   actual_declaration.hxx
  * Author: kwpfalzer
  *
- * Created on October 3, 2017, 6:19 PM
+ * Created on October 4, 2017, 8:30 PM
  */
 
-#ifndef STRING_HXX
-#define STRING_HXX
+#ifndef ACTUAL_DECLARATION_HXX
+#define ACTUAL_DECLARATION_HXX
 
-#include "laolx/list.hxx"
 #include "ast/common.hxx"
+#include "ast/string.hxx"
 
-class String;
-class StringList;
-typedef std::shared_ptr<String> TRcString;
-typedef std::shared_ptr<StringList> TRcStringList;
+class ActualDeclaration;
+typedef std::shared_ptr<ActualDeclaration> TRcActualDeclaration;
 
-class String : public virtual AstNode {
+class ActualDeclaration : public virtual AstNode {
 public:
-    static TRcString parse(Parser& parser);
+    static TRcActualDeclaration parse(Parser& parser);
 
-    explicit String(const TRcToken& token);
+    explicit ActualDeclaration(const TRcString& actual_declaration);
 
-    bool isSingleQuoted() const;
-
-    bool isDoubleQuoted() const;
-
-    const TRcToken m_token;
+    const TRcString m_actual_declaration;
     
-    virtual ~String();
-};
-
-class StringList : public virtual AstNode {
-public:
-    static TRcStringList parse(Parser& parser);
-
-    explicit StringList(const TRcString& string);
-
-    const laolx::List<TRcString>& getStrings() const {
-        return m_strings;
-    }
-    
-    virtual ~StringList();
-    
-private:
-    void append(const TRcString& string);
-    
-    StringList& operator<<(const TRcString& string) {
-        append(string);
-        return *this;
-    }
-    
-    laolx::List<TRcString> m_strings;
+    virtual ~ActualDeclaration();
 };
 
 
-#endif /* STRING_HXX */
+#endif /* ACTUAL_DECLARATION_HXX */
 

@@ -32,7 +32,7 @@ TRcString String::parse(Parser& parser) {
     const TRcToken& token = parser.peek();
     switch (token->code) {
         case Token::SQSTRING: case Token::DQSTRING:
-            return std::make_shared<String>(token);
+            return std::make_shared<String>(parser.accept());
         default:
             return stNull;
     }
@@ -59,13 +59,25 @@ void StringList::append(const TRcString& string) {
 }
 
 TRcStringList StringList::parse(Parser& parser) {
-    static const TRcStringList stNull(nullptr);
-    TRcString string = String::parse(parser);
-    if (!string) {
-        return stNull;
+    Parser::index_type start = parser.getMark();
+    TRcStringList stringList(nullptr);
+    while (parser.hasMore()) {
+        TRcString string = String::parse(parser);
+        if (!string) {
+            break;
+        }
+        if (stringList) {
+            *stringList << string;
+        } else {
+            stringList = std::make_shared<StringList>(string);
+        }
+        start = parser.getMark();
+        if (parser.accept()->code != Token::S_COMMA) {
+            break;
+        }
     }
-    TRcStringList stringList = std::make_shared<StringList>(string);
-    //todo add mark to parser
+    parser.setMark(start);
+    return stringList;
 }
 
 StringList::~StringList() {

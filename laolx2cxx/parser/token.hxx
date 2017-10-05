@@ -97,6 +97,7 @@ public:
         K_ELSE,
         K_ELSIF,
         K_EXTENDS,
+        K_EXTERN,
         K_FLOAT,
         K_FOR,
         K_IF,

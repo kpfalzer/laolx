@@ -23,61 +23,33 @@
  */
 
 /* 
- * File:   string.hxx
+ * File:   include_statement.hxx
  * Author: kwpfalzer
  *
- * Created on October 3, 2017, 6:19 PM
+ * Created on October 4, 2017, 5:53 PM
  */
 
-#ifndef STRING_HXX
-#define STRING_HXX
+#ifndef INCLUDE_STATEMENT_HXX
+#define INCLUDE_STATEMENT_HXX
 
-#include "laolx/list.hxx"
 #include "ast/common.hxx"
+#include "ast/string.hxx"
 
-class String;
-class StringList;
-typedef std::shared_ptr<String> TRcString;
-typedef std::shared_ptr<StringList> TRcStringList;
+class IncludeStatement;
+typedef std::shared_ptr<IncludeStatement> TRcIncludeStatement;
 
-class String : public virtual AstNode {
+class IncludeStatement : public virtual AstNode {
 public:
-    static TRcString parse(Parser& parser);
+    static TRcIncludeStatement parse(Parser& parser);
 
-    explicit String(const TRcToken& token);
+    explicit IncludeStatement(const TRcStringList& includes)
+    : m_includes(includes) {
+    }
 
-    bool isSingleQuoted() const;
+    const TRcStringList m_includes;
 
-    bool isDoubleQuoted() const;
-
-    const TRcToken m_token;
-    
-    virtual ~String();
+    virtual ~IncludeStatement();
 };
 
-class StringList : public virtual AstNode {
-public:
-    static TRcStringList parse(Parser& parser);
-
-    explicit StringList(const TRcString& string);
-
-    const laolx::List<TRcString>& getStrings() const {
-        return m_strings;
-    }
-    
-    virtual ~StringList();
-    
-private:
-    void append(const TRcString& string);
-    
-    StringList& operator<<(const TRcString& string) {
-        append(string);
-        return *this;
-    }
-    
-    laolx::List<TRcString> m_strings;
-};
-
-
-#endif /* STRING_HXX */
+#endif /* INCLUDE_STATEMENT_HXX */
 

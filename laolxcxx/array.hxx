@@ -34,6 +34,7 @@
 
 #include <vector>
 #include <functional>
+#include <cassert>
 #include "laolx/object.hxx"
 
 namespace laolx {
@@ -81,15 +82,15 @@ namespace laolx {
         }
 
         const_reference first() const {
-            return operator[](0);
+            return this->operator[](0);
         }
 
         reference last() {
-            return operator[](-1);
+            return this->operator[](-1);
         }
 
         const_reference last() const {
-            return operator[](-1);
+            return this->operator[](-1);
         }
 
         bool isEmpty() const {
@@ -100,6 +101,10 @@ namespace laolx {
             return m_array.size();
         }
 
+        size_type size() const {
+            return length();
+        }
+        
         void each(const std::function<void (const T& ele)>& consume) const {
             eachImpl(m_array, consume);
         }
@@ -153,13 +158,17 @@ namespace laolx {
         bool operator<(const Array& other) const {
             return m_array < other.m_array;
         }
+        
+        void compact() {
+            m_array.shrink_to_fit();
+        }
 
         virtual ~Array() {
         }
 
     private:
 
-        size_type actual_index(index_type ix) {
+        size_type actual_index(index_type ix) const {
             return (0 <= ix) ? ix : (length() + ix);
         }
 

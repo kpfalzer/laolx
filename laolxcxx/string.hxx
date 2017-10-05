@@ -50,6 +50,13 @@ namespace laolx {
         String(const char* str) : std::string(str) {
         }
 
+        const String& operator=(const String& ref) {
+            std::string::operator=(ref);
+            return *this;
+        }
+        
+        String(const String& ref) : std::string(ref) {}
+        
         /**
          * Return substring [start, end).
          * @param start starting position of substring (relative to beginning).

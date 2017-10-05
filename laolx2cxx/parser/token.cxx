@@ -26,7 +26,7 @@
 
 laolx::String Location::toString() const {
     laolx::String loc;
-    if (! filename.empty()) {
+    if (!filename.empty()) {
         loc += filename + ":";
     }
     loc += ":";
@@ -49,6 +49,7 @@ const Token::CodeByString Token::stKeywords({
     {"else", Token::K_ELSE},
     {"elsif", Token::K_ELSIF},
     {"extends", Token::K_EXTENDS},
+    {"extern", Token::K_EXTERN},
     {"float", Token::K_FLOAT},
     {"for", Token::K_FOR},
     {"if", Token::K_IF},

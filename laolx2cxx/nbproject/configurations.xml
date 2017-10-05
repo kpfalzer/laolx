@@ -4,8 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>ast/actual_declaration.hxx</itemPath>
       <itemPath>parser/astnode.hxx</itemPath>
+      <itemPath>ast/class_declaration.hxx</itemPath>
+      <itemPath>ast/common.hxx</itemPath>
+      <itemPath>ast/declaration.hxx</itemPath>
+      <itemPath>ast/include_statement.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
+      <itemPath>ast/linkage.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
@@ -18,7 +24,11 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>parser/astnode.cxx</itemPath>
+      <itemPath>ast/class_declaration.cxx</itemPath>
+      <itemPath>ast/declaration.cxx</itemPath>
+      <itemPath>ast/include_statement.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
+      <itemPath>ast/linkage.cxx</itemPath>
       <itemPath>main.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
@@ -67,6 +77,26 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
@@ -131,6 +161,26 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">

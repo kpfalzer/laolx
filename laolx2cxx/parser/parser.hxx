@@ -32,27 +32,52 @@
 #ifndef PARSER_HXX
 #define PARSER_HXX
 
-#include "laolx/list.hxx"
+#include <initializer_list>
+#include "laolx/array.hxx"
 #include "parser/lexer.hxx"
 
 class Parser {
 public:
+    typedef long int index_type;
+    
     explicit Parser(const laolx::String& filename);
 
     explicit Parser(laolx::LineReader& input);
 
-    bool isEmpty() const;
+    bool hasMore() const {
+        return m_pos < m_tokens.length();
+    }
     
-    const TRcToken& peek() const;
+    bool isEmpty() const {
+        return !hasMore();
+    }
     
-    TRcToken pop();
+    const TRcToken& peek(index_type offset = 0) const;
+    
+    /**
+     * Accept (position) n tokens and return value at n-1.
+     * @param n number of tokens to advance.
+     * @return current token at [n-1].
+     */
+    TRcToken accept(index_type n = 1);
+    
+    index_type getMark() const {
+        return m_pos;
+    }
+    
+    void setMark(index_type mark) {
+        m_pos = mark;
+    }
+    
+    bool accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes);
     
     virtual ~Parser();
     
 private:
     void initialize(laolx::LineReader& input);
     
-    laolx::List<TRcToken>  m_tokens, m_comments;
+    laolx::Array<TRcToken>  m_tokens, m_comments;
+    index_type m_pos;
 };
 
 #endif /* PARSER_HXX */

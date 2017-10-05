@@ -22,62 +22,28 @@
  * THE SOFTWARE.
  */
 
-/* 
- * File:   string.hxx
- * Author: kwpfalzer
- *
- * Created on October 3, 2017, 6:19 PM
- */
+#include "ast/declaration.hxx"
 
-#ifndef STRING_HXX
-#define STRING_HXX
+Declaration::Declaration(const TRcLinkage& linkage, const TRcActualDeclaration& actual) 
+: m_linkage(linkage), m_actual(actual) {
 
-#include "laolx/list.hxx"
-#include "ast/common.hxx"
+}
 
-class String;
-class StringList;
-typedef std::shared_ptr<String> TRcString;
-typedef std::shared_ptr<StringList> TRcStringList;
-
-class String : public virtual AstNode {
-public:
-    static TRcString parse(Parser& parser);
-
-    explicit String(const TRcToken& token);
-
-    bool isSingleQuoted() const;
-
-    bool isDoubleQuoted() const;
-
-    const TRcToken m_token;
-    
-    virtual ~String();
-};
-
-class StringList : public virtual AstNode {
-public:
-    static TRcStringList parse(Parser& parser);
-
-    explicit StringList(const TRcString& string);
-
-    const laolx::List<TRcString>& getStrings() const {
-        return m_strings;
+TRcDeclaration Declaration::parse(Parser& parser) {
+    TRcDeclaration decl(nullptr);
+    Parser::index_type start = parser.getMark();
+    TRcLinkage linkage = Linkage::parse(parser);
+    TRcActualDeclaration actual = ActualDeclaration::parse(parser);
+    if (actual) {
+        decl = std::make_shared<Declaration>(linkage, actual);
+    } else {
+        parser.setMark(start);
     }
-    
-    virtual ~StringList();
-    
-private:
-    void append(const TRcString& string);
-    
-    StringList& operator<<(const TRcString& string) {
-        append(string);
-        return *this;
-    }
-    
-    laolx::List<TRcString> m_strings;
-};
+    return decl;
+}
 
+Declaration::~Declaration() {
 
-#endif /* STRING_HXX */
+}
+
 

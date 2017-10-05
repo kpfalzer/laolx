@@ -262,6 +262,28 @@ void test8() {
     fis.close();
 }
 
+void test9() {
+    union U {
+        U(){} ~U(){}
+        int i; double d; laolx::String s;
+        
+        operator int() const {return i;}
+        operator double() const {return d;}
+        operator const laolx::String&() const {return s;}
+        
+        int operator=(int i) {this->i = i; return i;}
+        double operator=(double d) {this->d = d; return d;}
+        const laolx::String& operator=(const laolx::String& s) {this->s = s; return s;}
+    } u;
+    
+    u = 123;
+    u = 1234.5;
+    u = "foobar";
+    laolx::String s = u;
+    std::cout << "u.s=" << s << std::endl;
+    s = u;
+}
+
 int main(int argc, char** argv) {
     std::cout << "%SUITE_STARTING% maptest" << std::endl;
 
@@ -296,6 +318,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% test8 (maptest)" << std::endl;
     test8();
     std::cout << "%TEST_FINISHED% test8 (maptest)" << std::endl;
+
+    std::cout << "%TEST_STARTED% test9 (maptest)" << std::endl;
+    test9();
+    std::cout << "%TEST_FINISHED% test9 (maptest)" << std::endl;
 
     std::cout << "%SUITE_FINISHED%" << std::endl;
 

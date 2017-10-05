@@ -23,61 +23,32 @@
  */
 
 /* 
- * File:   string.hxx
+ * File:   linkage.hxx
  * Author: kwpfalzer
  *
- * Created on October 3, 2017, 6:19 PM
+ * Created on October 4, 2017, 8:30 PM
  */
 
-#ifndef STRING_HXX
-#define STRING_HXX
+#ifndef LINKAGE_HXX
+#define LINKAGE_HXX
 
-#include "laolx/list.hxx"
 #include "ast/common.hxx"
+#include "ast/string.hxx"
 
-class String;
-class StringList;
-typedef std::shared_ptr<String> TRcString;
-typedef std::shared_ptr<StringList> TRcStringList;
+class Linkage;
+typedef std::shared_ptr<Linkage> TRcLinkage;
 
-class String : public virtual AstNode {
+class Linkage : public virtual AstNode {
 public:
-    static TRcString parse(Parser& parser);
+    static TRcLinkage parse(Parser& parser);
 
-    explicit String(const TRcToken& token);
+    explicit Linkage(const TRcString& linkage);
 
-    bool isSingleQuoted() const;
-
-    bool isDoubleQuoted() const;
-
-    const TRcToken m_token;
+    const TRcString m_linkage;
     
-    virtual ~String();
-};
-
-class StringList : public virtual AstNode {
-public:
-    static TRcStringList parse(Parser& parser);
-
-    explicit StringList(const TRcString& string);
-
-    const laolx::List<TRcString>& getStrings() const {
-        return m_strings;
-    }
-    
-    virtual ~StringList();
-    
-private:
-    void append(const TRcString& string);
-    
-    StringList& operator<<(const TRcString& string) {
-        append(string);
-        return *this;
-    }
-    
-    laolx::List<TRcString> m_strings;
+    virtual ~Linkage();
 };
 
 
-#endif /* STRING_HXX */
+#endif /* LINKAGE_HXX */
 
