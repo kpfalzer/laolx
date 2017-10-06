@@ -31,7 +31,6 @@
       <itemPath>ast/include_statement.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
       <itemPath>ast/linkage.cxx</itemPath>
-      <itemPath>main.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
       <itemPath>ast/source_file.cxx</itemPath>
       <itemPath>ast/statement.cxx</itemPath>
@@ -42,11 +41,8 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
-      <logicalFolder name="f1"
-                     displayName="parser test"
-                     projectFiles="true"
-                     kind="TEST">
-        <itemPath>tests/parser_test.cxx</itemPath>
+      <logicalFolder name="f1" displayName="test1" projectFiles="true" kind="TEST">
+        <itemPath>tests/test1.cxx</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -58,7 +54,7 @@
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
+    <conf name="Debug" type="3">
       <toolsSet>
         <compilerSet>CLang|CLang</compilerSet>
         <dependencyChecking>true</dependencyChecking>
@@ -66,20 +62,27 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <developmentMode>0</developmentMode>
           <standard>11</standard>
           <incDir>
             <pElem>.</pElem>
             <pElem>../laolxcxx</pElem>
           </incDir>
         </ccTool>
-        <linkerTool>
-          <linkerAddLib>
-            <pElem>../laolxcxx/dist/Debug/CLang-MacOSX</pElem>
-          </linkerAddLib>
-          <linkerLibItems>
-            <linkerOptionItem>-llaolxcxx</linkerOptionItem>
-          </linkerLibItems>
-        </linkerTool>
+        <archiverTool>
+        </archiverTool>
+        <requiredProjects>
+          <makeArtifact PL="../laolxcxx"
+                        CT="3"
+                        CN="Debug"
+                        AC="true"
+                        BL="true"
+                        WD="../laolxcxx"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxcxx.a">
+          </makeArtifact>
+        </requiredProjects>
       </compileType>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
@@ -113,6 +116,16 @@
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles">
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>../laolxcxx/dist/Debug/CLang-MacOSX</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerOptionItem>-llaolxcxx</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -128,8 +141,6 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
-      <item path="main.cxx" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="parser/astnode.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="parser/astnode.hxx" ex="false" tool="3" flavor2="0">
@@ -146,10 +157,10 @@
       </item>
       <item path="parser/token.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/parser_test.cxx" ex="false" tool="1" flavor2="0">
+      <item path="tests/test1.cxx" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
-    <conf name="Release" type="1">
+    <conf name="Release" type="3">
       <toolsSet>
         <compilerSet>CLang|CLang</compilerSet>
         <dependencyChecking>true</dependencyChecking>
@@ -160,7 +171,8 @@
           <developmentMode>5</developmentMode>
         </cTool>
         <ccTool>
-          <developmentMode>5</developmentMode>
+          <developmentMode>0</developmentMode>
+          <standard>11</standard>
           <incDir>
             <pElem>.</pElem>
             <pElem>../laolxcxx</pElem>
@@ -172,6 +184,20 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <archiverTool>
+        </archiverTool>
+        <requiredProjects>
+          <makeArtifact PL="../laolxcxx"
+                        CT="3"
+                        CN="Debug"
+                        AC="true"
+                        BL="true"
+                        WD="../laolxcxx"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxcxx.a">
+          </makeArtifact>
+        </requiredProjects>
       </compileType>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
@@ -220,8 +246,6 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
-      <item path="main.cxx" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="parser/astnode.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="parser/astnode.hxx" ex="false" tool="3" flavor2="0">
@@ -238,7 +262,7 @@
       </item>
       <item path="parser/token.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/parser_test.cxx" ex="false" tool="1" flavor2="0">
+      <item path="tests/test1.cxx" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

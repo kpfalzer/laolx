@@ -3,21 +3,23 @@
     <type>org.netbeans.modules.cnd.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>laolx2cxx</name>
+            <name>laolxast</name>
             <c-extensions/>
             <cpp-extensions>cxx</cpp-extensions>
             <header-extensions>hxx</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
-            <make-dep-projects/>
+            <make-dep-projects>
+                <make-dep-project>../laolxcxx</make-dep-project>
+            </make-dep-projects>
             <sourceRootList/>
             <confList>
                 <confElem>
                     <name>Debug</name>
-                    <type>1</type>
+                    <type>3</type>
                 </confElem>
                 <confElem>
                     <name>Release</name>
-                    <type>1</type>
+                    <type>3</type>
                 </confElem>
             </confList>
             <formatting>

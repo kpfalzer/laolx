@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=laolx2cxx
+PROJECTNAME=laolxast
 
 # Active Configuration
 DEFAULTCONF=Debug
