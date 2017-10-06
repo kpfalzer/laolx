@@ -29,10 +29,7 @@ laolx::String Location::toString() const {
     if (!filename.empty()) {
         loc += filename + ":";
     }
-    loc += ":";
-    loc += linenum;
-    loc += ":";
-    loc += colnum;
+    loc += std::to_string(linenum) + ":" + std::to_string(colnum);
     return loc;
 }
 

@@ -59,11 +59,11 @@ void test2() {
 }
 
 void test3() {
-    static const std::string TEST3 = "include 'file1', \"file2\" foobar";
+    static const std::string TEST3 = "include 'file1', \"file2\"   foobar";
     laolx::StringInputStream sis(TEST3);
     Parser parser(sis);
     TRcSourceFile sourceFile = SourceFile::parse(parser);
-    assert(sourceFile);
+    assert(!sourceFile);
 }
 
 int main(int argc, char** argv) {

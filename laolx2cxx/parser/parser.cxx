@@ -111,7 +111,7 @@ bool Parser::isEndOfStatement(bool skipOverSemi) {
 }
 
 bool Parser::expectEndOfStatement() {
-    static const std::string FMT = "at '%s'. Expected end-of-statement: ';', EOLN or EOF";
+    static const std::string FMT = "Expected end-of-statement: ';', EOLN or EOF.  Found '%s'.";
     const bool ok = isEndOfStatement();
     if (!ok) {
         error(FMT, peek());
