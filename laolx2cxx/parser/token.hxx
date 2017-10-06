@@ -186,6 +186,10 @@ public:
         return (BLOCK_COMMENT == code) || (LINE_COMMENT == code);
     }
     
+    bool isEOF() const {
+        return (XEOF == code);
+    }
+    
     /**
      * Return true if text matches a keyword.
      * @param text check if keyword.

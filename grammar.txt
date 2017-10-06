@@ -1,8 +1,7 @@
 //add decomposition declaration:
 // auto& [l1, l2] = expr_returns_2_elements
 
-
-XFile: IncludeStatement* (Declaration | Statement)* EOF
+SourceFile: IncludeStatement* (Declaration | Statement)* EOF
 
 IncludeStatement: K_INCLUDE StringList
 

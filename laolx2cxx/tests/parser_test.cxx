@@ -34,6 +34,7 @@
 #include <string>
 #include <cassert>
 #include "parser/parser.hxx"
+#include "ast/source_file.hxx"
 
 /*
  * Simple C++ Test Suite
@@ -57,6 +58,14 @@ void test2() {
     Parser parser(sis);
 }
 
+void test3() {
+    static const std::string TEST3 = "include 'file1', \"file2\" foobar";
+    laolx::StringInputStream sis(TEST3);
+    Parser parser(sis);
+    TRcSourceFile sourceFile = SourceFile::parse(parser);
+    assert(sourceFile);
+}
+
 int main(int argc, char** argv) {
     std::cout << "%SUITE_STARTING% parser_test" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
@@ -68,6 +77,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% test2 (parser_test)" << std::endl;
     test2();
     std::cout << "%TEST_FINISHED% test2 (parser_test)" << std::endl;
+    
+    std::cout << "%TEST_STARTED% test3 (parser_test)" << std::endl;
+    test3();
+    std::cout << "%TEST_FINISHED% test3 (parser_test)" << std::endl;
     
     std::cout << "%SUITE_FINISHED%" << std::endl;
 

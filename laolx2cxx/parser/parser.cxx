@@ -23,6 +23,8 @@
  */
 
 #include <cassert>
+#include <cstdio>
+#include <iostream>
 #include "parser/parser.hxx"
 
 Parser::Parser(const laolx::String& filename) {
@@ -37,6 +39,7 @@ Parser::Parser(laolx::LineReader& input) {
 
 void Parser::initialize(laolx::LineReader& input) {
     m_pos = 0;
+    m_errorCount = 0;
     Lexer lexer(input);
     TRcToken token;
     Token::Code code;
@@ -51,8 +54,8 @@ void Parser::initialize(laolx::LineReader& input) {
                 m_comments << token;
             }
         }
-    } while (Token::XEOF != code);
-    assert(Token::XEOF == code);
+    } while (! token->isEOF());
+    assert(token->isEOF());
     m_tokens << token; //add XEOF
     m_tokens.compact();
     m_comments.compact();
@@ -88,10 +91,10 @@ bool Parser::accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token:
 }
 
 bool Parser::isEndOfStatement(bool skipOverSemi) {
-    auto code = peek()->code;
-    if (Token::XEOF == code) {
+    if (peek()->isEOF()) {
         return true;
     }
+    auto code = peek()->code;
     auto prevLineNum = peek(-1)->location.linenum;
     auto nextLineNum = peek()->location.linenum;
     if (nextLineNum != prevLineNum) {
@@ -105,6 +108,25 @@ bool Parser::isEndOfStatement(bool skipOverSemi) {
         return true;
     }
     return false;
+}
+
+bool Parser::expectEndOfStatement() {
+    static const std::string FMT = "at '%s'. Expected end-of-statement: ';', EOLN or EOF";
+    const bool ok = isEndOfStatement();
+    if (!ok) {
+        error(FMT, peek());
+    }
+    return ok;
+}
+
+void Parser::error(const std::string& message, const TRcToken& token) {
+    const std::string location = token->location.toString();
+    const std::string format = "%s: " + message;
+    const std::string text = token->text;
+    std::vector<char> buf(format.size() + location.size() + text.size() + 8);
+    std::snprintf(&buf[0], buf.size(), format.c_str(), location.c_str(), text.c_str());
+    std::cerr << "Error: " << buf.data() << std::endl;
+    m_errorCount++;
 }
 
 Parser::~Parser() {

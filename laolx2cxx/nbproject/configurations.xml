@@ -13,6 +13,8 @@
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>ast/linkage.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
+      <itemPath>ast/source_file.hxx</itemPath>
+      <itemPath>ast/statement.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
     </logicalFolder>
@@ -31,6 +33,8 @@
       <itemPath>ast/linkage.cxx</itemPath>
       <itemPath>main.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
+      <itemPath>ast/source_file.cxx</itemPath>
+      <itemPath>ast/statement.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
     </logicalFolder>
@@ -96,6 +100,14 @@
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -180,6 +192,14 @@
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>

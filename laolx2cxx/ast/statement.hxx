@@ -21,31 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   astnode.hxx
+ * File:   statement.hxx
  * Author: kwpfalzer
  *
- * Created on October 3, 2017, 6:15 PM
+ * Created on Thu Oct  5 19:07:28 2017
  */
+#ifndef STATEMENT_HXX
+#define STATEMENT_HXX
 
-#ifndef ASTNODE_HXX
-#define ASTNODE_HXX
+#include "ast/common.hxx"
 
-#include <memory>
+class Statement;
+typedef std::shared_ptr<Statement> TRcStatement;
 
-class AstNode;
-typedef std::shared_ptr<AstNode> TRcAstNode;
-
-class AstNode {
+class Statement : public virtual AstNode {
 public:
-    virtual ~AstNode() = 0;
+	static TRcStatement parse(Parser& parser);
 
-protected:
+	explicit Statement();
 
-    explicit AstNode() {
-    }
+	virtual ~Statement();
 };
 
-#endif /* ASTNODE_HXX */
-
+#endif /* STATEMENT_HXX */

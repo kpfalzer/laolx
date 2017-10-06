@@ -32,7 +32,8 @@ TRcIncludeStatement IncludeStatement::parse(Parser& parser) {
     }
     TRcStringList includes = StringList::parse(parser);
     if (includes) {
-       stmt = std::make_shared<IncludeStatement>(includes); 
+       parser.expectEndOfStatement(); //ignore result: and keep going...
+       stmt = std::make_shared<IncludeStatement>(includes);
     } else {
         parser.setMark(start);
     }

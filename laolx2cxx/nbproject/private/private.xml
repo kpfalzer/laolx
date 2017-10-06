@@ -12,11 +12,15 @@
         <group>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/declaration.hxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/class_declaration.cxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/source_file.cxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/include_statement.hxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/class_declaration.hxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/parser.cxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/source_file.hxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/token.hxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/lexer.cxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/parser/parser.hxx</file>
+            <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/tests/parser_test.cxx</file>
             <file>file:/Users/kwpfalzer/projects/laolx/laolx2cxx/ast/include_statement.cxx</file>
         </group>
     </open-files>

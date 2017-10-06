@@ -56,7 +56,7 @@ bool Lexer::isEOF() {
     if (!m_token) {
         next();
     }
-    return (Token::XEOF == m_token->code);
+    return m_token->isEOF();
 }
 
 Lexer::~Lexer() {
@@ -346,7 +346,7 @@ TRcToken Lexer::attrDeclOrOther() {
 
 TRcToken Lexer::next() {
     if (isEmpty()) {
-        if (!m_token || (Token::XEOF != m_token->code)) {
+        if (!m_token || !m_token->isEOF()) {
             m_text = XEOF;
             return getToken(Token::XEOF);
         }

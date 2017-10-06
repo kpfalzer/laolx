@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+require 'date'
+
+def get_copyright(filename)
+copyright =<<L1
+/*
+ * The MIT License
+ *
+ * Copyright 2017 kwpfalzer.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+/* 
+ * File:   #{filename}
+ * Author: #{ENV['USER']}
+ *
+ * Created on #{Time.now.strftime '%c'}
+ */
+L1
+	return copyright
+end
+
+def gen_hxx(filename, base_fn, cls_name)
+	if File.exist?(filename)
+		STDOUT.puts "Warning: #{filename}: file exists, will not overwrite."
+		return
+	end
+	ofid = File.new(filename, 'w')
+	ofid << get_copyright(filename)
+	defname = "#{base_fn.upcase}_HXX"
+	str =<<L2
+#ifndef #{defname}
+#define #{defname}
+
+#include "ast/common.hxx"
+
+class #{cls_name};
+typedef std::shared_ptr<#{cls_name}> TRc#{cls_name};
+
+class #{cls_name} : public virtual AstNode {
+public:
+	static TRc#{cls_name} parse(Parser& parser);
+
+	explicit #{cls_name}();
+
+	virtual ~#{cls_name}();
+};
+
+#endif /* #{defname} */
+L2
+	ofid << str
+	ofid.close
+end
+
+def gen_cxx(filename, base_fn, cls_name)
+	if File.exist?(filename)
+		STDOUT.puts "Warning: #{filename}: file exists, will not overwrite."
+		return
+	end
+	ofid = File.new(filename, 'w')
+	ofid << get_copyright(filename)
+	str =<<L2
+#include "ast/#{base_fn}.hxx"
+
+TRc#{cls_name} #{cls_name}::parse(Parser& parser) {
+	TRc#{cls_name} result(nullptr);
+	//todo
+	return result;
+}
+
+#{cls_name}::#{cls_name}() {}
+
+#{cls_name}::~#{cls_name}() {}
+L2
+	ofid << str
+	ofid.close
+end
+
+def main(argv)
+	argv.each do |base_fn|
+		cls_name = base_fn.split('_').map{|e| e.capitalize}.join
+		gen_hxx("#{base_fn}.hxx", base_fn, cls_name)
+		gen_cxx("#{base_fn}.cxx", base_fn, cls_name)
+	end
+end
+
+main ARGV

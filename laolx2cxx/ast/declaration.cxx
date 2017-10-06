@@ -33,7 +33,7 @@ TRcDeclaration Declaration::parse(Parser& parser) {
     TRcDeclaration decl(nullptr);
     Parser::index_type start = parser.getMark();
     TRcLinkage linkage = Linkage::parse(parser);
-    TRcActualDeclaration actual = ActualDeclaration::parse(parser);
+    TRcActualDeclaration actual; //todo = ActualDeclaration::parse(parser);
     if (actual) {
         decl = std::make_shared<Declaration>(linkage, actual);
     } else {
