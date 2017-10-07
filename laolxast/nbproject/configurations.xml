@@ -5,18 +5,38 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>ast/actual_declaration.hxx</itemPath>
+      <itemPath>ast/actual_type_parameters.hxx</itemPath>
+      <itemPath>ast/array_type_modifier.hxx</itemPath>
       <itemPath>parser/astnode.hxx</itemPath>
+      <itemPath>ast/base_name.hxx</itemPath>
+      <itemPath>ast/class_body.hxx</itemPath>
       <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
       <itemPath>ast/declaration.hxx</itemPath>
+      <itemPath>ast/extends_declaration.hxx</itemPath>
+      <itemPath>ast/implements_declaration.hxx</itemPath>
       <itemPath>ast/include_statement.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>ast/linkage.hxx</itemPath>
+      <itemPath>ast/mutability.hxx</itemPath>
+      <itemPath>ast/parameter_declaration.hxx</itemPath>
+      <itemPath>ast/parameter_declaration_list.hxx</itemPath>
+      <itemPath>ast/parameter_name.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
+      <itemPath>ast/primitive_type.hxx</itemPath>
+      <itemPath>ast/scope_name.hxx</itemPath>
+      <itemPath>ast/scoped_type.hxx</itemPath>
+      <itemPath>ast/simple_type.hxx</itemPath>
       <itemPath>ast/source_file.hxx</itemPath>
       <itemPath>ast/statement.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
+      <itemPath>ast/type.hxx</itemPath>
+      <itemPath>ast/type_modifier.hxx</itemPath>
+      <itemPath>ast/type_name.hxx</itemPath>
+      <itemPath>ast/type_parameters.hxx</itemPath>
+      <itemPath>ast/union_type.hxx</itemPath>
+      <itemPath>ast/visibility.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -25,17 +45,37 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>ast/actual_type_parameters.cxx</itemPath>
+      <itemPath>ast/array_type_modifier.cxx</itemPath>
       <itemPath>parser/astnode.cxx</itemPath>
+      <itemPath>ast/base_name.cxx</itemPath>
+      <itemPath>ast/class_body.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
       <itemPath>ast/declaration.cxx</itemPath>
+      <itemPath>ast/extends_declaration.cxx</itemPath>
+      <itemPath>ast/implements_declaration.cxx</itemPath>
       <itemPath>ast/include_statement.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
       <itemPath>ast/linkage.cxx</itemPath>
+      <itemPath>ast/mutability.cxx</itemPath>
+      <itemPath>ast/parameter_declaration.cxx</itemPath>
+      <itemPath>ast/parameter_declaration_list.cxx</itemPath>
+      <itemPath>ast/parameter_name.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
+      <itemPath>ast/primitive_type.cxx</itemPath>
+      <itemPath>ast/scope_name.cxx</itemPath>
+      <itemPath>ast/scoped_type.cxx</itemPath>
+      <itemPath>ast/simple_type.cxx</itemPath>
       <itemPath>ast/source_file.cxx</itemPath>
       <itemPath>ast/statement.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
+      <itemPath>ast/type.cxx</itemPath>
+      <itemPath>ast/type_modifier.cxx</itemPath>
+      <itemPath>ast/type_name.cxx</itemPath>
+      <itemPath>ast/type_parameters.cxx</itemPath>
+      <itemPath>ast/union_type.cxx</itemPath>
+      <itemPath>ast/visibility.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -52,6 +92,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>ast</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="3">
@@ -86,6 +129,22 @@
       </compileType>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/actual_type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/actual_type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/array_type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/array_type_modifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -96,6 +155,14 @@
       </item>
       <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/extends_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/extends_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/implements_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/implements_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
@@ -103,6 +170,38 @@
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/primitive_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/primitive_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/scope_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/scope_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/scoped_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/scoped_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/simple_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/simple_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -115,6 +214,30 @@
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_modifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/union_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/union_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/visibility.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/visibility.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles">
         <linkerTool>
@@ -201,6 +324,22 @@
       </compileType>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/actual_type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/actual_type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/array_type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/array_type_modifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -211,6 +350,14 @@
       </item>
       <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/extends_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/extends_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/implements_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/implements_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
@@ -218,6 +365,38 @@
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_declaration_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/parameter_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/parameter_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/primitive_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/primitive_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/scope_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/scope_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/scoped_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/scoped_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/simple_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/simple_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -230,6 +409,30 @@
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_modifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/union_type.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/union_type.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/visibility.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/visibility.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

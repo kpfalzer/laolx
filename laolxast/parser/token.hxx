@@ -113,6 +113,7 @@ public:
         K_PUBLIC,
         K_STATIC,
         K_STRING,
+        K_SYMBOL,
         K_THROW,
         K_UNLESS,
         K_UNTIL,

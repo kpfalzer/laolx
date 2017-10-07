@@ -33,6 +33,12 @@
 #define CLASS_DECLARATION_HXX
 
 #include "ast/common.hxx"
+#include "ast/type_parameters.hxx"
+#include "ast/parameter_declaration_list.hxx"
+#include "ast/extends_declaration.hxx"
+#include "ast/implements_declaration.hxx"
+#include "ast/class_body.hxx"
+#include "parameter_declaration.hxx"
 
 class ClassDeclaration;
 typedef std::shared_ptr<ClassDeclaration> TRcClassDeclaration;
@@ -41,12 +47,24 @@ class ClassDeclaration : public virtual AstNode {
 public:
     static TRcClassDeclaration parse(Parser& parser);
 
-    explicit ClassDeclaration(const TRcToken& className);
-    
-    const TRcToken  m_className;
-    
+    explicit ClassDeclaration(
+            const TRcToken& className,
+            const TRcTypeParameters& typeParameters,
+            const TRcParameterDeclarationList& parameterDeclarationList,
+            const TRcExtendsDeclaration& extendsDeclaration,
+            const TRcImplementsDeclaration& implementsDeclaration,
+            const TRcClassBody& classBody
+            );
+
+    const TRcToken m_className;
+    const TRcTypeParameters m_typeParameters;
+    const TRcParameterDeclarationList m_parameterDeclarationList;
+    const TRcExtendsDeclaration m_extendsDeclaration;
+    const TRcImplementsDeclaration m_implementsDeclaration;
+    const TRcClassBody m_classBody;
+
     virtual ~ClassDeclaration();
-    
+
 };
 
 

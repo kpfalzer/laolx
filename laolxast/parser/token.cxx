@@ -62,6 +62,7 @@ const Token::CodeByString Token::stKeywords({
     {"public", Token::K_PUBLIC},
     {"static", Token::K_STATIC},
     {"string", Token::K_STRING},
+    {"symbol", Token::K_SYMBOL},
     {"throw", Token::K_THROW},
     {"unless", Token::K_UNLESS},
     {"until", Token::K_UNTIL},

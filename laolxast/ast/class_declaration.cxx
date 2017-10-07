@@ -26,19 +26,50 @@
 
 TRcClassDeclaration ClassDeclaration::parse(Parser& parser) {
     static const std::initializer_list<Token::Code> stFirst({Token::K_CLASS, Token::IDENT});
-    static const TRcClassDeclaration stNull(nullptr);
+    TRcClassDeclaration classDecl(nullptr);
     Parser::index_type start = parser.getMark();
     laolx::Array<TRcToken> first(2);
-    if (! parser.accept(first, stFirst)) {
-        return stNull;
+    if (!parser.accept(first, stFirst)) {
+        return classDecl;
     }
-    TRcClassDeclaration classDecl = std::make_shared<ClassDeclaration>(first[1]);
-    //todo: if we fail: be sure to return stNull!!!
+    const auto className = first[1];
+    const auto typeParameters = TypeParameters::parse(parser);
+    const auto parameterDeclationList = ParameterDeclarationList::parse(parser);
+    const auto extendsDeclaration = ExtendsDeclaration::parse(parser);
+    const auto implementsDeclaration = ImplementsDeclaration::parse(parser);
+    TRcClassBody classBody;
+    bool ok = (Token::S_LCURLY == parser.accept()->code);
+    if (ok) {
+        classBody = ClassBody::parse(parser);
+        ok &= (Token::S_RCURLY == parser.accept()->code);
+    }
+    if (ok) {
+        classDecl = std::make_shared<ClassDeclaration>(
+                className,
+                typeParameters,
+                parameterDeclationList,
+                extendsDeclaration,
+                implementsDeclaration,
+                classBody
+                );
+    } else {
+        parser.setMark(start);
+    }
     return classDecl;
 }
 
-ClassDeclaration::ClassDeclaration(const TRcToken& className) 
-: m_className(className) {
+ClassDeclaration::ClassDeclaration(
+        const TRcToken& className,
+        const TRcTypeParameters& typeParameters,
+        const TRcParameterDeclarationList& parameterDeclarationList,
+        const TRcExtendsDeclaration& extendsDeclaration,
+        const TRcImplementsDeclaration& implementsDeclaration,
+        const TRcClassBody& classBody)
+: m_className(className),
+m_typeParameters(typeParameters),
+m_parameterDeclarationList(parameterDeclarationList),
+m_extendsDeclaration(extendsDeclaration),
+m_implementsDeclaration(implementsDeclaration) {
 
 }
 

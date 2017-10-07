@@ -11,7 +11,9 @@
             <make-dep-projects>
                 <make-dep-project>../laolxcxx</make-dep-project>
             </make-dep-projects>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>ast</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
