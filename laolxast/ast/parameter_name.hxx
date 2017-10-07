@@ -39,7 +39,9 @@ class ParameterName : public virtual AstNode {
 public:
 	static TRcParameterName parse(Parser& parser);
 
-	explicit ParameterName();
+	explicit ParameterName(const TRcToken& name);
+        
+        const TRcToken m_name;
 
 	virtual ~ParameterName();
 };
