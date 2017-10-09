@@ -30,18 +30,23 @@
 #ifndef BASE_NAME_HXX
 #define BASE_NAME_HXX
 
+#include "laolx/array.hxx"
 #include "ast/common.hxx"
+#include "actual_type_parameters.hxx"
 
 class BaseName;
 typedef std::shared_ptr<BaseName> TRcBaseName;
 
 class BaseName : public virtual AstNode {
 public:
-	static TRcBaseName parse(Parser& parser);
+    static TRcBaseName parse(Parser& parser);
 
-	explicit BaseName();
+    explicit BaseName(const laolx::Array<TRcToken>& names, const TRcActualTypeParameters& params);
 
-	virtual ~BaseName();
+    const laolx::Array<TRcToken> m_names;
+    const TRcActualTypeParameters m_params;
+    
+    virtual ~BaseName();
 };
 
 #endif /* BASE_NAME_HXX */

@@ -159,8 +159,9 @@ namespace laolx {
             return m_array < other.m_array;
         }
         
-        void compact() {
+        Array& compact() {
             m_array.shrink_to_fit();
+            return *this;
         }
 
         virtual ~Array() {

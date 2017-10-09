@@ -93,6 +93,13 @@ public:
      */
     void error(const std::string& message, const TRcToken& token);
 
+    /**
+     * Attempt to accept consecutive codes.
+     * @param tokens collect match tokens into (this pre-allocated) array.
+     * @param codes consecutive Token::Code to match.
+     * @return true on match/accept; else false.
+     * Note: tokens is invalid/indeterminate unless return true.
+     */
     bool accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes);
 
     auto errorCount() const {

@@ -75,8 +75,10 @@ ParameterDeclarationList:
 
 BaseName: IDENT (COLON2 IDENT)* ActualTypeParameters?
 
+// No visibility for extends: access controlled by base visibility.
 ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
 
+// No visibility for implements: access controlled by base visibility.
 ImplementsDeclaration: K_IMPLEMENTS BaseName (COMMA BaseName)*
 
 ClassBody: ???

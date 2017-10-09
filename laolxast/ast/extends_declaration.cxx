@@ -29,12 +29,38 @@
  */
 #include "ast/extends_declaration.hxx"
 
+//ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
+
 TRcExtendsDeclaration ExtendsDeclaration::parse(Parser& parser) {
-	TRcExtendsDeclaration result(nullptr);
-	//todo
-	return result;
+    TRcExtendsDeclaration result(nullptr);
+    if (Token::K_EXTENDS != parser.peek()->code) {
+        return result;
+    }
+    auto start = parser.getMark();
+    laolx::Array<TRcBaseName> names;
+    parser.accept(); //K_EXTENDS
+    while (true) {
+        TRcBaseName baseName = BaseName::parse(parser);
+        if (!baseName) {
+            break;
+        }
+        names << baseName;
+        if (Token::S_COMMA != parser.accept()->code) {
+            break;
+        }
+    }
+    if (names.isEmpty()) {
+        parser.setMark(start);
+    } else {
+        result = std::make_shared<ExtendsDeclaration>(names.compact());
+    }
+    return result;
 }
 
-ExtendsDeclaration::ExtendsDeclaration() {}
+ExtendsDeclaration::ExtendsDeclaration(const laolx::Array<TRcBaseName>& names)
+: m_names(names) {
 
-ExtendsDeclaration::~ExtendsDeclaration() {}
+}
+
+ExtendsDeclaration::~ExtendsDeclaration() {
+}

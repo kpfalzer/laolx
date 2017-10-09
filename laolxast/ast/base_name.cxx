@@ -29,12 +29,26 @@
  */
 #include "ast/base_name.hxx"
 
+// BaseName: IDENT (COLON2 IDENT)* ActualTypeParameters?
+
 TRcBaseName BaseName::parse(Parser& parser) {
-	TRcBaseName result(nullptr);
-	//todo
-	return result;
+    TRcBaseName result(nullptr);
+    if (Token::IDENT != parser.peek()->code) {
+        return result;
+    }
+    laolx::Array<TRcToken> names, nextName(2);
+    names << parser.accept();
+    while (parser.accept(nextName,{Token::S_COLON2, Token::IDENT})) { // (COLON2 IDENT)*
+        names << nextName.last();
+    }
+    auto params = ActualTypeParameters::parse(parser);
+    result = std::make_shared<BaseName>(names.compact(), params);
+    return result;
 }
 
-BaseName::BaseName() {}
+BaseName::BaseName(const laolx::Array<TRcToken>& names, const TRcActualTypeParameters& params)
+: m_names(names), m_params(params) {
+}
 
-BaseName::~BaseName() {}
+BaseName::~BaseName() {
+}

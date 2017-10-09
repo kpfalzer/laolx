@@ -30,18 +30,22 @@
 #ifndef EXTENDS_DECLARATION_HXX
 #define EXTENDS_DECLARATION_HXX
 
+#include "laolx/array.hxx"
 #include "ast/common.hxx"
+#include "ast/base_name.hxx"
 
 class ExtendsDeclaration;
 typedef std::shared_ptr<ExtendsDeclaration> TRcExtendsDeclaration;
 
 class ExtendsDeclaration : public virtual AstNode {
 public:
-	static TRcExtendsDeclaration parse(Parser& parser);
+    static TRcExtendsDeclaration parse(Parser& parser);
 
-	explicit ExtendsDeclaration();
+    explicit ExtendsDeclaration(const laolx::Array<TRcBaseName>& names);
 
-	virtual ~ExtendsDeclaration();
+    const laolx::Array<TRcBaseName> m_names;
+    
+    virtual ~ExtendsDeclaration();
 };
 
 #endif /* EXTENDS_DECLARATION_HXX */
