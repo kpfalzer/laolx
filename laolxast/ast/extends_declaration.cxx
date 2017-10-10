@@ -31,14 +31,14 @@
 
 //ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
 
-TRcExtendsDeclaration ExtendsDeclaration::parse(Parser& parser) {
+TRcExtendsDeclaration ExtendsDeclaration::parse(Parser& parser, Token::Code code) {
     TRcExtendsDeclaration result(nullptr);
-    if (Token::K_EXTENDS != parser.peek()->code) {
+    if (code != parser.peek()->code) {
         return result;
     }
     auto start = parser.getMark();
     laolx::Array<TRcBaseName> names;
-    parser.accept(); //K_EXTENDS
+    parser.accept(); //K_EXTENDS|IMPLEMENTS
     while (true) {
         TRcBaseName baseName = BaseName::parse(parser);
         if (!baseName) {

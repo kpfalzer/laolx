@@ -117,6 +117,7 @@ public:
         K_THROW,
         K_UNLESS,
         K_UNTIL,
+        K_VAR,
         K_WHEN,
         K_WHILE,
         //

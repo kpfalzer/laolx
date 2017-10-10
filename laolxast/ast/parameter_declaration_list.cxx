@@ -30,11 +30,34 @@
 #include "ast/parameter_declaration_list.hxx"
 
 TRcParameterDeclarationList ParameterDeclarationList::parse(Parser& parser) {
-	TRcParameterDeclarationList result(nullptr);
-	//todo
-	return result;
+    TRcParameterDeclarationList result(nullptr);
+    if (Token::S_LPAREN != parser.peek()->code) {
+        return result;
+    }
+    const auto start = parser.getMark();
+    while (true) {
+        parser.accept();    //skip ( or ,
+        auto parameterDeclaration = ParameterDeclaration::parse(parser);
+        if (! parameterDeclaration) {
+            break;
+        }
+        if (! result) {
+            result = std::make_shared<ParameterDeclarationList>();
+        }
+        *result << parameterDeclaration;
+        if (Token::S_COMMA != parser.peek()->code) {
+            break;
+        }
+    }
+    if (Token::S_RPAREN != parser.accept()->code) {
+        parser.setMark(start);
+        result = nullptr;
+    }
+    return result;
 }
 
-ParameterDeclarationList::ParameterDeclarationList() {}
+ParameterDeclarationList::ParameterDeclarationList() {
+}
 
-ParameterDeclarationList::~ParameterDeclarationList() {}
+ParameterDeclarationList::~ParameterDeclarationList() {
+}

@@ -30,18 +30,20 @@
 #ifndef PARAMETER_DECLARATION_LIST_HXX
 #define PARAMETER_DECLARATION_LIST_HXX
 
+#include "laolx/array.hxx"
 #include "ast/common.hxx"
+#include "ast/parameter_declaration.hxx"
 
 class ParameterDeclarationList;
 typedef std::shared_ptr<ParameterDeclarationList> TRcParameterDeclarationList;
 
-class ParameterDeclarationList : public virtual AstNode {
+class ParameterDeclarationList : public virtual AstNode, public laolx::Array<TRcParameterDeclaration> {
 public:
-	static TRcParameterDeclarationList parse(Parser& parser);
+    static TRcParameterDeclarationList parse(Parser& parser);
 
-	explicit ParameterDeclarationList();
+    explicit ParameterDeclarationList();    
 
-	virtual ~ParameterDeclarationList();
+    virtual ~ParameterDeclarationList();
 };
 
 #endif /* PARAMETER_DECLARATION_LIST_HXX */

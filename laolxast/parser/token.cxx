@@ -66,6 +66,7 @@ const Token::CodeByString Token::stKeywords({
     {"throw", Token::K_THROW},
     {"unless", Token::K_UNLESS},
     {"until", Token::K_UNTIL},
+    {"var", Token::K_VAR},
     {"when", Token::K_WHEN},
     {"while", Token::K_WHILE}
 });

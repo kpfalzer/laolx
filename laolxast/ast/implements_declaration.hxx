@@ -31,17 +31,18 @@
 #define IMPLEMENTS_DECLARATION_HXX
 
 #include "ast/common.hxx"
+#include "ast/extends_declaration.hxx"
 
 class ImplementsDeclaration;
 typedef std::shared_ptr<ImplementsDeclaration> TRcImplementsDeclaration;
 
-class ImplementsDeclaration : public virtual AstNode {
+class ImplementsDeclaration : public virtual AstNode, public ExtendsDeclaration {
 public:
-	static TRcImplementsDeclaration parse(Parser& parser);
+    static TRcImplementsDeclaration parse(Parser& parser);
 
-	explicit ImplementsDeclaration();
+    explicit ImplementsDeclaration(const laolx::Array<TRcBaseName>& names, bool isConst);
 
-	virtual ~ImplementsDeclaration();
+    virtual ~ImplementsDeclaration();
 };
 
 #endif /* IMPLEMENTS_DECLARATION_HXX */

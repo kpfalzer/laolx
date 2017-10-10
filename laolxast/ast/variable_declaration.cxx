@@ -22,28 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   visibility.hxx
- * Author: kwpfalzer
+ * File:   variable_declaration.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Mon Oct  9 14:17:22 2017
  */
-#ifndef VISIBILITY_HXX
-#define VISIBILITY_HXX
+#include "ast/variable_declaration.hxx"
 
-#include "ast/common.hxx"
+TRcVariableDeclaration VariableDeclaration::parse(Parser& parser) {
+	TRcVariableDeclaration result(nullptr);
+	//todo
+	return result;
+}
 
-class Visibility;
-typedef std::shared_ptr<Visibility> TRcVisibility;
+VariableDeclaration::VariableDeclaration() {}
 
-class Visibility : public virtual AstNode {
-public:
-    static TRcVisibility parse(Parser& parser);
-
-    explicit Visibility(const TRcToken& visibility);
-    
-    const TRcToken  m_visibility;
-
-    virtual ~Visibility();
-};
-
-#endif /* VISIBILITY_HXX */
+VariableDeclaration::~VariableDeclaration() {}

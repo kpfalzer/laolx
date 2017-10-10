@@ -22,28 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   visibility.hxx
- * Author: kwpfalzer
+ * File:   typedef_declaration.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Mon Oct  9 14:17:22 2017
  */
-#ifndef VISIBILITY_HXX
-#define VISIBILITY_HXX
+#include "ast/typedef_declaration.hxx"
 
-#include "ast/common.hxx"
+TRcTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
+	TRcTypedefDeclaration result(nullptr);
+	//todo
+	return result;
+}
 
-class Visibility;
-typedef std::shared_ptr<Visibility> TRcVisibility;
+TypedefDeclaration::TypedefDeclaration() {}
 
-class Visibility : public virtual AstNode {
-public:
-    static TRcVisibility parse(Parser& parser);
-
-    explicit Visibility(const TRcToken& visibility);
-    
-    const TRcToken  m_visibility;
-
-    virtual ~Visibility();
-};
-
-#endif /* VISIBILITY_HXX */
+TypedefDeclaration::~TypedefDeclaration() {}

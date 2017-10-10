@@ -21,19 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
  * File:   actual_declaration.hxx
- * Author: kwpfalzer
+ * Author: kpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Mon Oct  9 14:14:07 2017
  */
-
 #ifndef ACTUAL_DECLARATION_HXX
 #define ACTUAL_DECLARATION_HXX
 
 #include "ast/common.hxx"
-#include "ast/string.hxx"
 
 class ActualDeclaration;
 typedef std::shared_ptr<ActualDeclaration> TRcActualDeclaration;
@@ -42,13 +39,11 @@ class ActualDeclaration : public virtual AstNode {
 public:
     static TRcActualDeclaration parse(Parser& parser);
 
-    explicit ActualDeclaration(const TRcString& actual_declaration);
-
-    const TRcString m_actual_declaration;
+    explicit ActualDeclaration(const TRcAstNode& node);
     
+    const TRcAstNode m_declaration;
+
     virtual ~ActualDeclaration();
 };
 
-
 #endif /* ACTUAL_DECLARATION_HXX */
-

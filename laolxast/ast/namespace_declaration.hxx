@@ -22,28 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   visibility.hxx
- * Author: kwpfalzer
+ * File:   namespace_declaration.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Mon Oct  9 14:17:22 2017
  */
-#ifndef VISIBILITY_HXX
-#define VISIBILITY_HXX
+#ifndef NAMESPACE_DECLARATION_HXX
+#define NAMESPACE_DECLARATION_HXX
 
 #include "ast/common.hxx"
 
-class Visibility;
-typedef std::shared_ptr<Visibility> TRcVisibility;
+class NamespaceDeclaration;
+typedef std::shared_ptr<NamespaceDeclaration> TRcNamespaceDeclaration;
 
-class Visibility : public virtual AstNode {
+class NamespaceDeclaration : public virtual AstNode {
 public:
-    static TRcVisibility parse(Parser& parser);
+	static TRcNamespaceDeclaration parse(Parser& parser);
 
-    explicit Visibility(const TRcToken& visibility);
-    
-    const TRcToken  m_visibility;
+	explicit NamespaceDeclaration();
 
-    virtual ~Visibility();
+	virtual ~NamespaceDeclaration();
 };
 
-#endif /* VISIBILITY_HXX */
+#endif /* NAMESPACE_DECLARATION_HXX */

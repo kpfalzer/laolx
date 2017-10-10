@@ -29,12 +29,25 @@
  */
 #include "ast/visibility.hxx"
 
+//Visibility: K_PUBLIC | K_PROTECTED | K_PRIVATE
 TRcVisibility Visibility::parse(Parser& parser) {
-	TRcVisibility result(nullptr);
-	//todo
-	return result;
+    TRcVisibility result(nullptr);
+    switch(parser.peek()->code) {
+        case Token::K_PUBLIC:
+        case Token::K_PROTECTED:
+        case Token::K_PRIVATE:
+            result = std::make_shared<Visibility>(parser.accept());
+            break;
+        default:
+            ;//nothing
+    }
+    return result;
 }
 
-Visibility::Visibility() {}
+Visibility::Visibility(const TRcToken& visibility) 
+: m_visibility(visibility) {
 
-Visibility::~Visibility() {}
+}
+
+Visibility::~Visibility() {
+}

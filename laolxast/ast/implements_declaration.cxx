@@ -30,11 +30,17 @@
 #include "ast/implements_declaration.hxx"
 
 TRcImplementsDeclaration ImplementsDeclaration::parse(Parser& parser) {
-	TRcImplementsDeclaration result(nullptr);
-	//todo
-	return result;
+    TRcImplementsDeclaration result(nullptr);
+    const auto extends = ExtendsDeclaration::parse(parser, Token::K_IMPLEMENTS);
+    if (extends) {
+        result = std::make_shared<ImplementsDeclaration>(extends->m_names);
+    }
+    return result;
 }
 
-ImplementsDeclaration::ImplementsDeclaration() {}
+ImplementsDeclaration::ImplementsDeclaration(const laolx::Array<TRcBaseName>& names)
+: ExtendsDeclaration(names) {
+}
 
-ImplementsDeclaration::~ImplementsDeclaration() {}
+ImplementsDeclaration::~ImplementsDeclaration() {
+}

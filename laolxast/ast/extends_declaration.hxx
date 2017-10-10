@@ -39,7 +39,7 @@ typedef std::shared_ptr<ExtendsDeclaration> TRcExtendsDeclaration;
 
 class ExtendsDeclaration : public virtual AstNode {
 public:
-    static TRcExtendsDeclaration parse(Parser& parser);
+    static TRcExtendsDeclaration parse(Parser& parser, Token::Code code = Token::K_EXTENDS);
 
     explicit ExtendsDeclaration(const laolx::Array<TRcBaseName>& names);
 
