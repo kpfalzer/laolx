@@ -32,18 +32,11 @@
 #include "ast/interface_declaration.hxx"
 #include "ast/variable_declaration.hxx"
 #include "ast/typedef_declaration.hxx"
-#include "ast/constant_declaration.hxx"
 #include "ast/method_declaration.hxx"
 #include "ast/namespace_declaration.hxx"
 
 TRcActualDeclaration ActualDeclaration::parse(Parser& parser) {
     TRcActualDeclaration result(nullptr);
-    {
-        const auto decl = ClassDeclaration::parse(parser);
-        if (decl) {
-            return std::make_shared<ActualDeclaration>(std::static_pointer_cast<AstNode>(decl));
-        }
-    }
     {
         const auto decl = ClassDeclaration::parse(parser);
         if (decl) {
@@ -64,12 +57,6 @@ TRcActualDeclaration ActualDeclaration::parse(Parser& parser) {
     }
     {
         const auto decl = TypedefDeclaration::parse(parser);
-        if (decl) {
-            return std::make_shared<ActualDeclaration>(std::static_pointer_cast<AstNode>(decl));
-        }
-    }
-    {
-        const auto decl = ConstantDeclaration::parse(parser);
         if (decl) {
             return std::make_shared<ActualDeclaration>(std::static_pointer_cast<AstNode>(decl));
         }

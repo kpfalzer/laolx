@@ -48,10 +48,10 @@ namespace laolx {
         typedef typename collection_type::const_reference const_reference;
         typedef typename collection_type::const_iterator const_iterator;
 
-        List() {
+        explicit List() {
         }
 
-        List(std::initializer_list<T> init) : m_list(init) {
+        explicit List(std::initializer_list<T> init) : m_list(init) {
         }
 
         bool isEmpty() const {
@@ -112,8 +112,9 @@ namespace laolx {
             return m_list.size();
         }
 
-        void each(const std::function<void (const T& ele)>& consume) const {
+        List& each(const std::function<void (const T& ele)>& consume) const {
             eachImpl(m_list, consume);
+            return *this;
         }
 
         List select(const std::function<bool (const T& ele)>& predicate) const {

@@ -22,28 +22,32 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   visibility.hxx
+ * File:   access.cxx
  * Author: kwpfalzer
  *
  * Created on Fri Oct  6 19:30:04 2017
  */
-#ifndef VISIBILITY_HXX
-#define VISIBILITY_HXX
+#include "ast/access.hxx"
 
-#include "ast/common.hxx"
+//Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
+TRcAccess Access::parse(Parser& parser) {
+    TRcAccess result(nullptr);
+    switch(parser.peek()->code) {
+        case Token::K_PUBLIC:
+        case Token::K_PROTECTED:
+        case Token::K_PRIVATE:
+            result = std::make_shared<Access>(parser.accept());
+            break;
+        default:
+            ;//nothing
+    }
+    return result;
+}
 
-class Visibility;
-typedef std::shared_ptr<Visibility> TRcVisibility;
+Access::Access(const TRcToken& access) 
+: m_access(access) {
 
-class Visibility : public virtual AstNode {
-public:
-    static TRcVisibility parse(Parser& parser);
+}
 
-    explicit Visibility(const TRcToken& visibility);
-    
-    const TRcToken  m_visibility;
-
-    virtual ~Visibility();
-};
-
-#endif /* VISIBILITY_HXX */
+Access::~Access() {
+}

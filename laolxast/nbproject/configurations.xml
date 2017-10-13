@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>ast/access.hxx</itemPath>
       <itemPath>ast/actual_declaration.hxx</itemPath>
       <itemPath>ast/actual_type_parameters.hxx</itemPath>
       <itemPath>ast/array_type_modifier.hxx</itemPath>
@@ -41,7 +42,6 @@
       <itemPath>ast/typedef_declaration.hxx</itemPath>
       <itemPath>ast/union_type.hxx</itemPath>
       <itemPath>ast/variable_declaration.hxx</itemPath>
-      <itemPath>ast/visibility.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -50,6 +50,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>ast/access.cxx</itemPath>
       <itemPath>ast/actual_declaration.cxx</itemPath>
       <itemPath>ast/actual_type_parameters.cxx</itemPath>
       <itemPath>ast/array_type_modifier.cxx</itemPath>
@@ -86,7 +87,6 @@
       <itemPath>ast/typedef_declaration.cxx</itemPath>
       <itemPath>ast/union_type.cxx</itemPath>
       <itemPath>ast/variable_declaration.cxx</itemPath>
-      <itemPath>ast/visibility.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -138,6 +138,10 @@
           </makeArtifact>
         </requiredProjects>
       </compileType>
+      <item path="ast/access.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/actual_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -267,10 +271,6 @@
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/visibility.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/visibility.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles">
         <linkerTool>
@@ -355,6 +355,10 @@
           </makeArtifact>
         </requiredProjects>
       </compileType>
+      <item path="ast/access.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/actual_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -484,10 +488,6 @@
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/visibility.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/visibility.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

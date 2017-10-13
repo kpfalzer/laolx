@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ast/access.o \
 	${OBJECTDIR}/ast/actual_declaration.o \
 	${OBJECTDIR}/ast/actual_type_parameters.o \
 	${OBJECTDIR}/ast/array_type_modifier.o \
@@ -67,7 +68,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/union_type.o \
 	${OBJECTDIR}/ast/variable_declaration.o \
-	${OBJECTDIR}/ast/visibility.o \
 	${OBJECTDIR}/parser/astnode.o \
 	${OBJECTDIR}/parser/lexer.o \
 	${OBJECTDIR}/parser/parser.o \
@@ -109,6 +109,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxast.a: ${OBJECTFILES}
 	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxast.a
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxast.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblaolxast.a
+
+${OBJECTDIR}/ast/access.o: ast/access.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access.o ast/access.cxx
 
 ${OBJECTDIR}/ast/actual_declaration.o: ast/actual_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -270,11 +275,6 @@ ${OBJECTDIR}/ast/variable_declaration.o: ast/variable_declaration.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/variable_declaration.o ast/variable_declaration.cxx
 
-${OBJECTDIR}/ast/visibility.o: ast/visibility.cxx
-	${MKDIR} -p ${OBJECTDIR}/ast
-	${RM} "$@.d"
-	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/visibility.o ast/visibility.cxx
-
 ${OBJECTDIR}/parser/astnode.o: parser/astnode.cxx
 	${MKDIR} -p ${OBJECTDIR}/parser
 	${RM} "$@.d"
@@ -313,6 +313,19 @@ ${TESTDIR}/tests/test1.o: tests/test1.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -I. -std=c++14 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test1.o tests/test1.cxx
 
+
+${OBJECTDIR}/ast/access_nomain.o: ${OBJECTDIR}/ast/access.o ast/access.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/access.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access_nomain.o ast/access.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/access.o ${OBJECTDIR}/ast/access_nomain.o;\
+	fi
 
 ${OBJECTDIR}/ast/actual_declaration_nomain.o: ${OBJECTDIR}/ast/actual_declaration.o ast/actual_declaration.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -728,19 +741,6 @@ ${OBJECTDIR}/ast/variable_declaration_nomain.o: ${OBJECTDIR}/ast/variable_declar
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/variable_declaration_nomain.o ast/variable_declaration.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/variable_declaration.o ${OBJECTDIR}/ast/variable_declaration_nomain.o;\
-	fi
-
-${OBJECTDIR}/ast/visibility_nomain.o: ${OBJECTDIR}/ast/visibility.o ast/visibility.cxx 
-	${MKDIR} -p ${OBJECTDIR}/ast
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/visibility.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/visibility_nomain.o ast/visibility.cxx;\
-	else  \
-	    ${CP} ${OBJECTDIR}/ast/visibility.o ${OBJECTDIR}/ast/visibility_nomain.o;\
 	fi
 
 ${OBJECTDIR}/parser/astnode_nomain.o: ${OBJECTDIR}/parser/astnode.o parser/astnode.cxx 

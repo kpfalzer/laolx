@@ -14,13 +14,15 @@ Declaration: Linkage? ActualDeclaration
 // extern linkage declarations do not have bodies, etc.
 Linkage: K_EXTERN String
 
-ActualDeclaration: ClassDeclaration 
-           | InterfaceDeclaration
-           | VariableDeclaration 
-           | TypedefDeclaration 
-           | MethodDeclaration 
-           | NamespaceDeclaration
+ActualDeclaration: 
+	ClassDeclaration 
+| 	InterfaceDeclaration
+| 	VariableDeclaration 
+| 	TypedefDeclaration 
+| 	MethodDeclaration 
+| 	NamespaceDeclaration
 
+// see std::variant (c++17)
 UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
 
 Type: UnionType | PrimitiveType | SimpleType | ScopedType
@@ -31,7 +33,7 @@ TypeName: IDENT
 
 PrimitiveType: K_SYMBOL | K_STRING | K_INT | K_FLOAT
 
-TypeModifier: ActualTypeParameters? ArrayTypeModifier? K_DOT3?
+TypeModifier: ActualTypeParameters? ArrayTypeModifier? S_DOT3?
 
 ArrayTypeModifier: LBRACK RBRACK
 
@@ -43,7 +45,7 @@ TypeParameters: LT IDENT (COMMA IDENT)* GT
 
 ActualTypeParameters: LT Type (COMMA Type)* GT
 
-Visibility: K_PUBLIC | K_PROTECTED | K_PRIVATE
+Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
 //example of class:
@@ -56,11 +58,12 @@ class foo<T1,T2>(int @p1, string @p2) extends C1, C2 implements I1 {
 class A(int p1, p1; T p2, p3; T2 p2, T3 p4) {}
 **/
 
-ClassDeclaration: K_CLASS IDENT TypeParameters? 
-				  ParameterDeclarationList?
-				  ExtendsDeclaration?
-				  ImplementsDeclaration?
-				  LCURLY ClassBody? RCURLY
+ClassDeclaration: 
+	K_CLASS IDENT TypeParameters? 
+  		ParameterDeclarationList?
+  		ExtendsDeclaration?
+  		ImplementsDeclaration?
+  		LCURLY ClassBody? RCURLY
 
 Mutability: K_CONST
 
@@ -88,8 +91,130 @@ ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
 // No visibility for implements: access controlled by base visibility.
 ImplementsDeclaration: K_IMPLEMENTS BaseName (COMMA BaseName)*
 
+// see structured binding: http://en.cppreference.com/w/cpp/language/structured_binding
 VariableDeclaration:
-	(K_CONST | K_VAR) Type VarName (S_COMMA VarName)* (S_EQ Expression)? 
+	K_CONST? Type? VarName (S_COMMA VarName)* (S_EQ InitializerClause)? 
+
+//c++ grammar: http://www.nongnu.org/hcb/
+
+//NOTE: BEGIN: from c++ begins here...
+
+InitializerClause: AssignmentExpression | BracedInitList
+
+BracedInitList: 
+	S_LCURLY InitializerList COMMA? S_RCURLY
+|	S_LCURLY S_RCURLY
+
+InitializerList:
+	InitializerClause S_DOT3? (S_COMMA InitializerClause S_DOT3?)
+
+AssignmentExpression: ConditionalExpression
+
+ConditionalExpression:
+	ExpressionEle (S_QMARK Expression S_COLON Expression)?
+
+// NOTE: Semantics of comma operator here are not same as c++/default.
+// Here, we are like ruby and create collection.
+// (c++: http://en.cppreference.com/w/cpp/language/operator_other)
+Expression: AssignmentExpression (S_COMMA AssignmentExpression)*
+
+// NOTE: ExpressionEle is simplified logical-or-expression of c++ grammar
+ExpressionEle:
+	UnaryExpression (BinaryOp ExpressionEle)*
+
+UnaryExpression:
+	PostfixExpression
+|	(S_PLUS2 | S_MINUS2) UnaryExpression
+|	UnaryOperator UnaryExpression
+
+UnaryOperator: S_PLUS | S_MINUS | S_EXCLAMATION | S_TILDE
+
+// NOTE: removed left recursion: 
+// A: A x | y
+// by
+// A: y A_X?
+// A_X: x A_X
+//
+PostfixExpression: PostfixExpressionY PostfixExpressionX?
+
+PostfixExpressionY:
+	PrimaryExpression
+|	SimpleTypeSpecifier S_LPAREN ExpressionList? S_RPAREN
+|	SimpleTypeSpecifier BracedInitList
+
+PostfixExpressionX
+	S_LBRACK Expression S_RBRACK PostfixExpressionX
+|	S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX
+|	S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX
+|	DOT K_TEMPLATE? IdExpression PostfixExpressionX
+|	(S_PLUS2 | S_MINUS2) PostfixExpressionX
+
+PrimaryExpression:
+	Literal
+|	K_THIS
+|	S_LPAREN Expression S_RPAREN
+|	IdExpression
+|	LambdaExpression
+
+ExpressionList: InitializerList
+
+// todo: replace Type, SimpleType above???
+SimpleTypeSpecifier:
+	S_COLON2? NestedNameSpecifier? TypeName
+|	K_INT
+|	K_FLOAT
+|	K_STRING
+
+IdExpression:
+	UnqualifiedId
+|	QualifiedId
+
+UnqualifiedId:
+	IDENT
+|	OperatorFunctionId
+|	TemplateId
+
+QualifiedId:
+	S_COLON2? NestedNameSpecifier K_TEMPLATE? UnqualifiedId
+|	S_COLON2 IDENT
+|	S_COLON2 OperatorFunctionId
+|	S_COLON2 TemplateId
+
+NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
+
+NestedNameSpecifierY:
+	TypeName S_COLON2
+|	NamespaceName S_COLON2
+
+NestedNameSpecifierX:
+	IDENT S_COLON2 NestedNameSpecifierX
+|	K_TEMPLATE? SimpleTemplateId S_COLON2 NestedNameSpecifierX
+
+NamespaceName: IDENT
+	
+TypeName: ClassName | TypedefName | SimpleTemplateId
+
+ClassName: IDENT | SimpleTemplateId
+
+TypedefName: IDENT
+
+SimpleTemplateId: IDENT S_LT TemplateArgumentList? S_GT
+
+TemplateId:
+	SimpleTemplateId
+|	OperatorFunctionId S_LT TemplateArgumentList? S_GT
+
+TemplateArgumentList:
+	TemplateArgument S_DOT3 (S_COMMA TemplateArgument S_DOT3)*
+	
+TemplateArgument:
+	ConstantExpression
+|	IdExpression
+
+OperatorFunctionId:
+	K_OPERATOR OverloadableOperator
+
+//////////////////////////adhoc follows/
 
 ClassBody: ???
 	+ how to specify visibility

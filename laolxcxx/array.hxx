@@ -49,13 +49,13 @@ namespace laolx {
         typedef typename collection_type::const_iterator const_iterator;
         typedef long int index_type;
 
-        Array() {
+        explicit Array() {
         }
 
-        Array(size_type n) : m_array(n) {
+        explicit Array(size_type n) : m_array(n) {
         }
 
-        Array(std::initializer_list<T> init) : m_array(init) {
+        explicit Array(std::initializer_list<T> init) : m_array(init) {
         }
 
         Array& operator<<(const T& item) {
@@ -105,8 +105,9 @@ namespace laolx {
             return length();
         }
         
-        void each(const std::function<void (const T& ele)>& consume) const {
+        Array& each(const std::function<void (const T& ele)>& consume) const {
             eachImpl(m_array, consume);
+            return *this;
         }
 
         Array select(const std::function<bool (const T& ele)>& predicate) const {
@@ -128,8 +129,9 @@ namespace laolx {
          * @param aLessThanB compare function: returns true if a < b;
          * i.e., a before b in sorted/ascending order.
          */
-        void sort(const std::function<bool (const T& a, const T& b)>& aLessThanB) {
+        Array& sort(const std::function<bool (const T& a, const T& b)>& aLessThanB) {
             std::sort(m_array.begin(), m_array.end(), aLessThanB);
+            return *this;
         }
         
         const_iterator begin() const {

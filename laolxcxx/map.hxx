@@ -72,7 +72,7 @@ namespace laolx {
 
         const V& operator[](const K & key) const {
             // unordered_map does not have a const operator[] since
-            // it wants to insert if no key (thus an non-const operation.
+            // it wants to insert if no key (thus a non-const operation).
             // TODO: need to fix the semantics here!
             // throw no key??
             return const_cast<collection_type*>(&m_map)->operator[](key);
@@ -87,8 +87,9 @@ namespace laolx {
             return m_map.find(key) != m_map.end();
         }
 
-        void each(const std::function<void (const value_type&) >& consume) const {
+        Map& each(const std::function<void (const value_type&) >& consume) const {
             eachImpl(m_map, consume);
+            return *this;
         }
 
         Map select(const std::function<bool (const value_type&) >& predicate) const {
