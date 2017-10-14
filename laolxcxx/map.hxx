@@ -87,7 +87,7 @@ namespace laolx {
             return m_map.find(key) != m_map.end();
         }
 
-        Map& each(const std::function<void (const value_type&) >& consume) const {
+        const Map& each(const std::function<void (const value_type&) >& consume) const {
             eachImpl(m_map, consume);
             return *this;
         }

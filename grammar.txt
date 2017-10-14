@@ -9,48 +9,26 @@ String: SQSTRING | DQSTRING
 
 StringList: String (COMMA String)+
 
-Declaration: Linkage? ActualDeclaration
-
 // extern linkage declarations do not have bodies, etc.
 Linkage: K_EXTERN String
 
-ActualDeclaration: 
-	ClassDeclaration 
-| 	InterfaceDeclaration
-| 	VariableDeclaration 
+Declaration: 
+	Linkage? ClassDeclaration 
+| 	Linkage? InterfaceDeclaration
+| 	Linkage? VariableDeclaration 
+| 	Linkage? MethodDeclaration 
 | 	TypedefDeclaration 
-| 	MethodDeclaration 
 | 	NamespaceDeclaration
 
 // see std::variant (c++17)
 UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
-
-Type: UnionType | PrimitiveType | SimpleType | ScopedType
-
-SimpleType: TypeName TypeModifier?
-
-TypeName: IDENT
-
-PrimitiveType: K_SYMBOL | K_STRING | K_INT | K_FLOAT
-
-TypeModifier: ActualTypeParameters? ArrayTypeModifier? S_DOT3?
-
-ArrayTypeModifier: LBRACK RBRACK
-
-ScopedType: ScopeName (COLON2 ScopeName)+ ArrayTypeModifier?
-
-ScopeName: IDENT ActualTypeParameters?
-
-TypeParameters: LT IDENT (COMMA IDENT)* GT
-
-ActualTypeParameters: LT Type (COMMA Type)* GT
 
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
 //example of class:
 // p1 and p2 are readonly attributes
-class foo<T1,T2>(int @p1, string @p2) extends C1, C2 implements I1 {
+class foo<T1,T2>(int @p1, string @p2) : public C1, C2(a:p1), I(a:p1,b:p2) {
 	int @a = 14;	// a is an attribute
 	T v = 17;       // const T v = 17;
 }
@@ -59,45 +37,59 @@ class A(int p1, p1; T p2, p3; T2 p2, T3 p4) {}
 **/
 
 ClassDeclaration: 
-	K_CLASS IDENT TypeParameters? 
-  		ParameterDeclarationList?
-  		ExtendsDeclaration?
-  		ImplementsDeclaration?
+	K_CLASS IDENT TemplateParameterList? 
+  		MethodParametersDeclaration?
+  		BaseClause?
   		LCURLY ClassBody? RCURLY
+
+TemplateParameterList:
+	S_LT TemplateParameter (COMMA TemplateParameter)* S_GT
+
+TemplateParameter: IDENT (S_EQ InitializerClause)?
+
+MethodParametersDeclaration:
+	S_LPAREN MethodParameterList? S_RPAREN
+
+MethodParameterList:
+	MethodParameter (COMMA MethodParameter)*
+
+MethodParameter:
+	Access? Mutability? TypeName VarOrAttrName (S_EQ InitializerClause)?
 
 Mutability: K_CONST
 
-ParameterDeclaration: Visibility? Mutability? Type ParameterName
+VarName: IDENT
+VarOrAttrName: VarName | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
 
-ParameterName: IDENT | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
-VarName: //same as parameter name
-
-ParameterDeclarationList: 
-	LPAREN ParameterDeclaration 
-    (COMMA ParameterDeclaration) RPAREN
-
-BaseName: IDENT (COLON2 IDENT)* ActualTypeParameters?
-
-// No visibility for extends: access controlled by base visibility.
-// TODO: what about 'const' base?  We can only read?
-// Hmmm: we can accomplish by making const methods public (in base)
-// and non-const methods protected/private. ???
-// Nope, wont work.  An instance var i.e., 'c1' (class C c1;) will only
-// be able to access public methods: c1.m1 (m1 is public).
-// One would have to scaffold/subclass and then wrap access to protected
-// methods (in base) into public.
-ExtendsDeclaration: K_EXTENDS BaseName (COMMA BaseName)*
-
-// No visibility for implements: access controlled by base visibility.
-ImplementsDeclaration: K_IMPLEMENTS BaseName (COMMA BaseName)*
-
-// see structured binding: http://en.cppreference.com/w/cpp/language/structured_binding
+// see structured binding: 
+// http://en.cppreference.com/w/cpp/language/structured_binding
 VariableDeclaration:
-	K_CONST? Type? VarName (S_COMMA VarName)* (S_EQ InitializerClause)? 
+	Mutability? K_STATIC? TypeName? VarName (S_EQ InitializerClause)? 
 
-//c++ grammar: http://www.nongnu.org/hcb/
+BaseClause:
+	S_COLON BaseSpecifierList
 
-//NOTE: BEGIN: from c++ begins here...
+BaseSpecifierList:
+	BaseSpecifier (COMMA BaseSpecifier)*
+
+BaseSpecifier:
+	Access? BaseTypeSpecifier BaseInitializerSpecifier?	
+
+BaseInitializerSpecifier:
+	S_LPAREN BaseInitializerList S_RPAREN
+
+BaseInitializerList:
+	BaseInitializer (COMMA BaseInitializer)*
+
+//named association
+BaseInitializer:
+	(IDENT S_COLON)? InitializerClause
+	
+BaseTypeSpecifier:
+	S_COLON2? NestedNameSpecifier? BaseName
+
+// class | interface name
+BaseName: IDENT | SimpleTemplateId
 
 InitializerClause: AssignmentExpression | BracedInitList
 
@@ -105,8 +97,10 @@ BracedInitList:
 	S_LCURLY InitializerList COMMA? S_RCURLY
 |	S_LCURLY S_RCURLY
 
+// NOTE: see:
+// http://en.cppreference.com/w/cpp/language/list_initialization.html
 InitializerList:
-	InitializerClause S_DOT3? (S_COMMA InitializerClause S_DOT3?)
+	InitializerClause (S_COMMA InitializerClause)
 
 AssignmentExpression: ConditionalExpression
 
@@ -116,11 +110,13 @@ ConditionalExpression:
 // NOTE: Semantics of comma operator here are not same as c++/default.
 // Here, we are like ruby and create collection.
 // (c++: http://en.cppreference.com/w/cpp/language/operator_other)
-Expression: AssignmentExpression (S_COMMA AssignmentExpression)*
+Expression: AssignmentExpression //kiss: (S_COMMA AssignmentExpression)*
 
 // NOTE: ExpressionEle is simplified logical-or-expression of c++ grammar
 ExpressionEle:
 	UnaryExpression (BinaryOp ExpressionEle)*
+
+BinaryOp: //see code directly
 
 UnaryExpression:
 	PostfixExpression
@@ -133,7 +129,7 @@ UnaryOperator: S_PLUS | S_MINUS | S_EXCLAMATION | S_TILDE
 // A: A x | y
 // by
 // A: y A_X?
-// A_X: x A_X
+// A_X: x A_X?
 //
 PostfixExpression: PostfixExpressionY PostfixExpressionX?
 
@@ -143,11 +139,11 @@ PostfixExpressionY:
 |	SimpleTypeSpecifier BracedInitList
 
 PostfixExpressionX
-	S_LBRACK Expression S_RBRACK PostfixExpressionX
-|	S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX
-|	S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX
-|	DOT K_TEMPLATE? IdExpression PostfixExpressionX
-|	(S_PLUS2 | S_MINUS2) PostfixExpressionX
+	S_LBRACK Expression S_RBRACK PostfixExpressionX?
+|	S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
+|	S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
+|	DOT K_TEMPLATE? IdExpression PostfixExpressionX?
+|	(S_PLUS2 | S_MINUS2) PostfixExpressionX?
 
 PrimaryExpression:
 	Literal
@@ -155,6 +151,23 @@ PrimaryExpression:
 |	S_LPAREN Expression S_RPAREN
 |	IdExpression
 |	LambdaExpression
+
+Literal:
+	SYMBOL
+|	INT
+|	DOUBLE
+|	String
+|	REGEXP
+|	Words
+|	Symbols
+|	K_NIL
+|	Bool
+
+Bool: K_TRUE | K_FALSE
+
+Words: S_WORDS IDENT* S_RCURLY
+
+Symbols: S_SYMBOLS IDENT* S_RCURLY
 
 ExpressionList: InitializerList
 
@@ -187,8 +200,8 @@ NestedNameSpecifierY:
 |	NamespaceName S_COLON2
 
 NestedNameSpecifierX:
-	IDENT S_COLON2 NestedNameSpecifierX
-|	K_TEMPLATE? SimpleTemplateId S_COLON2 NestedNameSpecifierX
+	IDENT S_COLON2 NestedNameSpecifierX?
+|	K_TEMPLATE? SimpleTemplateId S_COLON2 NestedNameSpecifierX?
 
 NamespaceName: IDENT
 	
@@ -205,7 +218,7 @@ TemplateId:
 |	OperatorFunctionId S_LT TemplateArgumentList? S_GT
 
 TemplateArgumentList:
-	TemplateArgument S_DOT3 (S_COMMA TemplateArgument S_DOT3)*
+	TemplateArgument (S_COMMA TemplateArgument)*
 	
 TemplateArgument:
 	ConstantExpression
@@ -214,10 +227,34 @@ TemplateArgument:
 OperatorFunctionId:
 	K_OPERATOR OverloadableOperator
 
-//////////////////////////adhoc follows/
++ how to specify visibility
++ initial statement/decls are part of default constructor
++ method return values?
++ other attributes
+ClassBody:
+	MethodBody MethodDeclaration*
 
-ClassBody: ???
-	+ how to specify visibility
-	+ initial statement/decls are part of default constructor
-	+ method return values?
-	+ other attributes
+MethodBody: MethodBodyItem*
+
+MethodBodyItem:
+	TypedefDeclaration
+|	MemberVariableDeclaration
+|	Statement
+
+MemberVariableDeclaration:
+	Access? Mutability? K_STATIC? TypeName? VarOrAttrName 
+		(S_EQ InitializerClause)? 
+
+MethodDeclaration:
+	Access? Mutability? K_STATIC? 
+		(	K_DEF IDENT
+		|	K_OPERATOR OverloadableOperator
+		)
+		MethodParametersDeclaration?
+		ReturnSpecifier?
+		S_LCURLY MethodBody S_RCURLY
+
+ReturnSpecifier: 
+	S_EQGT SimpleTypeSpecifier
+|	S_EQGT S_LPAREN SimpleTypeSpecifierList S_RPAREN
+

@@ -375,6 +375,12 @@ TRcToken Lexer::next() {
     if (matchTo("%r{", false)) {
         return regexp();
     }
+    if (matchTo("%w{")) {
+        return getToken(Token::S_WORDS);
+    }
+    if (matchTo("%s{")) {
+        return getToken(Token::S_SYMBOLS);
+    }
     if (isDigit(ch)
             || (('-' == ch || '+' == ch)
             && testNextChar([this](auto c) {

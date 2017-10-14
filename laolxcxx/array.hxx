@@ -105,7 +105,7 @@ namespace laolx {
             return length();
         }
         
-        Array& each(const std::function<void (const T& ele)>& consume) const {
+        const Array& each(const std::function<void (const T& ele)>& consume) const {
             eachImpl(m_array, consume);
             return *this;
         }

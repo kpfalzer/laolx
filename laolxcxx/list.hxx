@@ -112,7 +112,7 @@ namespace laolx {
             return m_list.size();
         }
 
-        List& each(const std::function<void (const T& ele)>& consume) const {
+        const List& each(const std::function<void (const T& ele)>& consume) const {
             eachImpl(m_list, consume);
             return *this;
         }
