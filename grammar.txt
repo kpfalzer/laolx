@@ -20,6 +20,11 @@ Declaration:
 | 	TypedefDeclaration 
 | 	NamespaceDeclaration
 
+NamespaceDeclaration:
+	K_NAMESPACE NamespaceDeclarationName S_LCURLY Declaration* S_RCURLY
+
+NamespaceDeclarationName: NamespaceName (S_COLON2 NamespaceName)*
+
 // see std::variant (c++17)
 UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
 
@@ -54,9 +59,10 @@ MethodParameterList:
 	MethodParameter (COMMA MethodParameter)*
 
 MethodParameter:
-	Access? Mutability? TypeName VarOrAttrName (S_EQ InitializerClause)?
+	Access? Mutability? SimpleTypeSpecifier 
+		VarOrAttrName (S_EQ InitializerClause)?
 
-Mutability: K_CONST
+Mutability: K_CONST | K_VAR
 
 VarName: IDENT
 VarOrAttrName: VarName | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
@@ -64,7 +70,8 @@ VarOrAttrName: VarName | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
 // see structured binding: 
 // http://en.cppreference.com/w/cpp/language/structured_binding
 VariableDeclaration:
-	Mutability? K_STATIC? TypeName? VarName (S_EQ InitializerClause)? 
+	Mutability? K_STATIC? SimpleTypeSpecifier? 
+		VarName (S_EQ InitializerClause)? 
 
 BaseClause:
 	S_COLON BaseSpecifierList
@@ -152,6 +159,13 @@ PrimaryExpression:
 |	IdExpression
 |	LambdaExpression
 
+// TODO: how to pass lambda arguments?
+// |a,b|=>foo {e1; e2, e3}
+LambdaExpression:
+	S_OR IDENT (COMMA IDENT)* S_OR 
+		ReturnSpecifier? 
+		S_LCURLY Statement* S_RCURLY
+
 Literal:
 	SYMBOL
 |	INT
@@ -171,7 +185,6 @@ Symbols: S_SYMBOLS IDENT* S_RCURLY
 
 ExpressionList: InitializerList
 
-// todo: replace Type, SimpleType above???
 SimpleTypeSpecifier:
 	S_COLON2? NestedNameSpecifier? TypeName
 |	K_INT
@@ -205,7 +218,7 @@ NestedNameSpecifierX:
 
 NamespaceName: IDENT
 	
-TypeName: ClassName | TypedefName | SimpleTemplateId
+TypeName: ClassName | TypedefName
 
 ClassName: IDENT | SimpleTemplateId
 
@@ -227,10 +240,6 @@ TemplateArgument:
 OperatorFunctionId:
 	K_OPERATOR OverloadableOperator
 
-+ how to specify visibility
-+ initial statement/decls are part of default constructor
-+ method return values?
-+ other attributes
 ClassBody:
 	MethodBody MethodDeclaration*
 
@@ -242,7 +251,7 @@ MethodBodyItem:
 |	Statement
 
 MemberVariableDeclaration:
-	Access? Mutability? K_STATIC? TypeName? VarOrAttrName 
+	Access? Mutability? K_STATIC? SimpleTypeSpecifier? VarOrAttrName 
 		(S_EQ InitializerClause)? 
 
 MethodDeclaration:
@@ -252,9 +261,44 @@ MethodDeclaration:
 		)
 		MethodParametersDeclaration?
 		ReturnSpecifier?
-		S_LCURLY MethodBody S_RCURLY
+		(S_LCURLY MethodBody S_RCURLY)?
 
 ReturnSpecifier: 
 	S_EQGT SimpleTypeSpecifier
 |	S_EQGT S_LPAREN SimpleTypeSpecifierList S_RPAREN
 
+Statement:
+	Expression
+|	CompoundStatement
+|	IfStatement
+|	CaseStatement
+|	JumpStatement
+|	IterationStatement
+|	ForStatement
+
+// Range based only 'for'
+ForStatement:
+	K_FOR R_LPAREN IDENT S_COLON Expression S_RPAREN Statement
+
+IterationStatement:
+	K_WHILE Condition Statement
+|	K_DO Statement K_WHILE Condition
+
+JumpStatement:
+	K_BREAK
+|	K_CONTINUE
+|	K_RETURN (Expression | BracedInitList)?
+
+IfStatement:
+	K_IF Condition Statement
+		(K_ELSIF Condition Statement)*
+		(K_ELSE Statement)?
+	
+CaseStatement:
+	K_CASE Condition S_LCURLY
+		(K_WHEN Expression (COMMA Expression)* Statement)+
+		(K_ELSE Statement)?
+		S_RCURLY
+
+CompoundStatement:
+	S_LCURLY Statement* S_RCURLY

@@ -120,6 +120,7 @@ public:
         K_TRUE,
         K_UNLESS,
         K_UNTIL,
+        K_VAR,
         K_WHEN,
         K_WHILE,
         //
