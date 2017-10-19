@@ -32,9 +32,8 @@
 #ifndef DECLARATION_HXX
 #define DECLARATION_HXX
 
-#include "ast/common.hxx"
-#include "ast/linkage.hxx"
-#include "ast/actual_declaration.hxx"
+#include "common.hxx"
+#include "linkage.hxx"
 
 class Declaration;
 typedef std::shared_ptr<Declaration> TRcDeclaration;
@@ -43,10 +42,10 @@ class Declaration : public virtual AstNode {
 public:
     static TRcDeclaration parse(Parser& parser);
 
-    explicit Declaration(const TRcLinkage& linkage, const TRcActualDeclaration& actual);
+    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
 
-    const TRcLinkage m_linkage;
-    const TRcActualDeclaration m_actual;
+    const TRcLinkage linkage;
+    const TRcAstNode declaration;
     
     virtual ~Declaration();
 };

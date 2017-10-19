@@ -30,7 +30,7 @@
 #ifndef NAMESPACE_DECLARATION_HXX
 #define NAMESPACE_DECLARATION_HXX
 
-#include "ast/common.hxx"
+#include "common.hxx"
 
 class NamespaceDeclaration;
 typedef std::shared_ptr<NamespaceDeclaration> TRcNamespaceDeclaration;

@@ -27,7 +27,7 @@
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#include "ast/typedef_declaration.hxx"
+#include "typedef_declaration.hxx"
 
 TRcTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
 	TRcTypedefDeclaration result(nullptr);

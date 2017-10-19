@@ -22,28 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   primitive_type.hxx
+ * File:   template_parameter.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef PRIMITIVE_TYPE_HXX
-#define PRIMITIVE_TYPE_HXX
+#include "ast/template_parameter.hxx"
 
-#include "ast/common.hxx"
+TRcTemplateParameter TemplateParameter::parse(Parser& parser) {
+	TRcTemplateParameter result(nullptr);
+	//todo
+	return result;
+}
 
-class PrimitiveType;
-typedef std::shared_ptr<PrimitiveType> TRcPrimitiveType;
+TemplateParameter::TemplateParameter() {}
 
-class PrimitiveType : public virtual AstNode {
-public:
-    static TRcPrimitiveType parse(Parser& parser);
-
-    explicit PrimitiveType(const TRcToken& type);
-    
-    const TRcToken m_type;
-
-    virtual ~PrimitiveType();
-};
-
-#endif /* PRIMITIVE_TYPE_HXX */
+TemplateParameter::~TemplateParameter() {}

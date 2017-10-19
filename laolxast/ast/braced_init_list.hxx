@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_parameters.cxx
+ * File:   braced_init_list.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/type_parameters.hxx"
+#ifndef BRACED_INIT_LIST_HXX
+#define BRACED_INIT_LIST_HXX
 
-TRcTypeParameters TypeParameters::parse(Parser& parser) {
-	TRcTypeParameters result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-TypeParameters::TypeParameters() {}
+class BracedInitList;
+typedef std::shared_ptr<BracedInitList> TRcBracedInitList;
 
-TypeParameters::~TypeParameters() {}
+class BracedInitList : public virtual AstNode {
+public:
+	static TRcBracedInitList parse(Parser& parser);
+
+	explicit BracedInitList();
+
+	virtual ~BracedInitList();
+};
+
+#endif /* BRACED_INIT_LIST_HXX */

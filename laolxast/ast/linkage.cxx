@@ -1,4 +1,4 @@
-/*
+
  * The MIT License
  *
  * Copyright 2017 kwpfalzer.
@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-#include "ast/linkage.hxx"
+#include "linkage.hxx"
 #include "string.hxx"
 
-Linkage::Linkage(const TRcString& linkage) : m_linkage(linkage) {
+Linkage::Linkage(const TRcString& linkage) : linkage(linkage) {
 
 }
 

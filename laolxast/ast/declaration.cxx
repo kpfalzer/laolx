@@ -22,28 +22,57 @@
  * THE SOFTWARE.
  */
 
-#include "ast/declaration.hxx"
+#include "declaration.hxx"
+#include "class_declaration.hxx"
+#include "variable_declaration.hxx"
+#include "method_declaration.hxx"
+#include "typedef_declaration.hxx"
+#include "namespace_declaration.hxx"
 
-Declaration::Declaration(const TRcLinkage& linkage, const TRcActualDeclaration& actual) 
-: m_linkage(linkage), m_actual(actual) {
+Declaration::Declaration(const TRcLinkage& linkage, const TRcAstNode& declaration)
+: linkage(linkage), declaration(declaration) {
 
 }
 
 TRcDeclaration Declaration::parse(Parser& parser) {
-    TRcDeclaration decl(nullptr);
+    TRcDeclaration actual(nullptr);
+    TRcAstNode decl(nullptr);
     Parser::index_type start = parser.getMark();
     TRcLinkage linkage = Linkage::parse(parser);
-    TRcActualDeclaration actual; //todo = ActualDeclaration::parse(parser);
-    if (actual) {
-        decl = std::make_shared<Declaration>(linkage, actual);
+
+#define PARSE_CAST(_class)                                              \
+        {                                                               \
+            auto xdecl = _class::parse(parser);                         \
+            if (xdecl) {                                                \
+                decl = std::static_pointer_cast<AstNode>(xdecl);        \
+                break;                                                  \
+            }                                                           \
+        }
+
+    do {
+        PARSE_CAST(ClassDeclaration)
+        PARSE_CAST(VariableDeclaration)
+        PARSE_CAST(MethodDeclaration)
+        if (linkage) {
+            // no linkage before remaining...
+            parser.setMark(start);
+            return actual;
+        }
+        PARSE_CAST(TypedefDeclaration)
+        PARSE_CAST(NamespaceDeclaration)
+    } while (false); //one pass through
+    if (decl) {
+        actual = std::make_shared<Declaration>(linkage, decl);
     } else {
         parser.setMark(start);
     }
-    return decl;
+    return actual;
 }
 
 Declaration::~Declaration() {
 
 }
+
+#undef PARSE_CAST
 
 

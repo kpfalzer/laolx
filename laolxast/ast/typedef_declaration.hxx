@@ -30,7 +30,7 @@
 #ifndef TYPEDEF_DECLARATION_HXX
 #define TYPEDEF_DECLARATION_HXX
 
-#include "ast/common.hxx"
+#include "common.hxx"
 
 class TypedefDeclaration;
 typedef std::shared_ptr<TypedefDeclaration> TRcTypedefDeclaration;

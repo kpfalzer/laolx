@@ -22,42 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   union_type.cxx
+ * File:   initializer_clause.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/union_type.hxx"
+#include "ast/initializer_clause.hxx"
 
-TRcUnionType UnionType::parse(Parser& parser) {
-    TRcUnionType result(nullptr);
-    Parser::index_type start = parser.getMark();
-    if (Token::S_LPAREN != parser.peek()->code) {
-        return result;
-    }
-    TTypes types;
-    while (parser.hasMore()) {
-        TRcType type = Type::parse(parser);
-        if (!type) {
-            break;
-        }
-        types << type;
-        if (Token::S_OR != parser.accept()->code) {
-            break;
-        }
-    }
-    if (Token::S_RPAREN == parser.accept()->code) {
-        result = std::make_shared<UnionType>(types);
-    } else {
-        parser.setMark(start);
-    }
-    return result;
+TRcInitializerClause InitializerClause::parse(Parser& parser) {
+	TRcInitializerClause result(nullptr);
+	//todo
+	return result;
 }
 
-UnionType::UnionType(const TTypes& types)
-: m_types(types) {
+InitializerClause::InitializerClause() {}
 
-}
-
-UnionType::~UnionType() {
-}
+InitializerClause::~InitializerClause() {}

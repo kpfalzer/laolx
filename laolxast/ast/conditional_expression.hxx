@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   class_body.hxx
+ * File:   conditional_expression.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef CLASS_BODY_HXX
-#define CLASS_BODY_HXX
+#ifndef CONDITIONAL_EXPRESSION_HXX
+#define CONDITIONAL_EXPRESSION_HXX
 
 #include "ast/common.hxx"
 
-class ClassBody;
-typedef std::shared_ptr<ClassBody> TRcClassBody;
+class ConditionalExpression;
+typedef std::shared_ptr<ConditionalExpression> TRcConditionalExpression;
 
-class ClassBody : public virtual AstNode {
+class ConditionalExpression : public virtual AstNode {
 public:
-	static TRcClassBody parse(Parser& parser);
+	static TRcConditionalExpression parse(Parser& parser);
 
-	explicit ClassBody();
+	explicit ConditionalExpression();
 
-	virtual ~ClassBody();
+	virtual ~ConditionalExpression();
 };
 
-#endif /* CLASS_BODY_HXX */
+#endif /* CONDITIONAL_EXPRESSION_HXX */

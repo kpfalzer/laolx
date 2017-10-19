@@ -33,7 +33,7 @@
 #define STRING_HXX
 
 #include "laolx/list.hxx"
-#include "ast/common.hxx"
+#include "common.hxx"
 
 class String;
 class StringList;

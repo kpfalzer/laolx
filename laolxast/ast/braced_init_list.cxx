@@ -22,29 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_name.hxx
+ * File:   braced_init_list.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef TYPE_NAME_HXX
-#define TYPE_NAME_HXX
+#include "ast/braced_init_list.hxx"
 
-#include "ast/common.hxx"
-#include "type.hxx"
+TRcBracedInitList BracedInitList::parse(Parser& parser) {
+	TRcBracedInitList result(nullptr);
+	//todo
+	return result;
+}
 
-class TypeName;
-typedef std::shared_ptr<TypeName> TRcTypeName;
+BracedInitList::BracedInitList() {}
 
-class TypeName : public virtual AstNode {
-public:
-    static TRcTypeName parse(Parser& parser);
-
-    explicit TypeName(const TRcToken& name);
-    
-    const TRcToken m_name;
-
-    virtual ~TypeName();
-};
-
-#endif /* TYPE_NAME_HXX */
+BracedInitList::~BracedInitList() {}

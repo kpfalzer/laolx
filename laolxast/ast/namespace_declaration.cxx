@@ -27,7 +27,7 @@
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#include "ast/namespace_declaration.hxx"
+#include "namespace_declaration.hxx"
 
 TRcNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
 	TRcNamespaceDeclaration result(nullptr);

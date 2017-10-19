@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   actual_type_parameters.hxx
+ * File:   template_parameter_list.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef ACTUAL_TYPE_PARAMETERS_HXX
-#define ACTUAL_TYPE_PARAMETERS_HXX
+#ifndef TEMPLATE_PARAMETER_LIST_HXX
+#define TEMPLATE_PARAMETER_LIST_HXX
 
 #include "ast/common.hxx"
 
-class ActualTypeParameters;
-typedef std::shared_ptr<ActualTypeParameters> TRcActualTypeParameters;
+class TemplateParameterList;
+typedef std::shared_ptr<TemplateParameterList> TRcTemplateParameterList;
 
-class ActualTypeParameters : public virtual AstNode {
+class TemplateParameterList : public virtual AstNode {
 public:
-	static TRcActualTypeParameters parse(Parser& parser);
+	static TRcTemplateParameterList parse(Parser& parser);
 
-	explicit ActualTypeParameters();
+	explicit TemplateParameterList();
 
-	virtual ~ActualTypeParameters();
+	virtual ~TemplateParameterList();
 };
 
-#endif /* ACTUAL_TYPE_PARAMETERS_HXX */
+#endif /* TEMPLATE_PARAMETER_LIST_HXX */

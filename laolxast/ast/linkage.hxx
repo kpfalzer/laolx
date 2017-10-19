@@ -32,8 +32,8 @@
 #ifndef LINKAGE_HXX
 #define LINKAGE_HXX
 
-#include "ast/common.hxx"
-#include "ast/string.hxx"
+#include "common.hxx"
+#include "string.hxx"
 
 class Linkage;
 typedef std::shared_ptr<Linkage> TRcLinkage;
@@ -44,7 +44,7 @@ public:
 
     explicit Linkage(const TRcString& linkage);
 
-    const TRcString m_linkage;
+    const TRcString linkage;
     
     virtual ~Linkage();
 };

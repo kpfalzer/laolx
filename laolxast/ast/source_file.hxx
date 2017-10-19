@@ -31,10 +31,10 @@
 #define SOURCE_FILE_HXX
 
 #include "laolx/array.hxx"
-#include "ast/common.hxx"
-#include "ast/declaration.hxx"
-#include "ast/statement.hxx"
-#include "ast/include_statement.hxx"
+#include "common.hxx"
+#include "declaration.hxx"
+#include "statement.hxx"
+#include "include_statement.hxx"
 
 class SourceFile;
 typedef std::shared_ptr<SourceFile> TRcSourceFile;

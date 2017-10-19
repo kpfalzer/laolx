@@ -22,32 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   parameter_name.cxx
+ * File:   assignment_expression.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/parameter_name.hxx"
+#ifndef ASSIGNMENT_EXPRESSION_HXX
+#define ASSIGNMENT_EXPRESSION_HXX
 
-TRcParameterName ParameterName::parse(Parser& parser) {
-    TRcParameterName result(nullptr);
-    switch (parser.peek()->code) {
-        case Token::IDENT:
-        case Token::ATTR_DECL:
-        case Token::ATTR_DECL_RO:
-        case Token::ATTR_DECL_RW:
-            result = std::make_shared<ParameterName>(parser.accept());
-            break;
-        default:
-            ;//do nothing
-    }
-    return result;
-}
+#include "ast/common.hxx"
 
-ParameterName::ParameterName(const TRcToken& name) 
-: m_name(name) {
+class AssignmentExpression;
+typedef std::shared_ptr<AssignmentExpression> TRcAssignmentExpression;
 
-}
+class AssignmentExpression : public virtual AstNode {
+public:
+	static TRcAssignmentExpression parse(Parser& parser);
 
-ParameterName::~ParameterName() {
-}
+	explicit AssignmentExpression();
+
+	virtual ~AssignmentExpression();
+};
+
+#endif /* ASSIGNMENT_EXPRESSION_HXX */

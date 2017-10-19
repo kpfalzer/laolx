@@ -32,13 +32,15 @@
 #ifndef CLASS_DECLARATION_HXX
 #define CLASS_DECLARATION_HXX
 
-#include "ast/common.hxx"
-#include "ast/type_parameters.hxx"
-#include "ast/parameter_declaration_list.hxx"
-#include "ast/extends_declaration.hxx"
-#include "ast/implements_declaration.hxx"
-#include "ast/class_body.hxx"
+#include "common.hxx"
+#ifdef TODO
+#include "type_parameters.hxx"
+#include "parameter_declaration_list.hxx"
+#include "extends_declaration.hxx"
+#include "implements_declaration.hxx"
+#include "class_body.hxx"
 #include "parameter_declaration.hxx"
+#endif //TODO
 
 class ClassDeclaration;
 typedef std::shared_ptr<ClassDeclaration> TRcClassDeclaration;
@@ -48,20 +50,25 @@ public:
     static TRcClassDeclaration parse(Parser& parser);
 
     explicit ClassDeclaration(
-            const TRcToken& className,
+            const TRcToken& className
+#ifdef TODO
+            ,
             const TRcTypeParameters& typeParameters,
             const TRcParameterDeclarationList& parameterDeclarationList,
             const TRcExtendsDeclaration& extendsDeclaration,
             const TRcImplementsDeclaration& implementsDeclaration,
             const TRcClassBody& classBody
+#endif
             );
 
     const TRcToken m_className;
+#ifdef TODO
     const TRcTypeParameters m_typeParameters;
     const TRcParameterDeclarationList m_parameterDeclarationList;
     const TRcExtendsDeclaration m_extendsDeclaration;
     const TRcImplementsDeclaration m_implementsDeclaration;
     const TRcClassBody m_classBody;
+#endif //TODO
 
     virtual ~ClassDeclaration();
 

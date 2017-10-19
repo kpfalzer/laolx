@@ -22,27 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   implements_declaration.hxx
+ * File:   initializer_list.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef IMPLEMENTS_DECLARATION_HXX
-#define IMPLEMENTS_DECLARATION_HXX
+#ifndef INITIALIZER_LIST_HXX
+#define INITIALIZER_LIST_HXX
 
 #include "ast/common.hxx"
-#include "ast/extends_declaration.hxx"
 
-class ImplementsDeclaration;
-typedef std::shared_ptr<ImplementsDeclaration> TRcImplementsDeclaration;
+class InitializerList;
+typedef std::shared_ptr<InitializerList> TRcInitializerList;
 
-class ImplementsDeclaration : public virtual AstNode, public ExtendsDeclaration {
+class InitializerList : public virtual AstNode {
 public:
-    static TRcImplementsDeclaration parse(Parser& parser);
+	static TRcInitializerList parse(Parser& parser);
 
-    explicit ImplementsDeclaration(const laolx::Array<TRcBaseName>& names, bool isConst);
+	explicit InitializerList();
 
-    virtual ~ImplementsDeclaration();
+	virtual ~InitializerList();
 };
 
-#endif /* IMPLEMENTS_DECLARATION_HXX */
+#endif /* INITIALIZER_LIST_HXX */

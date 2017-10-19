@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#include "ast/string.hxx"
+#include "string.hxx"
 
 String::String(const TRcToken& token) : m_token(token) {
 }

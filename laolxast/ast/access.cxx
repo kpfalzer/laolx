@@ -45,7 +45,7 @@ TRcAccess Access::parse(Parser& parser) {
 }
 
 Access::Access(const TRcToken& access) 
-: m_access(access) {
+: access(access) {
 
 }
 

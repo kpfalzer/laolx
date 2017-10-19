@@ -25,9 +25,6 @@ NamespaceDeclaration:
 
 NamespaceDeclarationName: NamespaceName (S_COLON2 NamespaceName)*
 
-// see std::variant (c++17)
-UnionType: S_LPAREN Type (S_OR Type)* S_RPAREN
-
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
@@ -226,6 +223,7 @@ TypedefName: IDENT
 
 SimpleTemplateId: IDENT S_LT TemplateArgumentList? S_GT
 
+// NOTE: we'll use special templates: VARIANT and LAMBDA as needed.
 TemplateId:
 	SimpleTemplateId
 |	OperatorFunctionId S_LT TemplateArgumentList? S_GT

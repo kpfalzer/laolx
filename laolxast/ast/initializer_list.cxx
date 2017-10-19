@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   mutability.hxx
+ * File:   initializer_list.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef MUTABILITY_HXX
-#define MUTABILITY_HXX
+#include "ast/initializer_list.hxx"
 
-#include "ast/common.hxx"
+TRcInitializerList InitializerList::parse(Parser& parser) {
+	TRcInitializerList result(nullptr);
+	//todo
+	return result;
+}
 
-class Mutability;
-typedef std::shared_ptr<Mutability> TRcMutability;
+InitializerList::InitializerList() {}
 
-class Mutability : public virtual AstNode {
-public:
-	static TRcMutability parse(Parser& parser);
-
-	explicit Mutability();
-
-	virtual ~Mutability();
-};
-
-#endif /* MUTABILITY_HXX */
+InitializerList::~InitializerList() {}

@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   parameter_declaration.cxx
+ * File:   template_parameter.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/parameter_declaration.hxx"
+#ifndef TEMPLATE_PARAMETER_HXX
+#define TEMPLATE_PARAMETER_HXX
 
-TRcParameterDeclaration ParameterDeclaration::parse(Parser& parser) {
-	TRcParameterDeclaration result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-ParameterDeclaration::ParameterDeclaration() {}
+class TemplateParameter;
+typedef std::shared_ptr<TemplateParameter> TRcTemplateParameter;
 
-ParameterDeclaration::~ParameterDeclaration() {}
+class TemplateParameter : public virtual AstNode {
+public:
+	static TRcTemplateParameter parse(Parser& parser);
+
+	explicit TemplateParameter();
+
+	virtual ~TemplateParameter();
+};
+
+#endif /* TEMPLATE_PARAMETER_HXX */

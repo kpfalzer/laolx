@@ -22,27 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type.cxx
+ * File:   conditional_expression.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/simple_type.hxx"
+#include "ast/conditional_expression.hxx"
 
-TRcSimpleType SimpleType::parse(Parser& parser) {
-    TRcSimpleType result(nullptr);
-    auto typeName = TypeName::parse(parser);
-    if (typeName) {
-        auto typeModifier = TypeModifier::parse(parser);
-        result = std::make_shared<SimpleType>(typeName, typeModifier);
-    }
-    return result;
+TRcConditionalExpression ConditionalExpression::parse(Parser& parser) {
+	TRcConditionalExpression result(nullptr);
+	//todo
+	return result;
 }
 
-SimpleType::SimpleType(const TRcTypeName& typeName, const TRcTypeModifier& typeModifier)
-: m_typeName(typeName), m_typeModifier(typeModifier) {
+ConditionalExpression::ConditionalExpression() {}
 
-}
-
-SimpleType::~SimpleType() {
-}
+ConditionalExpression::~ConditionalExpression() {}

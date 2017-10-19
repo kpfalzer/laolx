@@ -5,42 +5,27 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>ast/access.hxx</itemPath>
-      <itemPath>ast/actual_declaration.hxx</itemPath>
-      <itemPath>ast/actual_type_parameters.hxx</itemPath>
-      <itemPath>ast/array_type_modifier.hxx</itemPath>
+      <itemPath>ast/assignment_expression.hxx</itemPath>
       <itemPath>parser/astnode.hxx</itemPath>
-      <itemPath>ast/base_name.hxx</itemPath>
-      <itemPath>ast/class_body.hxx</itemPath>
+      <itemPath>ast/braced_init_list.hxx</itemPath>
       <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
+      <itemPath>ast/conditional_expression.hxx</itemPath>
       <itemPath>ast/declaration.hxx</itemPath>
-      <itemPath>ast/extends_declaration.hxx</itemPath>
-      <itemPath>ast/implements_declaration.hxx</itemPath>
       <itemPath>ast/include_statement.hxx</itemPath>
-      <itemPath>ast/interface_declaration.hxx</itemPath>
+      <itemPath>ast/initializer_clause.hxx</itemPath>
+      <itemPath>ast/initializer_list.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>ast/linkage.hxx</itemPath>
       <itemPath>ast/method_declaration.hxx</itemPath>
-      <itemPath>ast/mutability.hxx</itemPath>
       <itemPath>ast/namespace_declaration.hxx</itemPath>
-      <itemPath>ast/parameter_declaration.hxx</itemPath>
-      <itemPath>ast/parameter_declaration_list.hxx</itemPath>
-      <itemPath>ast/parameter_name.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
-      <itemPath>ast/primitive_type.hxx</itemPath>
-      <itemPath>ast/scope_name.hxx</itemPath>
-      <itemPath>ast/scoped_type.hxx</itemPath>
-      <itemPath>ast/simple_type.hxx</itemPath>
       <itemPath>ast/source_file.hxx</itemPath>
-      <itemPath>ast/statement.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
+      <itemPath>ast/template_parameter.hxx</itemPath>
+      <itemPath>ast/template_parameter_list.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
-      <itemPath>ast/type.hxx</itemPath>
-      <itemPath>ast/type_modifier.hxx</itemPath>
-      <itemPath>ast/type_name.hxx</itemPath>
-      <itemPath>ast/type_parameters.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
-      <itemPath>ast/union_type.hxx</itemPath>
       <itemPath>ast/variable_declaration.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -51,41 +36,26 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>ast/access.cxx</itemPath>
-      <itemPath>ast/actual_declaration.cxx</itemPath>
-      <itemPath>ast/actual_type_parameters.cxx</itemPath>
-      <itemPath>ast/array_type_modifier.cxx</itemPath>
+      <itemPath>ast/assignment_expression.cxx</itemPath>
       <itemPath>parser/astnode.cxx</itemPath>
-      <itemPath>ast/base_name.cxx</itemPath>
-      <itemPath>ast/class_body.cxx</itemPath>
+      <itemPath>ast/braced_init_list.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
+      <itemPath>ast/conditional_expression.cxx</itemPath>
       <itemPath>ast/declaration.cxx</itemPath>
-      <itemPath>ast/extends_declaration.cxx</itemPath>
-      <itemPath>ast/implements_declaration.cxx</itemPath>
       <itemPath>ast/include_statement.cxx</itemPath>
-      <itemPath>ast/interface_declaration.cxx</itemPath>
+      <itemPath>ast/initializer_clause.cxx</itemPath>
+      <itemPath>ast/initializer_list.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
       <itemPath>ast/linkage.cxx</itemPath>
       <itemPath>ast/method_declaration.cxx</itemPath>
-      <itemPath>ast/mutability.cxx</itemPath>
       <itemPath>ast/namespace_declaration.cxx</itemPath>
-      <itemPath>ast/parameter_declaration.cxx</itemPath>
-      <itemPath>ast/parameter_declaration_list.cxx</itemPath>
-      <itemPath>ast/parameter_name.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
-      <itemPath>ast/primitive_type.cxx</itemPath>
-      <itemPath>ast/scope_name.cxx</itemPath>
-      <itemPath>ast/scoped_type.cxx</itemPath>
-      <itemPath>ast/simple_type.cxx</itemPath>
       <itemPath>ast/source_file.cxx</itemPath>
-      <itemPath>ast/statement.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
+      <itemPath>ast/template_parameter.cxx</itemPath>
+      <itemPath>ast/template_parameter_list.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
-      <itemPath>ast/type.cxx</itemPath>
-      <itemPath>ast/type_modifier.cxx</itemPath>
-      <itemPath>ast/type_name.cxx</itemPath>
-      <itemPath>ast/type_parameters.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
-      <itemPath>ast/union_type.cxx</itemPath>
       <itemPath>ast/variable_declaration.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -142,25 +112,13 @@
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/actual_declaration.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/assignment_expression.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/assignment_expression.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/actual_type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/braced_init_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/actual_type_parameters.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/array_type_modifier.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/array_type_modifier.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/base_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/base_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/braced_init_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -168,25 +126,25 @@
       </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/conditional_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/conditional_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/extends_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/extends_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/implements_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/implements_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/interface_declaration.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/initializer_clause.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/interface_declaration.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/initializer_clause.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/initializer_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/initializer_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -196,77 +154,29 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration_list.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration_list.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/primitive_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/primitive_type.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/scope_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/scope_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/scoped_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/scoped_type.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/simple_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/simple_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/statement.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/template_parameter.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/type.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/template_parameter.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/type_modifier.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/type_parameters.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/union_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/union_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -359,25 +269,13 @@
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/actual_declaration.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/assignment_expression.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/actual_declaration.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/assignment_expression.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/actual_type_parameters.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/braced_init_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/actual_type_parameters.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/array_type_modifier.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/array_type_modifier.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/base_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/base_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/braced_init_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -385,25 +283,25 @@
       </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/conditional_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/conditional_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/extends_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/extends_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/implements_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/implements_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/include_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/include_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/interface_declaration.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/initializer_clause.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/interface_declaration.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/initializer_clause.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/initializer_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/initializer_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -413,77 +311,29 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration_list.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_declaration_list.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/parameter_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/parameter_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/primitive_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/primitive_type.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/scope_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/scope_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/scoped_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/scoped_type.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/simple_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/simple_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/statement.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/template_parameter.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/type.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/template_parameter.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type_modifier.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/type_modifier.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/type_parameters.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_parameters.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/union_type.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/union_type.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>

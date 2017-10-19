@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#include "ast/include_statement.hxx"
+#include "include_statement.hxx"
 
 TRcIncludeStatement IncludeStatement::parse(Parser& parser) {
     TRcIncludeStatement stmt(nullptr);

@@ -27,7 +27,7 @@
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#include "ast/method_declaration.hxx"
+#include "method_declaration.hxx"
 
 TRcMethodDeclaration MethodDeclaration::parse(Parser& parser) {
 	TRcMethodDeclaration result(nullptr);

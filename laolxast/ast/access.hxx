@@ -41,7 +41,7 @@ public:
 
     explicit Access(const TRcToken& access);
     
-    const TRcToken  m_access;
+    const TRcToken  access;
 
     virtual ~Access();
 };

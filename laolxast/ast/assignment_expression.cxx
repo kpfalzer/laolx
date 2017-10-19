@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_modifier.hxx
+ * File:   assignment_expression.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef TYPE_MODIFIER_HXX
-#define TYPE_MODIFIER_HXX
+#include "ast/assignment_expression.hxx"
 
-#include "ast/common.hxx"
+TRcAssignmentExpression AssignmentExpression::parse(Parser& parser) {
+	TRcAssignmentExpression result(nullptr);
+	//todo
+	return result;
+}
 
-class TypeModifier;
-typedef std::shared_ptr<TypeModifier> TRcTypeModifier;
+AssignmentExpression::AssignmentExpression() {}
 
-class TypeModifier : public virtual AstNode {
-public:
-	static TRcTypeModifier parse(Parser& parser);
-
-	explicit TypeModifier();
-
-	virtual ~TypeModifier();
-};
-
-#endif /* TYPE_MODIFIER_HXX */
+AssignmentExpression::~AssignmentExpression() {}

@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   actual_type_parameters.cxx
+ * File:   initializer_clause.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#include "ast/actual_type_parameters.hxx"
+#ifndef INITIALIZER_CLAUSE_HXX
+#define INITIALIZER_CLAUSE_HXX
 
-TRcActualTypeParameters ActualTypeParameters::parse(Parser& parser) {
-	TRcActualTypeParameters result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-ActualTypeParameters::ActualTypeParameters() {}
+class InitializerClause;
+typedef std::shared_ptr<InitializerClause> TRcInitializerClause;
 
-ActualTypeParameters::~ActualTypeParameters() {}
+class InitializerClause : public virtual AstNode {
+public:
+	static TRcInitializerClause parse(Parser& parser);
+
+	explicit InitializerClause();
+
+	virtual ~InitializerClause();
+};
+
+#endif /* INITIALIZER_CLAUSE_HXX */

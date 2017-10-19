@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   scoped_type.hxx
+ * File:   template_parameter_list.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Wed Oct 18 20:17:32 2017
  */
-#ifndef SCOPED_TYPE_HXX
-#define SCOPED_TYPE_HXX
+#include "ast/template_parameter_list.hxx"
 
-#include "ast/common.hxx"
+TRcTemplateParameterList TemplateParameterList::parse(Parser& parser) {
+	TRcTemplateParameterList result(nullptr);
+	//todo
+	return result;
+}
 
-class ScopedType;
-typedef std::shared_ptr<ScopedType> TRcScopedType;
+TemplateParameterList::TemplateParameterList() {}
 
-class ScopedType : public virtual AstNode {
-public:
-	static TRcScopedType parse(Parser& parser);
-
-	explicit ScopedType();
-
-	virtual ~ScopedType();
-};
-
-#endif /* SCOPED_TYPE_HXX */
+TemplateParameterList::~TemplateParameterList() {}
