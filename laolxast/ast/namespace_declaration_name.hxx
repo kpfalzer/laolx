@@ -39,17 +39,17 @@ typedef std::shared_ptr<NamespaceDeclarationName> TRcNamespaceDeclarationName;
 
 class NamespaceDeclarationName : public virtual AstNode {
 public:
-    typedef std::shared_ptr<laolx::Array<TRcNamespaceName>> TRcNamespaceNames;
+    typedef laolx::Array<TRcNamespaceName> TNamespaceNames;
     
     static TRcNamespaceDeclarationName parse(Parser& parser);
 
-    explicit NamespaceDeclarationName(const TRcNamespaceNames& name)
+    explicit NamespaceDeclarationName(const TNamespaceNames* name)
     : name(name) {
     }
 
     virtual ~NamespaceDeclarationName();
 
-    const TRcNamespaceNames name;
+    const TNamespaceNames* name;
 };
 
 #endif /* NAMESPACE_DECLARATION_NAME_HXX */

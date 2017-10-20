@@ -45,9 +45,9 @@
  * @return compacted array of C.
  */
 template<class C>
-std::shared_ptr<laolx::Array<std::shared_ptr<C>>>
+laolx::Array<std::shared_ptr<C>>*
 sequenceOf(Parser& parser, Parser::index_type& start, const Token::Code delimiter) {
-    auto items = std::make_shared<laolx::Array<std::shared_ptr<C>>>();
+    auto items = new laolx::Array<std::shared_ptr<C>>();
     while (parser.hasMore()) {
         auto item = C::parse(parser);
         if (!item) {
