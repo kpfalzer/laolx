@@ -32,8 +32,8 @@
 #ifndef LINKAGE_HXX
 #define LINKAGE_HXX
 
-#include "common.hxx"
-#include "string.hxx"
+#include "ast/common.hxx"
+#include "ast/string.hxx"
 
 class Linkage;
 typedef std::shared_ptr<Linkage> TRcLinkage;

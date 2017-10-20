@@ -22,26 +22,20 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   actual_type_parameters.hxx
- * Author: kwpfalzer
+ * File:   namespace_name.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Thu Oct 19 14:32:08 2017
  */
-#ifndef ACTUAL_TYPE_PARAMETERS_HXX
-#define ACTUAL_TYPE_PARAMETERS_HXX
+#include "ast/namespace_name.hxx"
 
-#include "ast/common.hxx"
+TRcNamespaceName NamespaceName::parse(Parser& parser) {
+    TRcNamespaceName result(nullptr);
+    if (parser.peek()->code == Token::IDENT) {
+        result = std::make_shared<NamespaceName>(parser.accept());
+    }
+    return result;
+}
 
-class ActualTypeParameters;
-typedef std::shared_ptr<ActualTypeParameters> TRcActualTypeParameters;
-
-class ActualTypeParameters : public virtual AstNode {
-public:
-	static TRcActualTypeParameters parse(Parser& parser);
-
-	explicit ActualTypeParameters();
-
-	virtual ~ActualTypeParameters();
-};
-
-#endif /* ACTUAL_TYPE_PARAMETERS_HXX */
+NamespaceName::~NamespaceName() {
+}

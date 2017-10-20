@@ -32,8 +32,8 @@
 #ifndef INCLUDE_STATEMENT_HXX
 #define INCLUDE_STATEMENT_HXX
 
-#include "common.hxx"
-#include "string.hxx"
+#include "ast/common.hxx"
+#include "ast/string.hxx"
 
 class IncludeStatement;
 typedef std::shared_ptr<IncludeStatement> TRcIncludeStatement;
@@ -42,11 +42,11 @@ class IncludeStatement : public virtual AstNode {
 public:
     static TRcIncludeStatement parse(Parser& parser);
 
-    explicit IncludeStatement(const TRcStringList& includes)
+    explicit IncludeStatement(const TRcStrings& includes)
     : includes(includes) {
     }
 
-    const TRcStringList includes;
+    const TRcStrings includes;
 
     virtual ~IncludeStatement();
 };

@@ -21,35 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
- * Author: kwpfalzer
+ * File:   namespace_name.hxx
+ * Author: kpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Thu Oct 19 14:32:08 2017
  */
-
-#ifndef DECLARATION_HXX
-#define DECLARATION_HXX
+#ifndef NAMESPACE_NAME_HXX
+#define NAMESPACE_NAME_HXX
 
 #include "ast/common.hxx"
-#include "ast/linkage.hxx"
 
-class Declaration;
-typedef std::shared_ptr<Declaration> TRcDeclaration;
+class NamespaceName;
+typedef std::shared_ptr<NamespaceName> TRcNamespaceName;
 
-class Declaration : public virtual AstNode {
+class NamespaceName : public virtual AstNode {
 public:
-    static TRcDeclaration parse(Parser& parser);
 
-    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
-
-    const TRcLinkage linkage;
-    const TRcAstNode declaration;
+    explicit NamespaceName(const TRcToken& name) : name(name) {
+    }
     
-    virtual ~Declaration();
+    static TRcNamespaceName parse(Parser& parser);
+
+    explicit NamespaceName();
+
+    const TRcToken name;
+
+    virtual ~NamespaceName();
 };
 
-
-#endif /* DECLARATION_HXX */
-
+#endif /* NAMESPACE_NAME_HXX */

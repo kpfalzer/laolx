@@ -21,35 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
- * Author: kwpfalzer
+ * File:   namespace_declaration_name.hxx
+ * Author: kpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Thu Oct 19 14:37:46 2017
  */
+#ifndef NAMESPACE_DECLARATION_NAME_HXX
+#define NAMESPACE_DECLARATION_NAME_HXX
 
-#ifndef DECLARATION_HXX
-#define DECLARATION_HXX
-
+#include "laolx/array.hxx"
 #include "ast/common.hxx"
-#include "ast/linkage.hxx"
+#include "ast/namespace_name.hxx"
 
-class Declaration;
-typedef std::shared_ptr<Declaration> TRcDeclaration;
+class NamespaceDeclarationName;
+typedef std::shared_ptr<NamespaceDeclarationName> TRcNamespaceDeclarationName;
 
-class Declaration : public virtual AstNode {
+class NamespaceDeclarationName : public virtual AstNode {
 public:
-    static TRcDeclaration parse(Parser& parser);
-
-    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
-
-    const TRcLinkage linkage;
-    const TRcAstNode declaration;
+    typedef std::shared_ptr<laolx::Array<TRcNamespaceName>> TRcNamespaceNames;
     
-    virtual ~Declaration();
+    static TRcNamespaceDeclarationName parse(Parser& parser);
+
+    explicit NamespaceDeclarationName(const TRcNamespaceNames& name)
+    : name(name) {
+    }
+
+    virtual ~NamespaceDeclarationName();
+
+    const TRcNamespaceNames name;
 };
 
-
-#endif /* DECLARATION_HXX */
-
+#endif /* NAMESPACE_DECLARATION_NAME_HXX */

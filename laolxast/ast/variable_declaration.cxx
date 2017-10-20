@@ -27,7 +27,7 @@
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#include "variable_declaration.hxx"
+#include "ast/variable_declaration.hxx"
 
 TRcVariableDeclaration VariableDeclaration::parse(Parser& parser) {
 	TRcVariableDeclaration result(nullptr);

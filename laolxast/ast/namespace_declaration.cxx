@@ -27,14 +27,41 @@
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#include "namespace_declaration.hxx"
+#include "ast/namespace_declaration.hxx"
 
 TRcNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
-	TRcNamespaceDeclaration result(nullptr);
-	//todo
-	return result;
+    TRcNamespaceDeclaration result(nullptr);
+    if (parser.peek()->code != Token::K_NAMESPACE) {
+        return result;
+    }
+    Parser::index_type start = parser.getMark();
+    auto name = NamespaceDeclarationName::parse(parser.advance());
+    if (name) {
+        if (parser.accept()->code == Token::S_LCURLY) {
+            TRcDeclarations decls;
+            while (parser.hasMore()) {
+                auto decl = Declaration::parse(parser);
+                if (decl) {
+                    *decls << decl;
+                } else {
+                    break;
+                }
+            }
+            if (parser.accept()->code == Token::S_RCURLY) {
+                decls->compact();
+                return std::make_shared<NamespaceDeclaration>(name, decls);
+            }
+        }
+    }
+    parser.setMark(start);
+    return result;
 }
 
-NamespaceDeclaration::NamespaceDeclaration() {}
+NamespaceDeclaration::NamespaceDeclaration(
+        const TRcNamespaceDeclarationName& name,
+        const TRcDeclarations& declarations)
+: name(name), declarations(declarations) {
+}
 
-NamespaceDeclaration::~NamespaceDeclaration() {}
+NamespaceDeclaration::~NamespaceDeclaration() {
+}

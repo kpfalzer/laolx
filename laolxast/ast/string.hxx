@@ -33,12 +33,10 @@
 #define STRING_HXX
 
 #include "laolx/list.hxx"
-#include "common.hxx"
+#include "ast/common.hxx"
 
 class String;
-class StringList;
 typedef std::shared_ptr<String> TRcString;
-typedef std::shared_ptr<StringList> TRcStringList;
 
 class String : public virtual AstNode {
 public:
@@ -51,33 +49,13 @@ public:
     bool isDoubleQuoted() const;
 
     const TRcToken m_token;
-    
+
     virtual ~String();
 };
 
-class StringList : public virtual AstNode {
-public:
-    static TRcStringList parse(Parser& parser);
+typedef std::shared_ptr<laolx::Array<TRcString>> TRcStrings;
 
-    explicit StringList(const TRcString& string);
-
-    const laolx::List<TRcString>& getStrings() const {
-        return m_strings;
-    }
-    
-    virtual ~StringList();
-    
-private:
-    void append(const TRcString& string);
-    
-    StringList& operator<<(const TRcString& string) {
-        append(string);
-        return *this;
-    }
-    
-    laolx::List<TRcString> m_strings;
-};
-
+TRcStrings parseStrings(Parser& parser);
 
 #endif /* STRING_HXX */
 

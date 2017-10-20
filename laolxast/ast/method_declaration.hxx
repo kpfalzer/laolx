@@ -30,7 +30,7 @@
 #ifndef METHOD_DECLARATION_HXX
 #define METHOD_DECLARATION_HXX
 
-#include "common.hxx"
+#include "ast/common.hxx"
 
 class MethodDeclaration;
 typedef std::shared_ptr<MethodDeclaration> TRcMethodDeclaration;

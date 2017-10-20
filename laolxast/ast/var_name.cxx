@@ -21,35 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
+ * File:   var_name.cxx
  * Author: kwpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Thu Oct 19 20:02:39 2017
  */
+#include "ast/var_name.hxx"
 
-#ifndef DECLARATION_HXX
-#define DECLARATION_HXX
+TRcVarName VarName::parse(Parser& parser) {
+    TRcVarName result(nullptr);
+    if (parser.peek()->code == Token::IDENT) {
+        result = std::make_shared<VarName>(parser.accept());
+    }
+    return result;
+}
 
-#include "ast/common.hxx"
-#include "ast/linkage.hxx"
+VarName::~VarName() {
+}
 
-class Declaration;
-typedef std::shared_ptr<Declaration> TRcDeclaration;
+TRcVarOrAttrName VarOrAttrName::parse(Parser& parser) {
+    TRcVarOrAttrName result(nullptr);
+    {
+        auto varName = VarName::parse(parser);
+        if (varName) {
+            return std::make_shared<VarOrAttrName>(varName);
+        }
+    }
+    switch (parser.peek()->code) {
+        case Token::ATTR_DECL: case Token::ATTR_DECL_RO: case Token::ATTR_DECL_RW:
+            return std::make_shared<VarOrAttrName>(parser.accept());
+        default:
+            ; //do nothing
+    }
+    return result;
+}
 
-class Declaration : public virtual AstNode {
-public:
-    static TRcDeclaration parse(Parser& parser);
-
-    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
-
-    const TRcLinkage linkage;
-    const TRcAstNode declaration;
-    
-    virtual ~Declaration();
-};
-
-
-#endif /* DECLARATION_HXX */
-
+VarOrAttrName::~VarOrAttrName() {
+}

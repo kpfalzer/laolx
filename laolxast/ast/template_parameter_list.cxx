@@ -30,11 +30,18 @@
 #include "ast/template_parameter_list.hxx"
 
 TRcTemplateParameterList TemplateParameterList::parse(Parser& parser) {
-	TRcTemplateParameterList result(nullptr);
-	//todo
-	return result;
+    TRcTemplateParameterList result(nullptr);
+    if (parser.peek()->code != Token::S_LT) {
+        return result;
+    }
+    auto start = parser.getMark();
+    auto parameters = sequenceOf<TemplateParameter>(parser.advance(), start, Token::S_COMMA);
+    if (parser.accept()->code == Token::S_GT) {
+        return std::make_shared<TemplateParameterList>(parameters);
+    }
+    parser.setMark(start);
+    return result;
 }
 
-TemplateParameterList::TemplateParameterList() {}
-
-TemplateParameterList::~TemplateParameterList() {}
+TemplateParameterList::~TemplateParameterList() {
+}

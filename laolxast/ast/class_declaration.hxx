@@ -32,14 +32,14 @@
 #ifndef CLASS_DECLARATION_HXX
 #define CLASS_DECLARATION_HXX
 
-#include "common.hxx"
+#include "ast/common.hxx"
 #ifdef TODO
-#include "type_parameters.hxx"
-#include "parameter_declaration_list.hxx"
-#include "extends_declaration.hxx"
-#include "implements_declaration.hxx"
-#include "class_body.hxx"
-#include "parameter_declaration.hxx"
+#include "ast/type_parameters.hxx"
+#include "ast/parameter_declaration_list.hxx"
+#include "ast/extends_declaration.hxx"
+#include "ast/implements_declaration.hxx"
+#include "ast/class_body.hxx"
+#include "ast/parameter_declaration.hxx"
 #endif //TODO
 
 class ClassDeclaration;

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#include "include_statement.hxx"
+#include "ast/include_statement.hxx"
 
 TRcIncludeStatement IncludeStatement::parse(Parser& parser) {
     TRcIncludeStatement stmt(nullptr);
@@ -30,8 +30,8 @@ TRcIncludeStatement IncludeStatement::parse(Parser& parser) {
     if (parser.accept()->code != Token::K_INCLUDE) {
         return stmt;
     }
-    TRcStringList includes = StringList::parse(parser);
-    if (includes) {
+    auto includes = parseStrings(parser);
+    if (!includes->isEmpty()) {
        parser.expectEndOfStatement(); //ignore result: and keep going...
        stmt = std::make_shared<IncludeStatement>(includes);
     } else {

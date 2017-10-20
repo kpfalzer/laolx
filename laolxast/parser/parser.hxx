@@ -65,6 +65,13 @@ public:
      */
     TRcToken accept(index_type n = 1);
 
+    /**
+     * Advance (position) n tokens and return parser.
+     * @param n number of tokens to advance.
+     * @return this parser.
+     */
+    Parser& advance(index_type n = 1);
+    
     index_type getMark() const {
         return m_pos;
     }

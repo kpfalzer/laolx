@@ -22,19 +22,48 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   actual_type_parameters.cxx
+ * File:   var_name.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Thu Oct 19 20:02:39 2017
  */
-#include "ast/actual_type_parameters.hxx"
+#ifndef VAR_NAME_HXX
+#define VAR_NAME_HXX
 
-TRcActualTypeParameters ActualTypeParameters::parse(Parser& parser) {
-	TRcActualTypeParameters result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-ActualTypeParameters::ActualTypeParameters() {}
+class VarName;
+class VarOrAttrName;
+typedef std::shared_ptr<VarName> TRcVarName;
+typedef std::shared_ptr<VarOrAttrName> TRcVarOrAttrName;
 
-ActualTypeParameters::~ActualTypeParameters() {}
+class VarName : public virtual AstNode {
+public:
+    static TRcVarName parse(Parser& parser);
+
+    explicit VarName(const TRcToken& name) : name(name) {
+    }
+
+    const TRcToken name;
+
+    virtual ~VarName();
+};
+
+class VarOrAttrName : public virtual AstNode {
+public:
+    static TRcVarOrAttrName parse(Parser& parser);
+
+    explicit VarOrAttrName(const TRcToken& name)
+    : name(name) {
+    }
+
+    explicit VarOrAttrName(const TRcVarName& name)
+    : VarOrAttrName(name->name) {
+    }
+
+    const TRcToken name;
+
+    virtual ~VarOrAttrName();
+};
+
+#endif /* VAR_NAME_HXX */

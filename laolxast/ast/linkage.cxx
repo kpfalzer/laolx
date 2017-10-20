@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-#include "linkage.hxx"
-#include "string.hxx"
+#include "ast/linkage.hxx"
+#include "ast/string.hxx"
 
 Linkage::Linkage(const TRcString& linkage) : linkage(linkage) {
 

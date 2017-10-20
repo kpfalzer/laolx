@@ -72,6 +72,11 @@ TRcToken Parser::accept(index_type n) {
     return curr;
 }
 
+Parser& Parser::advance(index_type n) {
+    accept(n);
+    return *this;
+}
+
 bool Parser::accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes) {
     assert(tokens.size() == codes.size());
     index_type start = getMark(), i = 0;

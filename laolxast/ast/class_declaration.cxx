@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#include "class_declaration.hxx"
+#include "ast/class_declaration.hxx"
 
 TRcClassDeclaration ClassDeclaration::parse(Parser& parser) {
     static const std::initializer_list<Token::Code> stFirst({Token::K_CLASS, Token::IDENT});

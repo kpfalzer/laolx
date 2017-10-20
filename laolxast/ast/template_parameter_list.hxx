@@ -31,17 +31,24 @@
 #define TEMPLATE_PARAMETER_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/template_parameter.hxx"
 
 class TemplateParameterList;
 typedef std::shared_ptr<TemplateParameterList> TRcTemplateParameterList;
 
 class TemplateParameterList : public virtual AstNode {
 public:
-	static TRcTemplateParameterList parse(Parser& parser);
+    typedef std::shared_ptr<laolx::Array<TRcTemplateParameter>> TRcTemplateParameters;
 
-	explicit TemplateParameterList();
+    static TRcTemplateParameterList parse(Parser& parser);
 
-	virtual ~TemplateParameterList();
+    explicit TemplateParameterList(const TRcTemplateParameters& parameters)
+    : parameters(parameters) {
+    }
+
+    const TRcTemplateParameters parameters;
+
+    virtual ~TemplateParameterList();
 };
 
 #endif /* TEMPLATE_PARAMETER_LIST_HXX */

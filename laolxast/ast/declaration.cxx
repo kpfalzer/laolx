@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-#include "declaration.hxx"
-#include "class_declaration.hxx"
-#include "variable_declaration.hxx"
-#include "method_declaration.hxx"
-#include "typedef_declaration.hxx"
-#include "namespace_declaration.hxx"
+#include "ast/declaration.hxx"
+#include "ast/class_declaration.hxx"
+#include "ast/variable_declaration.hxx"
+#include "ast/method_declaration.hxx"
+#include "ast/typedef_declaration.hxx"
+#include "ast/namespace_declaration.hxx"
 
 Declaration::Declaration(const TRcLinkage& linkage, const TRcAstNode& declaration)
 : linkage(linkage), declaration(declaration) {

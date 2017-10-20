@@ -30,11 +30,26 @@
 #include "ast/template_parameter.hxx"
 
 TRcTemplateParameter TemplateParameter::parse(Parser& parser) {
-	TRcTemplateParameter result(nullptr);
-	//todo
-	return result;
+    TRcTemplateParameter result(nullptr);
+    if (parser.peek()->code != Token::IDENT) {
+        return result;
+    }
+    TRcToken name = parser.accept();
+    auto start = parser.getMark();
+    TRcInitializerClause initializer(nullptr);
+    if (parser.accept()->code == Token::S_EQ) {
+        initializer = InitializerClause::parse(parser);
+        if (!initializer) {
+            parser.setMark(start);
+        }
+    } 
+    result = std::make_shared<TemplateParameter>(name, initializer);
+    return result;
 }
 
-TemplateParameter::TemplateParameter() {}
+TemplateParameter::TemplateParameter(const TRcToken& name, const TRcInitializerClause& init)
+: name(name), initializer(init) {
+}
 
-TemplateParameter::~TemplateParameter() {}
+TemplateParameter::~TemplateParameter() {
+}

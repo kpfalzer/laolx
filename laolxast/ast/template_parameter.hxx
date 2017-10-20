@@ -31,17 +31,21 @@
 #define TEMPLATE_PARAMETER_HXX
 
 #include "ast/common.hxx"
+#include "ast/initializer_clause.hxx"
 
 class TemplateParameter;
 typedef std::shared_ptr<TemplateParameter> TRcTemplateParameter;
 
 class TemplateParameter : public virtual AstNode {
 public:
-	static TRcTemplateParameter parse(Parser& parser);
+    static TRcTemplateParameter parse(Parser& parser);
 
-	explicit TemplateParameter();
+    explicit TemplateParameter(const TRcToken& name, const TRcInitializerClause& init);
+    
+    const TRcToken name;
+    const TRcInitializerClause initializer;
 
-	virtual ~TemplateParameter();
+    virtual ~TemplateParameter();
 };
 
 #endif /* TEMPLATE_PARAMETER_HXX */

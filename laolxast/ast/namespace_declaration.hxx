@@ -30,18 +30,28 @@
 #ifndef NAMESPACE_DECLARATION_HXX
 #define NAMESPACE_DECLARATION_HXX
 
-#include "common.hxx"
+#include "laolx/array.hxx"
+#include "ast/common.hxx"
+#include "ast/namespace_declaration_name.hxx"
+#include "ast/declaration.hxx"
 
 class NamespaceDeclaration;
 typedef std::shared_ptr<NamespaceDeclaration> TRcNamespaceDeclaration;
 
 class NamespaceDeclaration : public virtual AstNode {
 public:
-	static TRcNamespaceDeclaration parse(Parser& parser);
+    typedef std::shared_ptr<laolx::Array<TRcDeclaration>> TRcDeclarations;
 
-	explicit NamespaceDeclaration();
+    static TRcNamespaceDeclaration parse(Parser& parser);
 
-	virtual ~NamespaceDeclaration();
+    explicit NamespaceDeclaration(
+            const TRcNamespaceDeclarationName& name,
+            const TRcDeclarations& declarations);
+
+    const TRcNamespaceDeclarationName name;
+    const TRcDeclarations declarations;
+
+    virtual ~NamespaceDeclaration();
 };
 
 #endif /* NAMESPACE_DECLARATION_HXX */

@@ -22,28 +22,23 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   actual_declaration.hxx
+ * File:   namespace_declaration_name.cxx
  * Author: kpfalzer
  *
- * Created on Mon Oct  9 14:14:07 2017
+ * Created on Thu Oct 19 14:37:46 2017
  */
-#ifndef ACTUAL_DECLARATION_HXX
-#define ACTUAL_DECLARATION_HXX
+#include "ast/namespace_declaration_name.hxx"
 
-#include "ast/common.hxx"
+TRcNamespaceDeclarationName NamespaceDeclarationName::parse(Parser& parser) {
+    TRcNamespaceDeclarationName result(nullptr);
+    Parser::index_type start = parser.getMark();
+    auto names = sequenceOf<NamespaceName>(parser, start, Token::S_COLON2);
+    if (!names->isEmpty()) {
+        result = std::make_shared<NamespaceDeclarationName>(names);
+    }
+    parser.setMark(start);
+    return result;
+}
 
-class ActualDeclaration;
-typedef std::shared_ptr<ActualDeclaration> TRcActualDeclaration;
-
-class ActualDeclaration : public virtual AstNode {
-public:
-    static TRcActualDeclaration parse(Parser& parser);
-
-    explicit ActualDeclaration(const TRcAstNode& node);
-    
-    const TRcAstNode m_declaration;
-
-    virtual ~ActualDeclaration();
-};
-
-#endif /* ACTUAL_DECLARATION_HXX */
+NamespaceDeclarationName::~NamespaceDeclarationName() {
+}

@@ -30,7 +30,7 @@
 #ifndef VARIABLE_DECLARATION_HXX
 #define VARIABLE_DECLARATION_HXX
 
-#include "common.hxx"
+#include "ast/common.hxx"
 
 class VariableDeclaration;
 typedef std::shared_ptr<VariableDeclaration> TRcVariableDeclaration;

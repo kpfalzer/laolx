@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#include "string.hxx"
+#include "ast/string.hxx"
 
 String::String(const TRcToken& token) : m_token(token) {
 }
@@ -50,37 +50,8 @@ String::~String() {
 
 }
 
-StringList::StringList(const TRcString& string) {
-    append(string);
-}
-
-void StringList::append(const TRcString& string) {
-    m_strings << string;
-}
-
-TRcStringList StringList::parse(Parser& parser) {
+TRcStrings parseStrings(Parser& parser) {
     Parser::index_type start = parser.getMark();
-    TRcStringList stringList(nullptr);
-    while (parser.hasMore()) {
-        TRcString string = String::parse(parser);
-        if (!string) {
-            break;
-        }
-        if (stringList) {
-            *stringList << string;
-        } else {
-            stringList = std::make_shared<StringList>(string);
-        }
-        start = parser.getMark();
-        if (parser.accept()->code != Token::S_COMMA) {
-            break;
-        }
-    }
-    parser.setMark(start);
-    return stringList;
-}
-
-StringList::~StringList() {
-
+    return sequenceOf<String>(parser, start, Token::S_COMMA);
 }
 

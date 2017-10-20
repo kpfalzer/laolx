@@ -37,5 +37,31 @@
 #include "parser/token.hxx"
 #include "parser/parser.hxx"
 
+/**
+ * Parse sequence of C separated by delimiter: C,C,...
+ * @param parser the parser.
+ * @param start update mark as match done.
+ * @param delimiter sequence delimiter.
+ * @return compacted array of C.
+ */
+template<class C>
+std::shared_ptr<laolx::Array<std::shared_ptr<C>>>
+sequenceOf(Parser& parser, Parser::index_type& start, const Token::Code delimiter) {
+    auto items = std::make_shared<laolx::Array<std::shared_ptr<C>>>();
+    while (parser.hasMore()) {
+        auto item = C::parse(parser);
+        if (!item) {
+            break;
+        }
+        *items << item;
+        start = parser.getMark();
+        if (parser.accept()->code != delimiter) {
+            break;
+        }
+    }
+    items->compact();
+    return items;
+}
+
 #endif /* COMMON_HXX */
 

@@ -21,35 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
+ * File:   mutability.cxx
  * Author: kwpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Thu Oct 19 19:53:52 2017
  */
+#include "ast/mutability.hxx"
 
-#ifndef DECLARATION_HXX
-#define DECLARATION_HXX
+TRcMutability Mutability::parse(Parser& parser) {
+    TRcMutability result(nullptr);
+    switch(parser.peek()->code) {
+        case Token::K_VAR:
+        case Token::K_CONST:
+            result = std::make_shared<Mutability>(parser.accept());
+            break;
+        default:
+            ;//do nothing
+    }
+    return result;
+}
 
-#include "ast/common.hxx"
-#include "ast/linkage.hxx"
-
-class Declaration;
-typedef std::shared_ptr<Declaration> TRcDeclaration;
-
-class Declaration : public virtual AstNode {
-public:
-    static TRcDeclaration parse(Parser& parser);
-
-    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
-
-    const TRcLinkage linkage;
-    const TRcAstNode declaration;
-    
-    virtual ~Declaration();
-};
-
-
-#endif /* DECLARATION_HXX */
-
+Mutability::~Mutability() {
+}
