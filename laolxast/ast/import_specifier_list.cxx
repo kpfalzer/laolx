@@ -21,37 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   import_specifier_list.cxx
+ * Author: kpfalzer
+ *
+ * Created on Fri Oct 20 10:21:57 2017
+ */
+#include "ast/import_specifier_list.hxx"
 
-#include "ast/string.hxx"
-
-String::String(const TRcToken& token) : m_token(token) {
+TPCImportSpecifierList ImportSpecifierList::parse(Parser& parser) {
+    auto includes = oneOrMore<ImportSpecifier>(parser, Token::S_COMMA);
+    return includes ? new ImportSpecifierList(includes) : nullptr;
 }
 
-TRcString String::parse(Parser& parser) {
-    static const TRcString stNull(nullptr);
-    const TRcToken& token = parser.peek();
-    switch (token->code) {
-        case Token::SQSTRING: case Token::DQSTRING:
-            return std::make_shared<String>(parser.accept());
-        default:
-            return stNull;
-    }
+ImportSpecifierList::~ImportSpecifierList() {
+    delete specifiers;
 }
-
-bool String::isDoubleQuoted() const {
-    return m_token->code == Token::DQSTRING;
-}
-
-bool String::isSingleQuoted() const {
-    return m_token->code == Token::SQSTRING;
-}
-
-String::~String() {
-
-}
-
-TRcStrings parseStrings(Parser& parser) {
-    Parser::index_type start = parser.getMark();
-    return sequenceOf<String>(parser, start, Token::S_COMMA);
-}
-

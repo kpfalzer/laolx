@@ -21,60 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   common.hxx
- * Author: kwpfalzer
+ * File:   import_specifier.cxx
+ * Author: kpfalzer
  *
- * Created on October 4, 2017, 5:55 PM
+ * Created on Fri Oct 20 10:21:57 2017
  */
+#include "ast/import_specifier.hxx"
 
-#ifndef COMMON_HXX
-#define COMMON_HXX
-
-#include <memory>
-#include "parser/astnode.hxx"
-#include "parser/token.hxx"
-#include "parser/parser.hxx"
-
-/**
- * Parse sequence of C separated by delimiter: C,C,...
- * @param parser the parser.
- * @param delimiter sequence delimiter.
- * @return compacted array of C (or nullptr if no sequence matched).
- */
-template<class C, typename T = const C*>
-laolx::Array<T>*
-oneOrMore(Parser& parser, const Token::Code delimiter) {
-    laolx::Array<T>* items = nullptr;
+TPCImportSpecifier ImportSpecifier::parse(Parser& parser) {
+    auto names = new laolx::Array<TRcToken>();
     auto start = parser.getMark();
     while (parser.hasMore()) {
-        auto item = C::parse(parser);
-        if (!item) {
+        if (parser.peek()->code != Token::IDENT) {
             break;
         }
-        if (!items) {
-            items = new laolx::Array<T>();
-        }
-        *items << item;
+        *names << parser.accept();
         start = parser.getMark();
-        if (parser.accept()->code != delimiter) {
+        if (parser.accept()->code != Token::S_DOT) {
             break;
         }
     }
     parser.setMark(start);
-    if (items) {
-        items->compact();
+    if (names->isEmpty()) {
+        return nullptr;
     }
-    return items;
+    TRcToken asIdent(nullptr);
+    if (!names->isEmpty()) {
+        laolx::Array<TRcToken> toks(2);
+        if (parser.accept(toks, {Token::K_AS, Token::IDENT})) {
+            asIdent = toks.last();
+        }
+    }
+    return new ImportSpecifier(names, asIdent);
 }
 
-template<class C, typename T = const C*>
-laolx::Array<T>*
-zeroOrMore(Parser& parser, const Token::Code delimiter) {
-    auto items = oneOrMore<C,T>(parser, delimiter);
-    return items ? items : new laolx::Array<T>();
+ImportSpecifier::ImportSpecifier(TPCNames names, const TRcToken& asIdent)
+: names(names), asIdent(asIdent) {
 }
 
-#endif /* COMMON_HXX */
-
+ImportSpecifier::~ImportSpecifier() {
+    delete names;
+}

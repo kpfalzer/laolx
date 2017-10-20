@@ -52,11 +52,11 @@ def gen_hxx(filename, base_fn, cls_name)
 #include "ast/common.hxx"
 
 class #{cls_name};
-typedef std::shared_ptr<#{cls_name}> TRc#{cls_name};
+typedef const #{cls_name}* TPC#{cls_name};
 
 class #{cls_name} : public virtual AstNode {
 public:
-	static TRc#{cls_name} parse(Parser& parser);
+	static TPC#{cls_name} parse(Parser& parser);
 
 	explicit #{cls_name}();
 
@@ -79,8 +79,8 @@ def gen_cxx(filename, base_fn, cls_name)
 	str =<<L2
 #include "ast/#{base_fn}.hxx"
 
-TRc#{cls_name} #{cls_name}::parse(Parser& parser) {
-	TRc#{cls_name} result(nullptr);
+TP#{cls_name} #{cls_name}::parse(Parser& parser) {
+	TP#{cls_name} result = nullptr;
 	//todo
 	return result;
 }

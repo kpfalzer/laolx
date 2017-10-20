@@ -21,26 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /* 
- * File:   mutability.cxx
+ * File:   string.hxx
  * Author: kwpfalzer
  *
- * Created on Thu Oct 19 19:53:52 2017
+ * Created on October 3, 2017, 6:19 PM
  */
-#include "ast/mutability.hxx"
 
-TRcMutability Mutability::parse(Parser& parser) {
-    TRcMutability result(nullptr);
-    switch(parser.peek()->code) {
-        case Token::K_VAR:
-        case Token::K_CONST:
-            result = std::make_shared<Mutability>(parser.accept());
-            break;
-        default:
-            ;//do nothing
-    }
-    return result;
-}
+#ifndef STRING_HXX
+#define STRING_HXX
 
-Mutability::~Mutability() {
-}
+#include "laolx/list.hxx"
+#include "ast/common.hxx"
+
+class String;
+typedef std::shared_ptr<String> TRcString;
+
+class String : public virtual AstNode {
+public:
+    static TRcString parse(Parser& parser);
+
+    explicit String(const TRcToken& token);
+
+    bool isSingleQuoted() const;
+
+    bool isDoubleQuoted() const;
+
+    const TRcToken m_token;
+
+    virtual ~String();
+};
+
+#endif /* STRING_HXX */
+

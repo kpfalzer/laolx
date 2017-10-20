@@ -21,31 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/* 
- * File:   mutability.hxx
- * Author: kwpfalzer
- *
- * Created on Thu Oct 19 19:53:52 2017
- */
-#ifndef MUTABILITY_HXX
-#define MUTABILITY_HXX
 
-#include "ast/common.hxx"
+#include "ast/string.hxx"
 
-class Mutability;
-typedef std::shared_ptr<Mutability> TRcMutability;
+String::String(const TRcToken& token) : m_token(token) {
+}
 
-class Mutability : public virtual AstNode {
-public:
-    static TRcMutability parse(Parser& parser);
-
-    explicit Mutability(const TRcToken& keyword)
-    : mutability(keyword) {
+TRcString String::parse(Parser& parser) {
+    static const TRcString stNull(nullptr);
+    const TRcToken& token = parser.peek();
+    switch (token->code) {
+        case Token::SQSTRING: case Token::DQSTRING:
+            return std::make_shared<String>(parser.accept());
+        default:
+            return stNull;
     }
+}
 
-    const TRcToken mutability;
+bool String::isDoubleQuoted() const {
+    return m_token->code == Token::DQSTRING;
+}
 
-    virtual ~Mutability();
-};
+bool String::isSingleQuoted() const {
+    return m_token->code == Token::SQSTRING;
+}
 
-#endif /* MUTABILITY_HXX */
+String::~String() {
+
+}
+

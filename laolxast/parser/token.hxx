@@ -88,6 +88,7 @@ public:
         FLOAT,
         //
         // K_xxx are keywords
+        K_AS,
         K_ASSERT,
         K_CASE,
         K_CATCH,
@@ -102,7 +103,7 @@ public:
         K_FLOAT,
         K_FOR,
         K_IF,
-        K_INCLUDE,
+        K_IMPORT,
         K_INT,
         K_INTERFACE,
         K_NAMESPACE,
@@ -164,7 +165,6 @@ public:
         S_OR2EQ,
         S_BSLASH,
         S_COLON,
-        S_COLON2,
         S_SEMI,
         S_DQOUTE,
         S_SQUOTE,

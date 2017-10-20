@@ -21,41 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   string.hxx
- * Author: kwpfalzer
+ * File:   import_specifier.hxx
+ * Author: kpfalzer
  *
- * Created on October 3, 2017, 6:19 PM
+ * Created on Fri Oct 20 10:21:57 2017
  */
+#ifndef IMPORT_SPECIFIER_HXX
+#define IMPORT_SPECIFIER_HXX
 
-#ifndef STRING_HXX
-#define STRING_HXX
-
-#include "laolx/list.hxx"
 #include "ast/common.hxx"
 
-class String;
-typedef std::shared_ptr<String> TRcString;
+class ImportSpecifier;
+typedef const ImportSpecifier* TPCImportSpecifier;
 
-class String : public virtual AstNode {
+class ImportSpecifier : public virtual AstNode {
 public:
-    static TRcString parse(Parser& parser);
+    typedef const laolx::Array<TRcToken>* TPCNames;
 
-    explicit String(const TRcToken& token);
+    static TPCImportSpecifier parse(Parser& parser);
 
-    bool isSingleQuoted() const;
+    explicit ImportSpecifier(TPCNames names, const TRcToken& asIndent);
 
-    bool isDoubleQuoted() const;
+    TPCNames names;
+    const TRcToken asIdent;
 
-    const TRcToken m_token;
-
-    virtual ~String();
+    virtual ~ImportSpecifier();
 };
 
-typedef std::shared_ptr<laolx::Array<TRcString>> TRcStrings;
-
-TRcStrings parseStrings(Parser& parser);
-
-#endif /* STRING_HXX */
-
+#endif /* IMPORT_SPECIFIER_HXX */

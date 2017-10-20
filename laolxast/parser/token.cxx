@@ -37,6 +37,7 @@ const laolx::String Token::EMPTY = "";
 
 const Token::CodeByString Token::stKeywords({
     // K_xxx are keywords
+    {"as", Token::K_AS},
     {"assert", Token::K_ASSERT},
     {"case", Token::K_CASE},
     {"catch", Token::K_CATCH},
@@ -51,7 +52,7 @@ const Token::CodeByString Token::stKeywords({
     {"float", Token::K_FLOAT},
     {"for", Token::K_FOR},
     {"if", Token::K_IF},
-    {"include", Token::K_INCLUDE},
+    {"import", Token::K_IMPORT},
     {"int", Token::K_INT},
     {"interface", Token::K_INTERFACE},
     {"namespace", Token::K_NAMESPACE},
@@ -115,7 +116,6 @@ const Token::CodeByString Token::stSymbols({
     {"||=", Token::S_OR2EQ},
     {"\\", Token::S_BSLASH},
     {":", Token::S_COLON},
-    {"::", Token::S_COLON2},
     {";", Token::S_SEMI},
     {"\"", Token::S_DQOUTE},
     {"'", Token::S_SQUOTE},

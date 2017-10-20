@@ -1,13 +1,15 @@
 //add decomposition declaration:
 // auto& [l1, l2] = expr_returns_2_elements
 
-SourceFile: IncludeStatement* (Declaration | Statement)* EOF
+SourceFile: ImportStatement* (Declaration | Statement)* EOF
 
-IncludeStatement: K_INCLUDE StringList
+ImportStatement: K_IMPORT ImportSpecifierList
 
 String: SQSTRING | DQSTRING
 
-StringList: String (COMMA String)+
+ImportSpecifierList: ImportSpecifier (COMMA ImportSpecifier)*
+
+ImportSpecifier: IDENT (S_DOT IDENT)* (K_AS IDENT)?
 
 // extern linkage declarations do not have bodies, etc.
 Linkage: K_EXTERN String
@@ -23,7 +25,7 @@ Declaration:
 NamespaceDeclaration:
 	K_NAMESPACE NamespaceDeclarationName S_LCURLY Declaration* S_RCURLY
 
-NamespaceDeclarationName: NamespaceName (S_COLON2 NamespaceName)*
+NamespaceDeclarationName: NamespaceName (S_DOT NamespaceName)*
 
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
@@ -90,7 +92,7 @@ BaseInitializer:
 	(IDENT S_COLON)? InitializerClause
 	
 BaseTypeSpecifier:
-	S_COLON2? NestedNameSpecifier? BaseName
+	NestedNameSpecifier? BaseName
 
 // class | interface name
 BaseName: IDENT | SimpleTemplateId
@@ -183,7 +185,7 @@ Symbols: S_SYMBOLS IDENT* S_RCURLY
 ExpressionList: InitializerList
 
 SimpleTypeSpecifier:
-	S_COLON2? NestedNameSpecifier? TypeName
+	NestedNameSpecifier? TypeName
 |	K_INT
 |	K_FLOAT
 |	K_STRING
@@ -197,21 +199,17 @@ UnqualifiedId:
 |	OperatorFunctionId
 |	TemplateId
 
-QualifiedId:
-	S_COLON2? NestedNameSpecifier K_TEMPLATE? UnqualifiedId
-|	S_COLON2 IDENT
-|	S_COLON2 OperatorFunctionId
-|	S_COLON2 TemplateId
+QualifiedId: NestedNameSpecifier K_TEMPLATE? UnqualifiedId
 
 NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
 
 NestedNameSpecifierY:
-	TypeName S_COLON2
-|	NamespaceName S_COLON2
+	TypeName S_DOT
+|	NamespaceName S_DOT
 
 NestedNameSpecifierX:
-	IDENT S_COLON2 NestedNameSpecifierX?
-|	K_TEMPLATE? SimpleTemplateId S_COLON2 NestedNameSpecifierX?
+	IDENT S_DOT NestedNameSpecifierX?
+|	K_TEMPLATE? SimpleTemplateId S_DOT NestedNameSpecifierX?
 
 NamespaceName: IDENT
 	

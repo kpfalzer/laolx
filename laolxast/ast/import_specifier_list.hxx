@@ -22,30 +22,33 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   mutability.hxx
- * Author: kwpfalzer
+ * File:   import_specifier_list.hxx
+ * Author: kpfalzer
  *
- * Created on Thu Oct 19 19:53:52 2017
+ * Created on Fri Oct 20 10:21:57 2017
  */
-#ifndef MUTABILITY_HXX
-#define MUTABILITY_HXX
+#ifndef IMPORT_SPECIFIER_LIST_HXX
+#define IMPORT_SPECIFIER_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/import_specifier.hxx"
 
-class Mutability;
-typedef std::shared_ptr<Mutability> TRcMutability;
+class ImportSpecifierList;
+typedef const ImportSpecifierList* TPCImportSpecifierList;
 
-class Mutability : public virtual AstNode {
+class ImportSpecifierList : public virtual AstNode {
 public:
-    static TRcMutability parse(Parser& parser);
+    typedef const laolx::Array<TPCImportSpecifier>* TPCImportSpecifiers;
+    
+    static TPCImportSpecifierList parse(Parser& parser);
 
-    explicit Mutability(const TRcToken& keyword)
-    : mutability(keyword) {
+    explicit ImportSpecifierList(TPCImportSpecifiers specifiers)
+    : specifiers(specifiers) {
     }
 
-    const TRcToken mutability;
+    TPCImportSpecifiers specifiers;
 
-    virtual ~Mutability();
+    virtual ~ImportSpecifierList();
 };
 
-#endif /* MUTABILITY_HXX */
+#endif /* IMPORT_SPECIFIER_LIST_HXX */

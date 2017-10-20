@@ -25,16 +25,22 @@
  * File:   mutability.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Thu Oct 19 19:53:52 2017
  */
 #include "ast/mutability.hxx"
 
 TRcMutability Mutability::parse(Parser& parser) {
-	TRcMutability result(nullptr);
-	//todo
-	return result;
+    TRcMutability result(nullptr);
+    switch(parser.peek()->code) {
+        case Token::K_VAR:
+        case Token::K_CONST:
+            result = std::make_shared<Mutability>(parser.accept());
+            break;
+        default:
+            ;//do nothing
+    }
+    return result;
 }
 
-Mutability::Mutability() {}
-
-Mutability::~Mutability() {}
+Mutability::~Mutability() {
+}
