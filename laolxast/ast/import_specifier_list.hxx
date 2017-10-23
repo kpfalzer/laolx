@@ -46,7 +46,7 @@ public:
     : specifiers(specifiers) {
     }
 
-    TPCImportSpecifiers specifiers;
+    const TPCImportSpecifiers specifiers;
 
     virtual ~ImportSpecifierList();
 };

@@ -5,14 +5,20 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>parser/astnode.hxx</itemPath>
+      <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
       <itemPath>ast/import_specifier.hxx</itemPath>
       <itemPath>ast/import_specifier_list.hxx</itemPath>
       <itemPath>ast/import_statement.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
+      <itemPath>ast/linkage.hxx</itemPath>
+      <itemPath>ast/method_declaration.hxx</itemPath>
+      <itemPath>ast/namespace_declaration.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
+      <itemPath>ast/typedef_declaration.hxx</itemPath>
+      <itemPath>ast/variable_declaration.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -22,13 +28,19 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>parser/astnode.cxx</itemPath>
+      <itemPath>ast/class_declaration.cxx</itemPath>
       <itemPath>ast/import_specifier.cxx</itemPath>
       <itemPath>ast/import_specifier_list.cxx</itemPath>
       <itemPath>ast/import_statement.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
+      <itemPath>ast/linkage.cxx</itemPath>
+      <itemPath>ast/method_declaration.cxx</itemPath>
+      <itemPath>ast/namespace_declaration.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
+      <itemPath>ast/typedef_declaration.cxx</itemPath>
+      <itemPath>ast/variable_declaration.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -80,6 +92,10 @@
           </makeArtifact>
         </requiredProjects>
       </compileType>
+      <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/import_specifier.cxx" ex="false" tool="1" flavor2="0">
@@ -94,9 +110,29 @@
       </item>
       <item path="ast/import_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/method_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles">
         <linkerTool>
@@ -181,6 +217,10 @@
           </makeArtifact>
         </requiredProjects>
       </compileType>
+      <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/import_specifier.cxx" ex="false" tool="1" flavor2="0">
@@ -195,9 +235,29 @@
       </item>
       <item path="ast/import_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/linkage.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/method_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

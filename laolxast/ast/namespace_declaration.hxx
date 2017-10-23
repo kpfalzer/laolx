@@ -21,34 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
- * Author: kwpfalzer
+ * File:   namespace_declaration.hxx
+ * Author: kpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Mon Oct  9 14:17:22 2017
  */
+#ifndef NAMESPACE_DECLARATION_HXX
+#define NAMESPACE_DECLARATION_HXX
 
-#ifndef LINKAGE_HXX
-#define LINKAGE_HXX
-
+#include "laolx/array.hxx"
 #include "ast/common.hxx"
-#include "ast/string.hxx"
 
-class Linkage;
-typedef std::shared_ptr<Linkage> TRcLinkage;
+class NamespaceDeclaration;
+typedef const NamespaceDeclaration* TPCNamespaceDeclaration;
 
-class Linkage : public virtual AstNode {
+class NamespaceDeclaration : public virtual AstNode {
 public:
-    static TRcLinkage parse(Parser& parser);
+    static TPCNamespaceDeclaration parse(Parser& parser);
 
-    explicit Linkage(const TRcString& linkage);
+    explicit NamespaceDeclaration();
 
-    const TRcString linkage;
-    
-    virtual ~Linkage();
+    virtual ~NamespaceDeclaration();
 };
 
-
-#endif /* LINKAGE_HXX */
-
+#endif /* NAMESPACE_DECLARATION_HXX */

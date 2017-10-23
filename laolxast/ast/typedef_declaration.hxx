@@ -22,36 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_declaration.hxx
+ * File:   typedef_declaration.hxx
  * Author: kpfalzer
  *
  * Created on Mon Oct  9 14:17:22 2017
  */
-#ifndef NAMESPACE_DECLARATION_HXX
-#define NAMESPACE_DECLARATION_HXX
+#ifndef TYPEDEF_DECLARATION_HXX
+#define TYPEDEF_DECLARATION_HXX
 
-#include "laolx/array.hxx"
 #include "ast/common.hxx"
-#include "ast/namespace_declaration_name.hxx"
-#include "ast/declaration.hxx"
 
-class NamespaceDeclaration;
-typedef std::shared_ptr<NamespaceDeclaration> TRcNamespaceDeclaration;
+class TypedefDeclaration;
+typedef const TypedefDeclaration* TPCTypedefDeclaration;
 
-class NamespaceDeclaration : public virtual AstNode {
+class TypedefDeclaration : public virtual AstNode {
 public:
-    typedef std::shared_ptr<laolx::Array<TRcDeclaration>> TRcDeclarations;
+    static TPCTypedefDeclaration parse(Parser& parser);
 
-    static TRcNamespaceDeclaration parse(Parser& parser);
+    explicit TypedefDeclaration();
 
-    explicit NamespaceDeclaration(
-            const TRcNamespaceDeclarationName& name,
-            const TRcDeclarations& declarations);
-
-    const TRcNamespaceDeclarationName name;
-    const TRcDeclarations declarations;
-
-    virtual ~NamespaceDeclaration();
+    virtual ~TypedefDeclaration();
 };
 
-#endif /* NAMESPACE_DECLARATION_HXX */
+#endif /* TYPEDEF_DECLARATION_HXX */

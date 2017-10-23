@@ -21,27 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/* 
- * File:   method_declaration.hxx
- * Author: kpfalzer
- *
- * Created on Mon Oct  9 14:17:22 2017
- */
-#ifndef METHOD_DECLARATION_HXX
-#define METHOD_DECLARATION_HXX
 
-#include "ast/common.hxx"
+#include "ast/linkage.hxx"
+#include "ast/string.hxx"
 
-class MethodDeclaration;
-typedef std::shared_ptr<MethodDeclaration> TRcMethodDeclaration;
+Linkage::Linkage(TPCString linkage) : linkage(linkage) {
+}
 
-class MethodDeclaration : public virtual AstNode {
-public:
-	static TRcMethodDeclaration parse(Parser& parser);
+TPCLinkage Linkage::parse(Parser& parser) {
+    if (parser.peek()->code != Token::K_EXTERN) {
+        return nullptr;
+    }
+    auto start = parser.getMark();
+    parser.accept();
+    auto str = String::parse(parser);
+    if (str) {
+        return new Linkage(str);
+    } else {
+        parser.setMark(start);
+    }
+    return nullptr;
+}
 
-	explicit MethodDeclaration();
+Linkage::~Linkage() {
+    delete linkage;
+}
 
-	virtual ~MethodDeclaration();
-};
 
-#endif /* METHOD_DECLARATION_HXX */

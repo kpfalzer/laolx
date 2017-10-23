@@ -1,4 +1,4 @@
-
+/*
  * The MIT License
  *
  * Copyright 2017 kwpfalzer.
@@ -21,32 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   method_declaration.hxx
+ * Author: kpfalzer
+ *
+ * Created on Mon Oct  9 14:17:22 2017
+ */
+#ifndef METHOD_DECLARATION_HXX
+#define METHOD_DECLARATION_HXX
 
-#include "ast/linkage.hxx"
-#include "ast/string.hxx"
+#include "ast/common.hxx"
 
-Linkage::Linkage(const TRcString& linkage) : linkage(linkage) {
+class MethodDeclaration;
+typedef const MethodDeclaration* TPCMethodDeclaration;
 
-}
+class MethodDeclaration : public virtual AstNode {
+public:
+    static TPCMethodDeclaration parse(Parser& parser);
 
-TRcLinkage Linkage::parse(Parser& parser) {
-    TRcLinkage linkage(nullptr);
-    if (parser.peek()->code != Token::K_EXTERN) {
-        return linkage;
-    }
-    Parser::index_type start = parser.getMark();
-    parser.accept();
-    TRcString str = String::parse(parser);
-    if (str) {
-        linkage = std::make_shared<Linkage>(str);
-    } else {
-        parser.setMark(start);
-    }
-    return linkage;
-}
+    explicit MethodDeclaration();
 
-Linkage::~Linkage() {
+    virtual ~MethodDeclaration();
+};
 
-}
-
-
+#endif /* METHOD_DECLARATION_HXX */

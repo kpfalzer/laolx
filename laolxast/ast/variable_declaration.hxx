@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   import_specifier.hxx
+ * File:   variable_declaration.hxx
  * Author: kpfalzer
  *
- * Created on Fri Oct 20 10:21:57 2017
+ * Created on Mon Oct  9 14:17:22 2017
  */
-#ifndef IMPORT_SPECIFIER_HXX
-#define IMPORT_SPECIFIER_HXX
+#ifndef VARIABLE_DECLARATION_HXX
+#define VARIABLE_DECLARATION_HXX
 
 #include "ast/common.hxx"
 
-class ImportSpecifier;
-typedef const ImportSpecifier* TPCImportSpecifier;
+class VariableDeclaration;
+typedef const VariableDeclaration* TPCVariableDeclaration;
 
-class ImportSpecifier : public virtual AstNode {
+class VariableDeclaration : public virtual AstNode {
 public:
-    typedef const laolx::Array<TRcToken>* TPCNames;
+    static TPCVariableDeclaration parse(Parser& parser);
 
-    static TPCImportSpecifier parse(Parser& parser);
+    explicit VariableDeclaration();
 
-    explicit ImportSpecifier(TPCNames names, const TRcToken& asIndent);
-
-    const TPCNames names;
-    const TRcToken asIdent;
-
-    virtual ~ImportSpecifier();
+    virtual ~VariableDeclaration();
 };
 
-#endif /* IMPORT_SPECIFIER_HXX */
+#endif /* VARIABLE_DECLARATION_HXX */

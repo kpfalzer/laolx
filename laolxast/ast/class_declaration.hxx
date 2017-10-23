@@ -21,27 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /* 
- * File:   variable_declaration.hxx
- * Author: kpfalzer
+ * File:   class_declaration.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on October 4, 2017, 8:55 PM
  */
-#ifndef VARIABLE_DECLARATION_HXX
-#define VARIABLE_DECLARATION_HXX
+
+#ifndef CLASS_DECLARATION_HXX
+#define CLASS_DECLARATION_HXX
 
 #include "ast/common.hxx"
 
-class VariableDeclaration;
-typedef std::shared_ptr<VariableDeclaration> TRcVariableDeclaration;
+class ClassDeclaration;
+typedef const ClassDeclaration* TPCClassDeclaration;
 
-class VariableDeclaration : public virtual AstNode {
+class ClassDeclaration : public virtual AstNode {
 public:
-	static TRcVariableDeclaration parse(Parser& parser);
+    static TPCClassDeclaration parse(Parser& parser);
 
-	explicit VariableDeclaration();
+    explicit ClassDeclaration(
+            const TRcToken& className
+#ifdef TODO
+            ,
+            const TRcTypeParameters& typeParameters,
+            const TRcParameterDeclarationList& parameterDeclarationList,
+            const TRcExtendsDeclaration& extendsDeclaration,
+            const TRcImplementsDeclaration& implementsDeclaration,
+            const TRcClassBody& classBody
+#endif
+            );
 
-	virtual ~VariableDeclaration();
+    const TRcToken m_className;
+#ifdef TODO
+    const TRcTypeParameters m_typeParameters;
+    const TRcParameterDeclarationList m_parameterDeclarationList;
+    const TRcExtendsDeclaration m_extendsDeclaration;
+    const TRcImplementsDeclaration m_implementsDeclaration;
+    const TRcClassBody m_classBody;
+#endif //TODO
+
+    virtual ~ClassDeclaration();
+
 };
 
-#endif /* VARIABLE_DECLARATION_HXX */
+
+#endif /* CLASS_DECLARATION_HXX */
+

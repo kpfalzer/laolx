@@ -21,27 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   linkage.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on October 4, 2017, 8:30 PM
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+
+#ifndef LINKAGE_HXX
+#define LINKAGE_HXX
 
 #include "ast/common.hxx"
+#include "ast/string.hxx"
 
-class TypedefDeclaration;
-typedef std::shared_ptr<TypedefDeclaration> TRcTypedefDeclaration;
+class Linkage;
+typedef const Linkage* TPCLinkage;
 
-class TypedefDeclaration : public virtual AstNode {
+class Linkage : public virtual AstNode {
 public:
-	static TRcTypedefDeclaration parse(Parser& parser);
+    static TPCLinkage parse(Parser& parser);
 
-	explicit TypedefDeclaration();
+    explicit Linkage(TPCString linkage);
 
-	virtual ~TypedefDeclaration();
+    const TPCString linkage;
+    
+    virtual ~Linkage();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+
+#endif /* LINKAGE_HXX */
+

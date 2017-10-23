@@ -46,7 +46,7 @@ public:
     : imports(imports) {
     }
 
-    TPCImportSpecifierList imports;
+    const TPCImportSpecifierList imports;
 
     virtual ~ImportStatement();
 };
