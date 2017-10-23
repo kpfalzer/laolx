@@ -64,7 +64,6 @@ const Token::CodeByString Token::stKeywords({
     {"static", Token::K_STATIC},
     {"string", Token::K_STRING},
     {"symbol", Token::K_SYMBOL},
-    {"template", Token::K_TEMPLATE},
     {"this", Token::K_THIS},
     {"throw", Token::K_THROW},
     {"true", Token::K_TRUE},

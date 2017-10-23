@@ -115,7 +115,6 @@ public:
         K_STATIC,
         K_STRING,
         K_SYMBOL,
-        K_TEMPLATE,
         K_THIS,
         K_THROW,
         K_TRUE,

@@ -22,34 +22,43 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_declaration_name.hxx
- * Author: kpfalzer
+ * File:   mutability.hxx
+ * Author: kwpfalzer
  *
- * Created on Thu Oct 19 14:37:46 2017
+ * Created on Thu Oct 19 19:53:52 2017
  */
-#ifndef NAMESPACE_DECLARATION_NAME_HXX
-#define NAMESPACE_DECLARATION_NAME_HXX
+#ifndef MUTABILITY_HXX
+#define MUTABILITY_HXX
 
-#include "laolx/array.hxx"
 #include "ast/common.hxx"
-#include "ast/namespace_name.hxx"
 
-class NamespaceDeclarationName;
-typedef std::shared_ptr<NamespaceDeclarationName> TRcNamespaceDeclarationName;
+class Mutability;
+typedef const Mutability* TPCMutability;
 
-class NamespaceDeclarationName : public virtual AstNode {
+class Mutability : public virtual AstNode {
 public:
-    typedef laolx::Array<TRcNamespaceName> TNamespaceNames;
-    
-    static TRcNamespaceDeclarationName parse(Parser& parser);
+    static TPCMutability parse(Parser& parser);
 
-    explicit NamespaceDeclarationName(const TNamespaceNames* name)
-    : name(name) {
+    explicit Mutability(const TRcToken& keyword)
+    : mutability(keyword) {
     }
 
-    virtual ~NamespaceDeclarationName();
+    /**
+     * Return true if (explicitly declared) var/mutable.
+     * @return true if var/mutable.
+     */
+    bool isVar() const;
+    
+    /**
+     * Return true if const/immutable.
+     * By default, all state is const/immutable.
+     * @return true if const/immutable.
+     */
+    bool isConst() const;
+    
+    const TRcToken mutability;
 
-    const TNamespaceNames* name;
+    virtual ~Mutability();
 };
 
-#endif /* NAMESPACE_DECLARATION_NAME_HXX */
+#endif /* MUTABILITY_HXX */

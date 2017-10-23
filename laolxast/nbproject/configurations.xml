@@ -13,7 +13,10 @@
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>ast/linkage.hxx</itemPath>
       <itemPath>ast/method_declaration.hxx</itemPath>
+      <itemPath>ast/mutability.hxx</itemPath>
       <itemPath>ast/namespace_declaration.hxx</itemPath>
+      <itemPath>ast/namespace_declaration_name.hxx</itemPath>
+      <itemPath>ast/namespace_name.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
@@ -35,7 +38,10 @@
       <itemPath>parser/lexer.cxx</itemPath>
       <itemPath>ast/linkage.cxx</itemPath>
       <itemPath>ast/method_declaration.cxx</itemPath>
+      <itemPath>ast/mutability.cxx</itemPath>
       <itemPath>ast/namespace_declaration.cxx</itemPath>
+      <itemPath>ast/namespace_declaration_name.cxx</itemPath>
+      <itemPath>ast/namespace_name.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
@@ -118,9 +124,21 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -243,9 +261,21 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_declaration_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/namespace_name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/namespace_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
       </item>

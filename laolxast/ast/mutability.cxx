@@ -22,23 +22,31 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_declaration_name.cxx
- * Author: kpfalzer
+ * File:   mutability.cxx
+ * Author: kwpfalzer
  *
- * Created on Thu Oct 19 14:37:46 2017
+ * Created on Thu Oct 19 19:53:52 2017
  */
-#include "ast/namespace_declaration_name.hxx"
+#include "ast/mutability.hxx"
 
-TRcNamespaceDeclarationName NamespaceDeclarationName::parse(Parser& parser) {
-    TRcNamespaceDeclarationName result(nullptr);
-    Parser::index_type start = parser.getMark();
-    auto names = sequenceOf<NamespaceName>(parser, start, Token::S_COLON2);
-    if (!names->isEmpty()) {
-        result = std::make_shared<NamespaceDeclarationName>(names);
+TPCMutability Mutability::parse(Parser& parser) {
+    switch (parser.peek()->code) {
+        case Token::K_VAR:
+        case Token::K_CONST:
+            return new Mutability(parser.accept());
+        default:
+            ; //do nothing
     }
-    parser.setMark(start);
-    return result;
+    return nullptr;
 }
 
-NamespaceDeclarationName::~NamespaceDeclarationName() {
+bool Mutability::isConst() const {
+    return !isVar();
+}
+
+bool Mutability::isVar() const {
+    return (mutability && (Token::K_VAR == mutability->code));
+}
+
+Mutability::~Mutability() {
 }

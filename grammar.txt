@@ -27,6 +27,8 @@ NamespaceDeclaration:
 
 NamespaceDeclarationName: NamespaceName (S_DOT NamespaceName)*
 
+NamespaceName: IDENT
+	
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
@@ -148,7 +150,7 @@ PostfixExpressionX
 	S_LBRACK Expression S_RBRACK PostfixExpressionX?
 |	S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
 |	S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
-|	DOT K_TEMPLATE? IdExpression PostfixExpressionX?
+|	DOT IdExpression PostfixExpressionX?
 |	(S_PLUS2 | S_MINUS2) PostfixExpressionX?
 
 PrimaryExpression:
@@ -199,7 +201,7 @@ UnqualifiedId:
 |	OperatorFunctionId
 |	TemplateId
 
-QualifiedId: NestedNameSpecifier K_TEMPLATE? UnqualifiedId
+QualifiedId: NestedNameSpecifier UnqualifiedId
 
 NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
 
@@ -209,10 +211,8 @@ NestedNameSpecifierY:
 
 NestedNameSpecifierX:
 	IDENT S_DOT NestedNameSpecifierX?
-|	K_TEMPLATE? SimpleTemplateId S_DOT NestedNameSpecifierX?
+|	SimpleTemplateId S_DOT NestedNameSpecifierX?
 
-NamespaceName: IDENT
-	
 TypeName: ClassName | TypedefName
 
 ClassName: IDENT | SimpleTemplateId

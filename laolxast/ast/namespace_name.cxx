@@ -22,25 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   mutability.cxx
- * Author: kwpfalzer
+ * File:   namespace_name.cxx
+ * Author: kpfalzer
  *
- * Created on Thu Oct 19 19:53:52 2017
+ * Created on Thu Oct 19 14:32:08 2017
  */
-#include "ast/mutability.hxx"
+#include "ast/namespace_name.hxx"
 
-TRcMutability Mutability::parse(Parser& parser) {
-    TRcMutability result(nullptr);
-    switch(parser.peek()->code) {
-        case Token::K_VAR:
-        case Token::K_CONST:
-            result = std::make_shared<Mutability>(parser.accept());
-            break;
-        default:
-            ;//do nothing
+TPCNamespaceName NamespaceName::parse(Parser& parser) {
+    if (parser.peek()->code == Token::IDENT) {
+        return new NamespaceName(parser.accept());
     }
-    return result;
+    return nullptr;
 }
 
-Mutability::~Mutability() {
+NamespaceName::~NamespaceName() {
 }

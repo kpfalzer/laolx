@@ -22,20 +22,32 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_name.cxx
+ * File:   namespace_name.hxx
  * Author: kpfalzer
  *
  * Created on Thu Oct 19 14:32:08 2017
  */
-#include "ast/namespace_name.hxx"
+#ifndef NAMESPACE_NAME_HXX
+#define NAMESPACE_NAME_HXX
 
-TRcNamespaceName NamespaceName::parse(Parser& parser) {
-    TRcNamespaceName result(nullptr);
-    if (parser.peek()->code == Token::IDENT) {
-        result = std::make_shared<NamespaceName>(parser.accept());
+#include "ast/common.hxx"
+
+class NamespaceName;
+typedef const NamespaceName* TPCNamespaceName;
+
+class NamespaceName : public virtual AstNode {
+public:
+
+    explicit NamespaceName(const TRcToken& name) : name(name) {
     }
-    return result;
-}
+    
+    static TPCNamespaceName parse(Parser& parser);
 
-NamespaceName::~NamespaceName() {
-}
+    explicit NamespaceName();
+
+    const TRcToken name;
+
+    virtual ~NamespaceName();
+};
+
+#endif /* NAMESPACE_NAME_HXX */

@@ -22,30 +22,18 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   mutability.hxx
- * Author: kwpfalzer
+ * File:   namespace_declaration_name.cxx
+ * Author: kpfalzer
  *
- * Created on Thu Oct 19 19:53:52 2017
+ * Created on Thu Oct 19 14:37:46 2017
  */
-#ifndef MUTABILITY_HXX
-#define MUTABILITY_HXX
+#include "ast/namespace_declaration_name.hxx"
 
-#include "ast/common.hxx"
+TPCNamespaceDeclarationName NamespaceDeclarationName::parse(Parser& parser) {
+    auto names = oneOrMore<NamespaceName>(parser, Token::S_DOT);
+    return names ? new NamespaceDeclarationName(names) : nullptr;
+}
 
-class Mutability;
-typedef std::shared_ptr<Mutability> TRcMutability;
-
-class Mutability : public virtual AstNode {
-public:
-    static TRcMutability parse(Parser& parser);
-
-    explicit Mutability(const TRcToken& keyword)
-    : mutability(keyword) {
-    }
-
-    const TRcToken mutability;
-
-    virtual ~Mutability();
-};
-
-#endif /* MUTABILITY_HXX */
+NamespaceDeclarationName::~NamespaceDeclarationName() {
+    delete names;
+}
