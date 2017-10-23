@@ -8,8 +8,10 @@
       <itemPath>ast/common.hxx</itemPath>
       <itemPath>ast/import_specifier.hxx</itemPath>
       <itemPath>ast/import_specifier_list.hxx</itemPath>
+      <itemPath>ast/import_statement.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
+      <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -22,8 +24,10 @@
       <itemPath>parser/astnode.cxx</itemPath>
       <itemPath>ast/import_specifier.cxx</itemPath>
       <itemPath>ast/import_specifier_list.cxx</itemPath>
+      <itemPath>ast/import_statement.cxx</itemPath>
       <itemPath>parser/lexer.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
+      <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -85,6 +89,14 @@
       <item path="ast/import_specifier_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/import_specifier_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/import_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/import_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles">
         <linkerTool>
@@ -178,6 +190,14 @@
       <item path="ast/import_specifier_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/import_specifier_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/import_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/import_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/string.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

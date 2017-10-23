@@ -24,26 +24,21 @@
 
 #include "ast/string.hxx"
 
-String::String(const TRcToken& token) : m_token(token) {
-}
-
-TRcString String::parse(Parser& parser) {
-    static const TRcString stNull(nullptr);
-    const TRcToken& token = parser.peek();
-    switch (token->code) {
+TPCString String::parse(Parser& parser) {
+    switch (parser.peek()->code) {
         case Token::SQSTRING: case Token::DQSTRING:
-            return std::make_shared<String>(parser.accept());
+            return new String(parser.accept());
         default:
-            return stNull;
+            return nullptr;
     }
 }
 
 bool String::isDoubleQuoted() const {
-    return m_token->code == Token::DQSTRING;
+    return value->code == Token::DQSTRING;
 }
 
 bool String::isSingleQuoted() const {
-    return m_token->code == Token::SQSTRING;
+    return value->code == Token::SQSTRING;
 }
 
 String::~String() {

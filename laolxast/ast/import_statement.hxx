@@ -22,26 +22,34 @@
  * THE SOFTWARE.
  */
 
-#include "ast/include_statement.hxx"
+/* 
+ * File:   include_statement.hxx
+ * Author: kwpfalzer
+ *
+ * Created on October 4, 2017, 5:53 PM
+ */
 
-TRcIncludeStatement IncludeStatement::parse(Parser& parser) {
-    TRcIncludeStatement stmt(nullptr);
-    Parser::index_type start = parser.getMark();
-    if (parser.accept()->code != Token::K_INCLUDE) {
-        return stmt;
+#ifndef IMPORT_STATEMENT_HXX
+#define IMPORT_STATEMENT_HXX
+
+#include "ast/common.hxx"
+#include "ast/import_specifier_list.hxx"
+
+class ImportStatement;
+typedef const ImportStatement* TPCImportStatement;
+
+class ImportStatement : public virtual AstNode {
+public:
+    static TPCImportStatement parse(Parser& parser);
+
+    explicit ImportStatement(TPCImportSpecifierList imports)
+    : imports(imports) {
     }
-    auto includes = parseStrings(parser);
-    if (!includes->isEmpty()) {
-       parser.expectEndOfStatement(); //ignore result: and keep going...
-       stmt = std::make_shared<IncludeStatement>(includes);
-    } else {
-        parser.setMark(start);
-    }
-    return stmt;
-}
 
-IncludeStatement::~IncludeStatement() {
+    TPCImportSpecifierList imports;
 
-}
+    virtual ~ImportStatement();
+};
 
+#endif /* IMPORT_STATEMENT_HXX */
 

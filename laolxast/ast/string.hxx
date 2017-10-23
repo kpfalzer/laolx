@@ -23,33 +23,36 @@
  */
 
 /* 
- * File:   include_statement.hxx
+ * File:   string.hxx
  * Author: kwpfalzer
  *
- * Created on October 4, 2017, 5:53 PM
+ * Created on October 3, 2017, 6:19 PM
  */
 
-#ifndef INCLUDE_STATEMENT_HXX
-#define INCLUDE_STATEMENT_HXX
+#ifndef STRING_HXX
+#define STRING_HXX
 
+#include "laolx/list.hxx"
 #include "ast/common.hxx"
-#include "ast/string.hxx"
 
-class IncludeStatement;
-typedef std::shared_ptr<IncludeStatement> TRcIncludeStatement;
+class String;
+typedef const String* TPCString;
 
-class IncludeStatement : public virtual AstNode {
+class String : public virtual AstNode {
 public:
-    static TRcIncludeStatement parse(Parser& parser);
+    static TPCString parse(Parser& parser);
 
-    explicit IncludeStatement(const TRcStrings& includes)
-    : includes(includes) {
+    explicit String(const TRcToken& token) : value(token) {
     }
 
-    const TRcStrings includes;
+    bool isSingleQuoted() const;
 
-    virtual ~IncludeStatement();
+    bool isDoubleQuoted() const;
+
+    const TRcToken value;
+
+    virtual ~String();
 };
 
-#endif /* INCLUDE_STATEMENT_HXX */
+#endif /* STRING_HXX */
 

@@ -37,6 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/ast/import_specifier.o \
 	${OBJECTDIR}/ast/import_specifier_list.o \
+	${OBJECTDIR}/ast/import_statement.o \
+	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/parser/astnode.o \
 	${OBJECTDIR}/parser/lexer.o \
 	${OBJECTDIR}/parser/parser.o \
@@ -88,6 +90,16 @@ ${OBJECTDIR}/ast/import_specifier_list.o: ast/import_specifier_list.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_specifier_list.o ast/import_specifier_list.cxx
+
+${OBJECTDIR}/ast/import_statement.o: ast/import_statement.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_statement.o ast/import_statement.cxx
+
+${OBJECTDIR}/ast/string.o: ast/string.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/string.o ast/string.cxx
 
 ${OBJECTDIR}/parser/astnode.o: parser/astnode.cxx
 	${MKDIR} -p ${OBJECTDIR}/parser
@@ -152,6 +164,32 @@ ${OBJECTDIR}/ast/import_specifier_list_nomain.o: ${OBJECTDIR}/ast/import_specifi
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_specifier_list_nomain.o ast/import_specifier_list.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/import_specifier_list.o ${OBJECTDIR}/ast/import_specifier_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/import_statement_nomain.o: ${OBJECTDIR}/ast/import_statement.o ast/import_statement.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/import_statement.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_statement_nomain.o ast/import_statement.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/import_statement.o ${OBJECTDIR}/ast/import_statement_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/string_nomain.o: ${OBJECTDIR}/ast/string.o ast/string.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/string.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/string_nomain.o ast/string.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/string.o ${OBJECTDIR}/ast/string_nomain.o;\
 	fi
 
 ${OBJECTDIR}/parser/astnode_nomain.o: ${OBJECTDIR}/parser/astnode.o parser/astnode.cxx 

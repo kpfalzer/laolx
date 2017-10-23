@@ -22,36 +22,24 @@
  * THE SOFTWARE.
  */
 
-/* 
- * File:   string.hxx
- * Author: kwpfalzer
- *
- * Created on October 3, 2017, 6:19 PM
- */
+#include "ast/import_statement.hxx"
 
-#ifndef STRING_HXX
-#define STRING_HXX
+TPCImportStatement ImportStatement::parse(Parser& parser) {
+    if (parser.peek()->code != Token::K_IMPORT) {
+        return nullptr;
+    }
+    auto start = parser.getMark();
+    auto imports = ImportSpecifierList::parse(parser.advance());
+    if (!imports) {
+        parser.setMark(start);
+        return nullptr;
+    }
+    parser.expectEndOfStatement(); //ignore result: and keep going...
+    return new ImportStatement(imports);
+}
 
-#include "laolx/list.hxx"
-#include "ast/common.hxx"
+ImportStatement::~ImportStatement() {
+    delete imports;
+}
 
-class String;
-typedef std::shared_ptr<String> TRcString;
-
-class String : public virtual AstNode {
-public:
-    static TRcString parse(Parser& parser);
-
-    explicit String(const TRcToken& token);
-
-    bool isSingleQuoted() const;
-
-    bool isDoubleQuoted() const;
-
-    const TRcToken m_token;
-
-    virtual ~String();
-};
-
-#endif /* STRING_HXX */
 
