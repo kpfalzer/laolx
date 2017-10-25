@@ -74,6 +74,8 @@ VariableDeclaration:
 	Mutability? K_STATIC? SimpleTypeSpecifier? 
 		VarName (S_EQ InitializerClause)? 
 
+TypdefDeclaration: K_TYPEDEF SimpleTypeSpecifier IDENT;
+
 BaseClause:
 	S_COLON BaseSpecifierList
 
@@ -250,9 +252,11 @@ MemberVariableDeclaration:
 	Access? Mutability? K_STATIC? SimpleTypeSpecifier? VarOrAttrName 
 		(S_EQ InitializerClause)? 
 
+MethodName: IDENT
+
 MethodDeclaration:
 	Access? Mutability? K_STATIC? 
-		(	K_DEF IDENT
+		(	K_DEF MethodName
 		|	K_OPERATOR OverloadableOperator
 		)
 		MethodParametersDeclaration?

@@ -67,6 +67,7 @@ const Token::CodeByString Token::stKeywords({
     {"this", Token::K_THIS},
     {"throw", Token::K_THROW},
     {"true", Token::K_TRUE},
+    {"typedef", Token::K_TYPEDEF},
     {"unless", Token::K_UNLESS},
     {"until", Token::K_UNTIL},
     {"var", Token::K_VAR},

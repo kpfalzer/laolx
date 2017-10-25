@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   simple_type_specifier.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Mon Oct 23 17:41:53 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#ifndef SIMPLE_TYPE_SPECIFIER_HXX
+#define SIMPLE_TYPE_SPECIFIER_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+class SimpleTypeSpecifier;
+typedef const SimpleTypeSpecifier* TPCSimpleTypeSpecifier;
 
-class TypedefDeclaration : public virtual AstNode {
+class SimpleTypeSpecifier : public virtual AstNode {
 public:
-    static TPCTypedefDeclaration parse(Parser& parser);
+    static TPCSimpleTypeSpecifier parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+    explicit SimpleTypeSpecifier();
 
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
+    virtual ~SimpleTypeSpecifier();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+#endif /* SIMPLE_TYPE_SPECIFIER_HXX */

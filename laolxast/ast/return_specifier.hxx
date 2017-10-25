@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   return_specifier.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Mon Oct 23 17:55:39 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#ifndef RETURN_SPECIFIER_HXX
+#define RETURN_SPECIFIER_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+class ReturnSpecifier;
+typedef const ReturnSpecifier* TPCReturnSpecifier;
 
-class TypedefDeclaration : public virtual AstNode {
+class ReturnSpecifier : public virtual AstNode {
 public:
-    static TPCTypedefDeclaration parse(Parser& parser);
+	static TPCReturnSpecifier parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+	explicit ReturnSpecifier();
 
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
+	virtual ~ReturnSpecifier();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+#endif /* RETURN_SPECIFIER_HXX */

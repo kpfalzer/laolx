@@ -118,6 +118,7 @@ public:
         K_THIS,
         K_THROW,
         K_TRUE,
+        K_TYPEDEF,
         K_UNLESS,
         K_UNTIL,
         K_VAR,

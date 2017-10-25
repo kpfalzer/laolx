@@ -29,16 +29,15 @@
  */
 #include "ast/namespace_declaration.hxx"
 
-TRcNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
-    TRcNamespaceDeclaration result(nullptr);
+TPCNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
     if (parser.peek()->code != Token::K_NAMESPACE) {
-        return result;
+        return nullptr;
     }
-    Parser::index_type start = parser.getMark();
+    auto start = parser.getMark();
     auto name = NamespaceDeclarationName::parse(parser.advance());
     if (name) {
         if (parser.accept()->code == Token::S_LCURLY) {
-            TRcDeclarations decls;
+            auto decls = new laolx::Array<TPCDeclaration>();
             while (parser.hasMore()) {
                 auto decl = Declaration::parse(parser);
                 if (decl) {
@@ -49,19 +48,20 @@ TRcNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
             }
             if (parser.accept()->code == Token::S_RCURLY) {
                 decls->compact();
-                return std::make_shared<NamespaceDeclaration>(name, decls);
+                return new NamespaceDeclaration(name, decls);
             }
         }
     }
     parser.setMark(start);
-    return result;
+    return nullptr;
 }
 
-NamespaceDeclaration::NamespaceDeclaration(
-        const TRcNamespaceDeclarationName& name,
-        const TRcDeclarations& declarations)
-: name(name), declarations(declarations) {
+NamespaceDeclaration::NamespaceDeclaration(TPCNamespaceDeclarationName name, TPCDeclarations decls) 
+: name(name), declarations(decls) {
+
 }
 
 NamespaceDeclaration::~NamespaceDeclaration() {
+    delete name;
+    delete declarations;
 }

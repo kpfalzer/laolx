@@ -29,12 +29,53 @@
  */
 #include "ast/method_declaration.hxx"
 
-TRcMethodDeclaration MethodDeclaration::parse(Parser& parser) {
-	TRcMethodDeclaration result(nullptr);
-	//todo
-	return result;
+TPCMethodDeclaration MethodDeclaration::parse(Parser& parser) {
+    // Access? Mutability? K_STATIC? --- in any order
+    TPCAccess access = nullptr;
+    TPCMutability mutability = nullptr;
+    bool isStatic = false;
+    bool accessMutabilityStaticDone = false;
+    access = Access::parse(parser);
+    if (access) {
+        mutability = Mutability::parse(parser);
+        if (mutability) {
+            accessMutabilityStaticDone = true;
+            isStatic = (parser.peek()->code == Token::K_STATIC);
+            if (isStatic) {
+                parser.accept();
+            }
+        } else if (parser.peek()->code == Token::K_STATIC) {
+            isStatic = true;
+            mutability = Mutability::parse(parser.advance());
+            accessMutabilityStaticDone = true;
+        }
+    } else {
+        //redux !!!
+    }
 }
 
-MethodDeclaration::MethodDeclaration() {}
+MethodDeclaration::MethodDeclaration(
+        TPCAccess access,
+        TPCMutability mutability,
+        TPCType type,
+        TPCMethodParametersDeclaration parametersDeclaration,
+        TPCReturnSpecifier returnSpecifier,
+        TPCMethodBody body,
+        bool isStatic)
+: access(access),
+mutability(mutability),
+type(type),
+parametersDeclaration(parametersDeclaration),
+returnSpecifier(returnSpecifier),
+body(body),
+isStatic(isStatic) {
+}
 
-MethodDeclaration::~MethodDeclaration() {}
+MethodDeclaration::~MethodDeclaration() {
+    delete access;
+    delete mutability;
+    delete type;
+    delete parametersDeclaration;
+    delete returnSpecifier;
+    delete body;
+}

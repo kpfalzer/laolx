@@ -30,16 +30,40 @@
 #ifndef METHOD_DECLARATION_HXX
 #define METHOD_DECLARATION_HXX
 
+#include <utility>
 #include "ast/common.hxx"
+#include "ast/access.hxx"
+#include "ast/mutability.hxx"
+#include "ast/method_parameters_declaration.hxx"
+#include "ast/return_specifier.hxx"
+#include "ast/method_body.hxx"
 
 class MethodDeclaration;
 typedef const MethodDeclaration* TPCMethodDeclaration;
 
 class MethodDeclaration : public virtual AstNode {
 public:
+    typedef const std::pair<TRcToken, TPCAstNode>* TPCType;
+
     static TPCMethodDeclaration parse(Parser& parser);
 
-    explicit MethodDeclaration();
+    explicit MethodDeclaration(
+            TPCAccess access,
+            TPCMutability mutability,
+            TPCType type,
+            TPCMethodParametersDeclaration parametersDeclaration,
+            TPCReturnSpecifier returnSpecifier,
+            TPCMethodBody body,
+            bool isStatic = false
+            );
+
+    const TPCAccess access;
+    const TPCMutability mutability;
+    const TPCType type;
+    const TPCMethodParametersDeclaration parametersDeclaration;
+    const TPCReturnSpecifier returnSpecifier;
+    const TPCMethodBody body;
+    const bool isStatic;
 
     virtual ~MethodDeclaration();
 };

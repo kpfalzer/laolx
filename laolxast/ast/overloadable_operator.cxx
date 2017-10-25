@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   overloadable_operator.cxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Mon Oct 23 17:55:39 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#include "ast/overloadable_operator.hxx"
 
-#include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
+TPOverloadableOperator OverloadableOperator::parse(Parser& parser) {
+	TPOverloadableOperator result = nullptr;
+	//todo
+	return result;
+}
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+OverloadableOperator::OverloadableOperator() {}
 
-class TypedefDeclaration : public virtual AstNode {
-public:
-    static TPCTypedefDeclaration parse(Parser& parser);
-
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
-
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
-};
-
-#endif /* TYPEDEF_DECLARATION_HXX */
+OverloadableOperator::~OverloadableOperator() {}

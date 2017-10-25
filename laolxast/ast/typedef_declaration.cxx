@@ -29,12 +29,28 @@
  */
 #include "ast/typedef_declaration.hxx"
 
-TRcTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
-	TRcTypedefDeclaration result(nullptr);
-	//todo
-	return result;
+TPCTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
+    if (parser.peek()->code != Token::K_TYPEDEF) {
+        return nullptr;
+    }
+    auto start = parser.getMark();
+    auto actual = SimpleTypeSpecifier::parse(parser.advance());
+    if (actual) {
+        auto name = TypedefName::parse(parser);
+        if (name) {
+            return new TypedefDeclaration(actual, name);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-TypedefDeclaration::TypedefDeclaration() {}
+TypedefDeclaration::TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name) 
+: actualType(actualType), name(name) {
+}
 
-TypedefDeclaration::~TypedefDeclaration() {}
+
+TypedefDeclaration::~TypedefDeclaration() {
+    delete name;
+    delete actualType;
+}

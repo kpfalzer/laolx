@@ -21,32 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   linkage.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on October 4, 2017, 8:30 PM
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+
+#ifndef DECLARATION_HXX
+#define DECLARATION_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
+#include "ast/linkage.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+class Declaration;
+typedef const Declaration* TPCDeclaration;
 
-class TypedefDeclaration : public virtual AstNode {
+class Declaration : public virtual AstNode {
 public:
-    static TPCTypedefDeclaration parse(Parser& parser);
+    static TPCDeclaration parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+    explicit Declaration();//(const TRcLinkage& linkage, const TRcAstNode& actual);
 
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
+    //const TRcLinkage linkage;
+    //const TRcAstNode declaration;
     
-    virtual ~TypedefDeclaration();
+    virtual ~Declaration();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+
+#endif /* DECLARATION_HXX */
+

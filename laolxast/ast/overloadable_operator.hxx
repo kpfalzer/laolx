@@ -22,28 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   access.hxx
+ * File:   overloadable_operator.hxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Mon Oct 23 17:55:39 2017
  */
-#ifndef ACCESS_HXX
-#define ACCESS_HXX
+#ifndef OVERLOADABLE_OPERATOR_HXX
+#define OVERLOADABLE_OPERATOR_HXX
 
 #include "ast/common.hxx"
 
-class Access;
-typedef std::shared_ptr<Access> TRcAccess;
+class OverloadableOperator;
+typedef const OverloadableOperator* TPCOverloadableOperator;
 
-class Access : public virtual AstNode {
+class OverloadableOperator : public virtual AstNode {
 public:
-    static TRcAccess parse(Parser& parser);
+	static TPCOverloadableOperator parse(Parser& parser);
 
-    explicit Access(const TRcToken& access);
-    
-    const TRcToken  access;
+	explicit OverloadableOperator();
 
-    virtual ~Access();
+	virtual ~OverloadableOperator();
 };
 
-#endif /* ACCESS_HXX */
+#endif /* OVERLOADABLE_OPERATOR_HXX */

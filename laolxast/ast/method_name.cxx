@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   method_name.cxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Mon Oct 23 17:58:32 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#include "ast/method_name.hxx"
 
-#include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
+TPCMethodName MethodName::parse(Parser& parser) {
+    if (Token::IDENT != parser.peek()->code) {
+        return new MethodName(parser.accept());
+    }
+    return nullptr;
+}
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
-
-class TypedefDeclaration : public virtual AstNode {
-public:
-    static TPCTypedefDeclaration parse(Parser& parser);
-
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
-
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
-};
-
-#endif /* TYPEDEF_DECLARATION_HXX */
+MethodName::~MethodName() {
+}

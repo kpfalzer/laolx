@@ -22,31 +22,29 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   access.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Fri Oct  6 19:30:04 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#ifndef ACCESS_HXX
+#define ACCESS_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+class Access;
+typedef const Access* TPCAccess;
 
-class TypedefDeclaration : public virtual AstNode {
+class Access : public virtual AstNode {
 public:
-    static TPCTypedefDeclaration parse(Parser& parser);
+    static TPCAccess parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+    explicit Access(const TRcToken& access) : access(access) {
+    }
 
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
+    const TRcToken access;
+
+    virtual ~Access();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+#endif /* ACCESS_HXX */

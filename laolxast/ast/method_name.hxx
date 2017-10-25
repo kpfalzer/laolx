@@ -22,31 +22,29 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_declaration.hxx
- * Author: kpfalzer
+ * File:   method_name.hxx
+ * Author: kwpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Mon Oct 23 17:58:32 2017
  */
-#ifndef TYPEDEF_DECLARATION_HXX
-#define TYPEDEF_DECLARATION_HXX
+#ifndef METHOD_NAME_HXX
+#define METHOD_NAME_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
+class MethodName;
+typedef const MethodName* TPCMethodName;
 
-class TypedefDeclaration : public virtual AstNode {
+class MethodName : public virtual AstNode {
 public:
-    static TPCTypedefDeclaration parse(Parser& parser);
+    static TPCMethodName parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+    explicit MethodName(const TRcToken& name) : name(name) {
+    }
 
-    const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
-    virtual ~TypedefDeclaration();
+    const TRcToken name;
+
+    virtual ~MethodName();
 };
 
-#endif /* TYPEDEF_DECLARATION_HXX */
+#endif /* METHOD_NAME_HXX */

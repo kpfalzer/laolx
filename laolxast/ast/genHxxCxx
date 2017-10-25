@@ -79,8 +79,8 @@ def gen_cxx(filename, base_fn, cls_name)
 	str =<<L2
 #include "ast/#{base_fn}.hxx"
 
-TP#{cls_name} #{cls_name}::parse(Parser& parser) {
-	TP#{cls_name} result = nullptr;
+TPC#{cls_name} #{cls_name}::parse(Parser& parser) {
+	TPC#{cls_name} result = nullptr;
 	//todo
 	return result;
 }

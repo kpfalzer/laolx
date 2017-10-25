@@ -22,32 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   access.cxx
+ * File:   typedef_name.cxx
  * Author: kwpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Mon Oct 23 17:50:34 2017
  */
-#include "ast/access.hxx"
+#include "ast/typedef_name.hxx"
 
-//Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
-TRcAccess Access::parse(Parser& parser) {
-    TRcAccess result(nullptr);
-    switch(parser.peek()->code) {
-        case Token::K_PUBLIC:
-        case Token::K_PROTECTED:
-        case Token::K_PRIVATE:
-            result = std::make_shared<Access>(parser.accept());
-            break;
-        default:
-            ;//nothing
-    }
-    return result;
+TPTypedefName TypedefName::parse(Parser& parser) {
+	TPTypedefName result = nullptr;
+	//todo
+	return result;
 }
 
-Access::Access(const TRcToken& access) 
-: access(access) {
+TypedefName::TypedefName() {}
 
-}
-
-Access::~Access() {
-}
+TypedefName::~TypedefName() {}

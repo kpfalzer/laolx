@@ -21,35 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /* 
- * File:   linkage.hxx
+ * File:   access.cxx
  * Author: kwpfalzer
  *
- * Created on October 4, 2017, 8:30 PM
+ * Created on Fri Oct  6 19:30:04 2017
  */
+#include "ast/access.hxx"
 
-#ifndef DECLARATION_HXX
-#define DECLARATION_HXX
+//Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
+TPCAccess Access::parse(Parser& parser) {
+    switch(parser.peek()->code) {
+        case Token::K_PUBLIC:
+        case Token::K_PROTECTED:
+        case Token::K_PRIVATE:
+            return new Access(parser.accept());
+        default:
+            ;//nothing
+    }
+    return nullptr;
+}
 
-#include "ast/common.hxx"
-#include "ast/linkage.hxx"
-
-class Declaration;
-typedef std::shared_ptr<Declaration> TRcDeclaration;
-
-class Declaration : public virtual AstNode {
-public:
-    static TRcDeclaration parse(Parser& parser);
-
-    explicit Declaration(const TRcLinkage& linkage, const TRcAstNode& actual);
-
-    const TRcLinkage linkage;
-    const TRcAstNode declaration;
-    
-    virtual ~Declaration();
-};
-
-
-#endif /* DECLARATION_HXX */
-
+Access::~Access() {
+}

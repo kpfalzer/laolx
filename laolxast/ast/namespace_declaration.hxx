@@ -32,17 +32,24 @@
 
 #include "laolx/array.hxx"
 #include "ast/common.hxx"
+#include "ast/namespace_declaration_name.hxx"
+#include "ast/declaration.hxx"
 
 class NamespaceDeclaration;
 typedef const NamespaceDeclaration* TPCNamespaceDeclaration;
 
 class NamespaceDeclaration : public virtual AstNode {
 public:
+    typedef const laolx::Array<TPCDeclaration>* TPCDeclarations;
+    
     static TPCNamespaceDeclaration parse(Parser& parser);
 
-    explicit NamespaceDeclaration();
+    explicit NamespaceDeclaration(TPCNamespaceDeclarationName name, TPCDeclarations decls);
 
     virtual ~NamespaceDeclaration();
+    
+    const TPCNamespaceDeclarationName name;
+    const TPCDeclarations declarations;
 };
 
 #endif /* NAMESPACE_DECLARATION_HXX */

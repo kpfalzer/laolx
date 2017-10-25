@@ -35,7 +35,7 @@
 #include <memory>
 
 class AstNode;
-typedef std::shared_ptr<AstNode> TRcAstNode;
+typedef const AstNode* TPCAstNode;
 
 class AstNode {
 public:
