@@ -108,6 +108,13 @@ public:
      * Note: tokens is invalid/indeterminate unless return true.
      */
     bool accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes);
+    
+    /**
+     * Attempt to accept code.  Return true if next token is code (and accept).
+     * @param code code to accept.
+     * @return treu if code accepted; else false.
+     */
+    bool accept(Token::Code code);
 
     auto errorCount() const {
         return m_errorCount;

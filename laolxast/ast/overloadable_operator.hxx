@@ -35,13 +35,22 @@
 class OverloadableOperator;
 typedef const OverloadableOperator* TPCOverloadableOperator;
 
+/**
+ * Overloadable operator can be operator or accessor (setter/getter).
+ */
 class OverloadableOperator : public virtual AstNode {
 public:
-	static TPCOverloadableOperator parse(Parser& parser);
+    static TPCOverloadableOperator parse(Parser& parser);
 
-	explicit OverloadableOperator();
+    explicit OverloadableOperator(const TRcToken& opname, bool isSetter = false)
+    : opname(opname), isSetter(isSetter) {
+    }
 
-	virtual ~OverloadableOperator();
+    TRcToken opname;
+    // isSetter only applies if opname is IDENT
+    const bool isSetter;
+
+    virtual ~OverloadableOperator();
 };
 
 #endif /* OVERLOADABLE_OPERATOR_HXX */

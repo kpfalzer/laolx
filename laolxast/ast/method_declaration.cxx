@@ -28,30 +28,65 @@
  * Created on Mon Oct  9 14:17:22 2017
  */
 #include "ast/method_declaration.hxx"
+#include "method_name.hxx"
+#include "overloadable_operator.hxx"
 
 TPCMethodDeclaration MethodDeclaration::parse(Parser& parser) {
     // Access? Mutability? K_STATIC? --- in any order
     TPCAccess access = nullptr;
     TPCMutability mutability = nullptr;
-    bool isStatic = false;
-    bool accessMutabilityStaticDone = false;
-    access = Access::parse(parser);
-    if (access) {
-        mutability = Mutability::parse(parser);
-        if (mutability) {
-            accessMutabilityStaticDone = true;
-            isStatic = (parser.peek()->code == Token::K_STATIC);
-            if (isStatic) {
-                parser.accept();
-            }
-        } else if (parser.peek()->code == Token::K_STATIC) {
-            isStatic = true;
-            mutability = Mutability::parse(parser.advance());
-            accessMutabilityStaticDone = true;
+    TRcToken isStatic = nullptr;
+    auto start = parser.getMark();
+    // since we'll allow any order: try 3 times
+    for (int iter = 0; iter < 3; iter++) {
+        if (!access) {
+            access = Access::parse(parser);
+        }
+        if (!mutability) {
+            mutability = Mutability::parse(parser);
+        }
+        if (!isStatic && (Token::K_STATIC == parser.peek()->code)) {
+            isStatic = parser.accept();
+        }
+    }
+    TRcToken type = nullptr;
+    switch (parser.peek()->code) {
+        case Token::K_DEF: case Token::K_OPERATOR:
+            type = parser.accept();
+            break;
+        default:
+            parser.setMark(start);
+            return nullptr;
+    }
+    TPCAstNode xtra = nullptr;
+    if (type->code == Token::K_DEF) {
+        auto methodName = MethodName::parse(parser);
+        if (methodName) {
+            xtra = methodName;
         }
     } else {
-        //redux !!!
+        auto op = OverloadableOperator::parse(parser);
+        if (op) {
+            xtra = op;
+        }
     }
+    if (!xtra) {
+        parser.setMark(start);
+        return nullptr;
+    }
+    auto typeNode = new Type(type, xtra);
+    auto methodParamDecl = MethodParametersDeclaration::parse(parser);
+    auto returnSpecifier = ReturnSpecifier::parse(parser);
+    TPCMethodBody methodBody = nullptr;
+    if (parser.peek()->code == Token::S_LCURLY) {
+        methodBody = MethodBody::parse(parser.advance());
+        if (!methodBody || parser.peek()->code != Token::S_RCURLY) {
+            parser.setMark(start);
+            return nullptr;
+        }
+        assert(Token::S_RCURLY == parser.accept()->code);
+    }
+    return new MethodDeclaration(access, mutability, typeNode, methodParamDecl, returnSpecifier, methodBody);
 }
 
 MethodDeclaration::MethodDeclaration(

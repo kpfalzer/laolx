@@ -31,17 +31,22 @@
 #define RETURN_SPECIFIER_HXX
 
 #include "ast/common.hxx"
+#include "simple_type_specifier.hxx"
 
 class ReturnSpecifier;
 typedef const ReturnSpecifier* TPCReturnSpecifier;
 
 class ReturnSpecifier : public virtual AstNode {
 public:
-	static TPCReturnSpecifier parse(Parser& parser);
+    static TPCReturnSpecifier parse(Parser& parser);
 
-	explicit ReturnSpecifier();
+    explicit ReturnSpecifier(TPCSimpleTypeSpecifier specifier)
+    : specifier(specifier) {
+    }
 
-	virtual ~ReturnSpecifier();
+    TPCSimpleTypeSpecifier specifier;
+
+    virtual ~ReturnSpecifier();
 };
 
 #endif /* RETURN_SPECIFIER_HXX */

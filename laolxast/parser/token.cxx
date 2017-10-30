@@ -58,6 +58,7 @@ const Token::CodeByString Token::stKeywords({
     {"namespace", Token::K_NAMESPACE},
     {"new", Token::K_NEW},
     {"nil", Token::K_NIL},
+    {"operator", Token::K_OPERATOR},
     {"private", Token::K_PRIVATE},
     {"protected", Token::K_PROTECTED},
     {"public", Token::K_PUBLIC},
@@ -133,7 +134,9 @@ const Token::CodeByString Token::stSymbols({
     {"...", Token::S_DOT3},
     {"?", Token::S_QMARK},
     {"/", Token::S_DIV},
-    {"`", Token::S_BACKTIC},
+    {"[]", Token::S_SUBSCRIPT},
+    {"[]=", Token::S_SUBSCRIPT_EQ},
+    {"()", Token::S_FUNC_CALL}
 });
 
 Token::SymbolsByChar Token::stSymbolsByChar;

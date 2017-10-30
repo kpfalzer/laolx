@@ -109,6 +109,7 @@ public:
         K_NAMESPACE,
         K_NEW,
         K_NIL,
+        K_OPERATOR,
         K_PRIVATE,
         K_PROTECTED,
         K_PUBLIC,
@@ -182,7 +183,9 @@ public:
         S_DOT3,
         S_QMARK,
         S_DIV,
-        S_BACKTIC
+        S_SUBSCRIPT,
+        S_SUBSCRIPT_EQ,
+        S_FUNC_CALL
     };
 
     explicit Token(const Location& location, Code code, const laolx::String& text)

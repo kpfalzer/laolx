@@ -29,12 +29,14 @@
  */
 #include "ast/return_specifier.hxx"
 
-TPReturnSpecifier ReturnSpecifier::parse(Parser& parser) {
-	TPReturnSpecifier result = nullptr;
-	//todo
-	return result;
+TPCReturnSpecifier ReturnSpecifier::parse(Parser& parser) {
+    if (Token::S_EQGT != parser.peek()->code) {
+        return nullptr;
+    }
+    auto specifier = SimpleTypeSpecifier::parse(parser);
+    return (specifier) ? new ReturnSpecifier(specifier) : nullptr;
 }
 
-ReturnSpecifier::ReturnSpecifier() {}
-
-ReturnSpecifier::~ReturnSpecifier() {}
+ReturnSpecifier::~ReturnSpecifier() {
+    delete specifier;
+}

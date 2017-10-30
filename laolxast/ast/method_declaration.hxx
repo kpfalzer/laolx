@@ -43,7 +43,8 @@ typedef const MethodDeclaration* TPCMethodDeclaration;
 
 class MethodDeclaration : public virtual AstNode {
 public:
-    typedef const std::pair<TRcToken, TPCAstNode>* TPCType;
+    typedef std::pair<TRcToken, TPCAstNode> Type;
+    typedef const Type* TPCType;
 
     static TPCMethodDeclaration parse(Parser& parser);
 

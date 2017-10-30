@@ -29,12 +29,39 @@
  */
 #include "ast/overloadable_operator.hxx"
 
-TPOverloadableOperator OverloadableOperator::parse(Parser& parser) {
-	TPOverloadableOperator result = nullptr;
-	//todo
-	return result;
+TPCOverloadableOperator OverloadableOperator::parse(Parser& parser) {
+    bool isSetter = false;
+    TRcToken op = nullptr;
+    if (Token::IDENT == parser.peek()->code) {
+        op = parser.accept();
+        isSetter = parser.accept(Token::S_EQ);
+    } else {
+        switch(parser.peek()->code) {
+            case Token::S_AND: case Token::S_AND2: case Token::S_AND2EQ:
+            case Token::S_ANDEQ: 
+            case Token::S_CARET: case Token::S_DIV:
+            case Token::S_EQ: case Token::S_EXCLAMATION:
+            case Token::S_FUNC_CALL: 
+            case Token::S_GT: case Token::S_GT2:
+            case Token::S_GT2EQ: case Token::S_GTEQ:
+            case Token::S_LT2EQ: case Token::S_LTEQ:
+            case Token::S_LT: case Token::S_LT2:
+            case Token::S_OR: case Token::S_OR2: case Token::S_OR2EQ:
+            case Token::S_OREQ:
+            case Token::S_PCNT: case Token::S_PCNTEQ:
+            case Token::S_PLUS: case Token::S_PLUSEQ:
+            case Token::S_STAR: case Token::S_STAR2:
+            case Token::S_STAR2EQ: case Token::S_STAREQ:
+            case Token::S_SUBSCRIPT: case Token::S_SUBSCRIPT_EQ:
+            case Token::S_TIDLE:
+                op = parser.accept();
+                break;
+            default:
+                ;//do nothing
+        }
+    }
+    return (op) ? new OverloadableOperator(op, isSetter) : nullptr;
 }
 
-OverloadableOperator::OverloadableOperator() {}
-
-OverloadableOperator::~OverloadableOperator() {}
+OverloadableOperator::~OverloadableOperator() {
+}

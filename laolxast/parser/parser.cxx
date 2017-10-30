@@ -95,6 +95,14 @@ bool Parser::accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token:
     return false;
 }
 
+bool Parser::accept(Token::Code code) {
+    if (peek()->code != code) {
+        return false;
+    }
+    accept();
+    return true;
+}
+
 bool Parser::isEndOfStatement(bool skipOverSemi) {
     if (peek()->isEOF()) {
         return true;
