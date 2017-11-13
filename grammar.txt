@@ -1,3 +1,6 @@
+//NOTE: make sure we can easily specify a new member, as we go...
+//      In ruby, all we do is declare '@foo'
+
 //add decomposition declaration:
 // auto& [l1, l2] = expr_returns_2_elements
 
@@ -5,7 +8,7 @@ SourceFile: ImportStatement* (Declaration | Statement)* EOF
 
 ImportStatement: K_IMPORT ImportSpecifierList
 
-String: SQSTRING | DQSTRING
+String: SQSTRING | DQSTRING | EVALSTRING
 
 ImportSpecifierList: ImportSpecifier (COMMA ImportSpecifier)*
 
@@ -162,12 +165,18 @@ PrimaryExpression:
 |	IdExpression
 |	LambdaExpression
 
-// TODO: how to pass lambda arguments?
-// |a,b|=>foo {e1; e2, e3}
+/**
 LambdaExpression:
 	S_OR IDENT (COMMA IDENT)* S_OR 
 		ReturnSpecifier? 
 		S_LCURLY Statement* S_RCURLY
+ **/
+// Chnage to look more method-like
+LambdaExpression:
+	K_DEF MethodName
+	MethodParametersDeclaration?
+	ReturnSpecifier?
+	S_LCURLY MethodBody S_RCURLY
 
 Literal:
 	SYMBOL

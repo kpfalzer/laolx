@@ -21,27 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   unary_expression.hxx
+ * Author: kwpfalzer
+ *
+ * Created on Mon Nov 13 11:03:15 2017
+ */
+#ifndef UNARY_EXPRESSION_HXX
+#define UNARY_EXPRESSION_HXX
 
-#include "ast/string.hxx"
+#include "ast/common.hxx"
+#include "ast/postfix_expression.hxx"
+#include "ast/unary_operator.hxx"
 
-TPCString String::parse(Parser& parser) {
-    switch (parser.peek()->code) {
-        case Token::SQSTRING: case Token::DQSTRING: case Token::EVALSTRING:
-            return new String(parser.accept());
-        default:
-            return nullptr;
-    }
-}
+class UnaryExpression;
+typedef const UnaryExpression* TPCUnaryExpression;
 
-bool String::isDoubleQuoted() const {
-    return value->code == Token::DQSTRING;
-}
+class UnaryExpression : public virtual AstNode {
+public:
+    static TPCUnaryExpression parse(Parser& parser);
 
-bool String::isSingleQuoted() const {
-    return value->code == Token::SQSTRING;
-}
+    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
+    
+    explicit UnaryExpression(TPCPostfixExpression expr);
+    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
+    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
 
-String::~String() {
+    const EType type;
+    
+    virtual ~UnaryExpression();
+    
+private:
+    union Expr {
+        TPCPostfixExpression m_postfixExpr;
+        TPCUnaryExpression m_preopExpr;
+        struct {
+            TPCUnaryOperator m_uop;
+            TPCUnaryExpression m_expr;
+        };
+    };
+    
+    Expr m_expr;
+};
 
-}
-
+#endif /* UNARY_EXPRESSION_HXX */

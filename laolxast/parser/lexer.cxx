@@ -46,7 +46,7 @@ TRcToken Lexer::accept() {
         next();
     }
     token = m_token;
-    if (! isEOF()) {
+    if (!isEOF()) {
         m_token.reset();
     }
     return token;
@@ -242,7 +242,11 @@ TRcToken Lexer::quoted(char quote) {
                 return quote == ch;
             },
     [quote, this]() {
-        return getToken(('"' == quote) ? Token::DQSTRING : Token::SQSTRING);
+        return getToken(('"' == quote)
+                ? Token::DQSTRING
+                : (('\'' == quote)
+                ? Token::SQSTRING
+                : Token::EVALSTRING));
     },
     1,
     true,
@@ -369,7 +373,7 @@ TRcToken Lexer::next() {
     if (matchTo("/*")) {
         return blockComment();
     }
-    if (('"' == ch) || ('\'' == ch)) {
+    if (('"' == ch) || ('\'' == ch) || ('`' == ch)) {
         return quoted(ch);
     }
     if (matchTo("%r{", false)) {

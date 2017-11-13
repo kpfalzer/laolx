@@ -83,6 +83,7 @@ public:
         ATTR_DECL_RW, //@+IDENT
         DQSTRING, //double-quoted string
         SQSTRING, //single-quoted string
+        EVALSTRING, // `${expr}...` as in javascript
         REGEXP, //%r{...}
         INT,
         FLOAT,
@@ -127,7 +128,7 @@ public:
         K_WHILE,
         //
         // S_xxx are symbols
-        S_TIDLE,
+        S_TILDE,
         S_EXCLAMATION,
         S_AT,
         S_POUND,
@@ -156,6 +157,7 @@ public:
         S_NOTMATCH,
         S_PLUSEQ,
         S_MINUSEQ,
+        S_MINUS2,
         S_LCURLY,
         S_RCURLY,
         S_LBRACK,

@@ -21,27 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   unary_operator.cxx
+ * Author: kwpfalzer
+ *
+ * Created on Fri Nov 10 07:13:54 2017
+ */
+#include "ast/unary_operator.hxx"
 
-#include "ast/string.hxx"
-
-TPCString String::parse(Parser& parser) {
+TPCUnaryOperator UnaryOperator::parse(Parser& parser) {
     switch (parser.peek()->code) {
-        case Token::SQSTRING: case Token::DQSTRING: case Token::EVALSTRING:
-            return new String(parser.accept());
+        case Token::S_PLUS: 
+        case Token::S_MINUS: 
+        case Token::S_EXCLAMATION: 
+        case Token::S_TILDE:
+            return new UnaryOperator(parser.accept());
         default:
             return nullptr;
     }
 }
 
-bool String::isDoubleQuoted() const {
-    return value->code == Token::DQSTRING;
+UnaryOperator::~UnaryOperator() {
 }
-
-bool String::isSingleQuoted() const {
-    return value->code == Token::SQSTRING;
-}
-
-String::~String() {
-
-}
-

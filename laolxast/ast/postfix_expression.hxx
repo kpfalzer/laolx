@@ -21,27 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   postfix_expression.hxx
+ * Author: kwpfalzer
+ *
+ * Created on Mon Nov 13 11:03:15 2017
+ */
+#ifndef POSTFIX_EXPRESSION_HXX
+#define POSTFIX_EXPRESSION_HXX
 
-#include "ast/string.hxx"
+#include "ast/common.hxx"
 
-TPCString String::parse(Parser& parser) {
-    switch (parser.peek()->code) {
-        case Token::SQSTRING: case Token::DQSTRING: case Token::EVALSTRING:
-            return new String(parser.accept());
-        default:
-            return nullptr;
-    }
-}
+class PostfixExpression;
+typedef const PostfixExpression* TPCPostfixExpression;
 
-bool String::isDoubleQuoted() const {
-    return value->code == Token::DQSTRING;
-}
+class PostfixExpression : public virtual AstNode {
+public:
+	static TPCPostfixExpression parse(Parser& parser);
 
-bool String::isSingleQuoted() const {
-    return value->code == Token::SQSTRING;
-}
+	explicit PostfixExpression();
 
-String::~String() {
+	virtual ~PostfixExpression();
+};
 
-}
-
+#endif /* POSTFIX_EXPRESSION_HXX */

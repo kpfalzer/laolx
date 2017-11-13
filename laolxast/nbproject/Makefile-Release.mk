@@ -51,11 +51,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/namespace_declaration_name.o \
 	${OBJECTDIR}/ast/namespace_name.o \
 	${OBJECTDIR}/ast/overloadable_operator.o \
+	${OBJECTDIR}/ast/postfix_expression.o \
 	${OBJECTDIR}/ast/return_specifier.o \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
 	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/typedef_name.o \
+	${OBJECTDIR}/ast/unary_expression.o \
+	${OBJECTDIR}/ast/unary_operator.o \
 	${OBJECTDIR}/ast/variable_declaration.o \
 	${OBJECTDIR}/parser/astnode.o \
 	${OBJECTDIR}/parser/lexer.o \
@@ -179,6 +182,11 @@ ${OBJECTDIR}/ast/overloadable_operator.o: ast/overloadable_operator.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/overloadable_operator.o ast/overloadable_operator.cxx
 
+${OBJECTDIR}/ast/postfix_expression.o: ast/postfix_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/postfix_expression.o ast/postfix_expression.cxx
+
 ${OBJECTDIR}/ast/return_specifier.o: ast/return_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -203,6 +211,16 @@ ${OBJECTDIR}/ast/typedef_name.o: ast/typedef_name.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/typedef_name.o ast/typedef_name.cxx
+
+${OBJECTDIR}/ast/unary_expression.o: ast/unary_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_expression.o ast/unary_expression.cxx
+
+${OBJECTDIR}/ast/unary_operator.o: ast/unary_operator.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_operator.o ast/unary_operator.cxx
 
 ${OBJECTDIR}/ast/variable_declaration.o: ast/variable_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -456,6 +474,19 @@ ${OBJECTDIR}/ast/overloadable_operator_nomain.o: ${OBJECTDIR}/ast/overloadable_o
 	    ${CP} ${OBJECTDIR}/ast/overloadable_operator.o ${OBJECTDIR}/ast/overloadable_operator_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/postfix_expression_nomain.o: ${OBJECTDIR}/ast/postfix_expression.o ast/postfix_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/postfix_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/postfix_expression_nomain.o ast/postfix_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/postfix_expression.o ${OBJECTDIR}/ast/postfix_expression_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/return_specifier_nomain.o: ${OBJECTDIR}/ast/return_specifier.o ast/return_specifier.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/return_specifier.o`; \
@@ -519,6 +550,32 @@ ${OBJECTDIR}/ast/typedef_name_nomain.o: ${OBJECTDIR}/ast/typedef_name.o ast/type
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/typedef_name_nomain.o ast/typedef_name.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/typedef_name.o ${OBJECTDIR}/ast/typedef_name_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/unary_expression_nomain.o: ${OBJECTDIR}/ast/unary_expression.o ast/unary_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/unary_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_expression_nomain.o ast/unary_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/unary_expression.o ${OBJECTDIR}/ast/unary_expression_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/unary_operator_nomain.o: ${OBJECTDIR}/ast/unary_operator.o ast/unary_operator.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/unary_operator.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_operator_nomain.o ast/unary_operator.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/unary_operator.o ${OBJECTDIR}/ast/unary_operator_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/variable_declaration_nomain.o: ${OBJECTDIR}/ast/variable_declaration.o ast/variable_declaration.cxx 

@@ -21,27 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   unary_operator.hxx
+ * Author: kwpfalzer
+ *
+ * Created on Fri Nov 10 07:13:54 2017
+ */
+#ifndef UNARY_OPERATOR_HXX
+#define UNARY_OPERATOR_HXX
 
-#include "ast/string.hxx"
+#include "ast/common.hxx"
 
-TPCString String::parse(Parser& parser) {
-    switch (parser.peek()->code) {
-        case Token::SQSTRING: case Token::DQSTRING: case Token::EVALSTRING:
-            return new String(parser.accept());
-        default:
-            return nullptr;
+class UnaryOperator;
+typedef const UnaryOperator* TPCUnaryOperator;
+
+class UnaryOperator : public virtual AstNode {
+public:
+    static TPCUnaryOperator parse(Parser& parser);
+
+    explicit UnaryOperator(const TRcToken& unaryOp) : unaryOp(unaryOp) {
     }
-}
 
-bool String::isDoubleQuoted() const {
-    return value->code == Token::DQSTRING;
-}
+    const TRcToken unaryOp;
 
-bool String::isSingleQuoted() const {
-    return value->code == Token::SQSTRING;
-}
+    virtual ~UnaryOperator();
+};
 
-String::~String() {
-
-}
-
+#endif /* UNARY_OPERATOR_HXX */

@@ -24,12 +24,15 @@
       <itemPath>ast/namespace_name.hxx</itemPath>
       <itemPath>ast/overloadable_operator.hxx</itemPath>
       <itemPath>parser/parser.hxx</itemPath>
+      <itemPath>ast/postfix_expression.hxx</itemPath>
       <itemPath>ast/return_specifier.hxx</itemPath>
       <itemPath>ast/simple_type_specifier.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
       <itemPath>ast/typedef_name.hxx</itemPath>
+      <itemPath>ast/unary_expression.hxx</itemPath>
+      <itemPath>ast/unary_operator.hxx</itemPath>
       <itemPath>ast/variable_declaration.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -58,12 +61,15 @@
       <itemPath>ast/namespace_name.cxx</itemPath>
       <itemPath>ast/overloadable_operator.cxx</itemPath>
       <itemPath>parser/parser.cxx</itemPath>
+      <itemPath>ast/postfix_expression.cxx</itemPath>
       <itemPath>ast/return_specifier.cxx</itemPath>
       <itemPath>ast/simple_type_specifier.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
       <itemPath>ast/typedef_name.cxx</itemPath>
+      <itemPath>ast/unary_expression.cxx</itemPath>
+      <itemPath>ast/unary_operator.cxx</itemPath>
       <itemPath>ast/variable_declaration.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -188,6 +194,10 @@
       </item>
       <item path="ast/overloadable_operator.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/postfix_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/postfix_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/return_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/return_specifier.hxx" ex="false" tool="3" flavor2="0">
@@ -207,6 +217,14 @@
       <item path="ast/typedef_name.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/unary_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/unary_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/unary_operator.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/unary_operator.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -367,6 +385,10 @@
       </item>
       <item path="ast/overloadable_operator.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/postfix_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/postfix_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/return_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/return_specifier.hxx" ex="false" tool="3" flavor2="0">
@@ -386,6 +408,14 @@
       <item path="ast/typedef_name.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/unary_expression.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/unary_expression.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/unary_operator.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/unary_operator.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>

@@ -78,7 +78,7 @@ const Token::CodeByString Token::stKeywords({
 
 
 const Token::CodeByString Token::stSymbols({
-    {"~", Token::S_TIDLE},
+    {"~", Token::S_TILDE},
     {"!", Token::S_EXCLAMATION},
     {"@", Token::S_AT},
     {"#", Token::S_POUND},
@@ -99,6 +99,7 @@ const Token::CodeByString Token::stSymbols({
     {"(", Token::S_LPAREN},
     {")", Token::S_RPAREN},
     {"-", Token::S_MINUS},
+    {"--", TOken::S_MINUS2},
     {"+", Token::S_PLUS},
     {"++", Token::S_PLUS2},
     {"=", Token::S_EQ},
