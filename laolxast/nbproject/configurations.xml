@@ -40,6 +40,8 @@
       <itemPath>ast/simple_type_specifier.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>ast/symbols.hxx</itemPath>
+      <itemPath>ast/template_argument.hxx</itemPath>
+      <itemPath>ast/template_argument_list.hxx</itemPath>
       <itemPath>ast/template_id.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
       <itemPath>ast/type_name.hxx</itemPath>
@@ -94,6 +96,8 @@
       <itemPath>ast/simple_type_specifier.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>ast/symbols.cxx</itemPath>
+      <itemPath>ast/template_argument.cxx</itemPath>
+      <itemPath>ast/template_argument_list.cxx</itemPath>
       <itemPath>ast/template_id.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
       <itemPath>ast/type_name.cxx</itemPath>
@@ -292,6 +296,14 @@
       <item path="ast/symbols.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/symbols.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_argument.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_argument.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_argument_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_argument_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/template_id.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -549,6 +561,14 @@
       <item path="ast/symbols.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/symbols.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_argument.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_argument.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_argument_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_argument_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/template_id.cxx" ex="false" tool="1" flavor2="0">
       </item>

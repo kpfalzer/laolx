@@ -30,18 +30,25 @@
 #ifndef TEMPLATE_ID_HXX
 #define TEMPLATE_ID_HXX
 
+#include <array>
 #include "ast/common.hxx"
+#include "ast/simple_template_id.hxx"
+#include "ast/operator_function_id.hxx"
+#include "ast/template_argument_list.hxx"
 
 class TemplateId;
 typedef const TemplateId* TPCTemplateId;
 
 class TemplateId : public virtual AstNode {
 public:
-	static TPCTemplateId parse(Parser& parser);
+    static TPCTemplateId parse(Parser& parser);
 
-	explicit TemplateId();
+    explicit TemplateId(TPCSimpleTemplateId simpl);
+    explicit TemplateId(TPCOperatorFunctionId func, TPCTemplateArgumentList args);
 
-	virtual ~TemplateId();
+    const std::array<TPCAstNode, 2> nodes;
+    
+    virtual ~TemplateId();
 };
 
 #endif /* TEMPLATE_ID_HXX */

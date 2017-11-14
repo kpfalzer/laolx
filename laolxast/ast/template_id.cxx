@@ -30,11 +30,35 @@
 #include "ast/template_id.hxx"
 
 TPCTemplateId TemplateId::parse(Parser& parser) {
-	TPCTemplateId result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    {
+        auto simpl = SimpleTemplateId::parse(parser);
+        if (simpl) {
+            return new TemplateId(simpl);
+        }
+    }
+    {
+        auto op = OperatorFunctionId::parse(parser);
+        if (op) {
+            if (Token::S_LT == parser.accept()->code) {
+                auto args = TemplateArgumentList::parse(parser);
+                if (Token::S_GT == parser.accept()->code) {
+                    return new TemplateId(op, args);
+                }
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-TemplateId::TemplateId() {}
+TemplateId::TemplateId(TPCSimpleTemplateId simpl) 
+: nodes({simpl, nullptr}) {
+}
 
-TemplateId::~TemplateId() {}
+TemplateId::TemplateId(TPCOperatorFunctionId func, TPCTemplateArgumentList args) 
+: nodes({func, args}) {
+}
+
+TemplateId::~TemplateId() {
+}

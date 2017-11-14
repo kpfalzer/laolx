@@ -31,17 +31,21 @@
 #define SIMPLE_TEMPLATE_ID_HXX
 
 #include "ast/common.hxx"
+#include "ast/template_argument_list.hxx"
 
 class SimpleTemplateId;
 typedef const SimpleTemplateId* TPCSimpleTemplateId;
 
 class SimpleTemplateId : public virtual AstNode {
 public:
-	static TPCSimpleTemplateId parse(Parser& parser);
+    static TPCSimpleTemplateId parse(Parser& parser);
 
-	explicit SimpleTemplateId();
+    explicit SimpleTemplateId(const TRcToken& ident, TPCTemplateArgumentList args);
 
-	virtual ~SimpleTemplateId();
+    const TRcToken name;
+    const TPCTemplateArgumentList args;
+    
+    virtual ~SimpleTemplateId();
 };
 
 #endif /* SIMPLE_TEMPLATE_ID_HXX */

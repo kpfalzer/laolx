@@ -68,6 +68,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
 	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/ast/symbols.o \
+	${OBJECTDIR}/ast/template_argument.o \
+	${OBJECTDIR}/ast/template_argument_list.o \
 	${OBJECTDIR}/ast/template_id.o \
 	${OBJECTDIR}/ast/type_name.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
@@ -283,6 +285,16 @@ ${OBJECTDIR}/ast/symbols.o: ast/symbols.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx
+
+${OBJECTDIR}/ast/template_argument.o: ast/template_argument.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_argument.o ast/template_argument.cxx
+
+${OBJECTDIR}/ast/template_argument_list.o: ast/template_argument_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_argument_list.o ast/template_argument_list.cxx
 
 ${OBJECTDIR}/ast/template_id.o: ast/template_id.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -795,6 +807,32 @@ ${OBJECTDIR}/ast/symbols_nomain.o: ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols_nomain.o ast/symbols.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/symbols.o ${OBJECTDIR}/ast/symbols_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/template_argument_nomain.o: ${OBJECTDIR}/ast/template_argument.o ast/template_argument.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/template_argument.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_argument_nomain.o ast/template_argument.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/template_argument.o ${OBJECTDIR}/ast/template_argument_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/template_argument_list_nomain.o: ${OBJECTDIR}/ast/template_argument_list.o ast/template_argument_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/template_argument_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_argument_list_nomain.o ast/template_argument_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/template_argument_list.o ${OBJECTDIR}/ast/template_argument_list_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/template_id_nomain.o: ${OBJECTDIR}/ast/template_id.o ast/template_id.cxx 

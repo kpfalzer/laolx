@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_name.cxx
+ * File:   template_argument.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:50:34 2017
+ * Created on Tue Nov 14 15:43:26 2017
  */
-#include "ast/typedef_name.hxx"
+#ifndef TEMPLATE_ARGUMENT_HXX
+#define TEMPLATE_ARGUMENT_HXX
 
-TPCTypedefName TypedefName::parse(Parser& parser) {
-    if (Token::IDENT == parser.peek()->code) {
-        return new TypedefName(parser.accept());
-    }
-    return nullptr;
-}
+#include "ast/common.hxx"
 
-TypedefName::~TypedefName() {
-}
+class TemplateArgument;
+typedef const TemplateArgument* TPCTemplateArgument;
+
+class TemplateArgument : public virtual AstNode {
+public:
+	static TPCTemplateArgument parse(Parser& parser);
+
+	explicit TemplateArgument();
+
+	virtual ~TemplateArgument();
+};
+
+#endif /* TEMPLATE_ARGUMENT_HXX */

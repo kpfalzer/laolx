@@ -37,11 +37,14 @@ typedef const TypedefName* TPCTypedefName;
 
 class TypedefName : public virtual AstNode {
 public:
-	static TPCTypedefName parse(Parser& parser);
+    static TPCTypedefName parse(Parser& parser);
 
-	explicit TypedefName();
+    explicit TypedefName(const TRcToken& name) : name(name) {
+    }
 
-	virtual ~TypedefName();
+    const TRcToken name;
+
+    virtual ~TypedefName();
 };
 
 #endif /* TYPEDEF_NAME_HXX */

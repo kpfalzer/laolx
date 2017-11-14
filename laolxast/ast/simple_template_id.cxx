@@ -30,11 +30,24 @@
 #include "ast/simple_template_id.hxx"
 
 TPCSimpleTemplateId SimpleTemplateId::parse(Parser& parser) {
-	TPCSimpleTemplateId result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    if (Token::IDENT == parser.peek()->code) {
+        auto name = parser.accept();
+        if (Token::S_LT == parser.accept()->code) {
+            auto args = TemplateArgumentList::parse(parser);
+            if (Token::S_GT == parser.accept()->code) {
+                return new SimpleTemplateId(name, args);
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-SimpleTemplateId::SimpleTemplateId() {}
+SimpleTemplateId::SimpleTemplateId(const TRcToken& ident, TPCTemplateArgumentList args)
+: name(ident), args(args) {
+}
 
-SimpleTemplateId::~SimpleTemplateId() {}
+SimpleTemplateId::~SimpleTemplateId() {
+    delete args;
+}

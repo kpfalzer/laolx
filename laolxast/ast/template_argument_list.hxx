@@ -22,19 +22,31 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_name.cxx
+ * File:   template_argument_list.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:50:34 2017
+ * Created on Tue Nov 14 15:30:41 2017
  */
-#include "ast/typedef_name.hxx"
+#ifndef TEMPLATE_ARGUMENT_LIST_HXX
+#define TEMPLATE_ARGUMENT_LIST_HXX
 
-TPCTypedefName TypedefName::parse(Parser& parser) {
-    if (Token::IDENT == parser.peek()->code) {
-        return new TypedefName(parser.accept());
-    }
-    return nullptr;
-}
+#include "ast/common.hxx"
+#include "ast/template_argument.hxx"
 
-TypedefName::~TypedefName() {
-}
+class TemplateArgumentList;
+typedef const TemplateArgumentList* TPCTemplateArgumentList;
+
+class TemplateArgumentList : public virtual AstNode {
+public:
+    typedef laolx::Array<TPCTemplateArgument> TArgs;
+    
+    static TPCTemplateArgumentList parse(Parser& parser);
+
+    explicit TemplateArgumentList(const TArgs& args);
+
+    const TArgs args;
+    
+    virtual ~TemplateArgumentList();
+};
+
+#endif /* TEMPLATE_ARGUMENT_LIST_HXX */
