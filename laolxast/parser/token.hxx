@@ -36,11 +36,13 @@
 #include <utility>
 #include "laolx/map.hxx"
 #include "laolx/string.hxx"
+#include "astnode.hxx"
 
 class Token;
 class Location;
 
 typedef std::shared_ptr<Token> TRcToken;
+typedef const Token* TPCToken;
 
 class Location {
 public:
@@ -65,7 +67,7 @@ public:
     const colnum_type colnum;
 };
 
-class Token {
+class Token : public AstNode {
 public:
     static const laolx::String EMPTY;
 

@@ -37,11 +37,22 @@ typedef const PostfixExpression* TPCPostfixExpression;
 
 class PostfixExpression : public virtual AstNode {
 public:
-	static TPCPostfixExpression parse(Parser& parser);
+    static TPCPostfixExpression parse(Parser& parser);
 
-	explicit PostfixExpression();
-
-	virtual ~PostfixExpression();
+    virtual ~PostfixExpression();
+    
+private:
+    class X;
+    class Y;
+    typedef const X* TPCX;
+    typedef const Y* TPCY;
+    
+    TPCX m_x;
+    TPCY m_y;
+    
+public:
+    explicit PostfixExpression(TPCY y, TPCX x);
+    
 };
 
 #endif /* POSTFIX_EXPRESSION_HXX */

@@ -61,33 +61,19 @@ TPCUnaryExpression UnaryExpression::parse(Parser& parser) {
     return nullptr;
 }
 
-UnaryExpression::UnaryExpression(TPCPostfixExpression expr) 
-: type(ePostfix) {
-    m_expr.m_postfixExpr = expr;
+UnaryExpression::UnaryExpression(TPCPostfixExpression expr)
+: type(ePostfix), nodes({expr, nullptr}) {
 }
 
-UnaryExpression::UnaryExpression(const TRcToken& preop, TPCUnaryExpression expr) 
-: type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr) {
-    m_expr.m_preopExpr = expr;
+UnaryExpression::UnaryExpression(const TRcToken& preop, TPCUnaryExpression expr)
+: type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr),
+    nodes({new Token(*preop), nullptr}) {
 }
 
-UnaryExpression::UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr)
-: type(eUopExpr) {
-    m_expr.m_uop = uop;
-    m_expr.m_expr = expr;
+UnaryExpression::UnaryExpression(TPCUnaryOperator uop, TPCUnaryExpression expr)
+: type(eUopExpr), nodes({uop, expr}) {
 }
 
 UnaryExpression::~UnaryExpression() {
-    switch (type) {
-        case ePreDecr: case ePreIncr:
-            delete m_expr.m_preopExpr;
-            break;
-        case ePostfix:
-            delete m_expr.m_postfixExpr;
-            break;
-        default:
-            delete m_expr.m_uop;
-            delete m_expr.m_expr;
-            break;
-    }
+    //NOTE: presumable: delete nodes[i]...
 }

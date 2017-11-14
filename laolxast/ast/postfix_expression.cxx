@@ -27,14 +27,206 @@
  *
  * Created on Mon Nov 13 11:03:15 2017
  */
+#include <array>
 #include "ast/postfix_expression.hxx"
+#include "ast/primary_expression.hxx"
+#include "ast/simple_type_specifier.hxx"
+#include "ast/expression_list.hxx"
+#include "ast/braced_init_list.hxx"
+#include "ast/expression.hxx"
+#include "ast/id_expression.hxx"
 
-TPCPostfixExpression PostfixExpression::parse(Parser& parser) {
-	TPCPostfixExpression result = nullptr;
-	//todo
-	return result;
+//PostfixExpressionY:
+//  (alt1)  PrimaryExpression
+//| (alt2)  SimpleTypeSpecifier S_LPAREN ExpressionList? S_RPAREN
+//| (alt3)  SimpleTypeSpecifier BracedInitList
+
+class PostfixExpression::Y {
+public:
+
+    static PostfixExpression::TPCY parse(Parser& parser) {
+        auto start = parser.getMark();
+        {
+            auto pexpr = PrimaryExpression::parse(parser);
+            if (pexpr) {
+                return new Y(pexpr);
+            }
+        }
+        {
+            auto stype = SimpleTypeSpecifier::parse(parser);
+            if (stype) {
+                if (Token::S_LPAREN == parser.accept()->code) {
+                    auto elist = ExpressionList::parse(parser);
+                    if (Token::S_RPAREN == parser.accept()->code) {
+                        return new Y(stype, elist);
+                    }
+                }
+            }
+        }
+        parser.setMark(start);
+        {
+            auto stype = SimpleTypeSpecifier::parse(parser);
+            if (stype) {
+                auto init = BracedInitList::parse(parser);
+                if (init) {
+                    return new Y(stype, init);
+                }
+            }
+        }
+        parser.setMark(start);
+        return nullptr;
+    }
+
+    enum EType {
+        eAlt1, eAlt2, eAlt3
+    };
+
+    explicit Y(TPCPrimaryExpression expr)
+    : type(eAlt1), nodes({expr, nullptr}) {
+    }
+
+    explicit Y(TPCSimpleTypeSpecifier spec, TPCExpressionList exprs)
+    : type(eAlt2), nodes({spec, exprs}) {
+    }
+
+    explicit Y(TPCSimpleTypeSpecifier spec, TPCBracedInitList init)
+    : type(eAlt3), nodes({spec, init}) {
+    }
+
+    const EType type;
+    const std::array<TPCAstNode, 2> nodes;
+
+    virtual ~Y() {
+        //default: destroys each element
+    }
+};
+
+//PostfixExpressionX
+//  (alt1)  S_LBRACK Expression S_RBRACK PostfixExpressionX?
+//| (alt2)  S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
+//| (alt3)  S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
+//| (alt4)  DOT IdExpression PostfixExpressionX?
+//| (alt5)  (S_PLUS2 | S_MINUS2) PostfixExpressionX?
+
+class PostfixExpression::X {
+public:
+
+    enum EType {
+        eAlt1, eAlt2, eAlt3, eAlt4, ePreIncr, ePreDecr
+    };
+
+    static PostfixExpression::TPCX parse(Parser& parser) {
+        auto start = parser.getMark();
+        {
+            if (Token::S_LBRACK == parser.accept()->code) {
+                auto expr = Expression::parse(parser);
+                if (expr && (Token::S_RBRACK == parser.accept()->code)) {
+                    auto pfe = PostfixExpression::X::parse(parser);
+                    return new X(expr, pfe);
+                }
+            }
+        }
+        parser.setMark(start);
+        {
+            if (Token::S_LBRACK == parser.accept()->code) {
+                auto init = BracedInitList::parse(parser);
+                if (Token::S_RBRACK == parser.accept()->code) {
+                    auto pfe = PostfixExpression::X::parse(parser);
+                    return new X(init, pfe);
+                }
+            }
+        }
+        parser.setMark(start);
+        {
+            if (Token::S_LPAREN == parser.accept()->code) {
+                auto elist = ExpressionList::parse(parser);
+                if (Token::S_RPAREN == parser.accept()->code) {
+                    auto pfe = PostfixExpression::X::parse(parser);
+                    return new X(elist, pfe);
+                }
+            }
+        }
+        parser.setMark(start);
+        {
+            if (Token::S_DOT == parser.accept()->code) {
+                auto expr = IdExpression::parse(parser);
+                if (expr) {
+                    auto pfe = PostfixExpression::X::parse(parser);
+                    return new X(expr, pfe);
+                }
+            }
+        }
+        parser.setMark(start);
+        {
+            auto tok = parser.accept();
+            if (Token::S_PLUS2 == tok->code || Token::S_MINUS2 == tok->code) {
+                auto pfe = PostfixExpression::X::parse(parser);
+                return new X(tok, pfe);
+            }
+        }
+        parser.setMark(start);
+        return nullptr;
+    }
+
+    explicit X(TPCExpression expr, TPCX post)
+    : type(eAlt1),
+    node(expr),
+    x(post) {
+    }
+
+    explicit X(TPCBracedInitList init, TPCX post)
+    : type(eAlt2),
+    node(init),
+    x(post) {
+    }
+
+    explicit X(TPCExpressionList elist, TPCX post)
+    : type(eAlt3),
+    node(elist),
+    x(post) {
+    }
+
+    explicit X(TPCIdExpression expr, TPCX post)
+    : type(eAlt4),
+    node(expr),
+    x(post) {
+    }
+
+    explicit X(const TRcToken& preop, TPCX post)
+    : type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr),
+    node(new Token(*preop)),
+    x(post) {
 }
 
-PostfixExpression::PostfixExpression() {}
+const EType type;
+TPCAstNode node;
 
-PostfixExpression::~PostfixExpression() {}
+// All alternatives have this (optionally)
+PostfixExpression::TPCX x;
+
+virtual ~X() {
+    delete x;
+}
+};
+
+TPCPostfixExpression PostfixExpression::parse(Parser& parser) {
+    auto start = parser.getMark();
+    auto y = Y::parse(parser);
+    if (y) {
+        auto x = X::parse(parser);
+        return new PostfixExpression(y, x);
+    }
+    parser.setMark(start);
+    return nullptr;
+}
+
+PostfixExpression::PostfixExpression(TPCY y, TPCX x)
+: m_y(y), m_x(x) {
+}
+
+PostfixExpression::~PostfixExpression() {
+    delete m_x;
+    delete m_y;
+}
+
+

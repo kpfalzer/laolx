@@ -22,36 +22,55 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   unary_expression.hxx
+ * File:   primary_expression.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 11:03:15 2017
+ * Created on Mon Nov 13 13:28:34 2017
  */
-#ifndef UNARY_EXPRESSION_HXX
-#define UNARY_EXPRESSION_HXX
+#include <cassert>
+#include "ast/primary_expression.hxx"
 
-#include <array>
-#include "ast/common.hxx"
-#include "ast/postfix_expression.hxx"
-#include "ast/unary_operator.hxx"
+TPCPrimaryExpression PrimaryExpression::parse(Parser& parser) {
+    auto start = parser.getMark();
+    {
+        auto literal = Literal::parse(parser);
+        if (literal) {
+            return new PrimaryExpression(literal);
+        }
+    }
+    if (Token::K_THIS == parser.peek()->code) {
+        return new PrimaryExpression(parser.accept());
+    }
+    parser.setMark(start);
+    return nullptr;
+}
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
+PrimaryExpression::PrimaryExpression(TPCLiteral literal)
+: type(eLiteral) {
+    node = literal;
+}
 
-class UnaryExpression : public virtual AstNode {
-public:
-    static TPCUnaryExpression parse(Parser& parser);
+PrimaryExpression::PrimaryExpression(const TRcToken& thisx)
+: type(eThis) {
+    assert(Token::K_THIS == thisx->code);
+    node = new Token(*thisx);
+}
 
-    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
-    
-    explicit UnaryExpression(TPCPostfixExpression expr);
-    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
-    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
+PrimaryExpression::PrimaryExpression(TPCExpression expr)
+: type(eExpr) {
+    node = expr;
+}
 
-    const EType type;
-    const std::array<TPCAstNode, 2> nodes;
-    
-    virtual ~UnaryExpression();
-};
+PrimaryExpression::PrimaryExpression(TPCIdExpression idExpr)
+: type(eIdExpr) {
+    node = idExpr;
+}
 
-#endif /* UNARY_EXPRESSION_HXX */
+PrimaryExpression::PrimaryExpression(TPCLambdaExpression lambda)
+: type(eLambda) {
+    node = lambda;
+}
+
+PrimaryExpression::~PrimaryExpression() {
+    delete node;
+}

@@ -41,7 +41,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/import_specifier.o \
 	${OBJECTDIR}/ast/import_specifier_list.o \
 	${OBJECTDIR}/ast/import_statement.o \
+	${OBJECTDIR}/ast/lambda_expression.o \
 	${OBJECTDIR}/ast/linkage.o \
+	${OBJECTDIR}/ast/literal.o \
 	${OBJECTDIR}/ast/method_body.o \
 	${OBJECTDIR}/ast/method_declaration.o \
 	${OBJECTDIR}/ast/method_name.o \
@@ -52,6 +54,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/namespace_name.o \
 	${OBJECTDIR}/ast/overloadable_operator.o \
 	${OBJECTDIR}/ast/postfix_expression.o \
+	${OBJECTDIR}/ast/primary_expression.o \
 	${OBJECTDIR}/ast/return_specifier.o \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
 	${OBJECTDIR}/ast/string.o \
@@ -132,10 +135,20 @@ ${OBJECTDIR}/ast/import_statement.o: ast/import_statement.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_statement.o ast/import_statement.cxx
 
+${OBJECTDIR}/ast/lambda_expression.o: ast/lambda_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/lambda_expression.o ast/lambda_expression.cxx
+
 ${OBJECTDIR}/ast/linkage.o: ast/linkage.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/linkage.o ast/linkage.cxx
+
+${OBJECTDIR}/ast/literal.o: ast/literal.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/literal.o ast/literal.cxx
 
 ${OBJECTDIR}/ast/method_body.o: ast/method_body.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -186,6 +199,11 @@ ${OBJECTDIR}/ast/postfix_expression.o: ast/postfix_expression.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/postfix_expression.o ast/postfix_expression.cxx
+
+${OBJECTDIR}/ast/primary_expression.o: ast/primary_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/primary_expression.o ast/primary_expression.cxx
 
 ${OBJECTDIR}/ast/return_specifier.o: ast/return_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -344,6 +362,19 @@ ${OBJECTDIR}/ast/import_statement_nomain.o: ${OBJECTDIR}/ast/import_statement.o 
 	    ${CP} ${OBJECTDIR}/ast/import_statement.o ${OBJECTDIR}/ast/import_statement_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/lambda_expression_nomain.o: ${OBJECTDIR}/ast/lambda_expression.o ast/lambda_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/lambda_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/lambda_expression_nomain.o ast/lambda_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/lambda_expression.o ${OBJECTDIR}/ast/lambda_expression_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/linkage_nomain.o: ${OBJECTDIR}/ast/linkage.o ast/linkage.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/linkage.o`; \
@@ -355,6 +386,19 @@ ${OBJECTDIR}/ast/linkage_nomain.o: ${OBJECTDIR}/ast/linkage.o ast/linkage.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/linkage_nomain.o ast/linkage.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/linkage.o ${OBJECTDIR}/ast/linkage_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/literal_nomain.o: ${OBJECTDIR}/ast/literal.o ast/literal.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/literal.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/literal_nomain.o ast/literal.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/literal.o ${OBJECTDIR}/ast/literal_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/method_body_nomain.o: ${OBJECTDIR}/ast/method_body.o ast/method_body.cxx 
@@ -485,6 +529,19 @@ ${OBJECTDIR}/ast/postfix_expression_nomain.o: ${OBJECTDIR}/ast/postfix_expressio
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/postfix_expression_nomain.o ast/postfix_expression.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/postfix_expression.o ${OBJECTDIR}/ast/postfix_expression_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/primary_expression_nomain.o: ${OBJECTDIR}/ast/primary_expression.o ast/primary_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/primary_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/primary_expression_nomain.o ast/primary_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/primary_expression.o ${OBJECTDIR}/ast/primary_expression_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/return_specifier_nomain.o: ${OBJECTDIR}/ast/return_specifier.o ast/return_specifier.cxx 

@@ -22,36 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   unary_expression.hxx
+ * File:   expression_list.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 11:03:15 2017
+ * Created on Mon Nov 13 13:28:34 2017
  */
-#ifndef UNARY_EXPRESSION_HXX
-#define UNARY_EXPRESSION_HXX
+#ifndef EXPRESSION_LIST_HXX
+#define EXPRESSION_LIST_HXX
 
-#include <array>
 #include "ast/common.hxx"
-#include "ast/postfix_expression.hxx"
-#include "ast/unary_operator.hxx"
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
+class ExpressionList;
+typedef const ExpressionList* TPCExpressionList;
 
-class UnaryExpression : public virtual AstNode {
+class ExpressionList : public virtual AstNode {
 public:
-    static TPCUnaryExpression parse(Parser& parser);
+	static TPCExpressionList parse(Parser& parser);
 
-    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
-    
-    explicit UnaryExpression(TPCPostfixExpression expr);
-    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
-    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
+	explicit ExpressionList();
 
-    const EType type;
-    const std::array<TPCAstNode, 2> nodes;
-    
-    virtual ~UnaryExpression();
+	virtual ~ExpressionList();
 };
 
-#endif /* UNARY_EXPRESSION_HXX */
+#endif /* EXPRESSION_LIST_HXX */

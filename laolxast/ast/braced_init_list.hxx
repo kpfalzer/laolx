@@ -22,36 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   unary_expression.hxx
+ * File:   braced_init_list.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 11:03:15 2017
+ * Created on Mon Nov 13 13:28:34 2017
  */
-#ifndef UNARY_EXPRESSION_HXX
-#define UNARY_EXPRESSION_HXX
+#ifndef BRACED_INIT_LIST_HXX
+#define BRACED_INIT_LIST_HXX
 
-#include <array>
 #include "ast/common.hxx"
-#include "ast/postfix_expression.hxx"
-#include "ast/unary_operator.hxx"
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
+class BracedInitList;
+typedef const BracedInitList* TPCBracedInitList;
 
-class UnaryExpression : public virtual AstNode {
+class BracedInitList : public virtual AstNode {
 public:
-    static TPCUnaryExpression parse(Parser& parser);
+	static TPCBracedInitList parse(Parser& parser);
 
-    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
-    
-    explicit UnaryExpression(TPCPostfixExpression expr);
-    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
-    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
+	explicit BracedInitList();
 
-    const EType type;
-    const std::array<TPCAstNode, 2> nodes;
-    
-    virtual ~UnaryExpression();
+	virtual ~BracedInitList();
 };
 
-#endif /* UNARY_EXPRESSION_HXX */
+#endif /* BRACED_INIT_LIST_HXX */

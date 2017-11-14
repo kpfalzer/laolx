@@ -22,36 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   unary_expression.hxx
+ * File:   lambda_expression.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 11:03:15 2017
+ * Created on Mon Nov 13 18:34:06 2017
  */
-#ifndef UNARY_EXPRESSION_HXX
-#define UNARY_EXPRESSION_HXX
+#ifndef LAMBDA_EXPRESSION_HXX
+#define LAMBDA_EXPRESSION_HXX
 
-#include <array>
 #include "ast/common.hxx"
-#include "ast/postfix_expression.hxx"
-#include "ast/unary_operator.hxx"
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
+class LambdaExpression;
+typedef const LambdaExpression* TPCLambdaExpression;
 
-class UnaryExpression : public virtual AstNode {
+class LambdaExpression : public virtual AstNode {
 public:
-    static TPCUnaryExpression parse(Parser& parser);
+	static TPCLambdaExpression parse(Parser& parser);
 
-    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
-    
-    explicit UnaryExpression(TPCPostfixExpression expr);
-    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
-    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
+	explicit LambdaExpression();
 
-    const EType type;
-    const std::array<TPCAstNode, 2> nodes;
-    
-    virtual ~UnaryExpression();
+	virtual ~LambdaExpression();
 };
 
-#endif /* UNARY_EXPRESSION_HXX */
+#endif /* LAMBDA_EXPRESSION_HXX */

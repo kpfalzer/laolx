@@ -22,36 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   unary_expression.hxx
+ * File:   id_expression.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 11:03:15 2017
+ * Created on Mon Nov 13 14:02:58 2017
  */
-#ifndef UNARY_EXPRESSION_HXX
-#define UNARY_EXPRESSION_HXX
+#ifndef ID_EXPRESSION_HXX
+#define ID_EXPRESSION_HXX
 
-#include <array>
 #include "ast/common.hxx"
-#include "ast/postfix_expression.hxx"
-#include "ast/unary_operator.hxx"
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
+class IdExpression;
+typedef const IdExpression* TPCIdExpression;
 
-class UnaryExpression : public virtual AstNode {
+class IdExpression : public virtual AstNode {
 public:
-    static TPCUnaryExpression parse(Parser& parser);
+	static TPCIdExpression parse(Parser& parser);
 
-    enum EType {ePostfix, ePreIncr, ePreDecr, eUopExpr};
-    
-    explicit UnaryExpression(TPCPostfixExpression expr);
-    explicit UnaryExpression(const TRcToken& preop,  TPCUnaryExpression expr);
-    explicit UnaryExpression(TPCUnaryOperator uop,  TPCUnaryExpression expr);
+	explicit IdExpression();
 
-    const EType type;
-    const std::array<TPCAstNode, 2> nodes;
-    
-    virtual ~UnaryExpression();
+	virtual ~IdExpression();
 };
 
-#endif /* UNARY_EXPRESSION_HXX */
+#endif /* ID_EXPRESSION_HXX */
