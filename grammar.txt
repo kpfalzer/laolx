@@ -224,6 +224,9 @@ NestedNameSpecifierX:
 	IDENT S_DOT NestedNameSpecifierX?
 |	SimpleTemplateId S_DOT NestedNameSpecifierX?
 
+// TODO: ambiguity between ClassName and TypedefName
+// since both match IDENT!
+//
 TypeName: ClassName | TypedefName
 
 ClassName: IDENT | SimpleTemplateId

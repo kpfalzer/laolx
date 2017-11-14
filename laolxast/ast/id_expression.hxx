@@ -37,11 +37,14 @@ typedef const IdExpression* TPCIdExpression;
 
 class IdExpression : public virtual AstNode {
 public:
-	static TPCIdExpression parse(Parser& parser);
+    static TPCIdExpression parse(Parser& parser);
 
-	explicit IdExpression();
+    explicit IdExpression(TPCAstNode node) : node(node) {
+    }
 
-	virtual ~IdExpression();
+    const TPCAstNode node;
+
+    virtual ~IdExpression();
 };
 
 #endif /* ID_EXPRESSION_HXX */

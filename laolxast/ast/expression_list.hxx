@@ -31,17 +31,22 @@
 #define EXPRESSION_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/initializer_list.hxx"
 
 class ExpressionList;
 typedef const ExpressionList* TPCExpressionList;
 
 class ExpressionList : public virtual AstNode {
 public:
-	static TPCExpressionList parse(Parser& parser);
+    static TPCExpressionList parse(Parser& parser);
 
-	explicit ExpressionList();
+    explicit ExpressionList(TPCInitializerList init)
+    : exprList(init) {
+    }
 
-	virtual ~ExpressionList();
+    const TPCInitializerList exprList;
+
+    virtual ~ExpressionList();
 };
 
 #endif /* EXPRESSION_LIST_HXX */

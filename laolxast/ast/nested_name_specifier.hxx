@@ -22,39 +22,34 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   nested_name_specifier.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:23:02 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef NESTED_NAME_SPECIFIER_HXX
+#define NESTED_NAME_SPECIFIER_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
-    }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
-    }
-    parser.setMark(start);
-    return nullptr;
-}
+#include "ast/common.hxx"
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+class NestedNameSpecifier;
+typedef const NestedNameSpecifier* TPCNestedNameSpecifier;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+class NestedNameSpecifier : public virtual AstNode {
+public:
+    static TPCNestedNameSpecifier parse(Parser& parser);
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+    class X;
+    typedef const X* TPCX;
+    class Y;
+    typedef const Y* TPCY;
+    
+    explicit NestedNameSpecifier(TPCY y, TPCX x);
+
+    const TPCY y;
+    const TPCX x;
+    
+    virtual ~NestedNameSpecifier();
+};
+
+#endif /* NESTED_NAME_SPECIFIER_HXX */

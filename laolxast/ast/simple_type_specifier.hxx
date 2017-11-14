@@ -30,7 +30,10 @@
 #ifndef SIMPLE_TYPE_SPECIFIER_HXX
 #define SIMPLE_TYPE_SPECIFIER_HXX
 
+#include <array>
 #include "ast/common.hxx"
+#include "ast/nested_name_specifier.hxx"
+#include "ast/type_name.hxx"
 
 class SimpleTypeSpecifier;
 typedef const SimpleTypeSpecifier* TPCSimpleTypeSpecifier;
@@ -39,7 +42,10 @@ class SimpleTypeSpecifier : public virtual AstNode {
 public:
     static TPCSimpleTypeSpecifier parse(Parser& parser);
 
-    explicit SimpleTypeSpecifier();
+    explicit SimpleTypeSpecifier(const TRcToken& token);
+    explicit SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type);
+    
+    const std::array<TPCAstNode, 2> nodes;
 
     virtual ~SimpleTypeSpecifier();
 };

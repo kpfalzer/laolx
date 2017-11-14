@@ -22,39 +22,31 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   qualified_id.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:31:23 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef QUALIFIED_ID_HXX
+#define QUALIFIED_ID_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
-    }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
-    }
-    parser.setMark(start);
-    return nullptr;
-}
+#include "ast/common.hxx"
+#include "ast/nested_name_specifier.hxx"
+#include "ast/unqualified_id.hxx"
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+class QualifiedId;
+typedef const QualifiedId* TPCQualifiedId;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+class QualifiedId : public virtual AstNode {
+public:
+    static TPCQualifiedId parse(Parser& parser);
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+    explicit QualifiedId(TPCNestedNameSpecifier nested, TPCUnqualifiedId unqual);
+
+    const TPCNestedNameSpecifier nestedName;
+    const TPCUnqualifiedId unqualId;
+    
+    virtual ~QualifiedId();
+};
+
+#endif /* QUALIFIED_ID_HXX */

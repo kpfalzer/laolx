@@ -30,11 +30,10 @@
 #include "ast/expression_list.hxx"
 
 TPCExpressionList ExpressionList::parse(Parser& parser) {
-	TPCExpressionList result = nullptr;
-	//todo
-	return result;
+    auto init = InitializerList::parse(parser);
+    return (init) ? new ExpressionList(init) : nullptr;
 }
 
-ExpressionList::ExpressionList() {}
-
-ExpressionList::~ExpressionList() {}
+ExpressionList::~ExpressionList() {
+    delete exprList;
+}

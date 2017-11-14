@@ -22,39 +22,34 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   class_name.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 14:08:49 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#include "ast/class_name.hxx"
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
+TPCClassName ClassName::parse(Parser& parser) {
     auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
+    if (Token::IDENT == parser.peek()->code) {
+        return new ClassName(parser.accept());
     }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
+    auto simplId = SimpleTemplateId::parse(parser);
+    if (simplId) {
+        return new ClassName(simplId);
     }
     parser.setMark(start);
     return nullptr;
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
+ClassName::ClassName(const TRcToken& ident)
+: node(new Token(*ident)) {
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
+ClassName::ClassName(TPCSimpleTemplateId simplId)
+: node(simplId) {
 }
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+ClassName::~ClassName() {
+    delete node;
+}

@@ -22,39 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   unqualified_id.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:31:23 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#include "ast/unqualified_id.hxx"
+#include "operator_function_id.hxx"
+#include "template_id.hxx"
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
+TPCUnqualifiedId UnqualifiedId::parse(Parser& parser) {
+    if (Token::IDENT == parser.peek()->code) {
+        return new UnqualifiedId(parser.accept());
     }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
+    TPCAstNode node = OperatorFunctionId::parse(parser);
+    if (!node) {
+        node = TemplateId::parse(parser);
     }
-    parser.setMark(start);
-    return nullptr;
+    return (node) ? new UnqualifiedId(node) : nullptr;
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
+UnqualifiedId::~UnqualifiedId() {
+    delete node;
 }
-
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
-
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}

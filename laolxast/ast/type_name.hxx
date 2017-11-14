@@ -22,39 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   type_name.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:24:10 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef TYPE_NAME_HXX
+#define TYPE_NAME_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
+#include "ast/common.hxx"
+
+class TypeName;
+typedef const TypeName* TPCTypeName;
+
+// TODO: ambiguity on ClassName and TypedefName
+class TypeName : public virtual AstNode {
+public:
+    static TPCTypeName parse(Parser& parser);
+
+    explicit TypeName(TPCAstNode node) : node(node) {
     }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
-    }
-    parser.setMark(start);
-    return nullptr;
-}
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+    const TPCAstNode node;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+    virtual ~TypeName();
+};
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+#endif /* TYPE_NAME_HXX */

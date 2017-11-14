@@ -22,39 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   class_name.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 14:08:49 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef CLASS_NAME_HXX
+#define CLASS_NAME_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
-    }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
-    }
-    parser.setMark(start);
-    return nullptr;
-}
+#include "ast/common.hxx"
+#include "ast/simple_template_id.hxx"
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+class ClassName;
+typedef const ClassName* TPCClassName;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+class ClassName : public virtual AstNode {
+public:
+    static TPCClassName parse(Parser& parser);
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+    explicit ClassName(const TRcToken& ident);
+    explicit ClassName(TPCSimpleTemplateId simplId);
+    
+    const TPCAstNode node;
+
+    virtual ~ClassName();
+};
+
+#endif /* CLASS_NAME_HXX */

@@ -38,10 +38,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
 	${OBJECTDIR}/ast/bool.o \
 	${OBJECTDIR}/ast/class_declaration.o \
+	${OBJECTDIR}/ast/class_name.o \
 	${OBJECTDIR}/ast/declaration.o \
+	${OBJECTDIR}/ast/expression_list.o \
+	${OBJECTDIR}/ast/id_expression.o \
 	${OBJECTDIR}/ast/import_specifier.o \
 	${OBJECTDIR}/ast/import_specifier_list.o \
 	${OBJECTDIR}/ast/import_statement.o \
+	${OBJECTDIR}/ast/initializer_list.o \
 	${OBJECTDIR}/ast/lambda_expression.o \
 	${OBJECTDIR}/ast/linkage.o \
 	${OBJECTDIR}/ast/literal.o \
@@ -53,17 +57,24 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/namespace_declaration.o \
 	${OBJECTDIR}/ast/namespace_declaration_name.o \
 	${OBJECTDIR}/ast/namespace_name.o \
+	${OBJECTDIR}/ast/nested_name_specifier.o \
+	${OBJECTDIR}/ast/operator_function_id.o \
 	${OBJECTDIR}/ast/overloadable_operator.o \
 	${OBJECTDIR}/ast/postfix_expression.o \
 	${OBJECTDIR}/ast/primary_expression.o \
+	${OBJECTDIR}/ast/qualified_id.o \
 	${OBJECTDIR}/ast/return_specifier.o \
+	${OBJECTDIR}/ast/simple_template_id.o \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
 	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/ast/symbols.o \
+	${OBJECTDIR}/ast/template_id.o \
+	${OBJECTDIR}/ast/type_name.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/typedef_name.o \
 	${OBJECTDIR}/ast/unary_expression.o \
 	${OBJECTDIR}/ast/unary_operator.o \
+	${OBJECTDIR}/ast/unqualified_id.o \
 	${OBJECTDIR}/ast/variable_declaration.o \
 	${OBJECTDIR}/ast/words.o \
 	${OBJECTDIR}/parser/astnode.o \
@@ -123,10 +134,25 @@ ${OBJECTDIR}/ast/class_declaration.o: ast/class_declaration.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/class_declaration.o ast/class_declaration.cxx
 
+${OBJECTDIR}/ast/class_name.o: ast/class_name.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/class_name.o ast/class_name.cxx
+
 ${OBJECTDIR}/ast/declaration.o: ast/declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/declaration.o ast/declaration.cxx
+
+${OBJECTDIR}/ast/expression_list.o: ast/expression_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_list.o ast/expression_list.cxx
+
+${OBJECTDIR}/ast/id_expression.o: ast/id_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/id_expression.o ast/id_expression.cxx
 
 ${OBJECTDIR}/ast/import_specifier.o: ast/import_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -142,6 +168,11 @@ ${OBJECTDIR}/ast/import_statement.o: ast/import_statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_statement.o ast/import_statement.cxx
+
+${OBJECTDIR}/ast/initializer_list.o: ast/initializer_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/initializer_list.o ast/initializer_list.cxx
 
 ${OBJECTDIR}/ast/lambda_expression.o: ast/lambda_expression.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -198,6 +229,16 @@ ${OBJECTDIR}/ast/namespace_name.o: ast/namespace_name.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/namespace_name.o ast/namespace_name.cxx
 
+${OBJECTDIR}/ast/nested_name_specifier.o: ast/nested_name_specifier.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/nested_name_specifier.o ast/nested_name_specifier.cxx
+
+${OBJECTDIR}/ast/operator_function_id.o: ast/operator_function_id.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/operator_function_id.o ast/operator_function_id.cxx
+
 ${OBJECTDIR}/ast/overloadable_operator.o: ast/overloadable_operator.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -213,10 +254,20 @@ ${OBJECTDIR}/ast/primary_expression.o: ast/primary_expression.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/primary_expression.o ast/primary_expression.cxx
 
+${OBJECTDIR}/ast/qualified_id.o: ast/qualified_id.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/qualified_id.o ast/qualified_id.cxx
+
 ${OBJECTDIR}/ast/return_specifier.o: ast/return_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/return_specifier.o ast/return_specifier.cxx
+
+${OBJECTDIR}/ast/simple_template_id.o: ast/simple_template_id.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/simple_template_id.o ast/simple_template_id.cxx
 
 ${OBJECTDIR}/ast/simple_type_specifier.o: ast/simple_type_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -232,6 +283,16 @@ ${OBJECTDIR}/ast/symbols.o: ast/symbols.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx
+
+${OBJECTDIR}/ast/template_id.o: ast/template_id.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_id.o ast/template_id.cxx
+
+${OBJECTDIR}/ast/type_name.o: ast/type_name.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/type_name.o ast/type_name.cxx
 
 ${OBJECTDIR}/ast/typedef_declaration.o: ast/typedef_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -252,6 +313,11 @@ ${OBJECTDIR}/ast/unary_operator.o: ast/unary_operator.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_operator.o ast/unary_operator.cxx
+
+${OBJECTDIR}/ast/unqualified_id.o: ast/unqualified_id.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unqualified_id.o ast/unqualified_id.cxx
 
 ${OBJECTDIR}/ast/variable_declaration.o: ast/variable_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -341,6 +407,19 @@ ${OBJECTDIR}/ast/class_declaration_nomain.o: ${OBJECTDIR}/ast/class_declaration.
 	    ${CP} ${OBJECTDIR}/ast/class_declaration.o ${OBJECTDIR}/ast/class_declaration_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/class_name_nomain.o: ${OBJECTDIR}/ast/class_name.o ast/class_name.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/class_name.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/class_name_nomain.o ast/class_name.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/class_name.o ${OBJECTDIR}/ast/class_name_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/declaration_nomain.o: ${OBJECTDIR}/ast/declaration.o ast/declaration.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/declaration.o`; \
@@ -352,6 +431,32 @@ ${OBJECTDIR}/ast/declaration_nomain.o: ${OBJECTDIR}/ast/declaration.o ast/declar
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/declaration_nomain.o ast/declaration.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/declaration.o ${OBJECTDIR}/ast/declaration_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/expression_list_nomain.o: ${OBJECTDIR}/ast/expression_list.o ast/expression_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/expression_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_list_nomain.o ast/expression_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/expression_list.o ${OBJECTDIR}/ast/expression_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/id_expression_nomain.o: ${OBJECTDIR}/ast/id_expression.o ast/id_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/id_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/id_expression_nomain.o ast/id_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/id_expression.o ${OBJECTDIR}/ast/id_expression_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/import_specifier_nomain.o: ${OBJECTDIR}/ast/import_specifier.o ast/import_specifier.cxx 
@@ -391,6 +496,19 @@ ${OBJECTDIR}/ast/import_statement_nomain.o: ${OBJECTDIR}/ast/import_statement.o 
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/import_statement_nomain.o ast/import_statement.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/import_statement.o ${OBJECTDIR}/ast/import_statement_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/initializer_list_nomain.o: ${OBJECTDIR}/ast/initializer_list.o ast/initializer_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/initializer_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/initializer_list_nomain.o ast/initializer_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/initializer_list.o ${OBJECTDIR}/ast/initializer_list_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/lambda_expression_nomain.o: ${OBJECTDIR}/ast/lambda_expression.o ast/lambda_expression.cxx 
@@ -536,6 +654,32 @@ ${OBJECTDIR}/ast/namespace_name_nomain.o: ${OBJECTDIR}/ast/namespace_name.o ast/
 	    ${CP} ${OBJECTDIR}/ast/namespace_name.o ${OBJECTDIR}/ast/namespace_name_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/nested_name_specifier_nomain.o: ${OBJECTDIR}/ast/nested_name_specifier.o ast/nested_name_specifier.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/nested_name_specifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/nested_name_specifier_nomain.o ast/nested_name_specifier.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/nested_name_specifier.o ${OBJECTDIR}/ast/nested_name_specifier_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/operator_function_id_nomain.o: ${OBJECTDIR}/ast/operator_function_id.o ast/operator_function_id.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/operator_function_id.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/operator_function_id_nomain.o ast/operator_function_id.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/operator_function_id.o ${OBJECTDIR}/ast/operator_function_id_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/overloadable_operator_nomain.o: ${OBJECTDIR}/ast/overloadable_operator.o ast/overloadable_operator.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/overloadable_operator.o`; \
@@ -575,6 +719,19 @@ ${OBJECTDIR}/ast/primary_expression_nomain.o: ${OBJECTDIR}/ast/primary_expressio
 	    ${CP} ${OBJECTDIR}/ast/primary_expression.o ${OBJECTDIR}/ast/primary_expression_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/qualified_id_nomain.o: ${OBJECTDIR}/ast/qualified_id.o ast/qualified_id.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/qualified_id.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/qualified_id_nomain.o ast/qualified_id.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/qualified_id.o ${OBJECTDIR}/ast/qualified_id_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/return_specifier_nomain.o: ${OBJECTDIR}/ast/return_specifier.o ast/return_specifier.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/return_specifier.o`; \
@@ -586,6 +743,19 @@ ${OBJECTDIR}/ast/return_specifier_nomain.o: ${OBJECTDIR}/ast/return_specifier.o 
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/return_specifier_nomain.o ast/return_specifier.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/return_specifier.o ${OBJECTDIR}/ast/return_specifier_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/simple_template_id_nomain.o: ${OBJECTDIR}/ast/simple_template_id.o ast/simple_template_id.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/simple_template_id.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/simple_template_id_nomain.o ast/simple_template_id.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/simple_template_id.o ${OBJECTDIR}/ast/simple_template_id_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/simple_type_specifier_nomain.o: ${OBJECTDIR}/ast/simple_type_specifier.o ast/simple_type_specifier.cxx 
@@ -625,6 +795,32 @@ ${OBJECTDIR}/ast/symbols_nomain.o: ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols_nomain.o ast/symbols.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/symbols.o ${OBJECTDIR}/ast/symbols_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/template_id_nomain.o: ${OBJECTDIR}/ast/template_id.o ast/template_id.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/template_id.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_id_nomain.o ast/template_id.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/template_id.o ${OBJECTDIR}/ast/template_id_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/type_name_nomain.o: ${OBJECTDIR}/ast/type_name.o ast/type_name.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/type_name.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/type_name_nomain.o ast/type_name.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/type_name.o ${OBJECTDIR}/ast/type_name_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/typedef_declaration_nomain.o: ${OBJECTDIR}/ast/typedef_declaration.o ast/typedef_declaration.cxx 
@@ -677,6 +873,19 @@ ${OBJECTDIR}/ast/unary_operator_nomain.o: ${OBJECTDIR}/ast/unary_operator.o ast/
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unary_operator_nomain.o ast/unary_operator.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/unary_operator.o ${OBJECTDIR}/ast/unary_operator_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/unqualified_id_nomain.o: ${OBJECTDIR}/ast/unqualified_id.o ast/unqualified_id.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/unqualified_id.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/unqualified_id_nomain.o ast/unqualified_id.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/unqualified_id.o ${OBJECTDIR}/ast/unqualified_id_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/variable_declaration_nomain.o: ${OBJECTDIR}/ast/variable_declaration.o ast/variable_declaration.cxx 

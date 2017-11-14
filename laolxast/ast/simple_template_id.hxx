@@ -22,39 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   simple_template_id.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:54:46 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef SIMPLE_TEMPLATE_ID_HXX
+#define SIMPLE_TEMPLATE_ID_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
-    }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
-    }
-    parser.setMark(start);
-    return nullptr;
-}
+#include "ast/common.hxx"
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+class SimpleTemplateId;
+typedef const SimpleTemplateId* TPCSimpleTemplateId;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+class SimpleTemplateId : public virtual AstNode {
+public:
+	static TPCSimpleTemplateId parse(Parser& parser);
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+	explicit SimpleTemplateId();
+
+	virtual ~SimpleTemplateId();
+};
+
+#endif /* SIMPLE_TEMPLATE_ID_HXX */

@@ -22,39 +22,28 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   type_name.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:24:10 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#include "ast/type_name.hxx"
+#include "ast/class_name.hxx"
+#include "ast/typedef_name.hxx"
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
+TPCTypeName TypeName::parse(Parser& parser) {
     auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
+    TPCAstNode node = ClassName::parse(parser);
+    if (!node) {
+        node = TypedefName::parse(parser);
     }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
+    if (node) {
+        return new TypeName(node);
     }
     parser.setMark(start);
     return nullptr;
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
+TypeName::~TypeName() {
+    delete node;
 }
-
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
-
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}

@@ -22,39 +22,33 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.cxx
+ * File:   unqualified_id.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Tue Nov 14 13:31:23 2017
  */
-#include "ast/simple_type_specifier.hxx"
+#ifndef UNQUALIFIED_ID_HXX
+#define UNQUALIFIED_ID_HXX
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
-    auto start = parser.getMark();
-    auto const code = parser.peek()->code;
-    switch (code) {
-        case Token::K_INT:
-        case Token::K_FLOAT:
-        case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
-        default:
-            ;//do nothing
+#include "ast/common.hxx"
+
+class UnqualifiedId;
+typedef const UnqualifiedId* TPCUnqualifiedId;
+
+class UnqualifiedId : public virtual AstNode {
+public:
+    static TPCUnqualifiedId parse(Parser& parser);
+
+    explicit UnqualifiedId(TPCAstNode node) : node(node) {
     }
-    auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
-    if (type) {
-        return new SimpleTypeSpecifier(spec, type);
+
+    explicit UnqualifiedId(const TRcToken& ident)
+    : UnqualifiedId(new Token(*ident)) {
     }
-    parser.setMark(start);
-    return nullptr;
-}
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
-: nodes({new Token(*token), nullptr}) {
-}
+    const TPCAstNode node;
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
-: nodes({spec, type}) {
-}
+    virtual ~UnqualifiedId();
+};
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+#endif /* UNQUALIFIED_ID_HXX */
