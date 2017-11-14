@@ -174,14 +174,14 @@ LambdaExpression:
 // Chnage to look more method-like
 LambdaExpression:
 	K_DEF MethodName
-	MethodParametersDeclaration?
-	ReturnSpecifier?
-	S_LCURLY MethodBody S_RCURLY
+		MethodParametersDeclaration?
+		ReturnSpecifier?
+		S_LCURLY MethodBody S_RCURLY
 
 Literal:
 	SYMBOL
 |	INT
-|	DOUBLE
+|	FLOAT
 |	String
 |	REGEXP
 |	Words

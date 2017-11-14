@@ -22,40 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   lambda_expression.hxx
+ * File:   symbols.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 18:34:06 2017
+ * Created on Tue Nov 14 10:24:14 2017
  */
-#ifndef LAMBDA_EXPRESSION_HXX
-#define LAMBDA_EXPRESSION_HXX
+#ifndef SYMBOLS_HXX
+#define SYMBOLS_HXX
 
 #include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
+class Symbols;
+typedef const Symbols* TPCSymbols;
 
-class LambdaExpression : public virtual AstNode {
+class Symbols : public virtual AstNode {
 public:
-    static TPCLambdaExpression parse(Parser& parser);
+    static TPCSymbols parse(Parser& parser);
 
-    explicit LambdaExpression(
-            TPCMethodName name,
-            TPCMethodParametersDeclaration params,
-            TPCReturnSpecifier returnx,
-            TPCMethodBody body
-            );
+    typedef laolx::Array<TRcToken> TSymbols;
+    
+    explicit Symbols(const TSymbols& symbols  );
 
-    virtual ~LambdaExpression();
-
-    const TPCMethodName name;
-    const TPCMethodParametersDeclaration params;
-    const TPCReturnSpecifier returnx;
-    const TPCMethodBody body;
+    const TSymbols symbols;
+    
+    virtual ~Symbols();
 };
 
-#endif /* LAMBDA_EXPRESSION_HXX */
+#endif /* SYMBOLS_HXX */

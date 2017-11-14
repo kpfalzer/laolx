@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>ast/access.hxx</itemPath>
       <itemPath>parser/astnode.hxx</itemPath>
+      <itemPath>ast/bool.hxx</itemPath>
       <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
       <itemPath>ast/declaration.hxx</itemPath>
@@ -30,12 +31,14 @@
       <itemPath>ast/return_specifier.hxx</itemPath>
       <itemPath>ast/simple_type_specifier.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
+      <itemPath>ast/symbols.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
       <itemPath>ast/typedef_name.hxx</itemPath>
       <itemPath>ast/unary_expression.hxx</itemPath>
       <itemPath>ast/unary_operator.hxx</itemPath>
       <itemPath>ast/variable_declaration.hxx</itemPath>
+      <itemPath>ast/words.hxx</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -46,6 +49,7 @@
                    projectFiles="true">
       <itemPath>ast/access.cxx</itemPath>
       <itemPath>parser/astnode.cxx</itemPath>
+      <itemPath>ast/bool.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
       <itemPath>ast/declaration.cxx</itemPath>
       <itemPath>ast/import_specifier.cxx</itemPath>
@@ -70,12 +74,14 @@
       <itemPath>ast/return_specifier.cxx</itemPath>
       <itemPath>ast/simple_type_specifier.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
+      <itemPath>ast/symbols.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
       <itemPath>ast/typedef_name.cxx</itemPath>
       <itemPath>ast/unary_expression.cxx</itemPath>
       <itemPath>ast/unary_operator.cxx</itemPath>
       <itemPath>ast/variable_declaration.cxx</itemPath>
+      <itemPath>ast/words.cxx</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -130,6 +136,10 @@
       <item path="ast/access.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/bool.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/bool.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -225,6 +235,10 @@
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/symbols.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/symbols.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -244,6 +258,10 @@
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/words.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/words.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles">
         <linkerTool>
@@ -332,6 +350,10 @@
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/bool.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/bool.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -426,6 +448,10 @@
       </item>
       <item path="ast/string.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/symbols.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/symbols.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
@@ -445,6 +471,10 @@
       <item path="ast/variable_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/variable_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/words.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/words.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

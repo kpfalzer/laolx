@@ -22,40 +22,31 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   lambda_expression.hxx
+ * File:   words.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 18:34:06 2017
+ * Created on Tue Nov 14 10:23:02 2017
  */
-#ifndef LAMBDA_EXPRESSION_HXX
-#define LAMBDA_EXPRESSION_HXX
+#include "ast/words.hxx"
 
-#include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
+TPCWords Words::parse(Parser& parser) {
+    auto start = parser.getMark();
+    if (Token::S_WORDS == parser.accept()->code) {
+        TWords words;
+        while (Token::IDENT == parser.peek()->code) {
+            words << parser.accept();
+        }
+        if (Token::S_RCURLY == parser.accept()->code) {
+            words.compact();
+            return new Words(words);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
+}
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
+Words::Words(const TWords& words) 
+: words(words) {
+}
 
-class LambdaExpression : public virtual AstNode {
-public:
-    static TPCLambdaExpression parse(Parser& parser);
-
-    explicit LambdaExpression(
-            TPCMethodName name,
-            TPCMethodParametersDeclaration params,
-            TPCReturnSpecifier returnx,
-            TPCMethodBody body
-            );
-
-    virtual ~LambdaExpression();
-
-    const TPCMethodName name;
-    const TPCMethodParametersDeclaration params;
-    const TPCReturnSpecifier returnx;
-    const TPCMethodBody body;
-};
-
-#endif /* LAMBDA_EXPRESSION_HXX */
+Words::~Words() {}

@@ -22,40 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   lambda_expression.hxx
+ * File:   bool.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 18:34:06 2017
+ * Created on Tue Nov 14 10:25:22 2017
  */
-#ifndef LAMBDA_EXPRESSION_HXX
-#define LAMBDA_EXPRESSION_HXX
+#ifndef BOOL_HXX
+#define BOOL_HXX
 
 #include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
+class Bool;
+typedef const Bool* TPCBool;
 
-class LambdaExpression : public virtual AstNode {
+class Bool : public virtual AstNode {
 public:
-    static TPCLambdaExpression parse(Parser& parser);
+    static TPCBool parse(Parser& parser);
 
-    explicit LambdaExpression(
-            TPCMethodName name,
-            TPCMethodParametersDeclaration params,
-            TPCReturnSpecifier returnx,
-            TPCMethodBody body
-            );
+    explicit Bool(const TRcToken& tok);
 
-    virtual ~LambdaExpression();
+    const TRcToken token;
+    
+    operator bool() const;
 
-    const TPCMethodName name;
-    const TPCMethodParametersDeclaration params;
-    const TPCReturnSpecifier returnx;
-    const TPCMethodBody body;
+    virtual ~Bool();
 };
 
-#endif /* LAMBDA_EXPRESSION_HXX */
+#endif /* BOOL_HXX */

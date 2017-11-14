@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
+	${OBJECTDIR}/ast/bool.o \
 	${OBJECTDIR}/ast/class_declaration.o \
 	${OBJECTDIR}/ast/declaration.o \
 	${OBJECTDIR}/ast/import_specifier.o \
@@ -58,11 +59,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/return_specifier.o \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
 	${OBJECTDIR}/ast/string.o \
+	${OBJECTDIR}/ast/symbols.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/typedef_name.o \
 	${OBJECTDIR}/ast/unary_expression.o \
 	${OBJECTDIR}/ast/unary_operator.o \
 	${OBJECTDIR}/ast/variable_declaration.o \
+	${OBJECTDIR}/ast/words.o \
 	${OBJECTDIR}/parser/astnode.o \
 	${OBJECTDIR}/parser/lexer.o \
 	${OBJECTDIR}/parser/parser.o \
@@ -109,6 +112,11 @@ ${OBJECTDIR}/ast/access.o: ast/access.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access.o ast/access.cxx
+
+${OBJECTDIR}/ast/bool.o: ast/bool.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool.o ast/bool.cxx
 
 ${OBJECTDIR}/ast/class_declaration.o: ast/class_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -220,6 +228,11 @@ ${OBJECTDIR}/ast/string.o: ast/string.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/string.o ast/string.cxx
 
+${OBJECTDIR}/ast/symbols.o: ast/symbols.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx
+
 ${OBJECTDIR}/ast/typedef_declaration.o: ast/typedef_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -244,6 +257,11 @@ ${OBJECTDIR}/ast/variable_declaration.o: ast/variable_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/variable_declaration.o ast/variable_declaration.cxx
+
+${OBJECTDIR}/ast/words.o: ast/words.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/words.o ast/words.cxx
 
 ${OBJECTDIR}/parser/astnode.o: parser/astnode.cxx
 	${MKDIR} -p ${OBJECTDIR}/parser
@@ -295,6 +313,19 @@ ${OBJECTDIR}/ast/access_nomain.o: ${OBJECTDIR}/ast/access.o ast/access.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access_nomain.o ast/access.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/access.o ${OBJECTDIR}/ast/access_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/bool_nomain.o: ${OBJECTDIR}/ast/bool.o ast/bool.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/bool.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool_nomain.o ast/bool.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/bool.o ${OBJECTDIR}/ast/bool_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/class_declaration_nomain.o: ${OBJECTDIR}/ast/class_declaration.o ast/class_declaration.cxx 
@@ -583,6 +614,19 @@ ${OBJECTDIR}/ast/string_nomain.o: ${OBJECTDIR}/ast/string.o ast/string.cxx
 	    ${CP} ${OBJECTDIR}/ast/string.o ${OBJECTDIR}/ast/string_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/symbols_nomain.o: ${OBJECTDIR}/ast/symbols.o ast/symbols.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/symbols.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/symbols_nomain.o ast/symbols.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/symbols.o ${OBJECTDIR}/ast/symbols_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/typedef_declaration_nomain.o: ${OBJECTDIR}/ast/typedef_declaration.o ast/typedef_declaration.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/typedef_declaration.o`; \
@@ -646,6 +690,19 @@ ${OBJECTDIR}/ast/variable_declaration_nomain.o: ${OBJECTDIR}/ast/variable_declar
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/variable_declaration_nomain.o ast/variable_declaration.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/variable_declaration.o ${OBJECTDIR}/ast/variable_declaration_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/words_nomain.o: ${OBJECTDIR}/ast/words.o ast/words.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/words.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/words_nomain.o ast/words.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/words.o ${OBJECTDIR}/ast/words_nomain.o;\
 	fi
 
 ${OBJECTDIR}/parser/astnode_nomain.o: ${OBJECTDIR}/parser/astnode.o parser/astnode.cxx 

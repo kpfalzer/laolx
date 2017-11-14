@@ -22,40 +22,24 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   lambda_expression.hxx
+ * File:   bool.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 18:34:06 2017
+ * Created on Tue Nov 14 10:25:22 2017
  */
-#ifndef LAMBDA_EXPRESSION_HXX
-#define LAMBDA_EXPRESSION_HXX
+#include "ast/bool.hxx"
 
-#include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
+TPCBool Bool::parse(Parser& parser) {
+    const auto code = parser.peek()->code;
+    if (Token::K_TRUE == code || Token::K_FALSE == code) {
+        return new Bool(parser.accept());
+    }
+    return nullptr;
+}
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
+Bool::operator bool() const {
+    return (Token::K_TRUE == token->code);
+}
 
-class LambdaExpression : public virtual AstNode {
-public:
-    static TPCLambdaExpression parse(Parser& parser);
-
-    explicit LambdaExpression(
-            TPCMethodName name,
-            TPCMethodParametersDeclaration params,
-            TPCReturnSpecifier returnx,
-            TPCMethodBody body
-            );
-
-    virtual ~LambdaExpression();
-
-    const TPCMethodName name;
-    const TPCMethodParametersDeclaration params;
-    const TPCReturnSpecifier returnx;
-    const TPCMethodBody body;
-};
-
-#endif /* LAMBDA_EXPRESSION_HXX */
+Bool::~Bool() {
+}

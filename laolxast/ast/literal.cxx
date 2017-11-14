@@ -28,13 +28,49 @@
  * Created on Mon Nov 13 18:33:19 2017
  */
 #include "ast/literal.hxx"
+#include "ast/string.hxx"
+#include "ast/symbols.hxx"
+#include "ast/bool.hxx"
+#include "ast/words.hxx"
 
 TPCLiteral Literal::parse(Parser& parser) {
-	TPCLiteral result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    const auto code = parser.peek()->code;
+    switch (code) {
+        case Token::SYMBOL:
+        case Token::INT:
+        case Token::FLOAT:
+        case Token::REGEXP:
+        case Token::K_NIL:
+            return new Literal(parser.accept());
+        default:
+            ; //do nothing
+    }
+    TPCAstNode node;
+    node = String::parse(parser);
+    if (!node) {
+        node = Words::parse(parser);
+        if (!node) {
+            node = Symbols::parse(parser);
+            if (!node) {
+                node = Bool::parse(parser);
+            }
+        }
+    }
+    if (node) {
+        return new Literal(node);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-Literal::Literal() {}
+Literal::Literal(TPCAstNode node) : node(node) {
+}
 
-Literal::~Literal() {}
+Literal::Literal(const TRcToken& tok)
+: node(new Token(*tok)) {
+}
+
+Literal::~Literal() {
+    delete node;
+}

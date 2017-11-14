@@ -37,11 +37,14 @@ typedef const Literal* TPCLiteral;
 
 class Literal : public virtual AstNode {
 public:
-	static TPCLiteral parse(Parser& parser);
+    static TPCLiteral parse(Parser& parser);
 
-	explicit Literal();
+    explicit Literal(TPCAstNode node);
+    explicit Literal(const TRcToken& tok);
 
-	virtual ~Literal();
+    virtual ~Literal();
+    
+    const TPCAstNode node;
 };
 
 #endif /* LITERAL_HXX */

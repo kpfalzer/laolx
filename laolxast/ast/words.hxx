@@ -22,40 +22,29 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   lambda_expression.hxx
+ * File:   words.hxx
  * Author: kwpfalzer
  *
- * Created on Mon Nov 13 18:34:06 2017
+ * Created on Tue Nov 14 10:23:02 2017
  */
-#ifndef LAMBDA_EXPRESSION_HXX
-#define LAMBDA_EXPRESSION_HXX
+#ifndef WORDS_HXX
+#define WORDS_HXX
 
 #include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
+class Words;
+typedef const Words* TPCWords;
 
-class LambdaExpression : public virtual AstNode {
+class Words : public virtual AstNode {
 public:
-    static TPCLambdaExpression parse(Parser& parser);
+    static TPCWords parse(Parser& parser);
+    typedef laolx::Array<TRcToken> TWords;
+    
+    explicit Words(const TWords& words  );
 
-    explicit LambdaExpression(
-            TPCMethodName name,
-            TPCMethodParametersDeclaration params,
-            TPCReturnSpecifier returnx,
-            TPCMethodBody body
-            );
-
-    virtual ~LambdaExpression();
-
-    const TPCMethodName name;
-    const TPCMethodParametersDeclaration params;
-    const TPCReturnSpecifier returnx;
-    const TPCMethodBody body;
+    const TWords words;
+    
+    virtual ~Words();
 };
 
-#endif /* LAMBDA_EXPRESSION_HXX */
+#endif /* WORDS_HXX */

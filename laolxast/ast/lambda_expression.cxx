@@ -30,11 +30,37 @@
 #include "ast/lambda_expression.hxx"
 
 TPCLambdaExpression LambdaExpression::parse(Parser& parser) {
-	TPCLambdaExpression result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    if (Token::K_DEF == parser.accept()->code) {
+        auto name = MethodName::parse(parser);
+        if (name) {
+            auto mpd = MethodParametersDeclaration::parse(parser);
+            auto ret = ReturnSpecifier::parse(parser);
+            if (Token::S_LCURLY == parser.accept()->code) {
+                auto body = MethodBody::parse(parser);
+                if (body) {
+                    if (Token::S_RCURLY == parser.accept()->code) {
+                        return new LambdaExpression(name, mpd, ret, body);
+                    }
+                }
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-LambdaExpression::LambdaExpression() {}
+LambdaExpression::LambdaExpression(
+        TPCMethodName name,
+        TPCMethodParametersDeclaration params,
+        TPCReturnSpecifier returnx,
+        TPCMethodBody body)
+: name(name), params(params), returnx(returnx), body(body) {
+}
 
-LambdaExpression::~LambdaExpression() {}
+LambdaExpression::~LambdaExpression() {
+    delete name;
+    delete params;
+    delete returnx;
+    delete body;
+}
