@@ -22,31 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 18:34:56 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef STATEMENT_HXX
+#define STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class Statement;
+typedef const Statement* TPCStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class Statement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+    static TPCStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
+    explicit Statement(TPCAstNode node)
+    : node(node) {
     }
 
-    const TPCOverloadableOperator op;
+    const TPCAstNode node;
 
-    virtual ~OperatorFunctionId();
+    virtual ~Statement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* STATEMENT_HXX */

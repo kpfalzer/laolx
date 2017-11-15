@@ -31,17 +31,22 @@
 #define METHOD_BODY_HXX
 
 #include "ast/common.hxx"
+#include "method_body_item.hxx"
 
 class MethodBody;
 typedef const MethodBody* TPCMethodBody;
 
 class MethodBody : public virtual AstNode {
 public:
-	static TPCMethodBody parse(Parser& parser);
+    typedef laolx::Array<TPCMethodBodyItem> TItems;
+    
+    static TPCMethodBody parse(Parser& parser);
 
-	explicit MethodBody();
+    explicit MethodBody(const TItems& items);
 
-	virtual ~MethodBody();
+    const TItems items;
+    
+    virtual ~MethodBody();
 };
 
 #endif /* METHOD_BODY_HXX */

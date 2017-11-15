@@ -22,28 +22,45 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   method_body.cxx
+ * File:   for_statement.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:55:39 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#include "ast/method_body.hxx"
+#include "ast/for_statement.hxx"
 
-TPCMethodBody MethodBody::parse(Parser& parser) {
-    TItems items;
-    while (true) {
-        auto item = MethodBodyItem::parse(parser);
-        if (!item) {
-            break;
+TPCForStatement ForStatement::parse(Parser& parser) {
+    auto start = parser.getMark();
+    if (Token::K_FOR == parser.accept()->code) {
+        if (Token::S_LPAREN == parser.accept()->code) {
+            auto ident = parser.accept();
+            if (Token::IDENT == ident->code) {
+                if (Token::S_COLON == parser.accept()->code) {
+                    auto expr = Expression::parse(parser);
+                    if (expr) {
+                        if (Token::S_RPAREN == parser.accept()->code) {
+                            auto stmt = Statement::parse(parser);
+                            if (stmt) {
+                                return new ForStatement(ident, expr, stmt);
+                            }
+                        }
+                    }
+                }
+            }
         }
-        items << item;
     }
-    return new MethodBody(items);
+    parser.setMark(start);
+    return nullptr;
 }
 
-MethodBody::MethodBody(const TItems& items)
-: items(items) {
+ForStatement::ForStatement(
+        const TRcToken& ident,
+        TPCExpression expr,
+        TPCStatement stmt)
+: ident(ident), expr(expr), stmt(stmt) {
 }
 
-MethodBody::~MethodBody() {
+ForStatement::~ForStatement() {
+    delete expr;
+    delete stmt;
 }

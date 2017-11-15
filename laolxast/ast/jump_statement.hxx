@@ -22,31 +22,29 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   jump_statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef JUMP_STATEMENT_HXX
+#define JUMP_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class JumpStatement;
+typedef const JumpStatement* TPCJumpStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class JumpStatement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+    static TPCJumpStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+    explicit JumpStatement(const TRcToken& kwrd, TPCAstNode node = nullptr);   
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+    const TRcToken kwrd;
+    const TPCAstNode node;
+    
+    virtual ~JumpStatement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* JUMP_STATEMENT_HXX */

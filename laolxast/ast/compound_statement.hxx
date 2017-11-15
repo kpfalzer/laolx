@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   compound_statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef COMPOUND_STATEMENT_HXX
+#define COMPOUND_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class CompoundStatement;
+typedef const CompoundStatement* TPCCompoundStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class CompoundStatement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+	static TPCCompoundStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+	explicit CompoundStatement();
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+	virtual ~CompoundStatement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* COMPOUND_STATEMENT_HXX */

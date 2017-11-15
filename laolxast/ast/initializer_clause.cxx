@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   initializer_clause.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 18:37:44 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#include "ast/initializer_clause.hxx"
 
-#include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+TPCInitializerClause InitializerClause::parse(Parser& parser) {
+	TPCInitializerClause result = nullptr;
+	//todo
+	return result;
+}
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+InitializerClause::InitializerClause() {}
 
-class OperatorFunctionId : public virtual AstNode {
-public:
-    static TPCOperatorFunctionId parse(Parser& parser);
-
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
-
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
-};
-
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+InitializerClause::~InitializerClause() {}

@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   case_statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef CASE_STATEMENT_HXX
+#define CASE_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class CaseStatement;
+typedef const CaseStatement* TPCCaseStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class CaseStatement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+	static TPCCaseStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+	explicit CaseStatement();
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+	virtual ~CaseStatement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* CASE_STATEMENT_HXX */

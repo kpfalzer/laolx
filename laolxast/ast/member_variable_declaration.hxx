@@ -22,31 +22,45 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   member_variable_declaration.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 18:33:41 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef MEMBER_VARIABLE_DECLARATION_HXX
+#define MEMBER_VARIABLE_DECLARATION_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+#include "ast/mutability.hxx"
+#include "ast/simple_type_specifier.hxx"
+#include "ast/var_or_attr_name.hxx"
+#include "ast/initializer_clause.hxx"
+#include "ast/access.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class MemberVariableDeclaration;
+typedef const MemberVariableDeclaration* TPCMemberVariableDeclaration;
 
-class OperatorFunctionId : public virtual AstNode {
+class MemberVariableDeclaration : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+    static TPCMemberVariableDeclaration parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+    explicit MemberVariableDeclaration(
+            TPCAccess access,
+            TPCMutability mutability,
+            bool isStatic,
+            TPCSimpleTypeSpecifier typeSpec,
+            TPCVarOrAttrName varOrAttrName,
+            TPCInitializerClause initClause
+            );
 
-    const TPCOverloadableOperator op;
+    const TPCAccess access;
+    const TPCMutability mutability;
+    const bool isStatic;
+    const TPCSimpleTypeSpecifier typeSpec;
+    const TPCVarOrAttrName varOrAttrName;
+    const TPCInitializerClause initClause;
 
-    virtual ~OperatorFunctionId();
+    virtual ~MemberVariableDeclaration();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* MEMBER_VARIABLE_DECLARATION_HXX */

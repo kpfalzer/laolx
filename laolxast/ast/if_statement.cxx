@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   if_statement.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#include "ast/if_statement.hxx"
 
-#include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+TPCIfStatement IfStatement::parse(Parser& parser) {
+	TPCIfStatement result = nullptr;
+	//todo
+	return result;
+}
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+IfStatement::IfStatement() {}
 
-class OperatorFunctionId : public virtual AstNode {
-public:
-    static TPCOperatorFunctionId parse(Parser& parser);
-
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
-
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
-};
-
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+IfStatement::~IfStatement() {}

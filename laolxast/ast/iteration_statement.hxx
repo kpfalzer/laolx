@@ -22,31 +22,35 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   iteration_statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef ITERATION_STATEMENT_HXX
+#define ITERATION_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+#include "ast/condition.hxx"
+#include "ast/statement.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class IterationStatement;
+typedef const IterationStatement* TPCIterationStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class IterationStatement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+    static TPCIterationStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+    explicit IterationStatement(
+            const TRcToken& kwrd,
+            TPCCondition cond,
+            TPCStatement stmt);
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+    const TRcToken kwrd;
+    const TPCCondition cond;
+    const TPCStatement stmt;
+    
+    virtual ~IterationStatement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* ITERATION_STATEMENT_HXX */

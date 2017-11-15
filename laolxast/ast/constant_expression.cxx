@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   constant_expression.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 17:41:45 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#include "ast/constant_expression.hxx"
 
-#include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+TPCConstantExpression ConstantExpression::parse(Parser& parser) {
+	TPCConstantExpression result = nullptr;
+	//todo
+	return result;
+}
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+ConstantExpression::ConstantExpression() {}
 
-class OperatorFunctionId : public virtual AstNode {
-public:
-    static TPCOperatorFunctionId parse(Parser& parser);
-
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
-
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
-};
-
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+ConstantExpression::~ConstantExpression() {}

@@ -290,7 +290,7 @@ Statement:
 
 // Range based only 'for'
 ForStatement:
-	K_FOR R_LPAREN IDENT S_COLON Expression S_RPAREN Statement
+	K_FOR S_LPAREN IDENT S_COLON Expression S_RPAREN Statement
 
 IterationStatement:
 	K_WHILE Condition Statement

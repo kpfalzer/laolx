@@ -22,31 +22,35 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   for_statement.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef FOR_STATEMENT_HXX
+#define FOR_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+#include "statement.hxx"
+#include "expression.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class ForStatement;
+typedef const ForStatement* TPCForStatement;
 
-class OperatorFunctionId : public virtual AstNode {
+class ForStatement : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+    static TPCForStatement parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+    explicit ForStatement(
+            const TRcToken& ident,
+            TPCExpression expr,
+            TPCStatement stmt);
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+    const TRcToken ident;
+    const TPCExpression expr;
+    const TPCStatement stmt;
+    
+    virtual ~ForStatement();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* FOR_STATEMENT_HXX */

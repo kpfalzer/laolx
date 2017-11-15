@@ -22,31 +22,43 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   statement.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 18:34:56 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#include "ast/statement.hxx"
+#include "ast/expression.hxx"
+#include "ast/compound_statement.hxx"
+#include "ast/if_statement.hxx"
+#include "ast/case_statement.hxx"
+#include "ast/jump_statement.hxx"
+#include "ast/iteration_statement.hxx"
+#include "ast/for_statement.hxx"
 
-#include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
-
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
-
-class OperatorFunctionId : public virtual AstNode {
-public:
-    static TPCOperatorFunctionId parse(Parser& parser);
-
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
+TPCStatement Statement::parse(Parser& parser) {
+    TPCAstNode node = Expression::parse(parser);
+    if (!node) {
+        node = CompoundStatement::parse(parser);
+        if (!node) {
+            node = IfStatement::parse(parser);
+            if (!node) {
+                node = CaseStatement::parse(parser);
+                if (!node) {
+                    node = JumpStatement::parse(parser);
+                    if (!node) {
+                        node = IterationStatement::parse(parser);
+                        if (!node) {
+                            node = ForStatement::parse(parser);
+                        }
+                    }
+                }
+            }
+        }
     }
+    return (node) ? new Statement(node) : nullptr;
+}
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
-};
-
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+Statement::~Statement() {
+    delete node;
+}

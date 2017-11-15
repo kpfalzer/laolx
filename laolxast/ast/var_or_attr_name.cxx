@@ -22,31 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   var_or_attr_name.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 18:37:44 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#include "ast/var_or_attr_name.hxx"
 
-#include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
+TPCVarOrAttrName VarOrAttrName::parse(Parser& parser) {
+	TPCVarOrAttrName result = nullptr;
+	//todo
+	return result;
+}
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+VarOrAttrName::VarOrAttrName() {}
 
-class OperatorFunctionId : public virtual AstNode {
-public:
-    static TPCOperatorFunctionId parse(Parser& parser);
-
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
-
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
-};
-
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+VarOrAttrName::~VarOrAttrName() {}

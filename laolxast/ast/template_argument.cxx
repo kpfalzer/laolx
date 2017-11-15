@@ -28,13 +28,17 @@
  * Created on Tue Nov 14 15:43:26 2017
  */
 #include "ast/template_argument.hxx"
+#include "ast/constant_expression.hxx"
+#include "ast/id_expression.hxx"
 
 TPCTemplateArgument TemplateArgument::parse(Parser& parser) {
-	TPCTemplateArgument result = nullptr;
-	//todo
-	return result;
+    TPCAstNode node = ConstantExpression::parse(parser);
+    if (!node) {
+        node = IdExpression::parse(parser);
+    }
+    return (node) ? new TemplateArgument(node) : nullptr;
 }
 
-TemplateArgument::TemplateArgument() {}
-
-TemplateArgument::~TemplateArgument() {}
+TemplateArgument::~TemplateArgument() {
+    delete node;
+}

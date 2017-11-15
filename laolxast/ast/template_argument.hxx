@@ -37,11 +37,14 @@ typedef const TemplateArgument* TPCTemplateArgument;
 
 class TemplateArgument : public virtual AstNode {
 public:
-	static TPCTemplateArgument parse(Parser& parser);
+    static TPCTemplateArgument parse(Parser& parser);
 
-	explicit TemplateArgument();
+    explicit TemplateArgument(TPCAstNode node) : node(node)
+    {}
 
-	virtual ~TemplateArgument();
+    const TPCAstNode node;
+    
+    virtual ~TemplateArgument();
 };
 
 #endif /* TEMPLATE_ARGUMENT_HXX */

@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.hxx
+ * File:   constant_expression.hxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 17:41:45 2017
  */
-#ifndef OPERATOR_FUNCTION_ID_HXX
-#define OPERATOR_FUNCTION_ID_HXX
+#ifndef CONSTANT_EXPRESSION_HXX
+#define CONSTANT_EXPRESSION_HXX
 
 #include "ast/common.hxx"
-#include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
+class ConstantExpression;
+typedef const ConstantExpression* TPCConstantExpression;
 
-class OperatorFunctionId : public virtual AstNode {
+class ConstantExpression : public virtual AstNode {
 public:
-    static TPCOperatorFunctionId parse(Parser& parser);
+	static TPCConstantExpression parse(Parser& parser);
 
-    explicit OperatorFunctionId(TPCOverloadableOperator op)
-    : op(op) {
-    }
+	explicit ConstantExpression();
 
-    const TPCOverloadableOperator op;
-
-    virtual ~OperatorFunctionId();
+	virtual ~ConstantExpression();
 };
 
-#endif /* OPERATOR_FUNCTION_ID_HXX */
+#endif /* CONSTANT_EXPRESSION_HXX */

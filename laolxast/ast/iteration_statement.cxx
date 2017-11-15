@@ -22,25 +22,51 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   operator_function_id.cxx
+ * File:   iteration_statement.cxx
  * Author: kwpfalzer
  *
- * Created on Tue Nov 14 13:36:48 2017
+ * Created on Tue Nov 14 19:16:47 2017
  */
-#include "ast/operator_function_id.hxx"
+#include "ast/iteration_statement.hxx"
 
-TPCOperatorFunctionId OperatorFunctionId::parse(Parser& parser) {
+TPCIterationStatement IterationStatement::parse(Parser& parser) {
     auto start = parser.getMark();
-    if (Token::K_OPERATOR == parser.accept()->code) {
-        auto op = OverloadableOperator::parse(parser);
-        if (op) {
-            return new OperatorFunctionId(op);
+    TRcToken kwrd = parser.accept();
+    {
+        if (Token::K_WHILE == kwrd->code) {
+            auto cond = Condition::parse(parser);
+            if (cond) {
+                auto stmt = Statement::parse(parser);
+                if (stmt) {
+                    return new IterationStatement(kwrd, cond, stmt);
+                }
+            }
+        }
+    }
+    parser.setMark(start);
+    {
+        kwrd = parser.accept();
+        if (Token::K_DO == kwrd->code) {
+            auto stmt = Statement::parse(parser);
+            if (stmt) {
+                if (Token::K_WHILE == parser.accept()->code) {
+                    auto cond = Condition::parse(parser);
+                    if (cond) {
+                        return new IterationStatement(kwrd, cond, stmt);
+                    }
+                }
+            }
         }
     }
     parser.setMark(start);
     return nullptr;
 }
 
-OperatorFunctionId::~OperatorFunctionId() {
-    delete op;
+IterationStatement::IterationStatement(const TRcToken& kwrd, TPCCondition cond, TPCStatement stmt)
+: kwrd(kwrd), cond(cond), stmt(stmt) {
+}
+
+IterationStatement::~IterationStatement() {
+    delete cond;
+    delete stmt;
 }
