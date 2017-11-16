@@ -30,18 +30,32 @@
 #ifndef IF_STATEMENT_HXX
 #define IF_STATEMENT_HXX
 
+#include <utility>
 #include "ast/common.hxx"
+#include "ast/condition.hxx"
+#include "ast/statement.hxx"
 
 class IfStatement;
 typedef const IfStatement* TPCIfStatement;
 
 class IfStatement : public virtual AstNode {
 public:
-	static TPCIfStatement parse(Parser& parser);
+    typedef std::pair<TPCCondition, TPCStatement> TCondStmt;
+    typedef laolx::Array<TCondStmt> TCondStmts;
 
-	explicit IfStatement();
+    static TPCIfStatement parse(Parser& parser);
 
-	virtual ~IfStatement();
+    explicit IfStatement(
+            const TCondStmt& ifClause,
+            const TCondStmts& elsifClauses,
+            TPCStatement elseClause
+            );
+
+    const TCondStmt ifClause;
+    const TCondStmts elsifClauses;
+    const TPCStatement elseClause;
+
+    virtual ~IfStatement();
 };
 
 #endif /* IF_STATEMENT_HXX */

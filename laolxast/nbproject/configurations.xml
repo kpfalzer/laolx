@@ -12,6 +12,7 @@
       <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/class_name.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
+      <itemPath>ast/compound_statement.hxx</itemPath>
       <itemPath>ast/condition.hxx</itemPath>
       <itemPath>ast/constant_expression.hxx</itemPath>
       <itemPath>ast/declaration.hxx</itemPath>
@@ -77,6 +78,7 @@
       <itemPath>ast/access.cxx</itemPath>
       <itemPath>parser/astnode.cxx</itemPath>
       <itemPath>ast/bool.cxx</itemPath>
+      <itemPath>ast/case_statement.cxx</itemPath>
       <itemPath>ast/class_body.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
       <itemPath>ast/class_name.cxx</itemPath>
@@ -195,6 +197,8 @@
       </item>
       <item path="ast/bool.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/case_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="ast/case_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
@@ -212,6 +216,8 @@
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/compound_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/compound_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/condition.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -522,6 +528,8 @@
       </item>
       <item path="ast/bool.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/case_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="ast/case_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
@@ -539,6 +547,8 @@
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/compound_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/compound_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/condition.cxx" ex="false" tool="1" flavor2="0">
       </item>

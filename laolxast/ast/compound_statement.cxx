@@ -30,11 +30,29 @@
 #include "ast/compound_statement.hxx"
 
 TPCCompoundStatement CompoundStatement::parse(Parser& parser) {
-	TPCCompoundStatement result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    TStatements statements;
+    if (Token::S_LCURLY == parser.accept()->code) {
+        while (true) {
+            auto statement = Statement::parse(parser);
+            if (statement) {
+                statements << statement;
+            } else {
+                break; //while
+            }
+        }
+        if (Token::S_RCURLY == parser.accept()->code) {
+            return new CompoundStatement(statements);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-CompoundStatement::CompoundStatement() {}
+CompoundStatement::CompoundStatement(const TStatements& statements)
+: statements(statements) {
 
-CompoundStatement::~CompoundStatement() {}
+}
+
+CompoundStatement::~CompoundStatement() {
+}

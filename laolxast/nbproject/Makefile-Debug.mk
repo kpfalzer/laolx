@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
 	${OBJECTDIR}/ast/bool.o \
+	${OBJECTDIR}/ast/case_statement.o \
 	${OBJECTDIR}/ast/class_body.o \
 	${OBJECTDIR}/ast/class_declaration.o \
 	${OBJECTDIR}/ast/class_name.o \
@@ -144,6 +145,11 @@ ${OBJECTDIR}/ast/bool.o: ast/bool.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool.o ast/bool.cxx
+
+${OBJECTDIR}/ast/case_statement.o: ast/case_statement.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/case_statement.o ast/case_statement.cxx
 
 ${OBJECTDIR}/ast/class_body.o: ast/class_body.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -488,6 +494,19 @@ ${OBJECTDIR}/ast/bool_nomain.o: ${OBJECTDIR}/ast/bool.o ast/bool.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool_nomain.o ast/bool.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/bool.o ${OBJECTDIR}/ast/bool_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/case_statement_nomain.o: ${OBJECTDIR}/ast/case_statement.o ast/case_statement.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/case_statement.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/case_statement_nomain.o ast/case_statement.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/case_statement.o ${OBJECTDIR}/ast/case_statement_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/class_body_nomain.o: ${OBJECTDIR}/ast/class_body.o ast/class_body.cxx 

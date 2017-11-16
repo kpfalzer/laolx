@@ -31,17 +31,22 @@
 #define COMPOUND_STATEMENT_HXX
 
 #include "ast/common.hxx"
+#include "statement.hxx"
 
 class CompoundStatement;
 typedef const CompoundStatement* TPCCompoundStatement;
 
 class CompoundStatement : public virtual AstNode {
 public:
-	static TPCCompoundStatement parse(Parser& parser);
+    typedef laolx::Array<TPCStatement> TStatements;
+    
+    static TPCCompoundStatement parse(Parser& parser);
 
-	explicit CompoundStatement();
+    explicit CompoundStatement(const TStatements& statements);
+    
+    const TStatements statements;
 
-	virtual ~CompoundStatement();
+    virtual ~CompoundStatement();
 };
 
 #endif /* COMPOUND_STATEMENT_HXX */

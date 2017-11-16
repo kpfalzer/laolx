@@ -30,11 +30,52 @@
 #include "ast/if_statement.hxx"
 
 TPCIfStatement IfStatement::parse(Parser& parser) {
-	TPCIfStatement result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    if (Token::K_IF == parser.accept()->code) {
+        auto ifCond = Condition::parse(parser);
+        if (ifCond) {
+            auto ifStmt = Statement::parse(parser);
+            if (ifStmt) {
+                TCondStmt ifClause = {ifCond, ifStmt};
+                start = parser.getMark();
+                TCondStmts elsifClauses;
+                while (Token::K_ELSIF == parser.peek()->code) {
+                    auto cond = Condition::parse(parser.advance());
+                    if (cond) {
+                        auto stmt = Statement::parse(parser);
+                        if (stmt) {
+                            elsifClauses << TCondStmt({cond, stmt});
+                            start = parser.getMark();
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                parser.setMark(start);
+                TPCStatement stmt = nullptr;
+                if (Token::K_ELSE == parser.peek()->code) {
+                    stmt = Statement::parse(parser.advance());
+                    if (!stmt) {
+                        parser.setMark(start);
+                    }
+                }
+                return new IfStatement(ifClause, elsifClauses, stmt);
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-IfStatement::IfStatement() {}
+IfStatement::IfStatement(
+        const TCondStmt& ifClause,
+        const TCondStmts& elsifClauses,
+        TPCStatement elseClause)
+: ifClause(ifClause),
+elsifClauses(elsifClauses),
+elseClause(elseClause) {
+}
 
-IfStatement::~IfStatement() {}
+IfStatement::~IfStatement() {
+    delete elseClause;
+}

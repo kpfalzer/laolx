@@ -30,18 +30,33 @@
 #ifndef CASE_STATEMENT_HXX
 #define CASE_STATEMENT_HXX
 
+#include <utility>
 #include "ast/common.hxx"
+#include "ast/condition.hxx"
+#include "ast/expression.hxx"
+#include "ast/statement.hxx"
 
 class CaseStatement;
 typedef const CaseStatement* TPCCaseStatement;
 
 class CaseStatement : public virtual AstNode {
 public:
-	static TPCCaseStatement parse(Parser& parser);
+    typedef laolx::Array<TPCExpression> TExpressions;
+    typedef std::pair<TExpressions, TPCStatement> TWhen;
+    typedef laolx::Array<TWhen> TWhens;
 
-	explicit CaseStatement();
+    static TPCCaseStatement parse(Parser& parser);
 
-	virtual ~CaseStatement();
+    explicit CaseStatement(
+            TPCCondition condition,
+            const TWhens& whens,
+            TPCStatement elseStmt);
+
+    const TPCCondition condition;
+    const TWhens whens;
+    const TPCStatement elseStmt;
+
+    virtual ~CaseStatement();
 };
 
 #endif /* CASE_STATEMENT_HXX */

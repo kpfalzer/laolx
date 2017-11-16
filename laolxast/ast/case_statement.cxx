@@ -30,11 +30,67 @@
 #include "ast/case_statement.hxx"
 
 TPCCaseStatement CaseStatement::parse(Parser& parser) {
-	TPCCaseStatement result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    if (Token::K_CASE == parser.accept()->code) {
+        auto condition = Condition::parse(parser);
+        if (condition) {
+            if (Token::S_LCURLY == parser.accept()->code) {
+                TWhens whens;
+                auto isOK = true;
+                auto mark = parser.getMark();
+                while (isOK && (Token::K_WHEN == parser.peek()->code)) {
+                    TWhen when;
+                    while (isOK) {
+                        auto expr = Expression::parse(parser.advance());
+                        if (expr) {
+                            when.first << expr;
+                            mark = parser.getMark();
+                            if (Token::S_COMMA != parser.peek()->code) {
+                                break;
+                            }
+                        } else {
+                            isOK = false;
+                        }
+                    }
+                    if (isOK) {
+                        auto stmt = Statement::parse(parser);
+                        if (stmt) {
+                            when.second = stmt;
+                            whens << when;
+                        } else {
+                            isOK = false;
+                        }
+                    }
+                }
+                if (isOK && !whens.isEmpty()) {
+                    TPCStatement elseStmt = nullptr;
+                    if (Token::K_ELSE == parser.peek()->code) {
+                        elseStmt = Statement::parse(parser.advance());
+                        if (!elseStmt) {
+                            isOK = false;
+                        }
+                    }
+                    if (isOK && (Token::S_RCURLY == parser.accept()->code)) {
+                        return new CaseStatement(condition, whens, elseStmt);
+                    }
+                }
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-CaseStatement::CaseStatement() {}
+CaseStatement::CaseStatement(
+        TPCCondition condition,
+        const TWhens& whens,
+        TPCStatement elseStmt)
+: condition(condition),
+whens(whens),
+elseStmt(elseStmt) {
+}
 
-CaseStatement::~CaseStatement() {}
+CaseStatement::~CaseStatement() {
+    delete condition;
+    delete elseStmt;
+}
