@@ -51,6 +51,7 @@
       <itemPath>ast/return_specifier.hxx</itemPath>
       <itemPath>ast/simple_template_id.hxx</itemPath>
       <itemPath>ast/simple_type_specifier.hxx</itemPath>
+      <itemPath>ast/source_file.hxx</itemPath>
       <itemPath>ast/statement.hxx</itemPath>
       <itemPath>ast/string.hxx</itemPath>
       <itemPath>ast/symbols.hxx</itemPath>
@@ -122,6 +123,7 @@
       <itemPath>ast/return_specifier.cxx</itemPath>
       <itemPath>ast/simple_template_id.cxx</itemPath>
       <itemPath>ast/simple_type_specifier.cxx</itemPath>
+      <itemPath>ast/source_file.cxx</itemPath>
       <itemPath>ast/statement.cxx</itemPath>
       <itemPath>ast/string.cxx</itemPath>
       <itemPath>ast/symbols.cxx</itemPath>
@@ -376,6 +378,10 @@
       <item path="ast/simple_type_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/simple_type_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -707,6 +713,10 @@
       <item path="ast/simple_type_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/simple_type_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/source_file.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/source_file.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/statement.cxx" ex="false" tool="1" flavor2="0">
       </item>

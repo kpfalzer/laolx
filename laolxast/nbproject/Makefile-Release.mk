@@ -79,6 +79,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/return_specifier.o \
 	${OBJECTDIR}/ast/simple_template_id.o \
 	${OBJECTDIR}/ast/simple_type_specifier.o \
+	${OBJECTDIR}/ast/source_file.o \
 	${OBJECTDIR}/ast/statement.o \
 	${OBJECTDIR}/ast/string.o \
 	${OBJECTDIR}/ast/symbols.o \
@@ -355,6 +356,11 @@ ${OBJECTDIR}/ast/simple_type_specifier.o: ast/simple_type_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/simple_type_specifier.o ast/simple_type_specifier.cxx
+
+${OBJECTDIR}/ast/source_file.o: ast/source_file.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/source_file.o ast/source_file.cxx
 
 ${OBJECTDIR}/ast/statement.o: ast/statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -1040,6 +1046,19 @@ ${OBJECTDIR}/ast/simple_type_specifier_nomain.o: ${OBJECTDIR}/ast/simple_type_sp
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/simple_type_specifier_nomain.o ast/simple_type_specifier.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/simple_type_specifier.o ${OBJECTDIR}/ast/simple_type_specifier_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/source_file_nomain.o: ${OBJECTDIR}/ast/source_file.o ast/source_file.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/source_file.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/source_file_nomain.o ast/source_file.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/source_file.o ${OBJECTDIR}/ast/source_file_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/statement_nomain.o: ${OBJECTDIR}/ast/statement.o ast/statement.cxx 
