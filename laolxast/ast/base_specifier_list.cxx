@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   class_body.hxx
- * Author: kwpfalzer
+ * File:   base_specifier_list.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef CLASS_BODY_HXX
-#define CLASS_BODY_HXX
+#include "ast/base_specifier_list.hxx"
 
-#include "ast/common.hxx"
+TPCBaseSpecifierList BaseSpecifierList::parse(Parser& parser) {
+	TPCBaseSpecifierList result = nullptr;
+	//todo
+	return result;
+}
 
-class ClassBody;
-typedef std::shared_ptr<ClassBody> TRcClassBody;
+BaseSpecifierList::BaseSpecifierList() {}
 
-class ClassBody : public virtual AstNode {
-public:
-	static TRcClassBody parse(Parser& parser);
-
-	explicit ClassBody();
-
-	virtual ~ClassBody();
-};
-
-#endif /* CLASS_BODY_HXX */
+BaseSpecifierList::~BaseSpecifierList() {}

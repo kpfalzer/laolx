@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   template_parameter_list.cxx
- * Author: kwpfalzer
+ * File:   base_clause.hxx
+ * Author: kpfalzer
  *
- * Created on Wed Oct 18 20:17:32 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/template_parameter_list.hxx"
+#ifndef BASE_CLAUSE_HXX
+#define BASE_CLAUSE_HXX
 
-TRcTemplateParameterList TemplateParameterList::parse(Parser& parser) {
-    TRcTemplateParameterList result(nullptr);
-    if (parser.peek()->code != Token::S_LT) {
-        return result;
-    }
-    auto start = parser.getMark();
-    auto parameters = sequenceOf<TemplateParameter>(parser.advance(), start, Token::S_COMMA);
-    if (parser.accept()->code == Token::S_GT) {
-        return std::make_shared<TemplateParameterList>(parameters);
-    }
-    parser.setMark(start);
-    return result;
-}
+#include "ast/common.hxx"
 
-TemplateParameterList::~TemplateParameterList() {
-}
+class BaseClause;
+typedef const BaseClause* TPCBaseClause;
+
+class BaseClause : public virtual AstNode {
+public:
+	static TPCBaseClause parse(Parser& parser);
+
+	explicit BaseClause();
+
+	virtual ~BaseClause();
+};
+
+#endif /* BASE_CLAUSE_HXX */

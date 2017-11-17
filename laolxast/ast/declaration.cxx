@@ -29,48 +29,36 @@
 #include "ast/typedef_declaration.hxx"
 #include "ast/namespace_declaration.hxx"
 
-Declaration::Declaration(const TRcLinkage& linkage, const TRcAstNode& declaration)
-: linkage(linkage), declaration(declaration) {
-
+Declaration::Declaration(TPCLinkage linkage, TPCAstNode actual) 
+: linkage(linkage), actual(actual) {
 }
 
-TRcDeclaration Declaration::parse(Parser& parser) {
-    TRcDeclaration actual(nullptr);
-    TRcAstNode decl(nullptr);
-    Parser::index_type start = parser.getMark();
-    TRcLinkage linkage = Linkage::parse(parser);
-
-#define PARSE_CAST(_class)                                              \
-        {                                                               \
-            auto xdecl = _class::parse(parser);                         \
-            if (xdecl) {                                                \
-                decl = std::static_pointer_cast<AstNode>(xdecl);        \
-                break;                                                  \
-            }                                                           \
+TPCDeclaration Declaration::parse(Parser& parser) {
+    auto start = parser.getMark();
+    auto linkage = Linkage::parse(parser);
+    TPCAstNode actual = ClassDeclaration::parse(parser);
+    if (!actual) {
+        actual = VariableDeclaration::parse(parser);
+        if (!actual) {
+            actual = MethodDeclaration::parse(parser);
         }
-
-    do {
-        PARSE_CAST(ClassDeclaration)
-        PARSE_CAST(VariableDeclaration)
-        PARSE_CAST(MethodDeclaration)
-        if (linkage) {
-            // no linkage before remaining...
-            parser.setMark(start);
-            return actual;
-        }
-        PARSE_CAST(TypedefDeclaration)
-        PARSE_CAST(NamespaceDeclaration)
-    } while (false); //one pass through
-    if (decl) {
-        actual = std::make_shared<Declaration>(linkage, decl);
-    } else {
-        parser.setMark(start);
     }
-    return actual;
+    if (!actual && !linkage) {
+        actual = TypedefDeclaration::parse(parser);
+        if (!actual) {
+            actual = NamespaceDeclaration::parse(parser);
+        }
+    }
+    if (actual) {
+        return new Declaration(linkage, actual);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
 Declaration::~Declaration() {
-
+    delete linkage;
+    delete actual;
 }
 
 #undef PARSE_CAST

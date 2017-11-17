@@ -22,34 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   template_parameter.cxx
- * Author: kwpfalzer
+ * File:   template_parameter.hxx
+ * Author: kpfalzer
  *
- * Created on Wed Oct 18 20:17:32 2017
+ * Created on Fri Nov 17 12:48:41 2017
  */
-#include "ast/template_parameter.hxx"
+#ifndef TEMPLATE_PARAMETER_HXX
+#define TEMPLATE_PARAMETER_HXX
 
-TRcTemplateParameter TemplateParameter::parse(Parser& parser) {
-    TRcTemplateParameter result(nullptr);
-    if (parser.peek()->code != Token::IDENT) {
-        return result;
-    }
-    TRcToken name = parser.accept();
-    auto start = parser.getMark();
-    TRcInitializerClause initializer(nullptr);
-    if (parser.accept()->code == Token::S_EQ) {
-        initializer = InitializerClause::parse(parser);
-        if (!initializer) {
-            parser.setMark(start);
-        }
-    } 
-    result = std::make_shared<TemplateParameter>(name, initializer);
-    return result;
-}
+#include "ast/common.hxx"
 
-TemplateParameter::TemplateParameter(const TRcToken& name, const TRcInitializerClause& init)
-: name(name), initializer(init) {
-}
+class TemplateParameter;
+typedef const TemplateParameter* TPCTemplateParameter;
 
-TemplateParameter::~TemplateParameter() {
-}
+class TemplateParameter : public virtual AstNode {
+public:
+	static TPCTemplateParameter parse(Parser& parser);
+
+	explicit TemplateParameter();
+
+	virtual ~TemplateParameter();
+};
+
+#endif /* TEMPLATE_PARAMETER_HXX */

@@ -45,6 +45,7 @@ class foo<T1,T2>(int @p1, string @p2) : public C1, C2(a:p1), I(a:p1,b:p2) {
 class A(int p1, p1; T p2, p3; T2 p2, T3 p4) {}
 **/
 
+<<<<<<<<<**************resume
 ClassDeclaration: 
 	K_CLASS IDENT TemplateParameterList? 
   		MethodParametersDeclaration?

@@ -42,10 +42,10 @@ class Declaration : public virtual AstNode {
 public:
     static TPCDeclaration parse(Parser& parser);
 
-    explicit Declaration();//(const TRcLinkage& linkage, const TRcAstNode& actual);
+    explicit Declaration(TPCLinkage linkage, TPCAstNode actual);
 
-    //const TRcLinkage linkage;
-    //const TRcAstNode declaration;
+    const TPCLinkage linkage;
+    const TPCAstNode actual;
     
     virtual ~Declaration();
 };

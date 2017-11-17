@@ -22,48 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   var_name.hxx
- * Author: kwpfalzer
+ * File:   base_clause.cxx
+ * Author: kpfalzer
  *
- * Created on Thu Oct 19 20:02:39 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef VAR_NAME_HXX
-#define VAR_NAME_HXX
+#include "ast/base_clause.hxx"
 
-#include "ast/common.hxx"
+TPCBaseClause BaseClause::parse(Parser& parser) {
+	TPCBaseClause result = nullptr;
+	//todo
+	return result;
+}
 
-class VarName;
-class VarOrAttrName;
-typedef std::shared_ptr<VarName> TRcVarName;
-typedef std::shared_ptr<VarOrAttrName> TRcVarOrAttrName;
+BaseClause::BaseClause() {}
 
-class VarName : public virtual AstNode {
-public:
-    static TRcVarName parse(Parser& parser);
-
-    explicit VarName(const TRcToken& name) : name(name) {
-    }
-
-    const TRcToken name;
-
-    virtual ~VarName();
-};
-
-class VarOrAttrName : public virtual AstNode {
-public:
-    static TRcVarOrAttrName parse(Parser& parser);
-
-    explicit VarOrAttrName(const TRcToken& name)
-    : name(name) {
-    }
-
-    explicit VarOrAttrName(const TRcVarName& name)
-    : VarOrAttrName(name->name) {
-    }
-
-    const TRcToken name;
-
-    virtual ~VarOrAttrName();
-};
-
-#endif /* VAR_NAME_HXX */
+BaseClause::~BaseClause() {}

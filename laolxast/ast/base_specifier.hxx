@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   scoped_type.hxx
- * Author: kwpfalzer
+ * File:   base_specifier.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef SCOPED_TYPE_HXX
-#define SCOPED_TYPE_HXX
+#ifndef BASE_SPECIFIER_HXX
+#define BASE_SPECIFIER_HXX
 
 #include "ast/common.hxx"
 
-class ScopedType;
-typedef std::shared_ptr<ScopedType> TRcScopedType;
+class BaseSpecifier;
+typedef const BaseSpecifier* TPCBaseSpecifier;
 
-class ScopedType : public virtual AstNode {
+class BaseSpecifier : public virtual AstNode {
 public:
-	static TRcScopedType parse(Parser& parser);
+	static TPCBaseSpecifier parse(Parser& parser);
 
-	explicit ScopedType();
+	explicit BaseSpecifier();
 
-	virtual ~ScopedType();
+	virtual ~BaseSpecifier();
 };
 
-#endif /* SCOPED_TYPE_HXX */
+#endif /* BASE_SPECIFIER_HXX */

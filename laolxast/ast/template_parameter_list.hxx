@@ -22,27 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   implements_declaration.hxx
- * Author: kwpfalzer
+ * File:   template_parameter_list.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:48:41 2017
  */
-#ifndef IMPLEMENTS_DECLARATION_HXX
-#define IMPLEMENTS_DECLARATION_HXX
+#ifndef TEMPLATE_PARAMETER_LIST_HXX
+#define TEMPLATE_PARAMETER_LIST_HXX
 
 #include "ast/common.hxx"
-#include "ast/extends_declaration.hxx"
 
-class ImplementsDeclaration;
-typedef std::shared_ptr<ImplementsDeclaration> TRcImplementsDeclaration;
+class TemplateParameterList;
+typedef const TemplateParameterList* TPCTemplateParameterList;
 
-class ImplementsDeclaration : public virtual AstNode, public ExtendsDeclaration {
+class TemplateParameterList : public virtual AstNode {
 public:
-    static TRcImplementsDeclaration parse(Parser& parser);
+	static TPCTemplateParameterList parse(Parser& parser);
 
-    explicit ImplementsDeclaration(const laolx::Array<TRcBaseName>& names, bool isConst);
+	explicit TemplateParameterList();
 
-    virtual ~ImplementsDeclaration();
+	virtual ~TemplateParameterList();
 };
 
-#endif /* IMPLEMENTS_DECLARATION_HXX */
+#endif /* TEMPLATE_PARAMETER_LIST_HXX */

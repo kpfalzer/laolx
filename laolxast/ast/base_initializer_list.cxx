@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_modifier.hxx
- * Author: kwpfalzer
+ * File:   base_initializer_list.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef TYPE_MODIFIER_HXX
-#define TYPE_MODIFIER_HXX
+#include "ast/base_initializer_list.hxx"
 
-#include "ast/common.hxx"
+TPCBaseInitializerList BaseInitializerList::parse(Parser& parser) {
+	TPCBaseInitializerList result = nullptr;
+	//todo
+	return result;
+}
 
-class TypeModifier;
-typedef std::shared_ptr<TypeModifier> TRcTypeModifier;
+BaseInitializerList::BaseInitializerList() {}
 
-class TypeModifier : public virtual AstNode {
-public:
-	static TRcTypeModifier parse(Parser& parser);
-
-	explicit TypeModifier();
-
-	virtual ~TypeModifier();
-};
-
-#endif /* TYPE_MODIFIER_HXX */
+BaseInitializerList::~BaseInitializerList() {}

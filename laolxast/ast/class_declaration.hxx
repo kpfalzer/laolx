@@ -33,6 +33,8 @@
 #define CLASS_DECLARATION_HXX
 
 #include "ast/common.hxx"
+#include "ast/template_parameter_list.hxx"
+#include "ast/method_parameters_declaration.hxx"
 
 class ClassDeclaration;
 typedef const ClassDeclaration* TPCClassDeclaration;
@@ -42,16 +44,11 @@ public:
     static TPCClassDeclaration parse(Parser& parser);
 
     explicit ClassDeclaration(
-            const TRcToken& className
-#ifdef TODO
-            ,
-            const TRcTypeParameters& typeParameters,
-            const TRcParameterDeclarationList& parameterDeclarationList,
-            const TRcExtendsDeclaration& extendsDeclaration,
-            const TRcImplementsDeclaration& implementsDeclaration,
-            const TRcClassBody& classBody
-#endif
-            );
+    const TRcToken name,
+    TPCTemplateParameterList templParams,
+    TPCMethodParametersDeclaration methodParams,
+    
+    );
 
     const TRcToken m_className;
 #ifdef TODO

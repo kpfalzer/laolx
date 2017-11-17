@@ -22,26 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   initializer_clause.hxx
- * Author: kwpfalzer
+ * File:   base_initializer_specifier.cxx
+ * Author: kpfalzer
  *
- * Created on Wed Oct 18 20:17:32 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef INITIALIZER_CLAUSE_HXX
-#define INITIALIZER_CLAUSE_HXX
+#include "ast/base_initializer_specifier.hxx"
 
-#include "ast/common.hxx"
+TPCBaseInitializerSpecifier BaseInitializerSpecifier::parse(Parser& parser) {
+	TPCBaseInitializerSpecifier result = nullptr;
+	//todo
+	return result;
+}
 
-class InitializerClause;
-typedef std::shared_ptr<InitializerClause> TRcInitializerClause;
+BaseInitializerSpecifier::BaseInitializerSpecifier() {}
 
-class InitializerClause : public virtual AstNode {
-public:
-	static TRcInitializerClause parse(Parser& parser);
-
-	explicit InitializerClause();
-
-	virtual ~InitializerClause();
-};
-
-#endif /* INITIALIZER_CLAUSE_HXX */
+BaseInitializerSpecifier::~BaseInitializerSpecifier() {}

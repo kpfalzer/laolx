@@ -22,28 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   primitive_type.hxx
- * Author: kwpfalzer
+ * File:   base_initializer_list.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef PRIMITIVE_TYPE_HXX
-#define PRIMITIVE_TYPE_HXX
+#ifndef BASE_INITIALIZER_LIST_HXX
+#define BASE_INITIALIZER_LIST_HXX
 
 #include "ast/common.hxx"
 
-class PrimitiveType;
-typedef std::shared_ptr<PrimitiveType> TRcPrimitiveType;
+class BaseInitializerList;
+typedef const BaseInitializerList* TPCBaseInitializerList;
 
-class PrimitiveType : public virtual AstNode {
+class BaseInitializerList : public virtual AstNode {
 public:
-    static TRcPrimitiveType parse(Parser& parser);
+	static TPCBaseInitializerList parse(Parser& parser);
 
-    explicit PrimitiveType(const TRcToken& type);
-    
-    const TRcToken m_type;
+	explicit BaseInitializerList();
 
-    virtual ~PrimitiveType();
+	virtual ~BaseInitializerList();
 };
 
-#endif /* PRIMITIVE_TYPE_HXX */
+#endif /* BASE_INITIALIZER_LIST_HXX */

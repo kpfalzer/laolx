@@ -22,30 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   extends_declaration.hxx
- * Author: kwpfalzer
+ * File:   template_parameter_list.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:48:41 2017
  */
-#ifndef EXTENDS_DECLARATION_HXX
-#define EXTENDS_DECLARATION_HXX
+#include "ast/template_parameter_list.hxx"
 
-#include "laolx/array.hxx"
-#include "ast/common.hxx"
-#include "ast/base_name.hxx"
+TPCTemplateParameterList TemplateParameterList::parse(Parser& parser) {
+	TPCTemplateParameterList result = nullptr;
+	//todo
+	return result;
+}
 
-class ExtendsDeclaration;
-typedef std::shared_ptr<ExtendsDeclaration> TRcExtendsDeclaration;
+TemplateParameterList::TemplateParameterList() {}
 
-class ExtendsDeclaration : public virtual AstNode {
-public:
-    static TRcExtendsDeclaration parse(Parser& parser, Token::Code code = Token::K_EXTENDS);
-
-    explicit ExtendsDeclaration(const laolx::Array<TRcBaseName>& names);
-
-    const laolx::Array<TRcBaseName> m_names;
-    
-    virtual ~ExtendsDeclaration();
-};
-
-#endif /* EXTENDS_DECLARATION_HXX */
+TemplateParameterList::~TemplateParameterList() {}

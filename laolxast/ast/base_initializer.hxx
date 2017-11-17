@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   conditional_expression.cxx
- * Author: kwpfalzer
+ * File:   base_initializer.hxx
+ * Author: kpfalzer
  *
- * Created on Wed Oct 18 20:17:32 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/conditional_expression.hxx"
+#ifndef BASE_INITIALIZER_HXX
+#define BASE_INITIALIZER_HXX
 
-TRcConditionalExpression ConditionalExpression::parse(Parser& parser) {
-	TRcConditionalExpression result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-ConditionalExpression::ConditionalExpression() {}
+class BaseInitializer;
+typedef const BaseInitializer* TPCBaseInitializer;
 
-ConditionalExpression::~ConditionalExpression() {}
+class BaseInitializer : public virtual AstNode {
+public:
+	static TPCBaseInitializer parse(Parser& parser);
+
+	explicit BaseInitializer();
+
+	virtual ~BaseInitializer();
+};
+
+#endif /* BASE_INITIALIZER_HXX */

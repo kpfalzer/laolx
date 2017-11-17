@@ -6,6 +6,13 @@
                    projectFiles="true">
       <itemPath>ast/access.hxx</itemPath>
       <itemPath>parser/astnode.hxx</itemPath>
+      <itemPath>ast/base_clause.hxx</itemPath>
+      <itemPath>ast/base_initializer.hxx</itemPath>
+      <itemPath>ast/base_initializer_list.hxx</itemPath>
+      <itemPath>ast/base_initializer_specifier.hxx</itemPath>
+      <itemPath>ast/base_specifier.hxx</itemPath>
+      <itemPath>ast/base_specifier_list.hxx</itemPath>
+      <itemPath>ast/base_type_specifier.hxx</itemPath>
       <itemPath>ast/bool.hxx</itemPath>
       <itemPath>ast/case_statement.hxx</itemPath>
       <itemPath>ast/class_body.hxx</itemPath>
@@ -58,6 +65,8 @@
       <itemPath>ast/template_argument.hxx</itemPath>
       <itemPath>ast/template_argument_list.hxx</itemPath>
       <itemPath>ast/template_id.hxx</itemPath>
+      <itemPath>ast/template_parameter.hxx</itemPath>
+      <itemPath>ast/template_parameter_list.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
       <itemPath>ast/type_name.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
@@ -78,6 +87,13 @@
                    projectFiles="true">
       <itemPath>ast/access.cxx</itemPath>
       <itemPath>parser/astnode.cxx</itemPath>
+      <itemPath>ast/base_clause.cxx</itemPath>
+      <itemPath>ast/base_initializer.cxx</itemPath>
+      <itemPath>ast/base_initializer_list.cxx</itemPath>
+      <itemPath>ast/base_initializer_specifier.cxx</itemPath>
+      <itemPath>ast/base_specifier.cxx</itemPath>
+      <itemPath>ast/base_specifier_list.cxx</itemPath>
+      <itemPath>ast/base_type_specifier.cxx</itemPath>
       <itemPath>ast/bool.cxx</itemPath>
       <itemPath>ast/case_statement.cxx</itemPath>
       <itemPath>ast/class_body.cxx</itemPath>
@@ -130,6 +146,8 @@
       <itemPath>ast/template_argument.cxx</itemPath>
       <itemPath>ast/template_argument_list.cxx</itemPath>
       <itemPath>ast/template_id.cxx</itemPath>
+      <itemPath>ast/template_parameter.cxx</itemPath>
+      <itemPath>ast/template_parameter_list.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
       <itemPath>ast/type_name.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
@@ -194,6 +212,34 @@
       <item path="ast/access.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_clause.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_clause.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_specifier_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_specifier_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_type_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_type_specifier.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/bool.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -406,6 +452,14 @@
       <item path="ast/template_id.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/template_id.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_parameter.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_parameter.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -530,6 +584,34 @@
       </item>
       <item path="ast/access.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/base_clause.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_clause.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_initializer_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_specifier_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_specifier_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/base_type_specifier.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/base_type_specifier.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/bool.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/bool.hxx" ex="false" tool="3" flavor2="0">
@@ -741,6 +823,14 @@
       <item path="ast/template_id.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/template_id.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_parameter.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_parameter.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
       </item>

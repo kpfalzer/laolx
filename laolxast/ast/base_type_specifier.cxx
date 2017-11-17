@@ -22,27 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type.cxx
- * Author: kwpfalzer
+ * File:   base_type_specifier.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/simple_type.hxx"
+#include "ast/base_type_specifier.hxx"
 
-TRcSimpleType SimpleType::parse(Parser& parser) {
-    TRcSimpleType result(nullptr);
-    auto typeName = TypeName::parse(parser);
-    if (typeName) {
-        auto typeModifier = TypeModifier::parse(parser);
-        result = std::make_shared<SimpleType>(typeName, typeModifier);
-    }
-    return result;
+TPCBaseTypeSpecifier BaseTypeSpecifier::parse(Parser& parser) {
+	TPCBaseTypeSpecifier result = nullptr;
+	//todo
+	return result;
 }
 
-SimpleType::SimpleType(const TRcTypeName& typeName, const TRcTypeModifier& typeModifier)
-: m_typeName(typeName), m_typeModifier(typeModifier) {
+BaseTypeSpecifier::BaseTypeSpecifier() {}
 
-}
-
-SimpleType::~SimpleType() {
-}
+BaseTypeSpecifier::~BaseTypeSpecifier() {}

@@ -22,33 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   template_parameter_list.hxx
- * Author: kwpfalzer
+ * File:   template_parameter.cxx
+ * Author: kpfalzer
  *
- * Created on Wed Oct 18 20:17:32 2017
+ * Created on Fri Nov 17 12:48:41 2017
  */
-#ifndef TEMPLATE_PARAMETER_LIST_HXX
-#define TEMPLATE_PARAMETER_LIST_HXX
-
-#include "ast/common.hxx"
 #include "ast/template_parameter.hxx"
 
-class TemplateParameterList;
-typedef std::shared_ptr<TemplateParameterList> TRcTemplateParameterList;
+TPCTemplateParameter TemplateParameter::parse(Parser& parser) {
+	TPCTemplateParameter result = nullptr;
+	//todo
+	return result;
+}
 
-class TemplateParameterList : public virtual AstNode {
-public:
-    typedef std::shared_ptr<laolx::Array<TRcTemplateParameter>> TRcTemplateParameters;
+TemplateParameter::TemplateParameter() {}
 
-    static TRcTemplateParameterList parse(Parser& parser);
-
-    explicit TemplateParameterList(const TRcTemplateParameters& parameters)
-    : parameters(parameters) {
-    }
-
-    const TRcTemplateParameters parameters;
-
-    virtual ~TemplateParameterList();
-};
-
-#endif /* TEMPLATE_PARAMETER_LIST_HXX */
+TemplateParameter::~TemplateParameter() {}

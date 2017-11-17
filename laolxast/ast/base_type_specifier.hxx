@@ -22,29 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_name.hxx
- * Author: kwpfalzer
+ * File:   base_type_specifier.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#ifndef TYPE_NAME_HXX
-#define TYPE_NAME_HXX
+#ifndef BASE_TYPE_SPECIFIER_HXX
+#define BASE_TYPE_SPECIFIER_HXX
 
 #include "ast/common.hxx"
-#include "type.hxx"
 
-class TypeName;
-typedef std::shared_ptr<TypeName> TRcTypeName;
+class BaseTypeSpecifier;
+typedef const BaseTypeSpecifier* TPCBaseTypeSpecifier;
 
-class TypeName : public virtual AstNode {
+class BaseTypeSpecifier : public virtual AstNode {
 public:
-    static TRcTypeName parse(Parser& parser);
+	static TPCBaseTypeSpecifier parse(Parser& parser);
 
-    explicit TypeName(const TRcToken& name);
-    
-    const TRcToken m_name;
+	explicit BaseTypeSpecifier();
 
-    virtual ~TypeName();
+	virtual ~BaseTypeSpecifier();
 };
 
-#endif /* TYPE_NAME_HXX */
+#endif /* BASE_TYPE_SPECIFIER_HXX */

@@ -36,6 +36,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
+	${OBJECTDIR}/ast/base_clause.o \
+	${OBJECTDIR}/ast/base_initializer.o \
+	${OBJECTDIR}/ast/base_initializer_list.o \
+	${OBJECTDIR}/ast/base_initializer_specifier.o \
+	${OBJECTDIR}/ast/base_specifier.o \
+	${OBJECTDIR}/ast/base_specifier_list.o \
+	${OBJECTDIR}/ast/base_type_specifier.o \
 	${OBJECTDIR}/ast/bool.o \
 	${OBJECTDIR}/ast/case_statement.o \
 	${OBJECTDIR}/ast/class_body.o \
@@ -86,6 +93,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/template_argument.o \
 	${OBJECTDIR}/ast/template_argument_list.o \
 	${OBJECTDIR}/ast/template_id.o \
+	${OBJECTDIR}/ast/template_parameter.o \
+	${OBJECTDIR}/ast/template_parameter_list.o \
 	${OBJECTDIR}/ast/type_name.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/typedef_name.o \
@@ -141,6 +150,41 @@ ${OBJECTDIR}/ast/access.o: ast/access.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access.o ast/access.cxx
+
+${OBJECTDIR}/ast/base_clause.o: ast/base_clause.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_clause.o ast/base_clause.cxx
+
+${OBJECTDIR}/ast/base_initializer.o: ast/base_initializer.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer.o ast/base_initializer.cxx
+
+${OBJECTDIR}/ast/base_initializer_list.o: ast/base_initializer_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_list.o ast/base_initializer_list.cxx
+
+${OBJECTDIR}/ast/base_initializer_specifier.o: ast/base_initializer_specifier.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_specifier.o ast/base_initializer_specifier.cxx
+
+${OBJECTDIR}/ast/base_specifier.o: ast/base_specifier.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_specifier.o ast/base_specifier.cxx
+
+${OBJECTDIR}/ast/base_specifier_list.o: ast/base_specifier_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_specifier_list.o ast/base_specifier_list.cxx
+
+${OBJECTDIR}/ast/base_type_specifier.o: ast/base_type_specifier.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_type_specifier.o ast/base_type_specifier.cxx
 
 ${OBJECTDIR}/ast/bool.o: ast/bool.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -392,6 +436,16 @@ ${OBJECTDIR}/ast/template_id.o: ast/template_id.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_id.o ast/template_id.cxx
 
+${OBJECTDIR}/ast/template_parameter.o: ast/template_parameter.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter.o ast/template_parameter.cxx
+
+${OBJECTDIR}/ast/template_parameter_list.o: ast/template_parameter_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter_list.o ast/template_parameter_list.cxx
+
 ${OBJECTDIR}/ast/type_name.o: ast/type_name.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -487,6 +541,97 @@ ${OBJECTDIR}/ast/access_nomain.o: ${OBJECTDIR}/ast/access.o ast/access.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access_nomain.o ast/access.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/access.o ${OBJECTDIR}/ast/access_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_clause_nomain.o: ${OBJECTDIR}/ast/base_clause.o ast/base_clause.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_clause.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_clause_nomain.o ast/base_clause.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_clause.o ${OBJECTDIR}/ast/base_clause_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_initializer_nomain.o: ${OBJECTDIR}/ast/base_initializer.o ast/base_initializer.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_initializer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_nomain.o ast/base_initializer.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_initializer.o ${OBJECTDIR}/ast/base_initializer_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_initializer_list_nomain.o: ${OBJECTDIR}/ast/base_initializer_list.o ast/base_initializer_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_initializer_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_list_nomain.o ast/base_initializer_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_initializer_list.o ${OBJECTDIR}/ast/base_initializer_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_initializer_specifier_nomain.o: ${OBJECTDIR}/ast/base_initializer_specifier.o ast/base_initializer_specifier.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_initializer_specifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_specifier_nomain.o ast/base_initializer_specifier.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_initializer_specifier.o ${OBJECTDIR}/ast/base_initializer_specifier_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_specifier_nomain.o: ${OBJECTDIR}/ast/base_specifier.o ast/base_specifier.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_specifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_specifier_nomain.o ast/base_specifier.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_specifier.o ${OBJECTDIR}/ast/base_specifier_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_specifier_list_nomain.o: ${OBJECTDIR}/ast/base_specifier_list.o ast/base_specifier_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_specifier_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_specifier_list_nomain.o ast/base_specifier_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_specifier_list.o ${OBJECTDIR}/ast/base_specifier_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/base_type_specifier_nomain.o: ${OBJECTDIR}/ast/base_type_specifier.o ast/base_type_specifier.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_type_specifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_type_specifier_nomain.o ast/base_type_specifier.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_type_specifier.o ${OBJECTDIR}/ast/base_type_specifier_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/bool_nomain.o: ${OBJECTDIR}/ast/bool.o ast/bool.cxx 
@@ -1137,6 +1282,32 @@ ${OBJECTDIR}/ast/template_id_nomain.o: ${OBJECTDIR}/ast/template_id.o ast/templa
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_id_nomain.o ast/template_id.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/template_id.o ${OBJECTDIR}/ast/template_id_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/template_parameter_nomain.o: ${OBJECTDIR}/ast/template_parameter.o ast/template_parameter.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/template_parameter.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter_nomain.o ast/template_parameter.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/template_parameter.o ${OBJECTDIR}/ast/template_parameter_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/template_parameter_list_nomain.o: ${OBJECTDIR}/ast/template_parameter_list.o ast/template_parameter_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/template_parameter_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter_list_nomain.o ast/template_parameter_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/template_parameter_list.o ${OBJECTDIR}/ast/template_parameter_list_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/type_name_nomain.o: ${OBJECTDIR}/ast/type_name.o ast/type_name.cxx 

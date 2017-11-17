@@ -22,19 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   parameter_declaration.cxx
- * Author: kwpfalzer
+ * File:   base_initializer.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/parameter_declaration.hxx"
+#include "ast/base_initializer.hxx"
 
-TRcParameterDeclaration ParameterDeclaration::parse(Parser& parser) {
-	TRcParameterDeclaration result(nullptr);
+TPCBaseInitializer BaseInitializer::parse(Parser& parser) {
+	TPCBaseInitializer result = nullptr;
 	//todo
 	return result;
 }
 
-ParameterDeclaration::ParameterDeclaration() {}
+BaseInitializer::BaseInitializer() {}
 
-ParameterDeclaration::~ParameterDeclaration() {}
+BaseInitializer::~BaseInitializer() {}

@@ -22,25 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   implements_declaration.cxx
- * Author: kwpfalzer
+ * File:   base_specifier.cxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/implements_declaration.hxx"
+#include "ast/base_specifier.hxx"
 
-TRcImplementsDeclaration ImplementsDeclaration::parse(Parser& parser) {
-    TRcImplementsDeclaration result(nullptr);
-    const auto extends = ExtendsDeclaration::parse(parser, Token::K_IMPLEMENTS);
-    if (extends) {
-        result = std::make_shared<ImplementsDeclaration>(extends->m_names);
-    }
-    return result;
+TPCBaseSpecifier BaseSpecifier::parse(Parser& parser) {
+	TPCBaseSpecifier result = nullptr;
+	//todo
+	return result;
 }
 
-ImplementsDeclaration::ImplementsDeclaration(const laolx::Array<TRcBaseName>& names)
-: ExtendsDeclaration(names) {
-}
+BaseSpecifier::BaseSpecifier() {}
 
-ImplementsDeclaration::~ImplementsDeclaration() {
-}
+BaseSpecifier::~BaseSpecifier() {}

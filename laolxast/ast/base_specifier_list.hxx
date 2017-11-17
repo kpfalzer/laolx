@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_parameters.cxx
- * Author: kwpfalzer
+ * File:   base_specifier_list.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/type_parameters.hxx"
+#ifndef BASE_SPECIFIER_LIST_HXX
+#define BASE_SPECIFIER_LIST_HXX
 
-TRcTypeParameters TypeParameters::parse(Parser& parser) {
-	TRcTypeParameters result(nullptr);
-	//todo
-	return result;
-}
+#include "ast/common.hxx"
 
-TypeParameters::TypeParameters() {}
+class BaseSpecifierList;
+typedef const BaseSpecifierList* TPCBaseSpecifierList;
 
-TypeParameters::~TypeParameters() {}
+class BaseSpecifierList : public virtual AstNode {
+public:
+	static TPCBaseSpecifierList parse(Parser& parser);
+
+	explicit BaseSpecifierList();
+
+	virtual ~BaseSpecifierList();
+};
+
+#endif /* BASE_SPECIFIER_LIST_HXX */

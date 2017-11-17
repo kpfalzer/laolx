@@ -22,32 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   parameter_name.cxx
- * Author: kwpfalzer
+ * File:   base_initializer_specifier.hxx
+ * Author: kpfalzer
  *
- * Created on Fri Oct  6 19:30:04 2017
+ * Created on Fri Nov 17 12:52:23 2017
  */
-#include "ast/parameter_name.hxx"
+#ifndef BASE_INITIALIZER_SPECIFIER_HXX
+#define BASE_INITIALIZER_SPECIFIER_HXX
 
-TRcParameterName ParameterName::parse(Parser& parser) {
-    TRcParameterName result(nullptr);
-    switch (parser.peek()->code) {
-        case Token::IDENT:
-        case Token::ATTR_DECL:
-        case Token::ATTR_DECL_RO:
-        case Token::ATTR_DECL_RW:
-            result = std::make_shared<ParameterName>(parser.accept());
-            break;
-        default:
-            ;//do nothing
-    }
-    return result;
-}
+#include "ast/common.hxx"
 
-ParameterName::ParameterName(const TRcToken& name) 
-: m_name(name) {
+class BaseInitializerSpecifier;
+typedef const BaseInitializerSpecifier* TPCBaseInitializerSpecifier;
 
-}
+class BaseInitializerSpecifier : public virtual AstNode {
+public:
+	static TPCBaseInitializerSpecifier parse(Parser& parser);
 
-ParameterName::~ParameterName() {
-}
+	explicit BaseInitializerSpecifier();
+
+	virtual ~BaseInitializerSpecifier();
+};
+
+#endif /* BASE_INITIALIZER_SPECIFIER_HXX */
