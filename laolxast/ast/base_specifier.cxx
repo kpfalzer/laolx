@@ -30,11 +30,27 @@
 #include "ast/base_specifier.hxx"
 
 TPCBaseSpecifier BaseSpecifier::parse(Parser& parser) {
-	TPCBaseSpecifier result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    auto access = Access::parse(parser);
+    auto type = BaseTypeSpecifier::parse(parser);
+    if (type) {
+        auto init = BaseInitializerSpecifier::parse(parser);
+        return new BaseSpecifier(access, type, init);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-BaseSpecifier::BaseSpecifier() {}
+BaseSpecifier::BaseSpecifier(
+        TPCAccess access,
+        TPCBaseTypeSpecifier type,
+        TPCBaseInitializerSpecifier init)
+: access(access), type(type), init(init) {
 
-BaseSpecifier::~BaseSpecifier() {}
+}
+
+BaseSpecifier::~BaseSpecifier() {
+    delete access;
+    delete type;
+    delete init;
+}

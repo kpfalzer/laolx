@@ -28,13 +28,17 @@
  * Created on Tue Nov 14 18:37:44 2017
  */
 #include "ast/initializer_clause.hxx"
+#include "ast/assignment_expression.hxx"
+#include "braced_init_list.hxx"
 
 TPCInitializerClause InitializerClause::parse(Parser& parser) {
-	TPCInitializerClause result = nullptr;
-	//todo
-	return result;
+    TPCAstNode clause = AssignmentExpression::parse(parser);
+    if (! clause) {
+        clause = BracedInitList::parse(parser);
+    }
+    return (clause) ? new InitializerClause(clause) : nullptr;
 }
 
-InitializerClause::InitializerClause() {}
-
-InitializerClause::~InitializerClause() {}
+InitializerClause::~InitializerClause() {
+    delete clause;
+}

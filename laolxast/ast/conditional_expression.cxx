@@ -22,25 +22,50 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_specifier.cxx
- * Author: kpfalzer
+ * File:   conditional_expression.cxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:14:07 2017
  */
-#include "ast/base_initializer_specifier.hxx"
+#include "ast/conditional_expression.hxx"
 
-TPCBaseInitializerSpecifier BaseInitializerSpecifier::parse(Parser& parser) {
+TPCConditionalExpression ConditionalExpression::parse(Parser& parser) {
     auto start = parser.getMark();
-    if (Token::S_LPAREN == parser.peek()->code) {
-        auto inits = BaseInitializerList::parse(parser.advance());
-        if (inits && (Token::S_RPAREN == parser.accept()->code)) {
-            return new BaseInitializerSpecifier(inits);
+    auto expr = ExpressionEle::parse(parser);
+    if (expr) {
+        start = parser.getMark();
+        if (Token::S_QMARK == parser.peek()->code) {
+            auto ifTrue = Expression::parse(parser.advance());
+            if (ifTrue) {
+                if (Token::S_COLON == parser.peek()->code) {
+                    auto ifFalse = Expression::parse(parser);
+                    if (ifFalse) {
+                        return new ConditionalExpression(expr, ifTrue, ifFalse);
+                    }
+                }
+            }
+            parser.setMark(start);
         }
+        return new ConditionalExpression(expr);
     }
     parser.setMark(start);
     return nullptr;
 }
 
-BaseInitializerSpecifier::~BaseInitializerSpecifier() {
-    delete inits;
+ConditionalExpression::ConditionalExpression(TPCExpressionEle expr)
+: ConditionalExpression(expr, nullptr, nullptr) {
+}
+
+ConditionalExpression::ConditionalExpression(
+        TPCExpressionEle expr,
+        TPCExpression ifTrue,
+        TPCExpression ifFalse)
+: expr(expr), ifTrue(ifTrue), ifFalse(ifFalse) {
+
+}
+
+ConditionalExpression::~ConditionalExpression() {
+    delete expr;
+    delete ifTrue;
+    delete ifFalse;
 }

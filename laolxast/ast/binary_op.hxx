@@ -22,33 +22,30 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   binary_op.hxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:51:56 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#ifndef BINARY_OP_HXX
+#define BINARY_OP_HXX
 
 #include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
 
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
+class BinaryOp;
+typedef const BinaryOp* TPCBinaryOp;
 
-class BaseInitializerList : public virtual AstNode {
+class BinaryOp : public virtual AstNode {
 public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
+    static TPCBinaryOp parse(Parser& parser);
 
-    static TPCBaseInitializerList parse(Parser& parser);
-
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
+    explicit BinaryOp(const TRcToken& op)
+    : op(op) {
     }
 
-    const TPCBaseInits inits;
+    const TRcToken op;
 
-    virtual ~BaseInitializerList();
+    virtual ~BinaryOp();
 };
 
-#endif /* BASE_INITIALIZER_LIST_HXX */
+#endif /* BINARY_OP_HXX */

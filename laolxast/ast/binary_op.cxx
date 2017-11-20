@@ -22,33 +22,41 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   binary_op.cxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:51:56 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#include "ast/binary_op.hxx"
 
-#include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
-
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
-
-class BaseInitializerList : public virtual AstNode {
-public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
-
-    static TPCBaseInitializerList parse(Parser& parser);
-
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
+TPCBinaryOp BinaryOp::parse(Parser& parser) {
+    switch (parser.peek()->code) {
+        case Token::S_PCNT:
+        case Token::S_CARET:
+        case Token::S_AND:
+        case Token::S_AND2:
+        case Token::S_STAR:
+        case Token::S_STAR2:
+        case Token::S_MINUS:
+        case Token::S_PLUS:
+        case Token::S_EQGT:
+        case Token::S_MATCH:
+        case Token::S_NOTMATCH:
+        case Token::S_OR:
+        case Token::S_OR2:
+        case Token::S_LT:
+        case Token::S_LTEQ:
+        case Token::S_LT2:
+        case Token::S_GT:
+        case Token::S_GTEQ:
+        case Token::S_GT2:
+        case Token::S_DIV:
+            return new BinaryOp(parser.accept());
+        default:
+            ; //do nothing
     }
+    return nullptr;
+}
 
-    const TPCBaseInits inits;
-
-    virtual ~BaseInitializerList();
-};
-
-#endif /* BASE_INITIALIZER_LIST_HXX */
+BinaryOp::~BinaryOp() {
+}

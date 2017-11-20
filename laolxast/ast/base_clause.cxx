@@ -30,11 +30,17 @@
 #include "ast/base_clause.hxx"
 
 TPCBaseClause BaseClause::parse(Parser& parser) {
-	TPCBaseClause result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    if (Token::S_COLON == parser.peek()->code) {
+        auto bases = BaseSpecifierList::parse(parser.advance());
+        if (bases) {
+            return new BaseClause(bases);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-BaseClause::BaseClause() {}
-
-BaseClause::~BaseClause() {}
+BaseClause::~BaseClause() {
+    delete bases;
+}

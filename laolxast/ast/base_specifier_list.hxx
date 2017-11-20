@@ -31,17 +31,24 @@
 #define BASE_SPECIFIER_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/base_specifier.hxx"
 
 class BaseSpecifierList;
 typedef const BaseSpecifierList* TPCBaseSpecifierList;
 
 class BaseSpecifierList : public virtual AstNode {
 public:
-	static TPCBaseSpecifierList parse(Parser& parser);
+    typedef const laolx::Array<TPCBaseSpecifier>* TPCBaseSpecifiers;
+    
+    static TPCBaseSpecifierList parse(Parser& parser);
 
-	explicit BaseSpecifierList();
+    explicit BaseSpecifierList(TPCBaseSpecifiers baseSpecs)
+    : baseSpecs(baseSpecs) {
+    }
 
-	virtual ~BaseSpecifierList();
+    const TPCBaseSpecifiers baseSpecs;
+    
+    virtual ~BaseSpecifierList();
 };
 
 #endif /* BASE_SPECIFIER_LIST_HXX */

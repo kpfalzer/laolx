@@ -67,7 +67,7 @@ UnaryExpression::UnaryExpression(TPCPostfixExpression expr)
 
 UnaryExpression::UnaryExpression(const TRcToken& preop, TPCUnaryExpression expr)
 : type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr),
-    nodes({new Token(*preop), nullptr}) {
+nodes({new Token(*preop), nullptr}) {
 }
 
 UnaryExpression::UnaryExpression(TPCUnaryOperator uop, TPCUnaryExpression expr)

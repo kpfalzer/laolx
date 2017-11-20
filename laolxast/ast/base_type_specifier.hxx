@@ -31,17 +31,22 @@
 #define BASE_TYPE_SPECIFIER_HXX
 
 #include "ast/common.hxx"
+#include "ast/nested_name_specifier.hxx"
+#include "ast/base_name.hxx"
 
 class BaseTypeSpecifier;
 typedef const BaseTypeSpecifier* TPCBaseTypeSpecifier;
 
 class BaseTypeSpecifier : public virtual AstNode {
 public:
-	static TPCBaseTypeSpecifier parse(Parser& parser);
+    static TPCBaseTypeSpecifier parse(Parser& parser);
 
-	explicit BaseTypeSpecifier();
+    explicit BaseTypeSpecifier(TPCNestedNameSpecifier prefix, TPCBaseName name);
 
-	virtual ~BaseTypeSpecifier();
+    const TPCNestedNameSpecifier prefix;
+    const TPCBaseName name;
+    
+    virtual ~BaseTypeSpecifier();
 };
 
 #endif /* BASE_TYPE_SPECIFIER_HXX */

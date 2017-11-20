@@ -88,7 +88,7 @@ const Token::CodeByString Token::stSymbols({
     {"#", Token::S_POUND},
     {"$", Token::S_DOLLAR},
     {"%", Token::S_PCNT},
-    {"^", Token::S_PCNTEQ},
+    {"%=", Token::S_PCNTEQ},
     {"%w{", Token::S_WORDS},
     {"%s{", Token::S_SYMBOLS},
     {"^", Token::S_CARET},

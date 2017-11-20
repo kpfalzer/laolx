@@ -22,33 +22,31 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   assignment_expression.hxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:14:07 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#ifndef ASSIGNMENT_EXPRESSION_HXX
+#define ASSIGNMENT_EXPRESSION_HXX
 
 #include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
+#include "constant_expression.hxx"
 
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
+class AssignmentExpression;
+typedef const AssignmentExpression* TPCAssignmentExpression;
 
-class BaseInitializerList : public virtual AstNode {
+class AssignmentExpression : public virtual AstNode {
 public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
+    static TPCAssignmentExpression parse(Parser& parser);
 
-    static TPCBaseInitializerList parse(Parser& parser);
-
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
+    explicit AssignmentExpression(TPCConstantExpression expr)
+    : expr(expr) {
     }
 
-    const TPCBaseInits inits;
+    const TPCConstantExpression expr;
 
-    virtual ~BaseInitializerList();
+    virtual ~AssignmentExpression();
 };
 
-#endif /* BASE_INITIALIZER_LIST_HXX */
+#endif /* ASSIGNMENT_EXPRESSION_HXX */

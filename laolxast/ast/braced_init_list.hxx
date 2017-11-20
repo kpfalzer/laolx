@@ -31,17 +31,23 @@
 #define BRACED_INIT_LIST_HXX
 
 #include "ast/common.hxx"
+#include "initializer_list.hxx"
 
 class BracedInitList;
 typedef const BracedInitList* TPCBracedInitList;
 
 class BracedInitList : public virtual AstNode {
 public:
-	static TPCBracedInitList parse(Parser& parser);
+    static TPCBracedInitList parse(Parser& parser);
 
-	explicit BracedInitList();
+    explicit BracedInitList(TPCInitializerList inits)
+    : inits(inits), isEmptyList(!inits) {
+    }
 
-	virtual ~BracedInitList();
+    const bool isEmptyList;
+    const TPCInitializerList inits;
+
+    virtual ~BracedInitList();
 };
 
 #endif /* BRACED_INIT_LIST_HXX */

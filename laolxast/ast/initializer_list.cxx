@@ -30,11 +30,13 @@
 #include "ast/initializer_list.hxx"
 
 TPCInitializerList InitializerList::parse(Parser& parser) {
-	TPCInitializerList result = nullptr;
-	//todo
-	return result;
+    auto clauses = oneOrMore<InitializerClause>(parser, Token::S_COMMA);
+    if (clauses) {
+        return new InitializerList(clauses);
+    }
+    return nullptr;
 }
 
-InitializerList::InitializerList() {}
-
-InitializerList::~InitializerList() {}
+InitializerList::~InitializerList() {
+    delete clauses;
+}

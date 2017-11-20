@@ -30,11 +30,10 @@
 #include "ast/base_initializer_list.hxx"
 
 TPCBaseInitializerList BaseInitializerList::parse(Parser& parser) {
-	TPCBaseInitializerList result = nullptr;
-	//todo
-	return result;
+    auto inits = oneOrMore<BaseInitializer>(parser, Token::S_COMMA);
+    return (inits) ? new BaseInitializerList(inits) : nullptr;
 }
 
-BaseInitializerList::BaseInitializerList() {}
-
-BaseInitializerList::~BaseInitializerList() {}
+BaseInitializerList::~BaseInitializerList() {
+    delete inits;
+}

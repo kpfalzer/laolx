@@ -31,17 +31,22 @@
 #define BASE_INITIALIZER_SPECIFIER_HXX
 
 #include "ast/common.hxx"
+#include "ast/base_initializer_list.hxx"
 
 class BaseInitializerSpecifier;
 typedef const BaseInitializerSpecifier* TPCBaseInitializerSpecifier;
 
 class BaseInitializerSpecifier : public virtual AstNode {
 public:
-	static TPCBaseInitializerSpecifier parse(Parser& parser);
+    static TPCBaseInitializerSpecifier parse(Parser& parser);
 
-	explicit BaseInitializerSpecifier();
+    explicit BaseInitializerSpecifier(TPCBaseInitializerList inits)
+    : inits(inits) {
+    }
 
-	virtual ~BaseInitializerSpecifier();
+    const TPCBaseInitializerList inits;
+
+    virtual ~BaseInitializerSpecifier();
 };
 
 #endif /* BASE_INITIALIZER_SPECIFIER_HXX */

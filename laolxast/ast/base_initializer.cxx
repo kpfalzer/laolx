@@ -30,11 +30,34 @@
 #include "ast/base_initializer.hxx"
 
 TPCBaseInitializer BaseInitializer::parse(Parser& parser) {
-	TPCBaseInitializer result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    TRcToken ident;
+    {
+        laolx::Array<TRcToken> toks;
+        if (parser.accept(toks,{Token::IDENT, Token::S_COLON})) {
+            ident = toks[0];
+        }
+    }
+    auto inits = InitializerClause::parse(parser);
+    if (inits) {
+        return (ident) 
+                ? new BaseInitializer(ident, inits)
+                : new BaseInitializer(inits);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-BaseInitializer::BaseInitializer() {}
+BaseInitializer::BaseInitializer(const TRcToken& ident, TPCInitializerClause init)
+: ident(ident), init(init) {
 
-BaseInitializer::~BaseInitializer() {}
+}
+
+BaseInitializer::BaseInitializer(TPCInitializerClause init)
+: init(init) {
+
+}
+
+BaseInitializer::~BaseInitializer() {
+    delete init;
+}

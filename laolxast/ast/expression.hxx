@@ -31,17 +31,22 @@
 #define EXPRESSION_HXX
 
 #include "ast/common.hxx"
+#include "ast/assignment_expression.hxx"
 
 class Expression;
 typedef const Expression* TPCExpression;
 
 class Expression : public virtual AstNode {
 public:
-	static TPCExpression parse(Parser& parser);
+    static TPCExpression parse(Parser& parser);
 
-	explicit Expression();
+    explicit Expression(TPCAssignmentExpression expr)
+    : expr(expr) {
+    }
 
-	virtual ~Expression();
+    const TPCAssignmentExpression expr;
+
+    virtual ~Expression();
 };
 
 #endif /* EXPRESSION_HXX */

@@ -30,11 +30,10 @@
 #include "ast/expression.hxx"
 
 TPCExpression Expression::parse(Parser& parser) {
-	TPCExpression result = nullptr;
-	//todo
-	return result;
+    auto expr = AssignmentExpression::parse(parser);
+    return (expr) ? new Expression(expr) : nullptr;
 }
 
-Expression::Expression() {}
-
-Expression::~Expression() {}
+Expression::~Expression() {
+    delete expr;
+}

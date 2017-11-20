@@ -22,33 +22,36 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   expression_ele.hxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:37:48 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#ifndef EXPRESSION_ELE_HXX
+#define EXPRESSION_ELE_HXX
 
 #include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
+#include "binary_op.hxx"
+#include "unary_expression.hxx"
 
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
+class ExpressionEle;
+typedef const ExpressionEle* TPCExpressionEle;
 
-class BaseInitializerList : public virtual AstNode {
+class ExpressionEle : public virtual AstNode {
 public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
+    typedef std::pair<TPCBinaryOp, TPCExpressionEle> TEle;
 
-    static TPCBaseInitializerList parse(Parser& parser);
+    static TPCExpressionEle parse(Parser& parser);
 
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
-    }
+    explicit ExpressionEle(TPCUnaryExpression expr);
+    explicit ExpressionEle(
+            TPCUnaryExpression expr,
+            const laolx::Array<TEle>& moExprs);
 
-    const TPCBaseInits inits;
+    const TPCUnaryExpression expr;
+    const laolx::Array<TEle> moExprs;
 
-    virtual ~BaseInitializerList();
+    virtual ~ExpressionEle();
 };
 
-#endif /* BASE_INITIALIZER_LIST_HXX */
+#endif /* EXPRESSION_ELE_HXX */

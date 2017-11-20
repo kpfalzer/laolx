@@ -30,11 +30,23 @@
 #include "ast/braced_init_list.hxx"
 
 TPCBracedInitList BracedInitList::parse(Parser& parser) {
-	TPCBracedInitList result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    {
+        laolx::Array<TRcToken> toks;
+        if (parser.accept(toks, {Token::S_LCURLY, Token::S_RCURLY})) {
+            return new BracedInitList(nullptr);
+        }
+    }
+    if (Token::S_LCURLY == parser.accept()->code) {
+        auto inits = InitializerList::parse(parser);
+        if (inits) {
+            return new BracedInitList(inits);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-BracedInitList::BracedInitList() {}
-
-BracedInitList::~BracedInitList() {}
+BracedInitList::~BracedInitList() {
+    delete inits;
+}

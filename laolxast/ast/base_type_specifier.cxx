@@ -30,11 +30,22 @@
 #include "ast/base_type_specifier.hxx"
 
 TPCBaseTypeSpecifier BaseTypeSpecifier::parse(Parser& parser) {
-	TPCBaseTypeSpecifier result = nullptr;
-	//todo
-	return result;
+    auto start = parser.getMark();
+    auto prefix = NestedNameSpecifier::parse(parser);
+    auto name = BaseName::parse(parser);
+    if (name) {
+        return new BaseTypeSpecifier(prefix, name);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-BaseTypeSpecifier::BaseTypeSpecifier() {}
+BaseTypeSpecifier::BaseTypeSpecifier(TPCNestedNameSpecifier prefix, TPCBaseName name) 
+: prefix(prefix), name(name) {
 
-BaseTypeSpecifier::~BaseTypeSpecifier() {}
+}
+
+BaseTypeSpecifier::~BaseTypeSpecifier() {
+    delete prefix;
+    delete name;
+}

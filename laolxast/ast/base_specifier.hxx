@@ -31,17 +31,27 @@
 #define BASE_SPECIFIER_HXX
 
 #include "ast/common.hxx"
+#include "ast/access.hxx"
+#include "ast/base_type_specifier.hxx"
+#include "ast/base_initializer_specifier.hxx"
 
 class BaseSpecifier;
 typedef const BaseSpecifier* TPCBaseSpecifier;
 
 class BaseSpecifier : public virtual AstNode {
 public:
-	static TPCBaseSpecifier parse(Parser& parser);
+    static TPCBaseSpecifier parse(Parser& parser);
 
-	explicit BaseSpecifier();
+    explicit BaseSpecifier(
+            TPCAccess access,
+            TPCBaseTypeSpecifier type,
+            TPCBaseInitializerSpecifier init);
 
-	virtual ~BaseSpecifier();
+    const TPCAccess access;
+    const TPCBaseTypeSpecifier type;
+    const TPCBaseInitializerSpecifier init;
+
+    virtual ~BaseSpecifier();
 };
 
 #endif /* BASE_SPECIFIER_HXX */

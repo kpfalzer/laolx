@@ -108,13 +108,14 @@ BaseName: IDENT | SimpleTemplateId
 InitializerClause: AssignmentExpression | BracedInitList
 
 BracedInitList: 
-	S_LCURLY InitializerList COMMA? S_RCURLY
+//	S_LCURLY InitializerList COMMA? S_RCURLY
+	S_LCURLY InitializerList S_RCURLY
 |	S_LCURLY S_RCURLY
 
 // NOTE: see:
 // http://en.cppreference.com/w/cpp/language/list_initialization.html
 InitializerList:
-	InitializerClause (S_COMMA InitializerClause)
+	InitializerClause (S_COMMA InitializerClause)*
 
 AssignmentExpression: ConditionalExpression
 

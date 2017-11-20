@@ -22,33 +22,36 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   conditional_expression.hxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:14:07 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#ifndef CONDITIONAL_EXPRESSION_HXX
+#define CONDITIONAL_EXPRESSION_HXX
 
+#include <array>
 #include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
+#include "ast/expression_ele.hxx"
+#include "ast/expression.hxx"
 
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
+class ConditionalExpression;
+typedef const ConditionalExpression* TPCConditionalExpression;
 
-class BaseInitializerList : public virtual AstNode {
+class ConditionalExpression : public virtual AstNode {
 public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
+    static TPCConditionalExpression parse(Parser& parser);
 
-    static TPCBaseInitializerList parse(Parser& parser);
+    explicit ConditionalExpression(TPCExpressionEle expr);
+    explicit ConditionalExpression(
+            TPCExpressionEle expr,
+            TPCExpression ifTrue,
+            TPCExpression ifFalse);
 
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
-    }
+    const TPCExpressionEle expr;
+    const TPCExpression ifTrue, ifFalse;
 
-    const TPCBaseInits inits;
-
-    virtual ~BaseInitializerList();
+    virtual ~ConditionalExpression();
 };
 
-#endif /* BASE_INITIALIZER_LIST_HXX */
+#endif /* CONDITIONAL_EXPRESSION_HXX */

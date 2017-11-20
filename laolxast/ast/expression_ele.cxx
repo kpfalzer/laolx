@@ -22,25 +22,49 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_specifier.cxx
- * Author: kpfalzer
+ * File:   expression_ele.cxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 14:37:48 2017
  */
-#include "ast/base_initializer_specifier.hxx"
+#include "ast/expression_ele.hxx"
 
-TPCBaseInitializerSpecifier BaseInitializerSpecifier::parse(Parser& parser) {
+TPCExpressionEle ExpressionEle::parse(Parser& parser) {
     auto start = parser.getMark();
-    if (Token::S_LPAREN == parser.peek()->code) {
-        auto inits = BaseInitializerList::parse(parser.advance());
-        if (inits && (Token::S_RPAREN == parser.accept()->code)) {
-            return new BaseInitializerSpecifier(inits);
+    auto expr = UnaryExpression::parse(parser);
+    if (expr) {
+        laolx::Array<TEle> moExprs;
+        while (true) {
+            auto bop = BinaryOp::parse(parser);
+            if (bop) {
+                auto ele = ExpressionEle::parse(parser);
+                if (ele) {
+                    moExprs << std::make_pair(bop, ele);
+                } else {
+                    break; //while
+                }
+            } else {
+                break; //while
+            }
         }
+        return (moExprs.isEmpty()) 
+                ? new ExpressionEle(expr)
+                : new ExpressionEle(expr, moExprs);
     }
     parser.setMark(start);
     return nullptr;
 }
 
-BaseInitializerSpecifier::~BaseInitializerSpecifier() {
-    delete inits;
+ExpressionEle::ExpressionEle(TPCUnaryExpression expr)
+: expr(expr) {
+}
+
+ExpressionEle::ExpressionEle(
+        TPCUnaryExpression expr,
+        const laolx::Array<TEle>& moExprs)
+: expr(expr), moExprs(moExprs) {
+}
+
+ExpressionEle::~ExpressionEle() {
+    delete expr;
 }

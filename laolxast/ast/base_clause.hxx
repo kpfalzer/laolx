@@ -31,17 +31,22 @@
 #define BASE_CLAUSE_HXX
 
 #include "ast/common.hxx"
+#include "base_specifier_list.hxx"
 
 class BaseClause;
 typedef const BaseClause* TPCBaseClause;
 
 class BaseClause : public virtual AstNode {
 public:
-	static TPCBaseClause parse(Parser& parser);
+    static TPCBaseClause parse(Parser& parser);
 
-	explicit BaseClause();
+    explicit BaseClause(TPCBaseSpecifierList bases)
+    : bases(bases) {
+    }
 
-	virtual ~BaseClause();
+    const TPCBaseSpecifierList bases;
+
+    virtual ~BaseClause();
 };
 
 #endif /* BASE_CLAUSE_HXX */

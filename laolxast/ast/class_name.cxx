@@ -30,15 +30,13 @@
 #include "ast/class_name.hxx"
 
 TPCClassName ClassName::parse(Parser& parser) {
-    auto start = parser.getMark();
-    if (Token::IDENT == parser.peek()->code) {
-        return new ClassName(parser.accept());
-    }
     auto simplId = SimpleTemplateId::parse(parser);
     if (simplId) {
         return new ClassName(simplId);
     }
-    parser.setMark(start);
+    if (Token::IDENT == parser.peek()->code) {
+        return new ClassName(parser.accept());
+    }
     return nullptr;
 }
 

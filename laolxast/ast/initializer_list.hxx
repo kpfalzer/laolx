@@ -31,17 +31,24 @@
 #define INITIALIZER_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/initializer_clause.hxx"
 
 class InitializerList;
 typedef const InitializerList* TPCInitializerList;
 
 class InitializerList : public virtual AstNode {
 public:
-	static TPCInitializerList parse(Parser& parser);
+    typedef const laolx::Array<TPCInitializerClause>* TPCInitClauses;
 
-	explicit InitializerList();
+    static TPCInitializerList parse(Parser& parser);
 
-	virtual ~InitializerList();
+    explicit InitializerList(TPCInitClauses clauses)
+    : clauses(clauses) {
+    }
+
+    const TPCInitClauses clauses;
+
+    virtual ~InitializerList();
 };
 
 #endif /* INITIALIZER_LIST_HXX */

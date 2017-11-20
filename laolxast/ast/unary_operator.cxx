@@ -31,9 +31,9 @@
 
 TPCUnaryOperator UnaryOperator::parse(Parser& parser) {
     switch (parser.peek()->code) {
-        case Token::S_PLUS: 
-        case Token::S_MINUS: 
-        case Token::S_EXCLAMATION: 
+        case Token::S_PLUS:
+        case Token::S_MINUS:
+        case Token::S_EXCLAMATION:
         case Token::S_TILDE:
             return new UnaryOperator(parser.accept());
         default:

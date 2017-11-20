@@ -36,23 +36,29 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
+	${OBJECTDIR}/ast/assignment_expression.o \
 	${OBJECTDIR}/ast/base_clause.o \
 	${OBJECTDIR}/ast/base_initializer.o \
 	${OBJECTDIR}/ast/base_initializer_list.o \
 	${OBJECTDIR}/ast/base_initializer_specifier.o \
+	${OBJECTDIR}/ast/base_name.o \
 	${OBJECTDIR}/ast/base_specifier.o \
 	${OBJECTDIR}/ast/base_specifier_list.o \
 	${OBJECTDIR}/ast/base_type_specifier.o \
+	${OBJECTDIR}/ast/binary_op.o \
 	${OBJECTDIR}/ast/bool.o \
+	${OBJECTDIR}/ast/braced_init_list.o \
 	${OBJECTDIR}/ast/case_statement.o \
 	${OBJECTDIR}/ast/class_body.o \
 	${OBJECTDIR}/ast/class_declaration.o \
 	${OBJECTDIR}/ast/class_name.o \
 	${OBJECTDIR}/ast/compound_statement.o \
 	${OBJECTDIR}/ast/condition.o \
+	${OBJECTDIR}/ast/conditional_expression.o \
 	${OBJECTDIR}/ast/constant_expression.o \
 	${OBJECTDIR}/ast/declaration.o \
 	${OBJECTDIR}/ast/expression.o \
+	${OBJECTDIR}/ast/expression_ele.o \
 	${OBJECTDIR}/ast/expression_list.o \
 	${OBJECTDIR}/ast/for_statement.o \
 	${OBJECTDIR}/ast/id_expression.o \
@@ -151,6 +157,11 @@ ${OBJECTDIR}/ast/access.o: ast/access.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access.o ast/access.cxx
 
+${OBJECTDIR}/ast/assignment_expression.o: ast/assignment_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/assignment_expression.o ast/assignment_expression.cxx
+
 ${OBJECTDIR}/ast/base_clause.o: ast/base_clause.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -171,6 +182,11 @@ ${OBJECTDIR}/ast/base_initializer_specifier.o: ast/base_initializer_specifier.cx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_initializer_specifier.o ast/base_initializer_specifier.cxx
 
+${OBJECTDIR}/ast/base_name.o: ast/base_name.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_name.o ast/base_name.cxx
+
 ${OBJECTDIR}/ast/base_specifier.o: ast/base_specifier.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -186,10 +202,20 @@ ${OBJECTDIR}/ast/base_type_specifier.o: ast/base_type_specifier.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_type_specifier.o ast/base_type_specifier.cxx
 
+${OBJECTDIR}/ast/binary_op.o: ast/binary_op.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/binary_op.o ast/binary_op.cxx
+
 ${OBJECTDIR}/ast/bool.o: ast/bool.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool.o ast/bool.cxx
+
+${OBJECTDIR}/ast/braced_init_list.o: ast/braced_init_list.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/braced_init_list.o ast/braced_init_list.cxx
 
 ${OBJECTDIR}/ast/case_statement.o: ast/case_statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -221,6 +247,11 @@ ${OBJECTDIR}/ast/condition.o: ast/condition.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/condition.o ast/condition.cxx
 
+${OBJECTDIR}/ast/conditional_expression.o: ast/conditional_expression.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/conditional_expression.o ast/conditional_expression.cxx
+
 ${OBJECTDIR}/ast/constant_expression.o: ast/constant_expression.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -235,6 +266,11 @@ ${OBJECTDIR}/ast/expression.o: ast/expression.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression.o ast/expression.cxx
+
+${OBJECTDIR}/ast/expression_ele.o: ast/expression_ele.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_ele.o ast/expression_ele.cxx
 
 ${OBJECTDIR}/ast/expression_list.o: ast/expression_list.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -543,6 +579,19 @@ ${OBJECTDIR}/ast/access_nomain.o: ${OBJECTDIR}/ast/access.o ast/access.cxx
 	    ${CP} ${OBJECTDIR}/ast/access.o ${OBJECTDIR}/ast/access_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/assignment_expression_nomain.o: ${OBJECTDIR}/ast/assignment_expression.o ast/assignment_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/assignment_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/assignment_expression_nomain.o ast/assignment_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/assignment_expression.o ${OBJECTDIR}/ast/assignment_expression_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/base_clause_nomain.o: ${OBJECTDIR}/ast/base_clause.o ast/base_clause.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_clause.o`; \
@@ -595,6 +644,19 @@ ${OBJECTDIR}/ast/base_initializer_specifier_nomain.o: ${OBJECTDIR}/ast/base_init
 	    ${CP} ${OBJECTDIR}/ast/base_initializer_specifier.o ${OBJECTDIR}/ast/base_initializer_specifier_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/base_name_nomain.o: ${OBJECTDIR}/ast/base_name.o ast/base_name.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_name.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/base_name_nomain.o ast/base_name.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/base_name.o ${OBJECTDIR}/ast/base_name_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/base_specifier_nomain.o: ${OBJECTDIR}/ast/base_specifier.o ast/base_specifier.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/base_specifier.o`; \
@@ -634,6 +696,19 @@ ${OBJECTDIR}/ast/base_type_specifier_nomain.o: ${OBJECTDIR}/ast/base_type_specif
 	    ${CP} ${OBJECTDIR}/ast/base_type_specifier.o ${OBJECTDIR}/ast/base_type_specifier_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/binary_op_nomain.o: ${OBJECTDIR}/ast/binary_op.o ast/binary_op.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/binary_op.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/binary_op_nomain.o ast/binary_op.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/binary_op.o ${OBJECTDIR}/ast/binary_op_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/bool_nomain.o: ${OBJECTDIR}/ast/bool.o ast/bool.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/bool.o`; \
@@ -645,6 +720,19 @@ ${OBJECTDIR}/ast/bool_nomain.o: ${OBJECTDIR}/ast/bool.o ast/bool.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/bool_nomain.o ast/bool.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/bool.o ${OBJECTDIR}/ast/bool_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/braced_init_list_nomain.o: ${OBJECTDIR}/ast/braced_init_list.o ast/braced_init_list.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/braced_init_list.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/braced_init_list_nomain.o ast/braced_init_list.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/braced_init_list.o ${OBJECTDIR}/ast/braced_init_list_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/case_statement_nomain.o: ${OBJECTDIR}/ast/case_statement.o ast/case_statement.cxx 
@@ -725,6 +813,19 @@ ${OBJECTDIR}/ast/condition_nomain.o: ${OBJECTDIR}/ast/condition.o ast/condition.
 	    ${CP} ${OBJECTDIR}/ast/condition.o ${OBJECTDIR}/ast/condition_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/conditional_expression_nomain.o: ${OBJECTDIR}/ast/conditional_expression.o ast/conditional_expression.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/conditional_expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/conditional_expression_nomain.o ast/conditional_expression.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/conditional_expression.o ${OBJECTDIR}/ast/conditional_expression_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/constant_expression_nomain.o: ${OBJECTDIR}/ast/constant_expression.o ast/constant_expression.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/constant_expression.o`; \
@@ -762,6 +863,19 @@ ${OBJECTDIR}/ast/expression_nomain.o: ${OBJECTDIR}/ast/expression.o ast/expressi
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_nomain.o ast/expression.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/expression.o ${OBJECTDIR}/ast/expression_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/expression_ele_nomain.o: ${OBJECTDIR}/ast/expression_ele.o ast/expression_ele.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/expression_ele.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_ele_nomain.o ast/expression_ele.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/expression_ele.o ${OBJECTDIR}/ast/expression_ele_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/expression_list_nomain.o: ${OBJECTDIR}/ast/expression_list.o ast/expression_list.cxx 

@@ -22,33 +22,33 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   base_initializer_list.hxx
- * Author: kpfalzer
+ * File:   base_name.cxx
+ * Author: kwpfalzer
  *
- * Created on Fri Nov 17 12:52:23 2017
+ * Created on Mon Nov 20 13:59:36 2017
  */
-#ifndef BASE_INITIALIZER_LIST_HXX
-#define BASE_INITIALIZER_LIST_HXX
+#include "ast/base_name.hxx"
 
-#include "ast/common.hxx"
-#include "ast/base_initializer.hxx"
-
-class BaseInitializerList;
-typedef const BaseInitializerList* TPCBaseInitializerList;
-
-class BaseInitializerList : public virtual AstNode {
-public:
-    typedef const laolx::Array<TPCBaseInitializer>* TPCBaseInits;
-
-    static TPCBaseInitializerList parse(Parser& parser);
-
-    explicit BaseInitializerList(TPCBaseInits inits) 
-    : inits(inits) {
+TPCBaseName BaseName::parse(Parser& parser) {
+    // Longest first (since both start with IDENT)
+    auto templ = SimpleTemplateId::parse(parser);
+    if (templ) {
+        return new BaseName(templ);
     }
+    if (Token::IDENT == parser.peek()->code) {
+        return new BaseName(parser.accept());
+    }
+    return nullptr;
+}
 
-    const TPCBaseInits inits;
+BaseName::BaseName(const TRcToken& name) 
+: name(new Token(*name)) {
+}
 
-    virtual ~BaseInitializerList();
-};
+BaseName::BaseName(TPCSimpleTemplateId name) 
+: name(name) {
+}
 
-#endif /* BASE_INITIALIZER_LIST_HXX */
+BaseName::~BaseName() {
+    delete name;
+}

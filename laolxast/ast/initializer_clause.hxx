@@ -37,11 +37,15 @@ typedef const InitializerClause* TPCInitializerClause;
 
 class InitializerClause : public virtual AstNode {
 public:
-	static TPCInitializerClause parse(Parser& parser);
+    static TPCInitializerClause parse(Parser& parser);
 
-	explicit InitializerClause();
+    explicit InitializerClause(TPCAstNode clause)
+    : clause(clause) {
+    }
 
-	virtual ~InitializerClause();
+    const TPCAstNode clause;
+
+    virtual ~InitializerClause();
 };
 
 #endif /* INITIALIZER_CLAUSE_HXX */

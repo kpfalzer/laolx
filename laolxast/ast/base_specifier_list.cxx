@@ -30,11 +30,10 @@
 #include "ast/base_specifier_list.hxx"
 
 TPCBaseSpecifierList BaseSpecifierList::parse(Parser& parser) {
-	TPCBaseSpecifierList result = nullptr;
-	//todo
-	return result;
+    auto baseSpecs = oneOrMore<BaseSpecifier>(parser, Token::S_COMMA);
+    return (baseSpecs) ? new BaseSpecifierList(baseSpecs) : nullptr;
 }
 
-BaseSpecifierList::BaseSpecifierList() {}
-
-BaseSpecifierList::~BaseSpecifierList() {}
+BaseSpecifierList::~BaseSpecifierList() {
+    delete baseSpecs;
+}
