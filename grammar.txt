@@ -30,8 +30,6 @@ NamespaceDeclaration:
 
 NamespaceDeclarationName: NamespaceName (S_DOT NamespaceName)*
 
-NamespaceName: IDENT
-	
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
 /**
@@ -69,7 +67,6 @@ MethodParameter:
 
 Mutability: K_CONST | K_VAR
 
-VarName: IDENT
 VarOrAttrName: VarName | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
 
 // see structured binding: 
@@ -218,6 +215,7 @@ QualifiedId: NestedNameSpecifier UnqualifiedId
 
 NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
 
+// TODO: ambiguity here too with first===IDENT
 NestedNameSpecifierY:
 	TypeName S_DOT
 |	NamespaceName S_DOT
@@ -228,12 +226,16 @@ NestedNameSpecifierX:
 
 // TODO: ambiguity between ClassName and TypedefName
 // since both match IDENT!
+// NOTE: for now: we'll just worry about syntax correctness
+// and let generared/target language deal with semantics.
+// So, to simplify... collapse to 'Name' which is IDENT|SimpleTemplateId
 //
 TypeName: ClassName | TypedefName
-
 ClassName: IDENT | SimpleTemplateId
-
 TypedefName: IDENT
+NamespaceName: IDENT
+MethodName: IDENT
+VarName: IDENT
 
 SimpleTemplateId: IDENT S_LT TemplateArgumentList? S_GT
 
@@ -265,8 +267,6 @@ MethodBodyItem:
 MemberVariableDeclaration:
 	Access? Mutability? K_STATIC? SimpleTypeSpecifier? VarOrAttrName 
 		(S_EQ InitializerClause)? 
-
-MethodName: IDENT
 
 MethodDeclaration:
 	Access? Mutability? K_STATIC? 
