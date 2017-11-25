@@ -31,10 +31,10 @@
 #define LAMBDA_EXPRESSION_HXX
 
 #include "ast/common.hxx"
-#include "method_name.hxx"
-#include "method_parameters_declaration.hxx"
-#include "return_specifier.hxx"
-#include "method_body.hxx"
+#include "ast/name.hxx"
+#include "ast/method_parameters_declaration.hxx"
+#include "ast/return_specifier.hxx"
+#include "ast/method_body.hxx"
 
 class LambdaExpression;
 typedef const LambdaExpression* TPCLambdaExpression;
@@ -44,7 +44,7 @@ public:
     static TPCLambdaExpression parse(Parser& parser);
 
     explicit LambdaExpression(
-            TPCMethodName name,
+            TPCName name,
             TPCMethodParametersDeclaration params,
             TPCReturnSpecifier returnx,
             TPCMethodBody body
@@ -52,7 +52,7 @@ public:
 
     virtual ~LambdaExpression();
 
-    const TPCMethodName name;
+    const TPCName name;
     const TPCMethodParametersDeclaration params;
     const TPCReturnSpecifier returnx;
     const TPCMethodBody body;

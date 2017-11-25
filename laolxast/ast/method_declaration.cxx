@@ -28,8 +28,8 @@
  * Created on Mon Oct  9 14:17:22 2017
  */
 #include "ast/method_declaration.hxx"
-#include "method_name.hxx"
-#include "overloadable_operator.hxx"
+#include "ast/name.hxx"
+#include "ast/overloadable_operator.hxx"
 
 TPCMethodDeclaration MethodDeclaration::parse(Parser& parser) {
     // Access? Mutability? K_STATIC? --- in any order
@@ -60,7 +60,7 @@ TPCMethodDeclaration MethodDeclaration::parse(Parser& parser) {
     }
     TPCAstNode xtra = nullptr;
     if (type->code == Token::K_DEF) {
-        auto methodName = MethodName::parse(parser);
+        auto methodName = Name::parse(parser);
         if (methodName) {
             xtra = methodName;
         }

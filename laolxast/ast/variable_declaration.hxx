@@ -31,6 +31,10 @@
 #define VARIABLE_DECLARATION_HXX
 
 #include "ast/common.hxx"
+#include "ast/mutability.hxx"
+#include "ast/simple_type_specifier.hxx"
+#include "ast/initializer_clause.hxx"
+#include "ast/var_or_attr_name.hxx"
 
 class VariableDeclaration;
 typedef const VariableDeclaration* TPCVariableDeclaration;
@@ -39,7 +43,19 @@ class VariableDeclaration : public virtual AstNode {
 public:
     static TPCVariableDeclaration parse(Parser& parser);
 
-    explicit VariableDeclaration();
+    explicit VariableDeclaration(
+            TPCMutability mutability,
+            bool isStatic,
+            TPCSimpleTypeSpecifier typeSpec,
+            TPCVarOrAttrName varName,
+            TPCInitializerClause initClause
+            );
+
+    const TPCMutability mutability;
+    const bool isStatic;
+    const TPCSimpleTypeSpecifier typeSpec;
+    const TPCVarOrAttrName varName;
+    const TPCInitializerClause initClause;
 
     virtual ~VariableDeclaration();
 };

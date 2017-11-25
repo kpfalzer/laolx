@@ -28,7 +28,7 @@ Declaration:
 NamespaceDeclaration:
 	K_NAMESPACE NamespaceDeclarationName S_LCURLY Declaration* S_RCURLY
 
-NamespaceDeclarationName: NamespaceName (S_DOT NamespaceName)*
+NamespaceDeclarationName: Name (S_DOT Name)*
 
 Access: K_PUBLIC | K_PROTECTED | K_PRIVATE
 
@@ -43,7 +43,6 @@ class foo<T1,T2>(int @p1, string @p2) : public C1, C2(a:p1), I(a:p1,b:p2) {
 class A(int p1, p1; T p2, p3; T2 p2, T3 p4) {}
 **/
 
-<<<<<<<<<**************resume
 ClassDeclaration: 
 	K_CLASS IDENT TemplateParameterList? 
   		MethodParametersDeclaration?
@@ -67,15 +66,15 @@ MethodParameter:
 
 Mutability: K_CONST | K_VAR
 
-VarOrAttrName: VarName | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
+VarOrAttrName: Name | ATTR_DECL | ATTR_DECL_RO | ATTR_DECL_RW
 
 // see structured binding: 
 // http://en.cppreference.com/w/cpp/language/structured_binding
 VariableDeclaration:
 	Mutability? K_STATIC? SimpleTypeSpecifier? 
-		VarName (S_EQ InitializerClause)? 
+		VarOrAttrName (S_EQ InitializerClause)? 
 
-TypdefDeclaration: K_TYPEDEF SimpleTypeSpecifier IDENT;
+TypedefDeclaration: K_TYPEDEF SimpleTypeSpecifier IDENT
 
 BaseClause:
 	S_COLON BaseSpecifierList
@@ -170,9 +169,9 @@ LambdaExpression:
 		ReturnSpecifier? 
 		S_LCURLY Statement* S_RCURLY
  **/
-// Chnage to look more method-like
+// Change to look more method-like
 LambdaExpression:
-	K_DEF MethodName
+	K_DEF Name
 		MethodParametersDeclaration?
 		ReturnSpecifier?
 		S_LCURLY MethodBody S_RCURLY
@@ -197,7 +196,7 @@ Symbols: S_SYMBOLS IDENT* S_RCURLY
 ExpressionList: InitializerList
 
 SimpleTypeSpecifier:
-	NestedNameSpecifier? TypeName
+	NestedNameSpecifier? Name
 |	K_INT
 |	K_FLOAT
 |	K_STRING
@@ -215,27 +214,13 @@ QualifiedId: NestedNameSpecifier UnqualifiedId
 
 NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
 
-// TODO: ambiguity here too with first===IDENT
-NestedNameSpecifierY:
-	TypeName S_DOT
-|	NamespaceName S_DOT
+NestedNameSpecifierY: Name S_DOT
 
 NestedNameSpecifierX:
 	IDENT S_DOT NestedNameSpecifierX?
 |	SimpleTemplateId S_DOT NestedNameSpecifierX?
 
-// TODO: ambiguity between ClassName and TypedefName
-// since both match IDENT!
-// NOTE: for now: we'll just worry about syntax correctness
-// and let generared/target language deal with semantics.
-// So, to simplify... collapse to 'Name' which is IDENT|SimpleTemplateId
-//
-TypeName: ClassName | TypedefName
-ClassName: IDENT | SimpleTemplateId
-TypedefName: IDENT
-NamespaceName: IDENT
-MethodName: IDENT
-VarName: IDENT
+Name: IDENT | SimpleTemplateId
 
 SimpleTemplateId: IDENT S_LT TemplateArgumentList? S_GT
 
@@ -270,7 +255,7 @@ MemberVariableDeclaration:
 
 MethodDeclaration:
 	Access? Mutability? K_STATIC? 
-		(	K_DEF MethodName
+		(	K_DEF Name
 		|	K_OPERATOR OverloadableOperator
 		)
 		MethodParametersDeclaration?

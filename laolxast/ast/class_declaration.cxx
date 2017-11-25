@@ -24,56 +24,52 @@
 
 #include "ast/class_declaration.hxx"
 
-TRcClassDeclaration ClassDeclaration::parse(Parser& parser) {
+TPCClassDeclaration ClassDeclaration::parse(Parser& parser) {
     static const std::initializer_list<Token::Code> stFirst({Token::K_CLASS, Token::IDENT});
-    TRcClassDeclaration classDecl(nullptr);
-    Parser::index_type start = parser.getMark();
+    auto start = parser.getMark();
     laolx::Array<TRcToken> first(2);
     if (!parser.accept(first, stFirst)) {
-        return classDecl;
+        return nullptr;
     }
     const auto className = first[1];
-    const auto typeParameters = TypeParameters::parse(parser);
-    const auto parameterDeclationList = ParameterDeclarationList::parse(parser);
-    const auto extendsDeclaration = ExtendsDeclaration::parse(parser);
-    const auto implementsDeclaration = ImplementsDeclaration::parse(parser);
-    TRcClassBody classBody;
+    const auto templParams = TemplateParameterList::parse(parser);
+    const auto methodParams = MethodParametersDeclaration::parse(parser);
+    const auto baseClause = BaseClause::parse(parser);
     bool ok = (Token::S_LCURLY == parser.accept()->code);
     if (ok) {
-        classBody = ClassBody::parse(parser);
+        auto classBody = ClassBody::parse(parser);
         ok &= (Token::S_RCURLY == parser.accept()->code);
+        if (ok) {
+            return new ClassDeclaration(
+                    className,
+                    templParams,
+                    methodParams,
+                    baseClause,
+                    classBody
+                    );
+        }
     }
-    if (ok) {
-        classDecl = std::make_shared<ClassDeclaration>(
-                className,
-                typeParameters,
-                parameterDeclationList,
-                extendsDeclaration,
-                implementsDeclaration,
-                classBody
-                );
-    } else {
-        parser.setMark(start);
-    }
-    return classDecl;
+    parser.setMark(start);
+    return nullptr;
 }
 
 ClassDeclaration::ClassDeclaration(
-        const TRcToken& className,
-        const TRcTypeParameters& typeParameters,
-        const TRcParameterDeclarationList& parameterDeclarationList,
-        const TRcExtendsDeclaration& extendsDeclaration,
-        const TRcImplementsDeclaration& implementsDeclaration,
-        const TRcClassBody& classBody)
-: m_className(className),
-m_typeParameters(typeParameters),
-m_parameterDeclarationList(parameterDeclarationList),
-m_extendsDeclaration(extendsDeclaration),
-m_implementsDeclaration(implementsDeclaration) {
-
+        const TRcToken name,
+        TPCTemplateParameterList templParams,
+        TPCMethodParametersDeclaration methodParams,
+        TPCBaseClause baseClause,
+        TPCClassBody body)
+: name(name),
+templParams(templParams),
+methodParams(methodParams),
+baseClause(baseClause),
+body(body) {
 }
 
 ClassDeclaration::~ClassDeclaration() {
-
+    delete templParams;
+    delete methodParams;
+    delete baseClause;
+    delete body;
 }
 

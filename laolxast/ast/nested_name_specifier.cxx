@@ -29,11 +29,11 @@
  */
 #include "ast/nested_name_specifier.hxx"
 #include "ast/simple_template_id.hxx"
-#include "ast/type_name.hxx"
-#include "ast/namespace_name.hxx"
+#include "ast/name.hxx"
 
 class NestedNameSpecifier::X {
 public:
+
     static TPCX parse(Parser& parser) {
         auto start = parser.getMark();
         {
@@ -58,7 +58,7 @@ public:
         parser.setMark(start);
         return nullptr;
     }
-    
+
     explicit X(const TRcToken& ident, TPCX x)
     : node(new Token(*ident)), x(x) {
     }
@@ -78,10 +78,11 @@ public:
 
 class NestedNameSpecifier::Y {
 public:
+
     static TPCY parse(Parser& parser) {
         auto start = parser.getMark();
         {
-            auto type = TypeName::parse(parser);
+            auto type = Name::parse(parser);
             if (type) {
                 if (Token::S_DOT == parser.accept()->code) {
                     return new Y(type);
@@ -89,18 +90,9 @@ public:
             }
         }
         parser.setMark(start);
-        {
-            auto namesp = NamespaceName::parse(parser);
-            if (namesp) {
-                if (Token::S_DOT == parser.accept()->code) {
-                    return new Y(namesp);
-                }
-            }
-        }
-        parser.setMark(start);
         return nullptr;
     }
-    
+
     explicit Y(TPCAstNode node)
     : node(node) {
     }

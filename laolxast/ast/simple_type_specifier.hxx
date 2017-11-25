@@ -33,7 +33,7 @@
 #include <array>
 #include "ast/common.hxx"
 #include "ast/nested_name_specifier.hxx"
-#include "ast/type_name.hxx"
+#include "ast/name.hxx"
 
 class SimpleTypeSpecifier;
 typedef const SimpleTypeSpecifier* TPCSimpleTypeSpecifier;
@@ -43,7 +43,7 @@ public:
     static TPCSimpleTypeSpecifier parse(Parser& parser);
 
     explicit SimpleTypeSpecifier(const TRcToken& token);
-    explicit SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type);
+    explicit SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCName type);
     
     const std::array<TPCAstNode, 2> nodes;
 

@@ -31,17 +31,22 @@
 #define METHOD_PARAMETERS_DECLARATION_HXX
 
 #include "ast/common.hxx"
+#include "ast/method_parameter_list.hxx"
 
 class MethodParametersDeclaration;
 typedef const MethodParametersDeclaration* TPCMethodParametersDeclaration;
 
 class MethodParametersDeclaration : public virtual AstNode {
 public:
-	static TPCMethodParametersDeclaration parse(Parser& parser);
+    static TPCMethodParametersDeclaration parse(Parser& parser);
 
-	explicit MethodParametersDeclaration();
+    explicit MethodParametersDeclaration(TPCMethodParameterList params)
+    : params(params) {
+    }
 
-	virtual ~MethodParametersDeclaration();
+    const TPCMethodParameterList params;
+
+    virtual ~MethodParametersDeclaration();
 };
 
 #endif /* METHOD_PARAMETERS_DECLARATION_HXX */

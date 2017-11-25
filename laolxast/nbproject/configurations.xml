@@ -21,7 +21,6 @@
       <itemPath>ast/case_statement.hxx</itemPath>
       <itemPath>ast/class_body.hxx</itemPath>
       <itemPath>ast/class_declaration.hxx</itemPath>
-      <itemPath>ast/class_name.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
       <itemPath>ast/compound_statement.hxx</itemPath>
       <itemPath>ast/condition.hxx</itemPath>
@@ -48,12 +47,12 @@
       <itemPath>ast/method_body.hxx</itemPath>
       <itemPath>ast/method_body_item.hxx</itemPath>
       <itemPath>ast/method_declaration.hxx</itemPath>
-      <itemPath>ast/method_name.hxx</itemPath>
+      <itemPath>ast/method_parameter.hxx</itemPath>
+      <itemPath>ast/method_parameter_list.hxx</itemPath>
       <itemPath>ast/method_parameters_declaration.hxx</itemPath>
       <itemPath>ast/mutability.hxx</itemPath>
       <itemPath>ast/namespace_declaration.hxx</itemPath>
       <itemPath>ast/namespace_declaration_name.hxx</itemPath>
-      <itemPath>ast/namespace_name.hxx</itemPath>
       <itemPath>ast/nested_name_specifier.hxx</itemPath>
       <itemPath>ast/operator_function_id.hxx</itemPath>
       <itemPath>ast/overloadable_operator.hxx</itemPath>
@@ -74,9 +73,7 @@
       <itemPath>ast/template_parameter.hxx</itemPath>
       <itemPath>ast/template_parameter_list.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
-      <itemPath>ast/type_name.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
-      <itemPath>ast/typedef_name.hxx</itemPath>
       <itemPath>ast/unary_expression.hxx</itemPath>
       <itemPath>ast/unary_operator.hxx</itemPath>
       <itemPath>ast/unqualified_id.hxx</itemPath>
@@ -108,7 +105,6 @@
       <itemPath>ast/case_statement.cxx</itemPath>
       <itemPath>ast/class_body.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
-      <itemPath>ast/class_name.cxx</itemPath>
       <itemPath>ast/compound_statement.cxx</itemPath>
       <itemPath>ast/condition.cxx</itemPath>
       <itemPath>ast/conditional_expression.cxx</itemPath>
@@ -135,12 +131,12 @@
       <itemPath>ast/method_body.cxx</itemPath>
       <itemPath>ast/method_body_item.cxx</itemPath>
       <itemPath>ast/method_declaration.cxx</itemPath>
-      <itemPath>ast/method_name.cxx</itemPath>
+      <itemPath>ast/method_parameter.cxx</itemPath>
+      <itemPath>ast/method_parameter_list.cxx</itemPath>
       <itemPath>ast/method_parameters_declaration.cxx</itemPath>
       <itemPath>ast/mutability.cxx</itemPath>
       <itemPath>ast/namespace_declaration.cxx</itemPath>
       <itemPath>ast/namespace_declaration_name.cxx</itemPath>
-      <itemPath>ast/namespace_name.cxx</itemPath>
       <itemPath>ast/nested_name_specifier.cxx</itemPath>
       <itemPath>ast/operator_function_id.cxx</itemPath>
       <itemPath>ast/overloadable_operator.cxx</itemPath>
@@ -161,9 +157,7 @@
       <itemPath>ast/template_parameter.cxx</itemPath>
       <itemPath>ast/template_parameter_list.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
-      <itemPath>ast/type_name.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
-      <itemPath>ast/typedef_name.cxx</itemPath>
       <itemPath>ast/unary_expression.cxx</itemPath>
       <itemPath>ast/unary_operator.cxx</itemPath>
       <itemPath>ast/unqualified_id.cxx</itemPath>
@@ -285,10 +279,6 @@
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/class_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/class_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/compound_statement.cxx" ex="false" tool="1" flavor2="0">
@@ -395,9 +385,13 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/method_name.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/method_parameter.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/method_name.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/method_parameter.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/method_parameter_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/method_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/method_parameters_declaration.cxx"
             ex="false"
@@ -420,10 +414,6 @@
       <item path="ast/namespace_declaration_name.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/namespace_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/namespace_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/nested_name_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -497,17 +487,9 @@
       </item>
       <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/typedef_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/typedef_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/unary_expression.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -680,10 +662,6 @@
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/class_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/class_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/compound_statement.cxx" ex="false" tool="1" flavor2="0">
@@ -790,9 +768,13 @@
       </item>
       <item path="ast/method_declaration.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/method_name.cxx" ex="false" tool="1" flavor2="0">
+      <item path="ast/method_parameter.cxx" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="ast/method_name.hxx" ex="false" tool="3" flavor2="0">
+      <item path="ast/method_parameter.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/method_parameter_list.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/method_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/method_parameters_declaration.cxx"
             ex="false"
@@ -815,10 +797,6 @@
       <item path="ast/namespace_declaration_name.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/namespace_declaration_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/namespace_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/namespace_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/nested_name_specifier.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -892,17 +870,9 @@
       </item>
       <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="ast/type_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/type_name.hxx" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ast/typedef_name.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ast/typedef_name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/unary_expression.cxx" ex="false" tool="1" flavor2="0">
       </item>

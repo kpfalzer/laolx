@@ -32,7 +32,6 @@
 
 #include "ast/common.hxx"
 #include "ast/simple_type_specifier.hxx"
-#include "ast/typedef_name.hxx"
 
 class TypedefDeclaration;
 typedef const TypedefDeclaration* TPCTypedefDeclaration;
@@ -41,11 +40,13 @@ class TypedefDeclaration : public virtual AstNode {
 public:
     static TPCTypedefDeclaration parse(Parser& parser);
 
-    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name);
+    explicit TypedefDeclaration(TPCSimpleTypeSpecifier actualType, const TRcToken name)
+    : actualType(actualType), name(name) {
+    }
 
     const TPCSimpleTypeSpecifier actualType;
-    const TPCTypedefName name;
-    
+    const TRcToken name;
+
     virtual ~TypedefDeclaration();
 };
 

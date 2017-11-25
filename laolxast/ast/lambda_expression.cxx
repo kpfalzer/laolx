@@ -32,7 +32,7 @@
 TPCLambdaExpression LambdaExpression::parse(Parser& parser) {
     auto start = parser.getMark();
     if (Token::K_DEF == parser.accept()->code) {
-        auto name = MethodName::parse(parser);
+        auto name = Name::parse(parser);
         if (name) {
             auto mpd = MethodParametersDeclaration::parse(parser);
             auto ret = ReturnSpecifier::parse(parser);
@@ -51,7 +51,7 @@ TPCLambdaExpression LambdaExpression::parse(Parser& parser) {
 }
 
 LambdaExpression::LambdaExpression(
-        TPCMethodName name,
+        TPCName name,
         TPCMethodParametersDeclaration params,
         TPCReturnSpecifier returnx,
         TPCMethodBody body)

@@ -41,7 +41,7 @@ TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
             ;//do nothing
     }
     auto spec = NestedNameSpecifier::parse(parser);
-    auto type = TypeName::parse(parser);
+    auto type = Name::parse(parser);
     if (type) {
         return new SimpleTypeSpecifier(spec, type);
     }
@@ -53,7 +53,7 @@ SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token)
 : nodes({new Token(*token), nullptr}) {
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCTypeName type) 
+SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCName type) 
 : nodes({spec, type}) {
 }
 

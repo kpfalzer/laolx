@@ -22,30 +22,26 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   type_name.hxx
- * Author: kwpfalzer
+ * File:   name.hxx
+ * Author: kpfalzer
  *
- * Created on Tue Nov 14 13:24:10 2017
+ * Created on Wed Nov 22 14:19:15 2017
  */
-#ifndef TYPE_NAME_HXX
-#define TYPE_NAME_HXX
+#ifndef NAME_HXX
+#define NAME_HXX
 
 #include "ast/common.hxx"
 
-class TypeName;
-typedef const TypeName* TPCTypeName;
+class Name;
+typedef const Name* TPCName;
 
-// TODO: ambiguity on ClassName and TypedefName
-class TypeName : public virtual AstNode {
+class Name : public virtual AstNode {
 public:
-    static TPCTypeName parse(Parser& parser);
+	static TPCName parse(Parser& parser);
 
-    explicit TypeName(TPCAstNode node) : node(node) {
-    }
+	explicit Name();
 
-    const TPCAstNode node;
-
-    virtual ~TypeName();
+	virtual ~Name();
 };
 
-#endif /* TYPE_NAME_HXX */
+#endif /* NAME_HXX */

@@ -37,11 +37,14 @@ typedef const VarOrAttrName* TPCVarOrAttrName;
 
 class VarOrAttrName : public virtual AstNode {
 public:
-	static TPCVarOrAttrName parse(Parser& parser);
+    static TPCVarOrAttrName parse(Parser& parser);
 
-	explicit VarOrAttrName();
+    explicit VarOrAttrName(TPCAstNode node) : node(node) {
+    }
 
-	virtual ~VarOrAttrName();
+    const TPCAstNode node;
+
+    virtual ~VarOrAttrName();
 };
 
 #endif /* VAR_OR_ATTR_NAME_HXX */

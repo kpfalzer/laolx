@@ -35,6 +35,8 @@
 #include "ast/common.hxx"
 #include "ast/template_parameter_list.hxx"
 #include "ast/method_parameters_declaration.hxx"
+#include "ast/base_clause.hxx"
+#include "ast/class_body.hxx"
 
 class ClassDeclaration;
 typedef const ClassDeclaration* TPCClassDeclaration;
@@ -47,18 +49,16 @@ public:
     const TRcToken name,
     TPCTemplateParameterList templParams,
     TPCMethodParametersDeclaration methodParams,
-    
+    TPCBaseClause baseClause,
+    TPCClassBody body
     );
 
-    const TRcToken m_className;
-#ifdef TODO
-    const TRcTypeParameters m_typeParameters;
-    const TRcParameterDeclarationList m_parameterDeclarationList;
-    const TRcExtendsDeclaration m_extendsDeclaration;
-    const TRcImplementsDeclaration m_implementsDeclaration;
-    const TRcClassBody m_classBody;
-#endif //TODO
-
+    const TRcToken name;
+    const TPCTemplateParameterList templParams;
+    const TPCMethodParametersDeclaration methodParams;
+    const TPCBaseClause baseClause;
+    const TPCClassBody body;
+    
     virtual ~ClassDeclaration();
 
 };

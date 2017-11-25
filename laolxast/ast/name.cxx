@@ -22,29 +22,19 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_name.hxx
- * Author: kwpfalzer
+ * File:   name.cxx
+ * Author: kpfalzer
  *
- * Created on Mon Oct 23 17:50:34 2017
+ * Created on Wed Nov 22 14:19:15 2017
  */
-#ifndef TYPEDEF_NAME_HXX
-#define TYPEDEF_NAME_HXX
+#include "ast/name.hxx"
 
-#include "ast/common.hxx"
+TPCName Name::parse(Parser& parser) {
+	TPCName result = nullptr;
+	//todo
+	return result;
+}
 
-class TypedefName;
-typedef const TypedefName* TPCTypedefName;
+Name::Name() {}
 
-class TypedefName : public virtual AstNode {
-public:
-    static TPCTypedefName parse(Parser& parser);
-
-    explicit TypedefName(const TRcToken& name) : name(name) {
-    }
-
-    const TRcToken name;
-
-    virtual ~TypedefName();
-};
-
-#endif /* TYPEDEF_NAME_HXX */
+Name::~Name() {}

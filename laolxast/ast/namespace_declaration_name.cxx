@@ -30,7 +30,7 @@
 #include "ast/namespace_declaration_name.hxx"
 
 TPCNamespaceDeclarationName NamespaceDeclarationName::parse(Parser& parser) {
-    auto names = oneOrMore<NamespaceName>(parser, Token::S_DOT);
+    auto names = oneOrMore<Name>(parser, Token::S_DOT);
     return names ? new NamespaceDeclarationName(names) : nullptr;
 }
 

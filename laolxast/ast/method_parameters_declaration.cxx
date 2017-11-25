@@ -29,12 +29,18 @@
  */
 #include "ast/method_parameters_declaration.hxx"
 
-TPMethodParametersDeclaration MethodParametersDeclaration::parse(Parser& parser) {
-	TPMethodParametersDeclaration result = nullptr;
-	//todo
-	return result;
+TPCMethodParametersDeclaration MethodParametersDeclaration::parse(Parser& parser) {
+    auto start = parser.getMark();
+    if (Token::S_LPAREN == parser.accept()->code) {
+        auto params = MethodParameterList::parse(parser);
+        if (Token::S_RPAREN == parser.accept()->code) {
+            return new MethodParametersDeclaration(params);
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-MethodParametersDeclaration::MethodParametersDeclaration() {}
-
-MethodParametersDeclaration::~MethodParametersDeclaration() {}
+MethodParametersDeclaration::~MethodParametersDeclaration() {
+    delete params;
+}

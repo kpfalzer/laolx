@@ -22,19 +22,43 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_name.cxx
+ * File:   method_parameter.hxx
  * Author: kpfalzer
  *
- * Created on Thu Oct 19 14:32:08 2017
+ * Created on Fri Nov 24 18:37:43 2017
  */
-#include "ast/namespace_name.hxx"
+#ifndef METHOD_PARAMETER_HXX
+#define METHOD_PARAMETER_HXX
 
-TPCNamespaceName NamespaceName::parse(Parser& parser) {
-    if (parser.peek()->code == Token::IDENT) {
-        return new NamespaceName(parser.accept());
-    }
-    return nullptr;
-}
+#include "ast/common.hxx"
+#include "ast/mutability.hxx"
+#include "ast/simple_type_specifier.hxx"
+#include "ast/initializer_clause.hxx"
+#include "ast/var_or_attr_name.hxx"
+#include "ast/access.hxx"
 
-NamespaceName::~NamespaceName() {
-}
+class MethodParameter;
+typedef const MethodParameter* TPCMethodParameter;
+
+class MethodParameter : public virtual AstNode {
+public:
+    static TPCMethodParameter parse(Parser& parser);
+
+    explicit MethodParameter(
+            TPCAccess access,
+            TPCMutability mutability,
+            TPCSimpleTypeSpecifier typeSpec,
+            TPCVarOrAttrName varName,
+            TPCInitializerClause initClause
+            );
+
+    const TPCAccess access;
+    const TPCMutability mutability;
+    const TPCSimpleTypeSpecifier typeSpec;
+    const TPCVarOrAttrName varName;
+    const TPCInitializerClause initClause;
+
+    virtual ~MethodParameter();
+};
+
+#endif /* METHOD_PARAMETER_HXX */

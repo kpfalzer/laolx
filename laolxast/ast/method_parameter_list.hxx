@@ -22,32 +22,29 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   namespace_name.hxx
+ * File:   method_parameter_list.hxx
  * Author: kpfalzer
  *
- * Created on Thu Oct 19 14:32:08 2017
+ * Created on Fri Nov 24 18:32:12 2017
  */
-#ifndef NAMESPACE_NAME_HXX
-#define NAMESPACE_NAME_HXX
+#ifndef METHOD_PARAMETER_LIST_HXX
+#define METHOD_PARAMETER_LIST_HXX
 
 #include "ast/common.hxx"
+#include "ast/method_parameter.hxx"
 
-class NamespaceName;
-typedef const NamespaceName* TPCNamespaceName;
+class MethodParameterList;
+typedef const MethodParameterList* TPCMethodParameterList;
 
-class NamespaceName : public virtual AstNode {
+class MethodParameterList : public virtual AstNode {
 public:
+    static TPCMethodParameterList parse(Parser& parser);
 
-    explicit NamespaceName(const TRcToken& name) : name(name) {
-    }
+    explicit MethodParameterList(const laolx::Array<TPCMethodParameter>* params);
     
-    static TPCNamespaceName parse(Parser& parser);
+    const laolx::Array<TPCMethodParameter>* params;
 
-    explicit NamespaceName();
-
-    const TRcToken name;
-
-    virtual ~NamespaceName();
+    virtual ~MethodParameterList();
 };
 
-#endif /* NAMESPACE_NAME_HXX */
+#endif /* METHOD_PARAMETER_LIST_HXX */

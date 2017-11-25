@@ -35,22 +35,13 @@ TPCTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
     }
     auto start = parser.getMark();
     auto actual = SimpleTypeSpecifier::parse(parser.advance());
-    if (actual) {
-        auto name = TypedefName::parse(parser);
-        if (name) {
-            return new TypedefDeclaration(actual, name);
-        }
+    if (actual && (Token::IDENT == parser.peek()->code)) {
+        return new TypedefDeclaration(actual, parser.accept());
     }
     parser.setMark(start);
     return nullptr;
 }
 
-TypedefDeclaration::TypedefDeclaration(TPCSimpleTypeSpecifier actualType, TPCTypedefName name) 
-: actualType(actualType), name(name) {
-}
-
-
 TypedefDeclaration::~TypedefDeclaration() {
-    delete name;
     delete actualType;
 }

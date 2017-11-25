@@ -53,7 +53,7 @@ TPCOverloadableOperator OverloadableOperator::parse(Parser& parser) {
             case Token::S_STAR: case Token::S_STAR2:
             case Token::S_STAR2EQ: case Token::S_STAREQ:
             case Token::S_SUBSCRIPT: case Token::S_SUBSCRIPT_EQ:
-            case Token::S_TIDLE:
+            case Token::S_TILDE:
                 op = parser.accept();
                 break;
             default:

@@ -22,21 +22,17 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   variable_declaration.cxx
+ * File:   method_parameter.cxx
  * Author: kpfalzer
  *
- * Created on Mon Oct  9 14:17:22 2017
+ * Created on Fri Nov 24 18:37:43 2017
  */
-#include "ast/variable_declaration.hxx"
+#include "ast/method_parameter.hxx"
 
-TPCVariableDeclaration VariableDeclaration::parse(Parser& parser) {
+TPCMethodParameter MethodParameter::parse(Parser& parser) {
     auto start = parser.getMark();
+    auto access = Access::parse(parser);
     auto mutability = Mutability::parse(parser);
-    auto isStatic = false;
-    if (Token::K_STATIC == parser.peek()->code) {
-        parser.accept();
-        isStatic = true;
-    }
     auto typeSpec = SimpleTypeSpecifier::parse(parser);
     auto varName = VarOrAttrName::parse(parser);
     if (varName) {
@@ -48,26 +44,28 @@ TPCVariableDeclaration VariableDeclaration::parse(Parser& parser) {
                 parser.setMark(start);
             }
         }
-        return new VariableDeclaration(mutability, isStatic, typeSpec, varName, initClause);
+        return new MethodParameter(access, mutability, typeSpec, varName, initClause);
     }
     parser.setMark(start);
     return nullptr;
+
 }
 
-VariableDeclaration::VariableDeclaration(
+MethodParameter::MethodParameter(
+        TPCAccess access,
         TPCMutability mutability,
-        bool isStatic,
         TPCSimpleTypeSpecifier typeSpec,
         TPCVarOrAttrName varName,
-        TPCInitializerClause initClause) 
-: mutability(mutability),
-isStatic(isStatic),
+        TPCInitializerClause initClause)
+: access(access),
+mutability(mutability),
 typeSpec(typeSpec),
 varName(varName),
 initClause(initClause) {
 }
 
-VariableDeclaration::~VariableDeclaration() {
+MethodParameter::~MethodParameter() {
+    delete access;
     delete mutability;
     delete typeSpec;
     delete varName;

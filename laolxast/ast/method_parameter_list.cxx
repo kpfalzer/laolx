@@ -22,19 +22,22 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   typedef_name.cxx
- * Author: kwpfalzer
+ * File:   method_parameter_list.cxx
+ * Author: kpfalzer
  *
- * Created on Mon Oct 23 17:50:34 2017
+ * Created on Fri Nov 24 18:32:12 2017
  */
-#include "ast/typedef_name.hxx"
+#include "ast/method_parameter_list.hxx"
 
-TPCTypedefName TypedefName::parse(Parser& parser) {
-    if (Token::IDENT == parser.peek()->code) {
-        return new TypedefName(parser.accept());
-    }
-    return nullptr;
+TPCMethodParameterList MethodParameterList::parse(Parser& parser) {
+    auto params = oneOrMore<MethodParameter>(parser, Token::S_COMMA);
+    return (params) ? new MethodParameterList(params) : nullptr;
 }
 
-TypedefName::~TypedefName() {
+MethodParameterList::MethodParameterList(const laolx::Array<TPCMethodParameter>* params)
+: params(params) {
+}
+
+MethodParameterList::~MethodParameterList() {
+    delete params;
 }
