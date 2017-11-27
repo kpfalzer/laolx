@@ -31,7 +31,7 @@
 #define BASE_INITIALIZER_HXX
 
 #include "ast/common.hxx"
-#include "initializer_clause.hxx"
+#include "ast/initializer_clause.hxx"
 
 class BaseInitializer;
 typedef const BaseInitializer* TPCBaseInitializer;

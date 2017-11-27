@@ -31,7 +31,7 @@
 #define RETURN_SPECIFIER_HXX
 
 #include "ast/common.hxx"
-#include "simple_type_specifier.hxx"
+#include "ast/simple_type_specifier.hxx"
 
 class ReturnSpecifier;
 typedef const ReturnSpecifier* TPCReturnSpecifier;

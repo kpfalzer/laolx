@@ -31,10 +31,10 @@
 #define PRIMARY_EXPRESSION_HXX
 
 #include "ast/common.hxx"
-#include "literal.hxx"
-#include "expression.hxx"
-#include "id_expression.hxx"
-#include "lambda_expression.hxx"
+#include "ast/literal.hxx"
+#include "ast/expression.hxx"
+#include "ast/id_expression.hxx"
+#include "ast/lambda_expression.hxx"
 
 class PrimaryExpression;
 typedef const PrimaryExpression* TPCPrimaryExpression;

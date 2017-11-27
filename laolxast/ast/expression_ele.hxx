@@ -31,8 +31,8 @@
 #define EXPRESSION_ELE_HXX
 
 #include "ast/common.hxx"
-#include "binary_op.hxx"
-#include "unary_expression.hxx"
+#include "ast/binary_op.hxx"
+#include "ast/unary_expression.hxx"
 
 class ExpressionEle;
 typedef const ExpressionEle* TPCExpressionEle;

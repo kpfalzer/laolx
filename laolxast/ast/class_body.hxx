@@ -32,7 +32,7 @@
 
 #include "ast/common.hxx"
 #include "ast/method_body.hxx"
-#include "method_declaration.hxx"
+#include "ast/method_declaration.hxx"
 
 class ClassBody;
 typedef const ClassBody* TPCClassBody;

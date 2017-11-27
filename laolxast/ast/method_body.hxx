@@ -31,7 +31,7 @@
 #define METHOD_BODY_HXX
 
 #include "ast/common.hxx"
-#include "method_body_item.hxx"
+#include "ast/method_body_item.hxx"
 
 class MethodBody;
 typedef const MethodBody* TPCMethodBody;

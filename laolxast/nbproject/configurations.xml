@@ -43,6 +43,7 @@
       <itemPath>ast/lambda_expression.hxx</itemPath>
       <itemPath>parser/lexer.hxx</itemPath>
       <itemPath>ast/linkage.hxx</itemPath>
+      <itemPath>ast/literal.hxx</itemPath>
       <itemPath>ast/member_variable_declaration.hxx</itemPath>
       <itemPath>ast/method_body.hxx</itemPath>
       <itemPath>ast/method_body_item.hxx</itemPath>
@@ -362,6 +363,8 @@
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/literal.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/literal.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/member_variable_declaration.cxx"
             ex="false"
@@ -745,6 +748,8 @@
       <item path="ast/linkage.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/literal.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/literal.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/member_variable_declaration.cxx"
             ex="false"

@@ -31,7 +31,7 @@
 #define BRACED_INIT_LIST_HXX
 
 #include "ast/common.hxx"
-#include "initializer_list.hxx"
+#include "ast/initializer_list.hxx"
 
 class BracedInitList;
 typedef const BracedInitList* TPCBracedInitList;

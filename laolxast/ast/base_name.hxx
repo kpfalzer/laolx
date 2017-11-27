@@ -31,7 +31,7 @@
 #define BASE_NAME_HXX
 
 #include "ast/common.hxx"
-#include "simple_template_id.hxx"
+#include "ast/simple_template_id.hxx"
 
 class BaseName;
 typedef const BaseName* TPCBaseName;

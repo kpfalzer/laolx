@@ -31,7 +31,7 @@
 #define ASSIGNMENT_EXPRESSION_HXX
 
 #include "ast/common.hxx"
-#include "constant_expression.hxx"
+#include "ast/constant_expression.hxx"
 
 class AssignmentExpression;
 typedef const AssignmentExpression* TPCAssignmentExpression;

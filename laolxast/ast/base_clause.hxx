@@ -31,7 +31,7 @@
 #define BASE_CLAUSE_HXX
 
 #include "ast/common.hxx"
-#include "base_specifier_list.hxx"
+#include "ast/base_specifier_list.hxx"
 
 class BaseClause;
 typedef const BaseClause* TPCBaseClause;

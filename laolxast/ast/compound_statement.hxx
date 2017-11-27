@@ -31,7 +31,7 @@
 #define COMPOUND_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "statement.hxx"
+#include "ast/statement.hxx"
 
 class CompoundStatement;
 typedef const CompoundStatement* TPCCompoundStatement;
