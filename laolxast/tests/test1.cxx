@@ -62,7 +62,7 @@ void test3() {
     static const std::string TEST3 = "include 'file1', \"file2\"   foobar";
     laolx::StringInputStream sis(TEST3);
     Parser parser(sis);
-    TRcSourceFile sourceFile = SourceFile::parse(parser);
+    TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(!sourceFile);
 }
 
