@@ -3,12 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		17B0B37A202A512800117CF0 /* test1.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17B0B379202A512800117CF0 /* test1.cxx */; };
+		F456F143202CE6CD0015195E /* liblaolxast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F456F142202CE6CD0015195E /* liblaolxast.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		F4F7DCF5202CE9D600D30194 /* liblaolxcxx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F7DCF3202CE9B300D30194 /* liblaolxcxx.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F4F7DCF2202CE9B300D30194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4F7DCEE202CE9B300D30194 /* laolxcxx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F43464ED1FCDF69B00F7D867;
+			remoteInfo = laolxcxx;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		17B0B367202A4EEC00117CF0 /* CopyFiles */ = {
@@ -25,6 +37,8 @@
 /* Begin PBXFileReference section */
 		17B0B369202A4EEC00117CF0 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B0B379202A512800117CF0 /* test1.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test1.cxx; path = ../../../../laolxast/tests/test1.cxx; sourceTree = "<group>"; };
+		F456F142202CE6CD0015195E /* liblaolxast.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblaolxast.a; path = ../DerivedData/laolxast/Build/Products/Debug/liblaolxast.a; sourceTree = "<group>"; };
+		F4F7DCEE202CE9B300D30194 /* laolxcxx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = laolxcxx.xcodeproj; path = ../../laolxcxx/laolxcxx.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F7DCF5202CE9D600D30194 /* liblaolxcxx.a in Frameworks */,
+				F456F143202CE6CD0015195E /* liblaolxast.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +57,8 @@
 		17B0B360202A4EEC00117CF0 = {
 			isa = PBXGroup;
 			children = (
+				F4F7DCEE202CE9B300D30194 /* laolxcxx.xcodeproj */,
+				F456F142202CE6CD0015195E /* liblaolxast.a */,
 				17B0B36B202A4EEC00117CF0 /* test */,
 				17B0B36A202A4EEC00117CF0 /* Products */,
 			);
@@ -60,6 +78,14 @@
 				17B0B379202A512800117CF0 /* test1.cxx */,
 			);
 			path = test;
+			sourceTree = "<group>";
+		};
+		F4F7DCEF202CE9B300D30194 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4F7DCF3202CE9B300D30194 /* liblaolxcxx.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,7 +124,7 @@
 				};
 			};
 			buildConfigurationList = 17B0B364202A4EEC00117CF0 /* Build configuration list for PBXProject "test" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -107,12 +133,28 @@
 			mainGroup = 17B0B360202A4EEC00117CF0;
 			productRefGroup = 17B0B36A202A4EEC00117CF0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F4F7DCEF202CE9B300D30194 /* Products */;
+					ProjectRef = F4F7DCEE202CE9B300D30194 /* laolxcxx.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				17B0B368202A4EEC00117CF0 /* test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F4F7DCF3202CE9B300D30194 /* liblaolxcxx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblaolxcxx.a;
+			remoteRef = F4F7DCF2202CE9B300D30194 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		17B0B365202A4EEC00117CF0 /* Sources */ = {
@@ -238,12 +280,7 @@
 					../../../laolxast,
 					../../../laolxcxx,
 				);
-				"OTHER_LDFLAGS[arch=*]" = (
-					"-L../DerivedData/laolxast/Build/Products/Debug",
-					"-llaolxast",
-					"-L/Users/kwpfalzer/projects/laolx/xcode/laolxcxx/DerivedData/laolxcxx/Build/Products/Debug",
-					"-llaolxcxx",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -257,6 +294,7 @@
 					../../../laolxast,
 					../../../laolxcxx,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
