@@ -28,8 +28,8 @@
  * Created on Thu Nov 16 10:37:38 2017
  */
 #include "ast/source_file.hxx"
-#include "declaration.hxx"
-#include "statement.hxx"
+#include "ast/declaration.hxx"
+#include "ast/statement.hxx"
 
 TPCSourceFile SourceFile::parse(Parser& parser) {
     TImports imports;

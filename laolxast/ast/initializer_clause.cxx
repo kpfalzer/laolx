@@ -29,7 +29,7 @@
  */
 #include "ast/initializer_clause.hxx"
 #include "ast/assignment_expression.hxx"
-#include "braced_init_list.hxx"
+#include "ast/braced_init_list.hxx"
 
 TPCInitializerClause InitializerClause::parse(Parser& parser) {
     TPCAstNode clause = AssignmentExpression::parse(parser);

@@ -28,8 +28,8 @@
  * Created on Mon Nov 13 14:02:58 2017
  */
 #include "ast/id_expression.hxx"
-#include "unqualified_id.hxx"
-#include "qualified_id.hxx"
+#include "ast/unqualified_id.hxx"
+#include "ast/qualified_id.hxx"
 
 TPCIdExpression IdExpression::parse(Parser& parser) {
     TPCAstNode node = UnqualifiedId::parse(parser);

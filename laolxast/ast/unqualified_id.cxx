@@ -28,8 +28,8 @@
  * Created on Tue Nov 14 13:31:23 2017
  */
 #include "ast/unqualified_id.hxx"
-#include "operator_function_id.hxx"
-#include "template_id.hxx"
+#include "ast/operator_function_id.hxx"
+#include "ast/template_id.hxx"
 
 TPCUnqualifiedId UnqualifiedId::parse(Parser& parser) {
     if (Token::IDENT == parser.peek()->code) {

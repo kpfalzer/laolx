@@ -28,7 +28,7 @@
  * Created on Tue Nov 14 18:37:44 2017
  */
 #include "ast/var_or_attr_name.hxx"
-#include "name.hxx"
+#include "ast/name.hxx"
 
 TPCVarOrAttrName VarOrAttrName::parse(Parser& parser) {
     {

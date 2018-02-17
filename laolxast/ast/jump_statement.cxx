@@ -28,8 +28,8 @@
  * Created on Tue Nov 14 19:16:47 2017
  */
 #include "ast/jump_statement.hxx"
-#include "expression.hxx"
-#include "braced_init_list.hxx"
+#include "ast/expression.hxx"
+#include "ast/braced_init_list.hxx"
 
 TPCJumpStatement JumpStatement::parse(Parser& parser) {
     TRcToken kwrd = parser.peek();
