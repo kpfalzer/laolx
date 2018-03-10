@@ -47,8 +47,8 @@ private:
     typedef const X* TPCX;
     typedef const Y* TPCY;
     
-    TPCX m_x;
-    TPCY m_y;
+    TPCX x;
+    TPCY y;
     
 public:
     explicit PostfixExpression(TPCY y, TPCX x);

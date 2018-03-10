@@ -94,6 +94,7 @@ const Token::CodeByString Token::stSymbols({
     {"^", Token::S_CARET},
     {"&", Token::S_AND},
     {"&=", Token::S_ANDEQ},
+    {"&.", Token::S_ANDDOT},
     {"&&", Token::S_AND2},
     {"&&=", Token::S_AND2EQ},
     {"*", Token::S_STAR},

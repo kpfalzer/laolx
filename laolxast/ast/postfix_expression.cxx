@@ -106,13 +106,14 @@ public:
 //| (alt2)  S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
 //| (alt3)  S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
 //| (alt4)  DOT IdExpression PostfixExpressionX?
-//| (alt5)  (S_PLUS2 | S_MINUS2) PostfixExpressionX?
+//| (alt5)  S_ANDDOT IdExpression PostfixExpressionX?
+//|        (S_PLUS2 | S_MINUS2) PostfixExpressionX?
 
 class PostfixExpression::X {
 public:
 
     enum EType {
-        eAlt1, eAlt2, eAlt3, eAlt4, ePreIncr, ePreDecr
+        eAlt1, eAlt2, eAlt3, eAlt4, eAlt5, ePreIncr, ePreDecr
     };
 
     static PostfixExpression::TPCX parse(Parser& parser) {
@@ -148,11 +149,12 @@ public:
         }
         parser.setMark(start);
         {
-            if (Token::S_DOT == parser.accept()->code) {
+            auto tok = parser.accept()->code;
+            if (Token::S_DOT == tok || Token::S_ANDDOT == tok) {
                 auto expr = IdExpression::parse(parser);
                 if (expr) {
                     auto pfe = PostfixExpression::X::parse(parser);
-                    return new X(expr, pfe);
+                    return new X(expr, pfe, Token::S_ANDDOT == tok);
                 }
             }
         }
@@ -186,8 +188,8 @@ public:
     x(post) {
     }
 
-    explicit X(TPCIdExpression expr, TPCX post)
-    : type(eAlt4),
+    explicit X(TPCIdExpression expr, TPCX post, bool isAndDot)
+    : type(isAndDot ? eAlt5 : eAlt4),
     node(expr),
     x(post) {
     }
@@ -196,17 +198,17 @@ public:
     : type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr),
     node(new Token(*preop)),
     x(post) {
-}
+    }
 
-const EType type;
-TPCAstNode node;
+    const EType type;
+    TPCAstNode node;
 
-// All alternatives have this (optionally)
-PostfixExpression::TPCX x;
+    // All alternatives have this (optionally)
+    PostfixExpression::TPCX x;
 
-virtual ~X() {
-    delete x;
-}
+    virtual ~X() {
+        delete x;
+    }
 };
 
 TPCPostfixExpression PostfixExpression::parse(Parser& parser) {
@@ -221,12 +223,12 @@ TPCPostfixExpression PostfixExpression::parse(Parser& parser) {
 }
 
 PostfixExpression::PostfixExpression(TPCY y, TPCX x)
-: m_y(y), m_x(x) {
+: y(y), x(x) {
 }
 
 PostfixExpression::~PostfixExpression() {
-    delete m_x;
-    delete m_y;
+    delete x;
+    delete y;
 }
 
 

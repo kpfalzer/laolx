@@ -30,11 +30,10 @@
 #include "ast/constant_expression.hxx"
 
 TPCConstantExpression ConstantExpression::parse(Parser& parser) {
-	TPCConstantExpression result = nullptr;
-	//todo
-	return result;
+    auto condExpr = ConditionalExpression::parse(parser);
+    return (condExpr) ? new ConstantExpression(condExpr) : nullptr;
 }
 
-ConstantExpression::ConstantExpression() {}
-
-ConstantExpression::~ConstantExpression() {}
+ConstantExpression::~ConstantExpression() {
+    delete condExpr;
+}

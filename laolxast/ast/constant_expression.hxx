@@ -31,6 +31,7 @@
 #define CONSTANT_EXPRESSION_HXX
 
 #include "ast/common.hxx"
+#include "ast/conditional_expression.hxx"
 
 class ConstantExpression;
 typedef const ConstantExpression* TPCConstantExpression;
@@ -38,8 +39,11 @@ typedef const ConstantExpression* TPCConstantExpression;
 class ConstantExpression : public virtual AstNode {
 public:
 	static TPCConstantExpression parse(Parser& parser);
+        
+        const TPCConditionalExpression condExpr;
 
-	explicit ConstantExpression();
+	explicit ConstantExpression(TPCConditionalExpression condExpr)
+        : condExpr(condExpr) {}
 
 	virtual ~ConstantExpression();
 };

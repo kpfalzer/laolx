@@ -145,6 +145,7 @@ public:
         S_SYMBOLS, //start list of symbols
         S_CARET,
         S_AND,
+        S_ANDDOT,
         S_ANDEQ,
         S_AND2,
         S_AND2EQ,
