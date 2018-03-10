@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class JumpStatement;
-typedef const JumpStatement* TPCJumpStatement;
 
 class JumpStatement : public virtual AstNode {
 public:

@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/initializer_list.hxx"
 
-class BracedInitList;
-typedef const BracedInitList* TPCBracedInitList;
 
 class BracedInitList : public virtual AstNode {
 public:

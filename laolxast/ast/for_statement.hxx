@@ -34,8 +34,6 @@
 #include "ast/statement.hxx"
 #include "ast/expression.hxx"
 
-class ForStatement;
-typedef const ForStatement* TPCForStatement;
 
 class ForStatement : public virtual AstNode {
 public:

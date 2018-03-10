@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class TemplateParameterList;
-typedef const TemplateParameterList* TPCTemplateParameterList;
 
 class TemplateParameterList : public virtual AstNode {
 public:

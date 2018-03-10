@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/base_specifier_list.hxx"
 
-class BaseClause;
-typedef const BaseClause* TPCBaseClause;
 
 class BaseClause : public virtual AstNode {
 public:

@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/overloadable_operator.hxx"
 
-class OperatorFunctionId;
-typedef const OperatorFunctionId* TPCOperatorFunctionId;
 
 class OperatorFunctionId : public virtual AstNode {
 public:

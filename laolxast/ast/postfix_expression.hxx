@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class PostfixExpression;
-typedef const PostfixExpression* TPCPostfixExpression;
 
 class PostfixExpression : public virtual AstNode {
 public:

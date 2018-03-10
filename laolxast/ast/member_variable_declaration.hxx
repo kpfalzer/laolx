@@ -37,8 +37,6 @@
 #include "ast/initializer_clause.hxx"
 #include "ast/access.hxx"
 
-class MemberVariableDeclaration;
-typedef const MemberVariableDeclaration* TPCMemberVariableDeclaration;
 
 class MemberVariableDeclaration : public virtual AstNode {
 public:

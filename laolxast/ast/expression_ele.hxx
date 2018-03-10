@@ -34,8 +34,6 @@
 #include "ast/binary_op.hxx"
 #include "ast/unary_expression.hxx"
 
-class ExpressionEle;
-typedef const ExpressionEle* TPCExpressionEle;
 
 class ExpressionEle : public virtual AstNode {
 public:

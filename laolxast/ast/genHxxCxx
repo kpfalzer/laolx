@@ -51,8 +51,10 @@ def gen_hxx(filename, base_fn, cls_name)
 
 #include "ast/common.hxx"
 
+/** Put in common.hxx
 class #{cls_name};
 typedef const #{cls_name}* TPC#{cls_name};
+**/
 
 class #{cls_name} : public virtual AstNode {
 public:

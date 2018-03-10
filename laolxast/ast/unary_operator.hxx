@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class UnaryOperator;
-typedef const UnaryOperator* TPCUnaryOperator;
 
 class UnaryOperator : public virtual AstNode {
 public:

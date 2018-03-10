@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class UnqualifiedId;
-typedef const UnqualifiedId* TPCUnqualifiedId;
 
 class UnqualifiedId : public virtual AstNode {
 public:

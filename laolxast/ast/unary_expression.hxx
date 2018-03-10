@@ -35,8 +35,6 @@
 #include "ast/postfix_expression.hxx"
 #include "ast/unary_operator.hxx"
 
-class UnaryExpression;
-typedef const UnaryExpression* TPCUnaryExpression;
 
 class UnaryExpression : public virtual AstNode {
 public:

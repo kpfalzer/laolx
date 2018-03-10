@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class NestedNameSpecifier;
-typedef const NestedNameSpecifier* TPCNestedNameSpecifier;
 
 class NestedNameSpecifier : public virtual AstNode {
 public:

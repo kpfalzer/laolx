@@ -36,8 +36,6 @@
 #include "ast/operator_function_id.hxx"
 #include "ast/template_argument_list.hxx"
 
-class TemplateId;
-typedef const TemplateId* TPCTemplateId;
 
 class TemplateId : public virtual AstNode {
 public:

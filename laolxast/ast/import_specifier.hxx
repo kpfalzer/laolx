@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class ImportSpecifier;
-typedef const ImportSpecifier* TPCImportSpecifier;
 
 class ImportSpecifier : public virtual AstNode {
 public:

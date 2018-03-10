@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class InitializerClause;
-typedef const InitializerClause* TPCInitializerClause;
 
 class InitializerClause : public virtual AstNode {
 public:

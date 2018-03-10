@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Bool;
-typedef const Bool* TPCBool;
 
 class Bool : public virtual AstNode {
 public:

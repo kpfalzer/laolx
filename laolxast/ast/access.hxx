@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Access;
-typedef const Access* TPCAccess;
 
 class Access : public virtual AstNode {
 public:

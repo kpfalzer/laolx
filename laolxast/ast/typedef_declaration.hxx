@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/simple_type_specifier.hxx"
 
-class TypedefDeclaration;
-typedef const TypedefDeclaration* TPCTypedefDeclaration;
 
 class TypedefDeclaration : public virtual AstNode {
 public:

@@ -36,8 +36,6 @@
 #include "ast/expression.hxx"
 #include "ast/statement.hxx"
 
-class CaseStatement;
-typedef const CaseStatement* TPCCaseStatement;
 
 class CaseStatement : public virtual AstNode {
 public:

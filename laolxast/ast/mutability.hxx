@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Mutability;
-typedef const Mutability* TPCMutability;
 
 class Mutability : public virtual AstNode {
 public:

@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/import_statement.hxx"
 
-class SourceFile;
-typedef const SourceFile* TPCSourceFile;
 
 class SourceFile : public virtual AstNode {
 public:

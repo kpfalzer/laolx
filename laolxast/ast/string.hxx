@@ -35,8 +35,6 @@
 #include "laolx/list.hxx"
 #include "ast/common.hxx"
 
-class String;
-typedef const String* TPCString;
 
 class String : public virtual AstNode {
 public:

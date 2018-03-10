@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/constant_expression.hxx"
 
-class AssignmentExpression;
-typedef const AssignmentExpression* TPCAssignmentExpression;
 
 class AssignmentExpression : public virtual AstNode {
 public:

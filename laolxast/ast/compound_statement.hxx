@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/statement.hxx"
 
-class CompoundStatement;
-typedef const CompoundStatement* TPCCompoundStatement;
 
 class CompoundStatement : public virtual AstNode {
 public:

@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class VarOrAttrName;
-typedef const VarOrAttrName* TPCVarOrAttrName;
 
 class VarOrAttrName : public virtual AstNode {
 public:

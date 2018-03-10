@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Condition;
-typedef const Condition* TPCCondition;
 
 class Condition : public virtual AstNode {
 public:

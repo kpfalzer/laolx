@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/conditional_expression.hxx"
 
-class ConstantExpression;
-typedef const ConstantExpression* TPCConstantExpression;
 
 class ConstantExpression : public virtual AstNode {
 public:

@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class BinaryOp;
-typedef const BinaryOp* TPCBinaryOp;
 
 class BinaryOp : public virtual AstNode {
 public:

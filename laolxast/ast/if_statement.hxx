@@ -35,8 +35,6 @@
 #include "ast/condition.hxx"
 #include "ast/statement.hxx"
 
-class IfStatement;
-typedef const IfStatement* TPCIfStatement;
 
 class IfStatement : public virtual AstNode {
 public:

@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/simple_template_id.hxx"
 
-class BaseName;
-typedef const BaseName* TPCBaseName;
 
 class BaseName : public virtual AstNode {
 public:

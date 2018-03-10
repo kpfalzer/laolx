@@ -37,8 +37,6 @@
 #include "ast/var_or_attr_name.hxx"
 #include "ast/access.hxx"
 
-class MethodParameter;
-typedef const MethodParameter* TPCMethodParameter;
 
 class MethodParameter : public virtual AstNode {
 public:

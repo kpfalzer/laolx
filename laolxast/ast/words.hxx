@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Words;
-typedef const Words* TPCWords;
 
 class Words : public virtual AstNode {
 public:

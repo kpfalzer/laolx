@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/initializer_list.hxx"
 
-class ExpressionList;
-typedef const ExpressionList* TPCExpressionList;
 
 class ExpressionList : public virtual AstNode {
 public:

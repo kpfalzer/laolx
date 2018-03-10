@@ -34,8 +34,6 @@
 #include "ast/nested_name_specifier.hxx"
 #include "ast/base_name.hxx"
 
-class BaseTypeSpecifier;
-typedef const BaseTypeSpecifier* TPCBaseTypeSpecifier;
 
 class BaseTypeSpecifier : public virtual AstNode {
 public:

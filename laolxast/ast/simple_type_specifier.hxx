@@ -35,8 +35,6 @@
 #include "ast/nested_name_specifier.hxx"
 #include "ast/name.hxx"
 
-class SimpleTypeSpecifier;
-typedef const SimpleTypeSpecifier* TPCSimpleTypeSpecifier;
 
 class SimpleTypeSpecifier : public virtual AstNode {
 public:

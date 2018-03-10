@@ -35,8 +35,6 @@
 #include "ast/base_type_specifier.hxx"
 #include "ast/base_initializer_specifier.hxx"
 
-class BaseSpecifier;
-typedef const BaseSpecifier* TPCBaseSpecifier;
 
 class BaseSpecifier : public virtual AstNode {
 public:

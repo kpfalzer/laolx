@@ -34,8 +34,6 @@
 #include "ast/condition.hxx"
 #include "ast/statement.hxx"
 
-class IterationStatement;
-typedef const IterationStatement* TPCIterationStatement;
 
 class IterationStatement : public virtual AstNode {
 public:

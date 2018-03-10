@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Literal;
-typedef const Literal* TPCLiteral;
 
 class Literal : public virtual AstNode {
 public:

@@ -36,8 +36,6 @@
 #include "ast/initializer_clause.hxx"
 #include "ast/var_or_attr_name.hxx"
 
-class VariableDeclaration;
-typedef const VariableDeclaration* TPCVariableDeclaration;
 
 class VariableDeclaration : public virtual AstNode {
 public:

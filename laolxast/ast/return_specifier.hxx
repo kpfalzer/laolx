@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/simple_type_specifier.hxx"
 
-class ReturnSpecifier;
-typedef const ReturnSpecifier* TPCReturnSpecifier;
 
 class ReturnSpecifier : public virtual AstNode {
 public:

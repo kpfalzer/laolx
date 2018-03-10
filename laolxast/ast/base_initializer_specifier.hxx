@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/base_initializer_list.hxx"
 
-class BaseInitializerSpecifier;
-typedef const BaseInitializerSpecifier* TPCBaseInitializerSpecifier;
 
 class BaseInitializerSpecifier : public virtual AstNode {
 public:

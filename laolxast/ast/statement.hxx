@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Statement;
-typedef const Statement* TPCStatement;
 
 class Statement : public virtual AstNode {
 public:

@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class IdExpression;
-typedef const IdExpression* TPCIdExpression;
 
 class IdExpression : public virtual AstNode {
 public:

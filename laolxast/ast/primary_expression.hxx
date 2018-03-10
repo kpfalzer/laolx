@@ -36,8 +36,6 @@
 #include "ast/id_expression.hxx"
 #include "ast/lambda_expression.hxx"
 
-class PrimaryExpression;
-typedef const PrimaryExpression* TPCPrimaryExpression;
 
 class PrimaryExpression : public virtual AstNode {
 public:

@@ -35,8 +35,6 @@
 #include "ast/namespace_declaration_name.hxx"
 #include "ast/declaration.hxx"
 
-class NamespaceDeclaration;
-typedef const NamespaceDeclaration* TPCNamespaceDeclaration;
 
 class NamespaceDeclaration : public virtual AstNode {
 public:

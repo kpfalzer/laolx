@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class MethodBodyItem;
-typedef const MethodBodyItem* TPCMethodBodyItem;
 
 class MethodBodyItem : public virtual AstNode {
 public:

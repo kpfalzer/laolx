@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/method_parameter.hxx"
 
-class MethodParameterList;
-typedef const MethodParameterList* TPCMethodParameterList;
 
 class MethodParameterList : public virtual AstNode {
 public:

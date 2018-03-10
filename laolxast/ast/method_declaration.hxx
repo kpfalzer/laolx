@@ -38,8 +38,6 @@
 #include "ast/return_specifier.hxx"
 #include "ast/method_body.hxx"
 
-class MethodDeclaration;
-typedef const MethodDeclaration* TPCMethodDeclaration;
 
 class MethodDeclaration : public virtual AstNode {
 public:

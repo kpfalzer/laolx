@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/template_argument.hxx"
 
-class TemplateArgumentList;
-typedef const TemplateArgumentList* TPCTemplateArgumentList;
 
 class TemplateArgumentList : public virtual AstNode {
 public:

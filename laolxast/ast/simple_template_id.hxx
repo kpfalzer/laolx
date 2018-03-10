@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/template_argument_list.hxx"
 
-class SimpleTemplateId;
-typedef const SimpleTemplateId* TPCSimpleTemplateId;
 
 class SimpleTemplateId : public virtual AstNode {
 public:

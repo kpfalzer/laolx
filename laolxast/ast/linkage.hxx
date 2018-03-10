@@ -35,8 +35,6 @@
 #include "ast/common.hxx"
 #include "ast/string.hxx"
 
-class Linkage;
-typedef const Linkage* TPCLinkage;
 
 class Linkage : public virtual AstNode {
 public:

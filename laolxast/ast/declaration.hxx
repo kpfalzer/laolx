@@ -35,8 +35,6 @@
 #include "ast/common.hxx"
 #include "ast/linkage.hxx"
 
-class Declaration;
-typedef const Declaration* TPCDeclaration;
 
 class Declaration : public virtual AstNode {
 public:

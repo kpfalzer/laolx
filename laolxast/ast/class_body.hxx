@@ -34,8 +34,6 @@
 #include "ast/method_body.hxx"
 #include "ast/method_declaration.hxx"
 
-class ClassBody;
-typedef const ClassBody* TPCClassBody;
 
 class ClassBody : public virtual AstNode {
 public:

@@ -38,8 +38,6 @@
 #include "ast/base_clause.hxx"
 #include "ast/class_body.hxx"
 
-class ClassDeclaration;
-typedef const ClassDeclaration* TPCClassDeclaration;
 
 class ClassDeclaration : public virtual AstNode {
 public:

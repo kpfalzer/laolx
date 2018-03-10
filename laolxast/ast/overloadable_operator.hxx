@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class OverloadableOperator;
-typedef const OverloadableOperator* TPCOverloadableOperator;
 
 /**
  * Overloadable operator can be operator or accessor (setter/getter).

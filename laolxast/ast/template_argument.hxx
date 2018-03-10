@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class TemplateArgument;
-typedef const TemplateArgument* TPCTemplateArgument;
 
 class TemplateArgument : public virtual AstNode {
 public:

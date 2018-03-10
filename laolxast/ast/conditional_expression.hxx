@@ -35,8 +35,6 @@
 #include "ast/expression_ele.hxx"
 #include "ast/expression.hxx"
 
-class ConditionalExpression;
-typedef const ConditionalExpression* TPCConditionalExpression;
 
 class ConditionalExpression : public virtual AstNode {
 public:

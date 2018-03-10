@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Name;
-typedef const Name* TPCName;
 
 class Name : public virtual AstNode {
 public:

@@ -34,8 +34,6 @@
 #include "ast/nested_name_specifier.hxx"
 #include "ast/unqualified_id.hxx"
 
-class QualifiedId;
-typedef const QualifiedId* TPCQualifiedId;
 
 class QualifiedId : public virtual AstNode {
 public:

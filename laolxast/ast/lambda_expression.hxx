@@ -36,8 +36,6 @@
 #include "ast/return_specifier.hxx"
 #include "ast/method_body.hxx"
 
-class LambdaExpression;
-typedef const LambdaExpression* TPCLambdaExpression;
 
 class LambdaExpression : public virtual AstNode {
 public:

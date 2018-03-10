@@ -33,8 +33,6 @@
 #include "ast/common.hxx"
 #include "ast/base_specifier.hxx"
 
-class BaseSpecifierList;
-typedef const BaseSpecifierList* TPCBaseSpecifierList;
 
 class BaseSpecifierList : public virtual AstNode {
 public:

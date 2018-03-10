@@ -32,8 +32,6 @@
 
 #include "ast/common.hxx"
 
-class Symbols;
-typedef const Symbols* TPCSymbols;
 
 class Symbols : public virtual AstNode {
 public:
