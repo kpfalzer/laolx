@@ -37,6 +37,9 @@ TPCBool Bool::parse(Parser& parser) {
     return nullptr;
 }
 
+Bool::Bool(const TRcToken& token)
+: token(token) {}
+
 Bool::operator bool() const {
     return (Token::K_TRUE == token->code);
 }

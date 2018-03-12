@@ -52,6 +52,7 @@
       <itemPath>ast/method_parameter_list.hxx</itemPath>
       <itemPath>ast/method_parameters_declaration.hxx</itemPath>
       <itemPath>ast/mutability.hxx</itemPath>
+      <itemPath>ast/name.hxx</itemPath>
       <itemPath>ast/namespace_declaration.hxx</itemPath>
       <itemPath>ast/namespace_declaration_name.hxx</itemPath>
       <itemPath>ast/nested_name_specifier.hxx</itemPath>
@@ -81,10 +82,6 @@
       <itemPath>ast/var_or_attr_name.hxx</itemPath>
       <itemPath>ast/variable_declaration.hxx</itemPath>
       <itemPath>ast/words.hxx</itemPath>
-    </logicalFolder>
-    <logicalFolder name="ResourceFiles"
-                   displayName="Resource Files"
-                   projectFiles="true">
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -136,6 +133,7 @@
       <itemPath>ast/method_parameter_list.cxx</itemPath>
       <itemPath>ast/method_parameters_declaration.cxx</itemPath>
       <itemPath>ast/mutability.cxx</itemPath>
+      <itemPath>ast/name.cxx</itemPath>
       <itemPath>ast/namespace_declaration.cxx</itemPath>
       <itemPath>ast/namespace_declaration_name.cxx</itemPath>
       <itemPath>ast/nested_name_specifier.cxx</itemPath>
@@ -409,6 +407,10 @@
       <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -794,6 +796,10 @@
       <item path="ast/mutability.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/mutability.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/name.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/namespace_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>

@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/tests/test1.cxx"
-            timestampString = "540155376.787619"
+            filePath = "../../laolxast/ast/var_or_attr_name.cxx"
+            timestampString = "542417116.58577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "test3()"
-            landmarkType = "9">
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "VarOrAttrName::parse(Parser&amp; parser)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

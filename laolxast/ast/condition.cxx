@@ -28,13 +28,16 @@
  * Created on Tue Nov 14 19:56:19 2017
  */
 #include "ast/condition.hxx"
+#include "ast/expression.hxx"
 
 TPCCondition Condition::parse(Parser& parser) {
-	TPCCondition result = nullptr;
-	//todo
-	return result;
+    auto cond = Expression::parse(parser);
+    return (cond) ? new Condition(cond) : nullptr;
 }
 
-Condition::Condition() {}
+Condition::Condition(TPCExpression cond) : cond(cond) {
+}
 
-Condition::~Condition() {}
+Condition::~Condition() {
+    delete cond;
+}

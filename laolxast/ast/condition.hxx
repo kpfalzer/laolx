@@ -32,12 +32,13 @@
 
 #include "ast/common.hxx"
 
-
 class Condition : public virtual AstNode {
 public:
 	static TPCCondition parse(Parser& parser);
 
-	explicit Condition();
+	explicit Condition(TPCExpression cond);
+        
+        const TPCExpression cond;
 
 	virtual ~Condition();
 };

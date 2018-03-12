@@ -32,14 +32,17 @@
 
 #include "ast/common.hxx"
 
-
 class Name : public virtual AstNode {
 public:
-	static TPCName parse(Parser& parser);
+    static TPCName parse(Parser& parser);
 
-	explicit Name();
+    explicit Name(const TRcToken id);
+    explicit Name(const TPCSimpleTemplateId simplTemplId);
+    
+    const TRcToken ident;
+    const TPCSimpleTemplateId simplTemplId;
 
-	virtual ~Name();
+    virtual ~Name();
 };
 
 #endif /* NAME_HXX */

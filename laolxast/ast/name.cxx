@@ -28,13 +28,31 @@
  * Created on Wed Nov 22 14:19:15 2017
  */
 #include "ast/name.hxx"
+#include "ast/simple_template_id.hxx"
 
 TPCName Name::parse(Parser& parser) {
-	TPCName result = nullptr;
-	//todo
-	return result;
+    //Name: IDENT | SimpleTemplateId
+    auto stid = SimpleTemplateId::parse(parser);
+    if (stid) {
+        return new Name(stid);
+    } else {
+        if (Token::IDENT == parser.peek()->code) {
+            return new Name(parser.accept());
+        }
+        return nullptr;
+    }
 }
 
-Name::Name() {}
+Name::Name(const TRcToken id)
+: ident(id), simplTemplId(nullptr) {
 
-Name::~Name() {}
+}
+
+Name::Name(const TPCSimpleTemplateId simplTemplId)
+: simplTemplId(simplTemplId) {
+
+}
+
+Name::~Name() {
+    delete simplTemplId;
+}

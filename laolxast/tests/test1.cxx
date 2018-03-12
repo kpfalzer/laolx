@@ -64,6 +64,16 @@ void test3() {
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(sourceFile);
+    assert(parser.isEOF());
+}
+
+void test4() {
+    static const std::string TEST4 = "const X = 12 + 3";
+    laolx::StringInputStream sis(TEST4);
+    Parser parser(sis);
+    TPCSourceFile sourceFile = SourceFile::parse(parser);
+    assert(sourceFile);
+    assert(parser.isEOF());
 }
 
 int main(int argc, char** argv) {
@@ -82,6 +92,10 @@ int main(int argc, char** argv) {
     test3();
     std::cout << "%TEST_FINISHED% test3 (parser_test)" << std::endl;
     
+    std::cout << "%TEST_STARTED% test4 (parser_test)" << std::endl;
+    test4();
+    std::cout << "%TEST_FINISHED% test4 (parser_test)" << std::endl;
+
     std::cout << "%SUITE_FINISHED%" << std::endl;
 
     return (EXIT_SUCCESS);

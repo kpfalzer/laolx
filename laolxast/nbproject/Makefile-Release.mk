@@ -80,6 +80,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/method_parameter_list.o \
 	${OBJECTDIR}/ast/method_parameters_declaration.o \
 	${OBJECTDIR}/ast/mutability.o \
+	${OBJECTDIR}/ast/name.o \
 	${OBJECTDIR}/ast/namespace_declaration.o \
 	${OBJECTDIR}/ast/namespace_declaration_name.o \
 	${OBJECTDIR}/ast/nested_name_specifier.o \
@@ -373,6 +374,11 @@ ${OBJECTDIR}/ast/mutability.o: ast/mutability.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/mutability.o ast/mutability.cxx
+
+${OBJECTDIR}/ast/name.o: ast/name.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/name.o ast/name.cxx
 
 ${OBJECTDIR}/ast/namespace_declaration.o: ast/namespace_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -1131,6 +1137,19 @@ ${OBJECTDIR}/ast/mutability_nomain.o: ${OBJECTDIR}/ast/mutability.o ast/mutabili
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/mutability_nomain.o ast/mutability.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/mutability.o ${OBJECTDIR}/ast/mutability_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/name_nomain.o: ${OBJECTDIR}/ast/name.o ast/name.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/name.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/name_nomain.o ast/name.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/name.o ${OBJECTDIR}/ast/name_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/namespace_declaration_nomain.o: ${OBJECTDIR}/ast/namespace_declaration.o ast/namespace_declaration.cxx 
