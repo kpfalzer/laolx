@@ -31,15 +31,17 @@
 #define TEMPLATE_PARAMETER_LIST_HXX
 
 #include "ast/common.hxx"
-
+#include "template_parameter.hxx"
 
 class TemplateParameterList : public virtual AstNode {
 public:
-	static TPCTemplateParameterList parse(Parser& parser);
+    static TPCTemplateParameterList parse(Parser& parser);
 
-	explicit TemplateParameterList();
+    explicit TemplateParameterList(const laolx::Array<TPCTemplateParameter>* params);
+    
+    const laolx::Array<TPCTemplateParameter>* parameters;
 
-	virtual ~TemplateParameterList();
+    virtual ~TemplateParameterList();
 };
 
 #endif /* TEMPLATE_PARAMETER_LIST_HXX */

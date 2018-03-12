@@ -51,6 +51,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/case_statement.o \
 	${OBJECTDIR}/ast/class_body.o \
 	${OBJECTDIR}/ast/class_declaration.o \
+	${OBJECTDIR}/ast/common.o \
 	${OBJECTDIR}/ast/compound_statement.o \
 	${OBJECTDIR}/ast/condition.o \
 	${OBJECTDIR}/ast/conditional_expression.o \
@@ -229,6 +230,11 @@ ${OBJECTDIR}/ast/class_declaration.o: ast/class_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/class_declaration.o ast/class_declaration.cxx
+
+${OBJECTDIR}/ast/common.o: ast/common.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/common.o ast/common.cxx
 
 ${OBJECTDIR}/ast/compound_statement.o: ast/compound_statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -760,6 +766,19 @@ ${OBJECTDIR}/ast/class_declaration_nomain.o: ${OBJECTDIR}/ast/class_declaration.
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/class_declaration_nomain.o ast/class_declaration.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/class_declaration.o ${OBJECTDIR}/ast/class_declaration_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/common_nomain.o: ${OBJECTDIR}/ast/common.o ast/common.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/common.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/common_nomain.o ast/common.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/common.o ${OBJECTDIR}/ast/common_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/compound_statement_nomain.o: ${OBJECTDIR}/ast/compound_statement.o ast/compound_statement.cxx 

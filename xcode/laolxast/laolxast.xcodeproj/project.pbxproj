@@ -162,6 +162,7 @@
 		170E0446202A735800FC40B0 /* lexer.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 170E043E202A735800FC40B0 /* lexer.cxx */; };
 		170E0447202A735800FC40B0 /* token.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 170E043F202A735800FC40B0 /* token.cxx */; };
 		170E0448202A735800FC40B0 /* lexer.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 170E0440202A735800FC40B0 /* lexer.hxx */; };
+		17C811BD2057409500E82897 /* common.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C811BB2057409500E82897 /* common.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,6 +332,7 @@
 		170E043F202A735800FC40B0 /* token.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = token.cxx; path = ../../../laolxast/parser/token.cxx; sourceTree = "<group>"; };
 		170E0440202A735800FC40B0 /* lexer.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lexer.hxx; path = ../../../laolxast/parser/lexer.hxx; sourceTree = "<group>"; };
 		17B0B373202A4EEC00117CF0 /* test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = test.xcodeproj; path = test/test.xcodeproj; sourceTree = "<group>"; };
+		17C811BB2057409500E82897 /* common.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cxx; path = ../../../laolxast/ast/common.cxx; sourceTree = "<group>"; };
 		F43465171FCDF86900F7D867 /* liblaolxast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblaolxast.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -348,6 +350,7 @@
 		170E030E202A72E400FC40B0 /* ast */ = {
 			isa = PBXGroup;
 			children = (
+				17C811BB2057409500E82897 /* common.cxx */,
 				170E0383202A733200FC40B0 /* access.cxx */,
 				170E0351202A732A00FC40B0 /* access.hxx */,
 				170E034C202A732900FC40B0 /* assignment_expression.cxx */,
@@ -758,6 +761,7 @@
 				170E03D7202A733400FC40B0 /* var_or_attr_name.cxx in Sources */,
 				170E03B2202A733400FC40B0 /* name.cxx in Sources */,
 				170E0435202A733400FC40B0 /* template_argument.cxx in Sources */,
+				17C811BD2057409500E82897 /* common.cxx in Sources */,
 				170E0412202A733400FC40B0 /* primary_expression.cxx in Sources */,
 				170E03E1202A733400FC40B0 /* braced_init_list.cxx in Sources */,
 				170E03EA202A733400FC40B0 /* import_specifier_list.cxx in Sources */,

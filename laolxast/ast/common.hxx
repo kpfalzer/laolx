@@ -223,5 +223,14 @@ zeroOrMore(Parser& parser, const Token::Code delimiter) {
     return items ? items : new laolx::Array<T>();
 }
 
+/**
+ * Parse typeSpec? varName correctly.
+ * @param parser parser.
+ * @param typeSpec typeSpec result.
+ * @param varName varName result.
+ */
+void
+simpleTypeVarName(Parser& parser, TPCSimpleTypeSpecifier& typeSpec, TPCVarOrAttrName& varName);
+
 #endif /* COMMON_HXX */
 

@@ -31,23 +31,22 @@
 #include "ast/name.hxx"
 
 TPCVarOrAttrName VarOrAttrName::parse(Parser& parser) {
-    {
-        auto varName = Name::parse(parser);
-        if (varName) {
-            return new VarOrAttrName(varName);
-        }
-        switch (parser.peek()->code) {
-            case Token::ATTR_DECL:
-            case Token::ATTR_DECL_RO:
-            case Token::ATTR_DECL_RW:
-            {
-                const TRcToken tok = parser.accept();
-                return new VarOrAttrName(new Token(*tok));
-            }
-            default:
-                assert(false);
-        }
+    auto varName = Name::parse(parser);
+    if (varName) {
+        return new VarOrAttrName(varName);
     }
+    switch (parser.peek()->code) {
+        case Token::ATTR_DECL:
+        case Token::ATTR_DECL_RO:
+        case Token::ATTR_DECL_RW:
+        {
+            const TRcToken tok = parser.accept();
+            return new VarOrAttrName(new Token(*tok));
+        }
+        default:
+            ;//do nothing
+    }
+    return nullptr;
 }
 
 VarOrAttrName::~VarOrAttrName() {

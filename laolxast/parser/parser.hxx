@@ -55,7 +55,7 @@ public:
     bool isEOF() const {
         return peek()->isEOF();
     }
-    
+
     const TRcToken& peek(index_type offset = 0) const;
 
     /**
@@ -71,7 +71,7 @@ public:
      * @return this parser.
      */
     Parser& advance(index_type n = 1);
-    
+
     index_type getMark() const {
         return m_pos;
     }
@@ -86,13 +86,13 @@ public:
      * @return if next token is eof(), on next line or is S_SEMI.
      */
     bool isEndOfStatement(bool skipOverSemi = true);
-    
+
     /**
      * Check for isEndOfStatement() and generate error if not found.
      * @return isEndOfStatement() result (error was generated if false).
      */
     bool expectEndOfStatement();
-    
+
     /**
      * Generate error message using text and location from token.
      * @param message message/format specifier with %s for text (from token).
@@ -108,7 +108,7 @@ public:
      * Note: tokens is invalid/indeterminate unless return true.
      */
     bool accept(laolx::Array<TRcToken>& tokens, std::initializer_list<Token::Code> codes);
-    
+
     /**
      * Attempt to accept code.  Return true if next token is code (and accept).
      * @param code code to accept.
@@ -119,11 +119,11 @@ public:
     auto errorCount() const {
         return m_errorCount;
     }
-    
+
     bool hasError() const {
         return (0 < errorCount());
     }
-    
+
     virtual ~Parser();
 
 private:

@@ -48,8 +48,9 @@ TPCMemberVariableDeclaration MemberVariableDeclaration::parse(Parser& parser) {
             isStatic = true;
         }
     }
-    auto simpl = SimpleTypeSpecifier::parse(parser);
-    auto varOrAttrName = VarOrAttrName::parse(parser);
+    TPCSimpleTypeSpecifier typeSpec = nullptr;
+    TPCVarOrAttrName varOrAttrName = nullptr;
+    simpleTypeVarName(parser, typeSpec, varOrAttrName);
     if (varOrAttrName) {
         TPCInitializerClause init = nullptr;
         start = parser.getMark();
@@ -61,7 +62,7 @@ TPCMemberVariableDeclaration MemberVariableDeclaration::parse(Parser& parser) {
         }
         return new MemberVariableDeclaration(
                 access, mutability, isStatic,
-                simpl, varOrAttrName, init);
+                typeSpec, varOrAttrName, init);
     }
     parser.setMark(start);
     return nullptr;

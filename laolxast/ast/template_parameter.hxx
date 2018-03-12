@@ -32,14 +32,16 @@
 
 #include "ast/common.hxx"
 
-
 class TemplateParameter : public virtual AstNode {
 public:
-	static TPCTemplateParameter parse(Parser& parser);
+    static TPCTemplateParameter parse(Parser& parser);
 
-	explicit TemplateParameter();
+    explicit TemplateParameter(const TRcToken& ident, const TPCInitializerClause initializer = nullptr);
 
-	virtual ~TemplateParameter();
+    const TRcToken ident;
+    const TPCInitializerClause initializer;
+
+    virtual ~TemplateParameter();
 };
 
 #endif /* TEMPLATE_PARAMETER_HXX */

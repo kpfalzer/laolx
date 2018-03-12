@@ -28,13 +28,30 @@
  * Created on Fri Nov 17 12:48:41 2017
  */
 #include "ast/template_parameter_list.hxx"
+#include "ast/template_parameter.hxx"
 
 TPCTemplateParameterList TemplateParameterList::parse(Parser& parser) {
-	TPCTemplateParameterList result = nullptr;
-	//todo
-	return result;
+    /*
+     TemplateParameterList:
+     S_LT TemplateParameter (COMMA TemplateParameter)* S_GT
+     */
+    if (Token::S_LT != parser.peek()->code) {
+        return nullptr;
+    }
+    const auto start = parser.getMark();
+    const auto params = oneOrMore<TemplateParameter>(parser.advance(1), Token::S_COMMA);
+    if (params && (Token::S_GT == parser.accept()->code)) {
+        return new TemplateParameterList(params);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
-TemplateParameterList::TemplateParameterList() {}
+TemplateParameterList::TemplateParameterList(const laolx::Array<TPCTemplateParameter>* params) 
+: parameters(params) {
 
-TemplateParameterList::~TemplateParameterList() {}
+}
+
+TemplateParameterList::~TemplateParameterList() {
+    delete parameters;
+}

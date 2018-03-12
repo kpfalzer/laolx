@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kwpfalzer.
+ * Copyright 2018 kwpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,39 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/* 
- * File:   template_parameter.cxx
- * Author: kpfalzer
- *
- * Created on Fri Nov 17 12:48:41 2017
- */
-#include "ast/template_parameter.hxx"
-#include "ast/initializer_clause.hxx"
 
-TPCTemplateParameter TemplateParameter::parse(Parser& parser) {
-    //todo: initializer can also be type-id (not just expression!)
-    //TemplateParameter: IDENT (S_EQ InitializerClause)?
-    if (Token::IDENT != parser.peek()->code) {
-        return nullptr;
+#include "ast/common.hxx"
+#include "ast/simple_type_specifier.hxx"
+#include "ast/var_or_attr_name.hxx"
+
+void simpleTypeVarName(Parser& parser, TPCSimpleTypeSpecifier& typeSpec, TPCVarOrAttrName& varOrAttrName) {
+    auto start = parser.getMark();
+    typeSpec = SimpleTypeSpecifier::parse(parser);
+    varOrAttrName = VarOrAttrName::parse(parser);
+    // case where typeSpec matches and varName did not.  We require a varName
+    if (typeSpec && !varOrAttrName) {
+        typeSpec = nullptr;
+        parser.setMark(start);
+        varOrAttrName = VarOrAttrName::parse(parser);
     }
-    const auto ident = parser.accept();
-    if (Token::S_EQ != parser.peek()->code) {
-        return new TemplateParameter(ident);
-    }
-    const auto start = parser.getMark();
-    const auto initializer = InitializerClause::parse(parser.advance(1));
-    if (initializer) {
-        return new TemplateParameter(ident, initializer);
-    }
-    parser.setMark(start);
-    return nullptr;
 }
 
-TemplateParameter::TemplateParameter(const TRcToken& ident, const TPCInitializerClause initializer) 
-: ident(ident), initializer(initializer) {
-
-}
-
-TemplateParameter::~TemplateParameter() {
-    delete initializer;
-}

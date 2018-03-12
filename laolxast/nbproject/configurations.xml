@@ -103,6 +103,7 @@
       <itemPath>ast/case_statement.cxx</itemPath>
       <itemPath>ast/class_body.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
+      <itemPath>ast/common.cxx</itemPath>
       <itemPath>ast/compound_statement.cxx</itemPath>
       <itemPath>ast/condition.cxx</itemPath>
       <itemPath>ast/conditional_expression.cxx</itemPath>
@@ -277,6 +278,8 @@
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/common.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>
@@ -666,6 +669,8 @@
       <item path="ast/class_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_declaration.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/common.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/common.hxx" ex="false" tool="3" flavor2="0">
       </item>

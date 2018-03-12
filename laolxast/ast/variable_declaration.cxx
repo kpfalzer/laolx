@@ -37,9 +37,10 @@ TPCVariableDeclaration VariableDeclaration::parse(Parser& parser) {
         parser.accept();
         isStatic = true;
     }
-    auto typeSpec = SimpleTypeSpecifier::parse(parser);
-    auto varName = VarOrAttrName::parse(parser);
-    if (varName) {
+    TPCSimpleTypeSpecifier typeSpec = nullptr;
+    TPCVarOrAttrName varOrAttrName = nullptr;
+    simpleTypeVarName(parser, typeSpec, varOrAttrName);
+    if (varOrAttrName) {
         TPCInitializerClause initClause = nullptr;
         start = parser.getMark();
         if (Token::S_EQ == parser.peek()->code) {
@@ -48,7 +49,7 @@ TPCVariableDeclaration VariableDeclaration::parse(Parser& parser) {
                 parser.setMark(start);
             }
         }
-        return new VariableDeclaration(mutability, isStatic, typeSpec, varName, initClause);
+        return new VariableDeclaration(mutability, isStatic, typeSpec, varOrAttrName, initClause);
     }
     parser.setMark(start);
     return nullptr;
