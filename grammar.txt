@@ -52,7 +52,7 @@ ClassDeclaration:
 TemplateParameterList:
 	S_LT TemplateParameter (COMMA TemplateParameter)* S_GT
 
-TemplateParameter: IDENT (S_EQ InitializerClause)?
+TemplateParameter: IDENT (S_EQ TemplateArgument)?
 
 MethodParametersDeclaration:
 	S_LPAREN MethodParameterList? S_RPAREN

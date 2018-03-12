@@ -36,10 +36,10 @@ class TemplateParameter : public virtual AstNode {
 public:
     static TPCTemplateParameter parse(Parser& parser);
 
-    explicit TemplateParameter(const TRcToken& ident, const TPCInitializerClause initializer = nullptr);
+    explicit TemplateParameter(const TRcToken& ident, const TPCTemplateArgument initializer = nullptr);
 
     const TRcToken ident;
-    const TPCInitializerClause initializer;
+    const TPCTemplateArgument initializer;
 
     virtual ~TemplateParameter();
 };

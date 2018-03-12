@@ -28,11 +28,10 @@
  * Created on Fri Nov 17 12:48:41 2017
  */
 #include "ast/template_parameter.hxx"
-#include "ast/initializer_clause.hxx"
+#include "ast/template_argument.hxx"
 
 TPCTemplateParameter TemplateParameter::parse(Parser& parser) {
-    //todo: initializer can also be type-id (not just expression!)
-    //TemplateParameter: IDENT (S_EQ InitializerClause)?
+    //TemplateParameter: IDENT (S_EQ TemplateArgument)?
     if (Token::IDENT != parser.peek()->code) {
         return nullptr;
     }
@@ -41,7 +40,7 @@ TPCTemplateParameter TemplateParameter::parse(Parser& parser) {
         return new TemplateParameter(ident);
     }
     const auto start = parser.getMark();
-    const auto initializer = InitializerClause::parse(parser.advance(1));
+    const auto initializer = TemplateArgument::parse(parser.advance(1));
     if (initializer) {
         return new TemplateParameter(ident, initializer);
     }
@@ -49,7 +48,7 @@ TPCTemplateParameter TemplateParameter::parse(Parser& parser) {
     return nullptr;
 }
 
-TemplateParameter::TemplateParameter(const TRcToken& ident, const TPCInitializerClause initializer) 
+TemplateParameter::TemplateParameter(const TRcToken& ident, const TPCTemplateArgument initializer) 
 : ident(ident), initializer(initializer) {
 
 }
