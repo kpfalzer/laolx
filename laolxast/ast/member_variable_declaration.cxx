@@ -60,6 +60,7 @@ TPCMemberVariableDeclaration MemberVariableDeclaration::parse(Parser& parser) {
                 parser.setMark(start);
             }
         }
+        parser.expectEndOfStatement();
         return new MemberVariableDeclaration(
                 access, mutability, isStatic,
                 typeSpec, varOrAttrName, init);

@@ -94,6 +94,12 @@ public:
     bool expectEndOfStatement();
 
     /**
+     * Check for isEOF() and return true if so.
+     * Else, geenrate error at current token and return false.
+     */
+    bool expectEOF();
+    
+    /**
      * Generate error message using text and location from token.
      * @param message message/format specifier with %s for text (from token).
      * @param token extract text and location for message.

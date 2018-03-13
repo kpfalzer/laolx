@@ -40,6 +40,7 @@ TPCLambdaExpression LambdaExpression::parse(Parser& parser) {
                 auto body = MethodBody::parse(parser);
                 if (body) {
                     if (Token::S_RCURLY == parser.accept()->code) {
+                        parser.expectEndOfStatement();
                         return new LambdaExpression(name, mpd, ret, body);
                     }
                 }

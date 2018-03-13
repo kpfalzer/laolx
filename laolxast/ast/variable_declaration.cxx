@@ -49,6 +49,7 @@ TPCVariableDeclaration VariableDeclaration::parse(Parser& parser) {
                 parser.setMark(start);
             }
         }
+        parser.expectEndOfStatement();
         return new VariableDeclaration(mutability, isStatic, typeSpec, varOrAttrName, initClause);
     }
     parser.setMark(start);

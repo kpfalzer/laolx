@@ -64,7 +64,7 @@ void test3() {
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(sourceFile);
-    assert(parser.isEOF());
+    assert(parser.expectEOF());
 }
 
 void test4() {
@@ -73,7 +73,7 @@ void test4() {
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(sourceFile);
-    assert(parser.isEOF());
+    assert(parser.expectEOF());
 }
 
 int main(int argc, char** argv) {

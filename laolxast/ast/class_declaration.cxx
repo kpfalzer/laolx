@@ -40,6 +40,7 @@ TPCClassDeclaration ClassDeclaration::parse(Parser& parser) {
         auto classBody = ClassBody::parse(parser);
         ok &= (Token::S_RCURLY == parser.accept()->code);
         if (ok) {
+            parser.expectEndOfStatement();
             return new ClassDeclaration(
                     className,
                     templParams,

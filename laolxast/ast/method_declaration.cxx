@@ -86,6 +86,7 @@ TPCMethodDeclaration MethodDeclaration::parse(Parser& parser) {
         }
         assert(Token::S_RCURLY == parser.accept()->code);
     }
+    parser.expectEndOfStatement();
     return new MethodDeclaration(access, mutability, typeNode, methodParamDecl, returnSpecifier, methodBody);
 }
 

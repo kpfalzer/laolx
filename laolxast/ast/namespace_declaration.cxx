@@ -48,6 +48,7 @@ TPCNamespaceDeclaration NamespaceDeclaration::parse(Parser& parser) {
             }
             if (parser.accept()->code == Token::S_RCURLY) {
                 decls->compact();
+                parser.expectEndOfStatement();
                 return new NamespaceDeclaration(name, decls);
             }
         }

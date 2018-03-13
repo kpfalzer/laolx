@@ -36,6 +36,7 @@ TPCTypedefDeclaration TypedefDeclaration::parse(Parser& parser) {
     auto start = parser.getMark();
     auto actual = SimpleTypeSpecifier::parse(parser.advance());
     if (actual && (Token::IDENT == parser.peek()->code)) {
+        parser.expectEndOfStatement();
         return new TypedefDeclaration(actual, parser.accept());
     }
     parser.setMark(start);

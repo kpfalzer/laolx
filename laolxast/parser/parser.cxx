@@ -132,6 +132,13 @@ bool Parser::expectEndOfStatement() {
     return ok;
 }
 
+bool Parser::expectEOF() {
+    if (isEOF()) {return true;}
+    static const std::string FMT = "Expected EOF.  Found '%s'.";
+    error(FMT, peek());
+    return false;
+}
+
 void Parser::error(const std::string& message, const TRcToken& token) {
     const std::string location = token->location.toString();
     const std::string format = "%s: " + message;

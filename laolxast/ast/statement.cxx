@@ -56,7 +56,11 @@ TPCStatement Statement::parse(Parser& parser) {
             }
         }
     }
-    return (node) ? new Statement(node) : nullptr;
+    if (node) {
+        parser.expectEndOfStatement();
+        return new Statement(node);
+    }
+    return nullptr;
 }
 
 Statement::~Statement() {
