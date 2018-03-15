@@ -33,7 +33,9 @@ laolx::String Location::toString() const {
     return loc;
 }
 
-const laolx::String Token::EMPTY = "";
+const /*static*/ laolx::String Token::EMPTY = "";
+const static Location NO_LOCATION(Token::EMPTY, 0, 0);
+const /*static*/ TRcToken Token::INVALID_TOKEN(new Token(NO_LOCATION, Token::INVALID, Token::EMPTY));
 
 const Token::CodeByString Token::stKeywords({
     // K_xxx are keywords
@@ -42,6 +44,7 @@ const Token::CodeByString Token::stKeywords({
     {"break", Token::K_BREAK},
     {"case", Token::K_CASE},
     {"catch", Token::K_CATCH},
+    {"char", Token::K_CHAR},
     {"class", Token::K_CLASS},
     {"const", Token::K_CONST},
     {"continue", Token::K_CONTINUE},

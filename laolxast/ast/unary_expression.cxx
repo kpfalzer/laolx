@@ -40,7 +40,7 @@ TPCUnaryExpression UnaryExpression::parse(Parser& parser) {
     {
         const auto preop = parser.peek();
         const auto code = preop->code;
-        if (Token::S_PLUS2 == code || Token::S_MINUS2) {
+        if (Token::S_PLUS2 == code || Token::S_MINUS2 == code) {
             auto uexpr = UnaryExpression::parse(parser.advance());
             if (uexpr) {
                 return new UnaryExpression(preop, uexpr);

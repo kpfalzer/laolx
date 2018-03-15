@@ -70,6 +70,7 @@ public:
 class Token : public AstNode {
 public:
     static const laolx::String EMPTY;
+    static const TRcToken INVALID_TOKEN;
 
     enum Code {
         INVALID,
@@ -96,6 +97,7 @@ public:
         K_BREAK,
         K_CASE,
         K_CATCH,
+        K_CHAR,
         K_CLASS,
         K_CONST,
         K_CONTINUE,

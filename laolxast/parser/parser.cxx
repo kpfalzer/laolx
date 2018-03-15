@@ -62,8 +62,8 @@ void Parser::initialize(laolx::LineReader& input) {
 }
 
 const TRcToken& Parser::peek(index_type offset) const {
-    assert(!isEmpty());
-    return m_tokens[m_pos + offset];
+    const auto actual = m_pos + offset;
+    return m_tokens.is_valid_index(actual) ? m_tokens[actual] : Token::INVALID_TOKEN;
 }
 
 TRcToken Parser::accept(index_type n) {

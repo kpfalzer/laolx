@@ -29,12 +29,12 @@
  */
 #include "ast/template_argument.hxx"
 #include "ast/constant_expression.hxx"
-#include "ast/id_expression.hxx"
+#include "ast/simple_type_specifier.hxx"
 
 TPCTemplateArgument TemplateArgument::parse(Parser& parser) {
     TPCAstNode node = ConstantExpression::parse(parser);
     if (!node) {
-        node = IdExpression::parse(parser);
+        node = SimpleTypeSpecifier::parse(parser);
     }
     return (node) ? new TemplateArgument(node) : nullptr;
 }

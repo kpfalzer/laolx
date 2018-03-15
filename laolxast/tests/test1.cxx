@@ -68,7 +68,11 @@ void test3() {
 }
 
 void test4() {
-    static const std::string TEST4 = "const X = 12 + 3";
+    static const std::string TEST4 = \
+    "const X = 12 + 3\n" \
+    "Array<int> foo"
+    ;
+
     laolx::StringInputStream sis(TEST4);
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);

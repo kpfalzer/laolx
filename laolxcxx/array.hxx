@@ -77,6 +77,10 @@ namespace laolx {
             return m_array.at(actual_index(index));
         }
 
+        bool is_valid_index(index_type index) const {
+            return actual_index(index) < length();
+        }
+        
         reference first() {
             return operator[](0);
         }

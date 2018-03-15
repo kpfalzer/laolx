@@ -195,11 +195,16 @@ Symbols: S_SYMBOLS IDENT* S_RCURLY
 
 ExpressionList: InitializerList
 
-SimpleTypeSpecifier:
+SimpleTypeSpecifier: SimpleTypeSpecifierX ArraySpecifier*
+
+SimpleTypeSpecifierX:
 	NestedNameSpecifier? Name
 |	K_INT
 |	K_FLOAT
 |	K_STRING
+|	K_CHAR
+
+ArraySpecifier: S_LBRACK S_RBRACK
 
 IdExpression:
 	UnqualifiedId
@@ -234,7 +239,7 @@ TemplateArgumentList:
 	
 TemplateArgument:
 	ConstantExpression
-|	IdExpression
+|	SimpleTypeSpecifier
 
 OperatorFunctionId:
 	K_OPERATOR OverloadableOperator
