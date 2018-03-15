@@ -29,32 +29,62 @@
  */
 #include "ast/simple_type_specifier.hxx"
 
-TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
+SimpleTypeSpecifier::TPCX SimpleTypeSpecifier::X::parse(Parser& parser) {
     auto start = parser.getMark();
     auto const code = parser.peek()->code;
     switch (code) {
         case Token::K_INT:
         case Token::K_FLOAT:
         case Token::K_STRING:
-            return new SimpleTypeSpecifier(parser.accept());
+        case Token::K_CHAR:
+            return new X(parser.accept());
         default:
-            ;//do nothing
+            ; //do nothing
     }
     auto spec = NestedNameSpecifier::parse(parser);
     auto type = Name::parse(parser);
     if (type) {
-        return new SimpleTypeSpecifier(spec, type);
+        return new X(spec, type);
     }
     parser.setMark(start);
     return nullptr;
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(const TRcToken& token) 
+SimpleTypeSpecifier::X::X(const TRcToken& token)
 : nodes({new Token(*token), nullptr}) {
 }
 
-SimpleTypeSpecifier::SimpleTypeSpecifier(TPCNestedNameSpecifier spec, TPCName type) 
+SimpleTypeSpecifier::X::X(TPCNestedNameSpecifier spec, TPCName type)
 : nodes({spec, type}) {
 }
 
-SimpleTypeSpecifier::~SimpleTypeSpecifier() {}
+SimpleTypeSpecifier::X::~X() {
+}
+
+SimpleTypeSpecifier::SimpleTypeSpecifier(const TPCX simpleType, const ArraySpecifiers* arraySpecs)
+: simpleType(simpleType), arraySpecs(arraySpecs) {
+}
+
+TPCSimpleTypeSpecifier SimpleTypeSpecifier::parse(Parser& parser) {
+    const auto simpleType = X::parse(parser);
+    if (!simpleType) return nullptr;
+    ArraySpecifiers* arraySpecs = nullptr;
+    while (parser.hasMore()) {
+        auto arraySpec = ArraySpecifier::parse(parser);
+        if (arraySpec) {
+            if (!arraySpecs) {
+                arraySpecs = new ArraySpecifiers();
+            }
+            *arraySpecs << arraySpec;
+        } else {
+            break; //while
+        }
+    }
+    return new SimpleTypeSpecifier(simpleType, arraySpecs);
+}
+
+SimpleTypeSpecifier::~SimpleTypeSpecifier() {
+    delete arraySpecs;
+}
+
+

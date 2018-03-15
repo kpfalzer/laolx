@@ -59,8 +59,8 @@ void test2() {
 }
 
 void test3() {
-    static const std::string TEST3 = "import p1.p2 as p2, p3";
-    laolx::StringInputStream sis(TEST3);
+    static const std::string TEST = "import p1.p2 as p2, p3";
+    laolx::StringInputStream sis(TEST);
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(sourceFile);
@@ -68,12 +68,24 @@ void test3() {
 }
 
 void test4() {
-    static const std::string TEST4 = \
+    static const std::string TEST = \
     "const X = 12 + 3\n" \
-    "Array<int> foo"
+    "Array<int> foo\n"
     ;
 
-    laolx::StringInputStream sis(TEST4);
+    laolx::StringInputStream sis(TEST);
+    Parser parser(sis);
+    TPCSourceFile sourceFile = SourceFile::parse(parser);
+    assert(sourceFile);
+    assert(parser.expectEOF());
+}
+
+void test5() {
+    static const std::string TEST = \
+    "someType[] x\n"
+    ;
+    
+    laolx::StringInputStream sis(TEST);
     Parser parser(sis);
     TPCSourceFile sourceFile = SourceFile::parse(parser);
     assert(sourceFile);
@@ -100,6 +112,10 @@ int main(int argc, char** argv) {
     test4();
     std::cout << "%TEST_FINISHED% test4 (parser_test)" << std::endl;
 
+    std::cout << "%TEST_STARTED% test5 (parser_test)" << std::endl;
+    test5();
+    std::cout << "%TEST_FINISHED% test5 (parser_test)" << std::endl;
+    
     std::cout << "%SUITE_FINISHED%" << std::endl;
 
     return (EXIT_SUCCESS);

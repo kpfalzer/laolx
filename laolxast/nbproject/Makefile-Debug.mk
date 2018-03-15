@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ast/access.o \
+	${OBJECTDIR}/ast/array_specifier.o \
 	${OBJECTDIR}/ast/assignment_expression.o \
 	${OBJECTDIR}/ast/base_clause.o \
 	${OBJECTDIR}/ast/base_initializer.o \
@@ -155,6 +156,11 @@ ${OBJECTDIR}/ast/access.o: ast/access.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access.o ast/access.cxx
+
+${OBJECTDIR}/ast/array_specifier.o: ast/array_specifier.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/array_specifier.o ast/array_specifier.cxx
 
 ${OBJECTDIR}/ast/assignment_expression.o: ast/assignment_expression.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -571,6 +577,19 @@ ${OBJECTDIR}/ast/access_nomain.o: ${OBJECTDIR}/ast/access.o ast/access.cxx
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/access_nomain.o ast/access.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/access.o ${OBJECTDIR}/ast/access_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/array_specifier_nomain.o: ${OBJECTDIR}/ast/array_specifier.o ast/array_specifier.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/array_specifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/array_specifier_nomain.o ast/array_specifier.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/array_specifier.o ${OBJECTDIR}/ast/array_specifier_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/assignment_expression_nomain.o: ${OBJECTDIR}/ast/assignment_expression.o ast/assignment_expression.cxx 

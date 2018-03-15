@@ -6,48 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/var_or_attr_name.cxx"
-            timestampString = "542578986.170669"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "VarOrAttrName::parse(Parser&amp; parser)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/unary_expression.cxx"
-            timestampString = "542762301.938292"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "UnaryExpression::parse(Parser&amp; parser)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../../laolxast/tests/test1.cxx"
-            timestampString = "542762301.938449"
+            timestampString = "542835157.371618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "test4()"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "test5()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../laolxast/ast/simple_type_specifier.cxx"
-            timestampString = "542818046.015556"
+            timestampString = "542835157.371852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "SimpleTypeSpecifier::parse(Parser&amp; parser)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/simple_template_id.cxx"
-            timestampString = "542817938.415383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "SimpleTemplateId::parse(Parser&amp; parser)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,14 +41,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/template_argument_list.cxx"
-            timestampString = "542817935.822238"
+            filePath = "../../laolxast/ast/common.cxx"
+            timestampString = "542835157.37204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "TemplateArgumentList::parse(Parser&amp; parser)"
-            landmarkType = "7">
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "simpleTypeVarName(Parser&amp; parser, TPCSimpleTypeSpecifier&amp; typeSpec, TPCVarOrAttrName&amp; varOrAttrName)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -105,14 +57,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/template_argument.cxx"
-            timestampString = "542818347.788991"
+            filePath = "../../laolxast/ast/common.cxx"
+            timestampString = "542835157.372208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "TemplateArgument::parse(Parser&amp; parser)"
-            landmarkType = "7">
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "simpleTypeVarName(Parser&amp; parser, TPCSimpleTypeSpecifier&amp; typeSpec, TPCVarOrAttrName&amp; varOrAttrName)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

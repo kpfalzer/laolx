@@ -22,43 +22,24 @@
  * THE SOFTWARE.
  */
 /* 
- * File:   simple_type_specifier.hxx
+ * File:   array_specifier.cxx
  * Author: kwpfalzer
  *
- * Created on Mon Oct 23 17:41:53 2017
+ * Created on Thu Mar 15 10:09:16 2018
  */
-#ifndef SIMPLE_TYPE_SPECIFIER_HXX
-#define SIMPLE_TYPE_SPECIFIER_HXX
+#include "ast/array_specifier.hxx"
 
-#include <array>
-#include "ast/common.hxx"
-#include "ast/nested_name_specifier.hxx"
-#include "ast/name.hxx"
-#include "array_specifier.hxx"
+TPCArraySpecifier ArraySpecifier::parse(Parser& parser) {
+    if ((Token::S_LBRACK == parser.peek()->code)
+            && (Token::S_RBRACK == parser.peek(1)->code)) {
+        parser.advance(2);
+        return new ArraySpecifier();
+    }
+    return nullptr;
+}
 
-class SimpleTypeSpecifier : public virtual AstNode {
-public:
-    class X;
-    typedef const X* TPCX;
-    typedef laolx::Array<TPCArraySpecifier> ArraySpecifiers;
+ArraySpecifier::ArraySpecifier() {
+}
 
-    static TPCSimpleTypeSpecifier parse(Parser& parser);
-
-    explicit SimpleTypeSpecifier(const TPCX simpleType, const ArraySpecifiers* arraySpecs);
-
-    const TPCX simpleType;
-    const ArraySpecifiers* arraySpecs;
-
-    virtual ~SimpleTypeSpecifier();
-
-    class X {
-    public:
-        static TPCX parse(Parser& parser);
-        explicit X(const TRcToken& token);
-        explicit X(TPCNestedNameSpecifier spec, TPCName type);
-        const std::array<TPCAstNode, 2> nodes;
-        virtual ~X();
-    };
-};
-
-#endif /* SIMPLE_TYPE_SPECIFIER_HXX */
+ArraySpecifier::~ArraySpecifier() {
+}

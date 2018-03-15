@@ -162,6 +162,8 @@
 		170E0446202A735800FC40B0 /* lexer.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 170E043E202A735800FC40B0 /* lexer.cxx */; };
 		170E0447202A735800FC40B0 /* token.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 170E043F202A735800FC40B0 /* token.cxx */; };
 		170E0448202A735800FC40B0 /* lexer.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 170E0440202A735800FC40B0 /* lexer.hxx */; };
+		178A1C5E205AE792000CBC9B /* array_specifier.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 178A1C5B205AE791000CBC9B /* array_specifier.hxx */; };
+		178A1C5F205AE792000CBC9B /* array_specifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178A1C5D205AE791000CBC9B /* array_specifier.cxx */; };
 		17C811BD2057409500E82897 /* common.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C811BB2057409500E82897 /* common.cxx */; };
 /* End PBXBuildFile section */
 
@@ -331,6 +333,8 @@
 		170E043E202A735800FC40B0 /* lexer.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lexer.cxx; path = ../../../laolxast/parser/lexer.cxx; sourceTree = "<group>"; };
 		170E043F202A735800FC40B0 /* token.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = token.cxx; path = ../../../laolxast/parser/token.cxx; sourceTree = "<group>"; };
 		170E0440202A735800FC40B0 /* lexer.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lexer.hxx; path = ../../../laolxast/parser/lexer.hxx; sourceTree = "<group>"; };
+		178A1C5B205AE791000CBC9B /* array_specifier.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = array_specifier.hxx; path = ../../../laolxast/ast/array_specifier.hxx; sourceTree = "<group>"; };
+		178A1C5D205AE791000CBC9B /* array_specifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = array_specifier.cxx; path = ../../../laolxast/ast/array_specifier.cxx; sourceTree = "<group>"; };
 		17B0B373202A4EEC00117CF0 /* test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = test.xcodeproj; path = test/test.xcodeproj; sourceTree = "<group>"; };
 		17C811BB2057409500E82897 /* common.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cxx; path = ../../../laolxast/ast/common.cxx; sourceTree = "<group>"; };
 		F43465171FCDF86900F7D867 /* liblaolxast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblaolxast.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +354,8 @@
 		170E030E202A72E400FC40B0 /* ast */ = {
 			isa = PBXGroup;
 			children = (
+				178A1C5D205AE791000CBC9B /* array_specifier.cxx */,
+				178A1C5B205AE791000CBC9B /* array_specifier.hxx */,
 				17C811BB2057409500E82897 /* common.cxx */,
 				170E0383202A733200FC40B0 /* access.cxx */,
 				170E0351202A732A00FC40B0 /* access.hxx */,
@@ -597,6 +603,7 @@
 				170E0407202A733400FC40B0 /* member_variable_declaration.hxx in Headers */,
 				170E040A202A733400FC40B0 /* literal.hxx in Headers */,
 				170E0409202A733400FC40B0 /* string.hxx in Headers */,
+				178A1C5E205AE792000CBC9B /* array_specifier.hxx in Headers */,
 				170E03A8202A733400FC40B0 /* namespace_declaration.hxx in Headers */,
 				170E03E8202A733400FC40B0 /* method_parameters_declaration.hxx in Headers */,
 				170E03DF202A733400FC40B0 /* base_type_specifier.hxx in Headers */,
@@ -731,6 +738,7 @@
 				170E03F1202A733400FC40B0 /* binary_op.cxx in Sources */,
 				170E040B202A733400FC40B0 /* base_specifier_list.cxx in Sources */,
 				170E03BF202A733400FC40B0 /* linkage.cxx in Sources */,
+				178A1C5F205AE792000CBC9B /* array_specifier.cxx in Sources */,
 				170E03C3202A733400FC40B0 /* lambda_expression.cxx in Sources */,
 				170E0419202A733400FC40B0 /* condition.cxx in Sources */,
 				170E042A202A733400FC40B0 /* initializer_clause.cxx in Sources */,

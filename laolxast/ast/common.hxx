@@ -39,6 +39,8 @@
 
 class Access;
 typedef const Access* TPCAccess;
+class ArraySpecifier;
+typedef const ArraySpecifier* TPCArraySpecifier;
 class AssignmentExpression;
 typedef const AssignmentExpression* TPCAssignmentExpression;
 class BaseClause;
@@ -220,7 +222,7 @@ template<class C, typename T = const C*>
 laolx::Array<T>*
 zeroOrMore(Parser& parser, const Token::Code delimiter) {
     auto items = oneOrMore<C,T>(parser, delimiter);
-    return items ? items : new laolx::Array<T>();
+    return items ? items : nullptr; //new laolx::Array<T>();
 }
 
 /**
