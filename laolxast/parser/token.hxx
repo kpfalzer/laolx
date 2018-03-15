@@ -218,6 +218,14 @@ public:
      */
     static bool isKeyword(const laolx::String& text, Code& code);
 
+    bool isInvalid() const {
+        return code == INVALID;
+    }
+    
+    bool isValid() const {
+        return !isInvalid();
+    }
+
     const Location location;
     const Code code;
     const laolx::String text;

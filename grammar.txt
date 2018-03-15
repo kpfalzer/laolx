@@ -237,9 +237,13 @@ TemplateId:
 TemplateArgumentList:
 	TemplateArgument (S_COMMA TemplateArgument)*
 	
+// NOTE: While syntax is a bit loose: semantics require all named/bound
+//       or all positional; cannot mix these.
 TemplateArgument:
-	ConstantExpression
-|	SimpleTypeSpecifier
+	(IDENT S_COLON)?
+		(	ConstantExpression
+		|	SimpleTypeSpecifier
+		)
 
 OperatorFunctionId:
 	K_OPERATOR OverloadableOperator

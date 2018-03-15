@@ -32,11 +32,25 @@
 #include "ast/simple_type_specifier.hxx"
 
 TPCTemplateArgument TemplateArgument::parse(Parser& parser) {
+    const auto start = parser.getMark();
+    TRcToken bindId = Token::INVALID_TOKEN;
+    if ((Token::IDENT == parser.peek()->code)
+            && (Token::S_COLON == parser.peek(1)->code)) {
+        bindId = parser.peek();
+        parser.advance(2);
+    }
     TPCAstNode node = ConstantExpression::parse(parser);
     if (!node) {
         node = SimpleTypeSpecifier::parse(parser);
     }
-    return (node) ? new TemplateArgument(node) : nullptr;
+    if (node) {
+        return (bindId->isValid())
+                ? new TemplateArgument(bindId, node)
+                : new TemplateArgument(node)
+                ;
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
 TemplateArgument::~TemplateArgument() {

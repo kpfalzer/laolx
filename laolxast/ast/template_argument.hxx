@@ -32,16 +32,20 @@
 
 #include "ast/common.hxx"
 
-
 class TemplateArgument : public virtual AstNode {
 public:
     static TPCTemplateArgument parse(Parser& parser);
 
-    explicit TemplateArgument(TPCAstNode node) : node(node)
-    {}
+    explicit TemplateArgument(const TRcToken& bindId, TPCAstNode node) 
+    : bindId(bindId), node(node) {
+    }
 
+    explicit TemplateArgument(TPCAstNode node) : node(node) {
+    }
+
+    const TRcToken bindId;
     const TPCAstNode node;
-    
+
     virtual ~TemplateArgument();
 };
 
