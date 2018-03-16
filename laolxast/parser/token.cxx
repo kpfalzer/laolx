@@ -41,6 +41,7 @@ const Token::CodeByString Token::stKeywords({
     // K_xxx are keywords
     {"as", Token::K_AS},
     {"assert", Token::K_ASSERT},
+    {"bool", Token::K_BOOL},
     {"break", Token::K_BREAK},
     {"case", Token::K_CASE},
     {"catch", Token::K_CATCH},
@@ -159,10 +160,11 @@ bool Token::init() {
     });
     //sort by descending length
     stSymbolsByChar.each([](const SymbolsByChar::value_type & kv) {
-        auto vals = const_cast<SymbolsByChar::mapped_type&> (kv.second);
+        auto vals = kv.second;
         vals.sort([](auto& a, auto& b) {
             return a.first.length() > b.first.length();
         });
+        stSymbolsByChar[kv.first] = vals;
     });
     return true;
 }

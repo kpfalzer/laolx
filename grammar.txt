@@ -203,6 +203,8 @@ SimpleTypeSpecifierX:
 |	K_FLOAT
 |	K_STRING
 |	K_CHAR
+|	K_BOOL
+|	K_SYMBOL
 
 ArraySpecifier: S_LBRACK S_RBRACK
 

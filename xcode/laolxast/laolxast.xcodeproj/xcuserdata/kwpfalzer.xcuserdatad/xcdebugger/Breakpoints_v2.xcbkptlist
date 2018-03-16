@@ -6,32 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../laolxast/tests/test1.cxx"
-            timestampString = "542835157.371618"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "test5()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/simple_type_specifier.cxx"
-            timestampString = "542835157.371852"
+            filePath = "../../laolxast/parser/token.cxx"
+            timestampString = "542863344.29741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "SimpleTypeSpecifier::parse(Parser&amp; parser)"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "Token::init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,14 +25,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/common.cxx"
-            timestampString = "542835157.37204"
+            filePath = "../../laolxast/parser/token.cxx"
+            timestampString = "542863344.297707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "simpleTypeVarName(Parser&amp; parser, TPCSimpleTypeSpecifier&amp; typeSpec, TPCVarOrAttrName&amp; varOrAttrName)"
-            landmarkType = "9">
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "Token::init()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,14 +41,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../laolxast/ast/common.cxx"
-            timestampString = "542835157.372208"
+            filePath = "../../laolxast/tests/test1.cxx"
+            timestampString = "542863101.925388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "simpleTypeVarName(Parser&amp; parser, TPCSimpleTypeSpecifier&amp; typeSpec, TPCVarOrAttrName&amp; varOrAttrName)"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "test6()"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../laolxast/ast/method_declaration.cxx"
+            timestampString = "542862754.7248729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "MethodDeclaration::parse(Parser&amp; parser)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../laolxast/ast/method_declaration.cxx"
+            timestampString = "542863198.663618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "MethodDeclaration::parse(Parser&amp; parser)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

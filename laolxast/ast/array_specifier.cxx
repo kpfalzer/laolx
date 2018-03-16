@@ -30,9 +30,8 @@
 #include "ast/array_specifier.hxx"
 
 TPCArraySpecifier ArraySpecifier::parse(Parser& parser) {
-    if ((Token::S_LBRACK == parser.peek()->code)
-            && (Token::S_RBRACK == parser.peek(1)->code)) {
-        parser.advance(2);
+    if (Token::S_SUBSCRIPT == parser.peek()->code) {
+        parser.advance(1);
         return new ArraySpecifier();
     }
     return nullptr;

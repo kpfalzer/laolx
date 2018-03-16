@@ -33,8 +33,13 @@ TPCReturnSpecifier ReturnSpecifier::parse(Parser& parser) {
     if (Token::S_EQGT != parser.peek()->code) {
         return nullptr;
     }
-    auto specifier = SimpleTypeSpecifier::parse(parser);
-    return (specifier) ? new ReturnSpecifier(specifier) : nullptr;
+    const auto start = parser.getMark();
+    auto specifier = SimpleTypeSpecifier::parse(parser.advance(1));
+    if (specifier) {
+        return new ReturnSpecifier(specifier);
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
 ReturnSpecifier::~ReturnSpecifier() {

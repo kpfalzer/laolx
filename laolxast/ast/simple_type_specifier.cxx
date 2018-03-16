@@ -37,6 +37,8 @@ SimpleTypeSpecifier::TPCX SimpleTypeSpecifier::X::parse(Parser& parser) {
         case Token::K_FLOAT:
         case Token::K_STRING:
         case Token::K_CHAR:
+        case Token::K_BOOL:
+        case Token::K_SYMBOL:
             return new X(parser.accept());
         default:
             ; //do nothing

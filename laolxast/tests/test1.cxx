@@ -92,6 +92,14 @@ void test5() {
     assert(parser.expectEOF());
 }
 
+void test6() {
+    laolx::FileInputStream fis("/Users/kwpfalzer/projects/laolx/lib/dbase.lx");
+    Parser parser(fis);
+    TPCSourceFile sourceFile = SourceFile::parse(parser);
+    assert(sourceFile);
+    assert(parser.expectEOF());
+}
+
 int main(int argc, char** argv) {
     std::cout << "%SUITE_STARTING% parser_test" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
@@ -115,6 +123,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% test5 (parser_test)" << std::endl;
     test5();
     std::cout << "%TEST_FINISHED% test5 (parser_test)" << std::endl;
+    
+    std::cout << "%TEST_STARTED% test6 (parser_test)" << std::endl;
+    test6();
+    std::cout << "%TEST_FINISHED% test6 (parser_test)" << std::endl;
     
     std::cout << "%SUITE_FINISHED%" << std::endl;
 

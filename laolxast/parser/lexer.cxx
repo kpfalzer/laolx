@@ -319,6 +319,7 @@ TRcToken Lexer::symbolOrOther() {
 
 TRcToken Lexer::getSymbolStartingWith(char ch) {
     assert(Token::stSymbolsByChar.hasKey(ch));
+    const auto debug = Token::stSymbolsByChar[ch];
     for (const auto& symbolCode : Token::stSymbolsByChar[ch]) {
         if (matchTo(symbolCode.first)) {
             return getToken(symbolCode.second);

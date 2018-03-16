@@ -94,6 +94,7 @@ public:
         // K_xxx are keywords
         K_AS,
         K_ASSERT,
+        K_BOOL,
         K_BREAK,
         K_CASE,
         K_CATCH,

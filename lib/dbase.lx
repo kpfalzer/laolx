@@ -1,0 +1,8 @@
+namespace dbase {
+    class Credentials {}
+    class UserPassword(string @user, string @password) : Credentials {
+    }
+    class Dbase {
+        def connect(Credentials credentials) => bool
+    }
+}
