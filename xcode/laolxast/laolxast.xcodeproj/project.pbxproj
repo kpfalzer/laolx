@@ -165,6 +165,8 @@
 		178A1C5E205AE792000CBC9B /* array_specifier.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 178A1C5B205AE791000CBC9B /* array_specifier.hxx */; };
 		178A1C5F205AE792000CBC9B /* array_specifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 178A1C5D205AE791000CBC9B /* array_specifier.cxx */; };
 		17C811BD2057409500E82897 /* common.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17C811BB2057409500E82897 /* common.cxx */; };
+		17DA95E82061BCD400842460 /* interface_declaration.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 17DA95E52061BCD300842460 /* interface_declaration.cxx */; };
+		17DA95E92061BCD400842460 /* interface_declaration.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 17DA95E72061BCD400842460 /* interface_declaration.hxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +339,8 @@
 		178A1C5D205AE791000CBC9B /* array_specifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = array_specifier.cxx; path = ../../../laolxast/ast/array_specifier.cxx; sourceTree = "<group>"; };
 		17B0B373202A4EEC00117CF0 /* test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = test.xcodeproj; path = test/test.xcodeproj; sourceTree = "<group>"; };
 		17C811BB2057409500E82897 /* common.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cxx; path = ../../../laolxast/ast/common.cxx; sourceTree = "<group>"; };
+		17DA95E52061BCD300842460 /* interface_declaration.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interface_declaration.cxx; path = ../../../laolxast/ast/interface_declaration.cxx; sourceTree = "<group>"; };
+		17DA95E72061BCD400842460 /* interface_declaration.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = interface_declaration.hxx; path = ../../../laolxast/ast/interface_declaration.hxx; sourceTree = "<group>"; };
 		F43465171FCDF86900F7D867 /* liblaolxast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblaolxast.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -354,6 +358,8 @@
 		170E030E202A72E400FC40B0 /* ast */ = {
 			isa = PBXGroup;
 			children = (
+				17DA95E52061BCD300842460 /* interface_declaration.cxx */,
+				17DA95E72061BCD400842460 /* interface_declaration.hxx */,
 				178A1C5D205AE791000CBC9B /* array_specifier.cxx */,
 				178A1C5B205AE791000CBC9B /* array_specifier.hxx */,
 				17C811BB2057409500E82897 /* common.cxx */,
@@ -625,6 +631,7 @@
 				170E03ED202A733400FC40B0 /* var_or_attr_name.hxx in Headers */,
 				170E041B202A733400FC40B0 /* method_body_item.hxx in Headers */,
 				170E0445202A735800FC40B0 /* token.hxx in Headers */,
+				17DA95E92061BCD400842460 /* interface_declaration.hxx in Headers */,
 				170E03D1202A733400FC40B0 /* import_statement.hxx in Headers */,
 				170E03C5202A733400FC40B0 /* simple_template_id.hxx in Headers */,
 				170E03AF202A733400FC40B0 /* primary_expression.hxx in Headers */,
@@ -774,6 +781,7 @@
 				170E03E1202A733400FC40B0 /* braced_init_list.cxx in Sources */,
 				170E03EA202A733400FC40B0 /* import_specifier_list.cxx in Sources */,
 				170E03FB202A733400FC40B0 /* case_statement.cxx in Sources */,
+				17DA95E82061BCD400842460 /* interface_declaration.cxx in Sources */,
 				170E03F2202A733400FC40B0 /* bool.cxx in Sources */,
 				170E03B8202A733400FC40B0 /* method_parameters_declaration.cxx in Sources */,
 				170E042B202A733400FC40B0 /* class_declaration.cxx in Sources */,

@@ -24,6 +24,7 @@
 
 #include "ast/declaration.hxx"
 #include "ast/class_declaration.hxx"
+#include "ast/interface_declaration.hxx"
 #include "ast/variable_declaration.hxx"
 #include "ast/method_declaration.hxx"
 #include "ast/typedef_declaration.hxx"
@@ -38,9 +39,12 @@ TPCDeclaration Declaration::parse(Parser& parser) {
     auto linkage = Linkage::parse(parser);
     TPCAstNode actual = ClassDeclaration::parse(parser);
     if (!actual) {
+        actual = InterfaceDeclaration::parse(parser);
+        if (!actual) {
         actual = VariableDeclaration::parse(parser);
         if (!actual) {
             actual = MethodDeclaration::parse(parser);
+        }
         }
     }
     if (!actual && !linkage) {

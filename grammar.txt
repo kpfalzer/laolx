@@ -49,6 +49,11 @@ ClassDeclaration:
   		BaseClause?
   		LCURLY ClassBody? RCURLY
 
+InterfaceDeclaration:
+	K_INTERFACE IDENT TemplateParameterList?
+		//An interface cannot inherit
+  		LCURLY MethodDeclaration* RCURLY
+
 TemplateParameterList:
 	S_LT TemplateParameter (COMMA TemplateParameter)* S_GT
 

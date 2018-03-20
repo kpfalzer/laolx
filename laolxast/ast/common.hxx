@@ -103,6 +103,8 @@ class InitializerClause;
 typedef const InitializerClause* TPCInitializerClause;
 class InitializerList;
 typedef const InitializerList* TPCInitializerList;
+class InterfaceDeclaration;
+typedef const InterfaceDeclaration* TPCInterfaceDeclaration;
 class IterationStatement;
 typedef const IterationStatement* TPCIterationStatement;
 class JumpStatement;

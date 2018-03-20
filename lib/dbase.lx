@@ -1,8 +1,8 @@
 namespace dbase {
-    class Credentials {}
+    interface Credentials {}
     class UserPassword(string @user, string @password) : Credentials {
     }
-    class Dbase {
+    interface Dbase {
         def connect(Credentials credentials) => bool
     }
 }
