@@ -1,8 +1,14 @@
 namespace dbase {
     interface Credentials {}
+
     class UserPassword(string @user, string @password) : Credentials {
     }
+
     interface Dbase {
         def connect(Credentials credentials) => bool
     }
+
+	class MySql : Dbase {
+	}
+
 }

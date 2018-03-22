@@ -69,6 +69,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/import_statement.o \
 	${OBJECTDIR}/ast/initializer_clause.o \
 	${OBJECTDIR}/ast/initializer_list.o \
+	${OBJECTDIR}/ast/interface_declaration.o \
 	${OBJECTDIR}/ast/iteration_statement.o \
 	${OBJECTDIR}/ast/jump_statement.o \
 	${OBJECTDIR}/ast/lambda_expression.o \
@@ -321,6 +322,11 @@ ${OBJECTDIR}/ast/initializer_list.o: ast/initializer_list.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/initializer_list.o ast/initializer_list.cxx
+
+${OBJECTDIR}/ast/interface_declaration.o: ast/interface_declaration.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/interface_declaration.o ast/interface_declaration.cxx
 
 ${OBJECTDIR}/ast/iteration_statement.o: ast/iteration_statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -1006,6 +1012,19 @@ ${OBJECTDIR}/ast/initializer_list_nomain.o: ${OBJECTDIR}/ast/initializer_list.o 
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/initializer_list_nomain.o ast/initializer_list.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/initializer_list.o ${OBJECTDIR}/ast/initializer_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/interface_declaration_nomain.o: ${OBJECTDIR}/ast/interface_declaration.o ast/interface_declaration.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/interface_declaration.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/interface_declaration_nomain.o ast/interface_declaration.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/interface_declaration.o ${OBJECTDIR}/ast/interface_declaration_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/iteration_statement_nomain.o: ${OBJECTDIR}/ast/iteration_statement.o ast/iteration_statement.cxx 

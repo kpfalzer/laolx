@@ -290,6 +290,9 @@ Statement:
 |	JumpStatement
 |	IterationStatement
 |	ForStatement
+|	TryStatement
+|	CatchStatement
+|	FinallyStatement
 
 // Range based only 'for'
 ForStatement:

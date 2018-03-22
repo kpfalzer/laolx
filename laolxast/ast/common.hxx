@@ -37,6 +37,12 @@
 #include "parser/token.hxx"
 #include "parser/parser.hxx"
 
+class TryStatement;
+typedef const TryStatement* TPCTryStatement;
+class CatchStatement;
+typedef const CatchStatement* TPCCatchStatement;
+class FinallyStatement;
+typedef const FinallyStatement* TPCFinallyStatement;
 class Access;
 typedef const Access* TPCAccess;
 class ArraySpecifier;
