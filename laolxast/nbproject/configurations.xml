@@ -20,6 +20,7 @@
       <itemPath>ast/bool.hxx</itemPath>
       <itemPath>ast/braced_init_list.hxx</itemPath>
       <itemPath>ast/case_statement.hxx</itemPath>
+      <itemPath>ast/catch_statement.hxx</itemPath>
       <itemPath>ast/class_body.hxx</itemPath>
       <itemPath>ast/class_declaration.hxx</itemPath>
       <itemPath>ast/common.hxx</itemPath>
@@ -31,6 +32,7 @@
       <itemPath>ast/expression.hxx</itemPath>
       <itemPath>ast/expression_ele.hxx</itemPath>
       <itemPath>ast/expression_list.hxx</itemPath>
+      <itemPath>ast/finally_statement.hxx</itemPath>
       <itemPath>ast/for_statement.hxx</itemPath>
       <itemPath>ast/id_expression.hxx</itemPath>
       <itemPath>ast/if_statement.hxx</itemPath>
@@ -77,6 +79,7 @@
       <itemPath>ast/template_parameter.hxx</itemPath>
       <itemPath>ast/template_parameter_list.hxx</itemPath>
       <itemPath>parser/token.hxx</itemPath>
+      <itemPath>ast/try_statement.hxx</itemPath>
       <itemPath>ast/typedef_declaration.hxx</itemPath>
       <itemPath>ast/unary_expression.hxx</itemPath>
       <itemPath>ast/unary_operator.hxx</itemPath>
@@ -104,6 +107,7 @@
       <itemPath>ast/bool.cxx</itemPath>
       <itemPath>ast/braced_init_list.cxx</itemPath>
       <itemPath>ast/case_statement.cxx</itemPath>
+      <itemPath>ast/catch_statement.cxx</itemPath>
       <itemPath>ast/class_body.cxx</itemPath>
       <itemPath>ast/class_declaration.cxx</itemPath>
       <itemPath>ast/common.cxx</itemPath>
@@ -115,6 +119,7 @@
       <itemPath>ast/expression.cxx</itemPath>
       <itemPath>ast/expression_ele.cxx</itemPath>
       <itemPath>ast/expression_list.cxx</itemPath>
+      <itemPath>ast/finally_statement.cxx</itemPath>
       <itemPath>ast/for_statement.cxx</itemPath>
       <itemPath>ast/id_expression.cxx</itemPath>
       <itemPath>ast/if_statement.cxx</itemPath>
@@ -161,6 +166,7 @@
       <itemPath>ast/template_parameter.cxx</itemPath>
       <itemPath>ast/template_parameter_list.cxx</itemPath>
       <itemPath>parser/token.cxx</itemPath>
+      <itemPath>ast/try_statement.cxx</itemPath>
       <itemPath>ast/typedef_declaration.cxx</itemPath>
       <itemPath>ast/unary_expression.cxx</itemPath>
       <itemPath>ast/unary_operator.cxx</itemPath>
@@ -279,6 +285,10 @@
       </item>
       <item path="ast/case_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/catch_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/catch_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
@@ -322,6 +332,10 @@
       <item path="ast/expression_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/expression_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/finally_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/finally_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/for_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -506,6 +520,10 @@
       <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/try_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/try_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -678,6 +696,10 @@
       </item>
       <item path="ast/case_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ast/catch_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/catch_statement.hxx" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ast/class_body.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/class_body.hxx" ex="false" tool="3" flavor2="0">
@@ -721,6 +743,10 @@
       <item path="ast/expression_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/expression_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/finally_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/finally_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/for_statement.cxx" ex="false" tool="1" flavor2="0">
       </item>
@@ -905,6 +931,10 @@
       <item path="ast/template_parameter_list.cxx" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ast/template_parameter_list.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ast/try_statement.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ast/try_statement.hxx" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ast/typedef_declaration.cxx" ex="false" tool="1" flavor2="0">
       </item>

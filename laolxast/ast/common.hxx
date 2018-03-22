@@ -238,8 +238,9 @@ zeroOrMore(Parser& parser, const Token::Code delimiter) {
  * @param parser parser.
  * @param typeSpec typeSpec result.
  * @param varName varName result.
+ * @return true if parse successful.
  */
-void
+bool
 simpleTypeVarName(Parser& parser, TPCSimpleTypeSpecifier& typeSpec, TPCVarOrAttrName& varName);
 
 #endif /* COMMON_HXX */

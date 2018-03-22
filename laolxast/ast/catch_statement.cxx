@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 kwpfalzer.
+ * Copyright 2017 kwpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-#include "ast/common.hxx"
+/* 
+ * File:   catch_statement.cxx
+ * Author: kwpfalzer
+ *
+ * Created on Thu Mar 22 11:21:19 2018
+ */
+#include "ast/catch_statement.hxx"
 #include "ast/simple_type_specifier.hxx"
 #include "ast/var_or_attr_name.hxx"
+#include "ast/statement.hxx"
 
-bool simpleTypeVarName(Parser& parser, TPCSimpleTypeSpecifier& typeSpec, TPCVarOrAttrName& varOrAttrName) {
-    auto start = parser.getMark();
-    typeSpec = SimpleTypeSpecifier::parse(parser);
-    varOrAttrName = VarOrAttrName::parse(parser);
-    // case where typeSpec matches and varName did not.  We require a varName
-    if (typeSpec && !varOrAttrName) {
-        typeSpec = nullptr;
-        parser.setMark(start);
-        varOrAttrName = VarOrAttrName::parse(parser);
+TPCCatchStatement CatchStatement::parse(Parser& parser) {
+    if ((Token::K_CATCH != parser.peek()->code) 
+            || (Token::S_LPAREN != parser.peek(1)->code)) {
+        return nullptr;
     }
-    return varOrAttrName;
+    const auto start = parser.getMark();
+    TPCSimpleTypeSpecifier typeSpec = nullptr;
+    TPCVarOrAttrName name = nullptr;
+    if (simpleTypeVarName(parser.advance(2), typeSpec, name)) {
+        if (Token::S_RPAREN == parser.accept()->code) {
+            auto statement = Statement::parse(parser);
+            if (statement) {
+                return new CatchStatement(typeSpec, name, statement);
+            }
+        }
+    }
+    parser.setMark(start);
+    return nullptr;
 }
 
+CatchStatement::CatchStatement(TPCSimpleTypeSpecifier typeSpec, TPCVarOrAttrName name, TPCStatement statement) 
+: typeSpec(typeSpec), name(name), statement(statement) {
+}
+
+CatchStatement::~CatchStatement() {
+    delete typeSpec;
+    delete name;
+    delete statement;
+}

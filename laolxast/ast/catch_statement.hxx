@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 kwpfalzer.
+ * Copyright 2017 kwpfalzer.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/* 
+ * File:   catch_statement.hxx
+ * Author: kwpfalzer
+ *
+ * Created on Thu Mar 22 11:21:19 2018
+ */
+#ifndef CATCH_STATEMENT_HXX
+#define CATCH_STATEMENT_HXX
 
 #include "ast/common.hxx"
-#include "ast/simple_type_specifier.hxx"
-#include "ast/var_or_attr_name.hxx"
 
-bool simpleTypeVarName(Parser& parser, TPCSimpleTypeSpecifier& typeSpec, TPCVarOrAttrName& varOrAttrName) {
-    auto start = parser.getMark();
-    typeSpec = SimpleTypeSpecifier::parse(parser);
-    varOrAttrName = VarOrAttrName::parse(parser);
-    // case where typeSpec matches and varName did not.  We require a varName
-    if (typeSpec && !varOrAttrName) {
-        typeSpec = nullptr;
-        parser.setMark(start);
-        varOrAttrName = VarOrAttrName::parse(parser);
-    }
-    return varOrAttrName;
-}
+class CatchStatement : public virtual AstNode {
+public:
+    static TPCCatchStatement parse(Parser& parser);
 
+    explicit CatchStatement(TPCSimpleTypeSpecifier typeSpec, TPCVarOrAttrName name, TPCStatement statement);
+
+    const TPCSimpleTypeSpecifier typeSpec;
+    const TPCVarOrAttrName name;
+    const TPCStatement statement;
+    
+    virtual ~CatchStatement();
+};
+
+#endif /* CATCH_STATEMENT_HXX */

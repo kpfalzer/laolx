@@ -50,6 +50,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/bool.o \
 	${OBJECTDIR}/ast/braced_init_list.o \
 	${OBJECTDIR}/ast/case_statement.o \
+	${OBJECTDIR}/ast/catch_statement.o \
 	${OBJECTDIR}/ast/class_body.o \
 	${OBJECTDIR}/ast/class_declaration.o \
 	${OBJECTDIR}/ast/common.o \
@@ -61,6 +62,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/expression.o \
 	${OBJECTDIR}/ast/expression_ele.o \
 	${OBJECTDIR}/ast/expression_list.o \
+	${OBJECTDIR}/ast/finally_statement.o \
 	${OBJECTDIR}/ast/for_statement.o \
 	${OBJECTDIR}/ast/id_expression.o \
 	${OBJECTDIR}/ast/if_statement.o \
@@ -104,6 +106,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/ast/template_id.o \
 	${OBJECTDIR}/ast/template_parameter.o \
 	${OBJECTDIR}/ast/template_parameter_list.o \
+	${OBJECTDIR}/ast/try_statement.o \
 	${OBJECTDIR}/ast/typedef_declaration.o \
 	${OBJECTDIR}/ast/unary_expression.o \
 	${OBJECTDIR}/ast/unary_operator.o \
@@ -228,6 +231,11 @@ ${OBJECTDIR}/ast/case_statement.o: ast/case_statement.cxx
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/case_statement.o ast/case_statement.cxx
 
+${OBJECTDIR}/ast/catch_statement.o: ast/catch_statement.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/catch_statement.o ast/catch_statement.cxx
+
 ${OBJECTDIR}/ast/class_body.o: ast/class_body.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
@@ -282,6 +290,11 @@ ${OBJECTDIR}/ast/expression_list.o: ast/expression_list.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_list.o ast/expression_list.cxx
+
+${OBJECTDIR}/ast/finally_statement.o: ast/finally_statement.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/finally_statement.o ast/finally_statement.cxx
 
 ${OBJECTDIR}/ast/for_statement.o: ast/for_statement.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -497,6 +510,11 @@ ${OBJECTDIR}/ast/template_parameter_list.o: ast/template_parameter_list.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
 	${RM} "$@.d"
 	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter_list.o ast/template_parameter_list.cxx
+
+${OBJECTDIR}/ast/try_statement.o: ast/try_statement.cxx
+	${MKDIR} -p ${OBJECTDIR}/ast
+	${RM} "$@.d"
+	$(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/try_statement.o ast/try_statement.cxx
 
 ${OBJECTDIR}/ast/typedef_declaration.o: ast/typedef_declaration.cxx
 	${MKDIR} -p ${OBJECTDIR}/ast
@@ -767,6 +785,19 @@ ${OBJECTDIR}/ast/case_statement_nomain.o: ${OBJECTDIR}/ast/case_statement.o ast/
 	    ${CP} ${OBJECTDIR}/ast/case_statement.o ${OBJECTDIR}/ast/case_statement_nomain.o;\
 	fi
 
+${OBJECTDIR}/ast/catch_statement_nomain.o: ${OBJECTDIR}/ast/catch_statement.o ast/catch_statement.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/catch_statement.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/catch_statement_nomain.o ast/catch_statement.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/catch_statement.o ${OBJECTDIR}/ast/catch_statement_nomain.o;\
+	fi
+
 ${OBJECTDIR}/ast/class_body_nomain.o: ${OBJECTDIR}/ast/class_body.o ast/class_body.cxx 
 	${MKDIR} -p ${OBJECTDIR}/ast
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/class_body.o`; \
@@ -908,6 +939,19 @@ ${OBJECTDIR}/ast/expression_list_nomain.o: ${OBJECTDIR}/ast/expression_list.o as
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/expression_list_nomain.o ast/expression_list.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/expression_list.o ${OBJECTDIR}/ast/expression_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/finally_statement_nomain.o: ${OBJECTDIR}/ast/finally_statement.o ast/finally_statement.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/finally_statement.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/finally_statement_nomain.o ast/finally_statement.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/finally_statement.o ${OBJECTDIR}/ast/finally_statement_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/for_statement_nomain.o: ${OBJECTDIR}/ast/for_statement.o ast/for_statement.cxx 
@@ -1467,6 +1511,19 @@ ${OBJECTDIR}/ast/template_parameter_list_nomain.o: ${OBJECTDIR}/ast/template_par
 	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/template_parameter_list_nomain.o ast/template_parameter_list.cxx;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ast/template_parameter_list.o ${OBJECTDIR}/ast/template_parameter_list_nomain.o;\
+	fi
+
+${OBJECTDIR}/ast/try_statement_nomain.o: ${OBJECTDIR}/ast/try_statement.o ast/try_statement.cxx 
+	${MKDIR} -p ${OBJECTDIR}/ast
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ast/try_statement.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -I. -I../laolxcxx -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ast/try_statement_nomain.o ast/try_statement.cxx;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ast/try_statement.o ${OBJECTDIR}/ast/try_statement_nomain.o;\
 	fi
 
 ${OBJECTDIR}/ast/typedef_declaration_nomain.o: ${OBJECTDIR}/ast/typedef_declaration.o ast/typedef_declaration.cxx 
