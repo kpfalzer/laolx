@@ -59,7 +59,7 @@ public:
         return nullptr;
     }
 
-    explicit X(const TRcToken& ident, TPCX x)
+    explicit X(const TRcToken& ident, TPCX x = nullptr)
     : node(new Token(*ident)), x(x) {
     }
 

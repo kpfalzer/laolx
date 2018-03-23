@@ -35,9 +35,9 @@
 TPCMethodBodyItem MethodBodyItem::parse(Parser& parser) {
     TPCAstNode node = TypedefDeclaration::parse(parser);
     if (!node) {
-        node = MemberVariableDeclaration::parse(parser);
+        node = Statement::parse(parser);
         if (!node) {
-            node = Statement::parse(parser);
+            node = MemberVariableDeclaration::parse(parser);
         }
     }
     return (node) ? new MethodBodyItem(node) : nullptr;

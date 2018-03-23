@@ -41,6 +41,25 @@ TPCPrimaryExpression PrimaryExpression::parse(Parser& parser) {
     if (Token::K_THIS == parser.peek()->code) {
         return new PrimaryExpression(parser.accept());
     }
+    if (Token::S_LPAREN == parser.peek()->code) {
+        auto expr = Expression::parse(parser.advance());
+        if (expr && (Token::S_RPAREN == parser.accept()->code)) {
+            return new PrimaryExpression(expr);
+        }
+    }
+    parser.setMark(start);
+    {
+        auto idExpr = IdExpression::parse(parser);
+        if (idExpr) {
+            return new PrimaryExpression(idExpr);
+        }
+    }
+    {
+        auto lambda = LambdaExpression::parse(parser);
+        if (lambda) {
+            return new PrimaryExpression(lambda);
+        }
+    }
     parser.setMark(start);
     return nullptr;
 }

@@ -47,12 +47,6 @@ public:
     static PostfixExpression::TPCY parse(Parser& parser) {
         auto start = parser.getMark();
         {
-            auto pexpr = PrimaryExpression::parse(parser);
-            if (pexpr) {
-                return new Y(pexpr);
-            }
-        }
-        {
             auto stype = SimpleTypeSpecifier::parse(parser);
             if (stype) {
                 if (Token::S_LPAREN == parser.accept()->code) {
@@ -64,6 +58,12 @@ public:
             }
         }
         parser.setMark(start);
+        {
+            auto pexpr = PrimaryExpression::parse(parser);
+            if (pexpr) {
+                return new Y(pexpr);
+            }
+        }
         {
             auto stype = SimpleTypeSpecifier::parse(parser);
             if (stype) {
@@ -105,7 +105,7 @@ public:
 //  (alt1)  S_LBRACK Expression S_RBRACK PostfixExpressionX?
 //| (alt2)  S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
 //| (alt3)  S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
-//| (alt4)  DOT IdExpression PostfixExpressionX?
+//| (alt4)  DOT (K_NEW | IdExpression) PostfixExpressionX?
 //| (alt5)  S_ANDDOT IdExpression PostfixExpressionX?
 //|        (S_PLUS2 | S_MINUS2) PostfixExpressionX?
 
@@ -113,7 +113,7 @@ class PostfixExpression::X {
 public:
 
     enum EType {
-        eAlt1, eAlt2, eAlt3, eAlt4, eAlt5, ePreIncr, ePreDecr
+        eAlt1, eAlt2, eAlt3, eAlt4, eAlt5, ePreIncr, ePreDecr, eNew
     };
 
     static PostfixExpression::TPCX parse(Parser& parser) {
@@ -148,6 +148,11 @@ public:
             }
         }
         parser.setMark(start);
+        if ((Token::S_DOT == parser.peek()->code) && (Token::K_NEW == parser.peek(1)->code)) {
+            auto tok = parser.peek(1);
+            auto pfe = PostfixExpression::X::parse(parser.advance(2));
+            return new X(tok, pfe);
+        }
         {
             auto tok = parser.accept()->code;
             if (Token::S_DOT == tok || Token::S_ANDDOT == tok) {
@@ -194,9 +199,11 @@ public:
     x(post) {
     }
 
-    explicit X(const TRcToken& preop, TPCX post)
-    : type((Token::S_PLUS2 == preop->code) ? ePreIncr : ePreDecr),
-    node(new Token(*preop)),
+    explicit X(const TRcToken& op, TPCX post)
+    : type((Token::S_PLUS2 == op->code)
+    ? ePreIncr
+    : ((Token::K_NEW == op->code) ? eNew : ePreDecr)),
+    node(new Token(*op)),
     x(post) {
     }
 
@@ -208,6 +215,7 @@ public:
 
     virtual ~X() {
         delete x;
+        delete node;
     }
 };
 
