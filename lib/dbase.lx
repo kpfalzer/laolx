@@ -5,10 +5,10 @@ namespace dbase {
     }
 
     interface Dbase {
-        def connect(Credentials credentials) => bool
+        def connect(string url, string database, Credentials credentials) => Exception
     }
 
-	class MySql : Dbase {
-	}
-
+    class MySql(string url, string database, string user, string password) : Dbase {
+        connect(url, database, UserPassword.new(user, password))
+    }
 }
