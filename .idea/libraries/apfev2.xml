@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="apfev2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../apfev2/out/artifacts/jar/apfev2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
