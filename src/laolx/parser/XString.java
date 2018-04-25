@@ -26,16 +26,85 @@
  */
 
 package laolx.parser;
+
 import apfev2.runtime.Accepted;
 import apfev2.runtime.Acceptor;
 import apfev2.runtime.CharBuffer;
+import apfev2.runtime.Location;
+
+import static apfev2.runtime.Util.isNull;
 
 /**
- * Accept "..." or %s{...}
+ * Accept "..." or '...' or %s{...}
  */
 public class XString implements Acceptor {
     @Override
     public Accepted accept(CharBuffer charBuffer) {
-        return null;
+        if (charBuffer.isEOF() || charBuffer.isEOLN()) {
+            return null;
+        }
+        char close = 0, peek = 0;
+        StringBuilder buf = null;
+        final Location start = charBuffer.getLocation();
+        while (true) {
+            peek = charBuffer.peekAndCheckUnexpected(close);
+            if (isNull(buf)) {
+                if ('"' == peek || '\'' == peek) {
+                    close = peek;
+                } else if (charBuffer.match("%s{")) {
+                    charBuffer.accept(1);
+                    close = '}';
+                } else {
+                    return null;
+                }
+                charBuffer.accept(); //accept prefix match
+                buf = new StringBuilder();
+            } else if (close != peek) {
+                buf.append(charBuffer.accept());
+                if ('\\' == peek) { //check what we just accepted
+                    buf.append(charBuffer.acceptUnlessUnexpected(close));
+                }
+            } else {
+                charBuffer.accept();
+                return new MyAccepted(start, buf.toString(), close);
+            }
+        }
     }
+
+    public static class MyAccepted extends Accepted {
+        public enum Type {
+            eSingle, eDouble, eCurlied
+        }
+
+        private MyAccepted(Location loc, String str, char close) {
+            super(loc);
+            this.string = str;
+            this.type = ('"' == close)
+                    ? Type.eDouble
+                    : (('}' == close)
+                    ? Type.eCurlied
+                    : Type.eSingle);
+        }
+
+        @Override
+        public String toString() {
+            final String delim[] = getDelim(type);
+            return delim[0] + string + delim[1];
+        }
+
+        private static String[] getDelim(Type type) {
+            if (Type.eSingle == type) {
+                return new String[]{"'", "'"};
+            }
+            if (Type.eDouble == type) {
+                return new String[]{"\"", "\'"};
+            }
+            return new String[]{"%s{", "}"};
+        }
+
+        public final String string;
+        public final Type type;
+
+    }
+
 }
