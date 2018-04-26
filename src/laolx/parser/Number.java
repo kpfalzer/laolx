@@ -50,8 +50,14 @@ public class Number implements Acceptor {
         char peek = 0;
         final Location start = charBuffer.getLocation();
         EType type = null;
-        Accepted accepted = INTEGER.accept(charBuffer), trailing = null;
+        Accepted accepted = HEX.accept(charBuffer), trailing = null;
         if (isNonNull(accepted)) {
+            type = EType.eHex;
+        } else {
+            accepted = INTEGER.accept(charBuffer);
+            if (isNull(accepted)) {
+                return null;
+            }
             type = EType.eInteger;
             peek = charBuffer.peek();
             if ('.' == peek) {
@@ -66,11 +72,6 @@ public class Number implements Acceptor {
                 }
             } else {
                 ;//do nothing
-            }
-        } else {
-            accepted = HEX.accept(charBuffer);
-            if (isNonNull(accepted)) {
-                type = EType.eHex;
             }
         }
         if (isNull(type)) {

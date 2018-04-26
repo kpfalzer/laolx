@@ -69,7 +69,7 @@ class XStringTest {
             assertTrue(S2.equals(x.baseAccepted.toString()));
             XString.MyAccepted y = downcast(x.baseAccepted);
             assertTrue(S1.equals(y.string));
-            assertTrue(y.type == XString.MyAccepted.Type.eDouble);
+            assertTrue(y.type == XString.MyAccepted.EType.eDouble);
         }
 
         accepted = XString.THE_ONE.accept(cbuf);
@@ -80,7 +80,7 @@ class XStringTest {
             assertTrue(S4.equals(x.baseAccepted.toString()));
             XString.MyAccepted y = downcast(x.baseAccepted);
             assertTrue(S3.equals(y.string));
-            assertTrue(y.type == XString.MyAccepted.Type.eSingle);
+            assertTrue(y.type == XString.MyAccepted.EType.eSingle);
         }
 
         accepted = XString.THE_ONE.accept(cbuf);
@@ -91,7 +91,7 @@ class XStringTest {
             assertTrue(S6.equals(x.baseAccepted.toString()));
             XString.MyAccepted y = downcast(x.baseAccepted);
             assertTrue(S5.equals(y.string));
-            assertTrue(y.type == XString.MyAccepted.Type.eCurlied);
+            assertTrue(y.type == XString.MyAccepted.EType.eCurlied);
         }
 
         try {
