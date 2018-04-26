@@ -45,18 +45,28 @@ class NumberTest {
         final String S2 = "0x1_2dead_bEEF";
         final String S3 = "5'b11_000";
         final String S4 = "123.456";
+        final String S5 = "1.0e-4";
+        final String S6 = "8'hFF00";
+
         final String DATA =
                 S1 + "\n"
                         + S2 + "\n"
                         + S3 + "\n"
-                        + S4;
+                        + S4 + "//line comment\n"
+                        + S5 + "\n"
+                        + S6 + "\n"
+                ;
 
         final CharBuffer cbuf = new CharBuffer(DATA.toCharArray());
 
         expect(cbuf, S1, Number.EType.eInteger);
         expect(cbuf, S2, Number.EType.eHex);
+        expect(cbuf, S3, Number.EType.eSized);
+        expect(cbuf, S4, Number.EType.eFloat);
+        expect(cbuf, S5, Number.EType.eFloat);
+        expect(cbuf, S6, Number.EType.eSized);
 
-        //assertTrue(cbuf.isEOF());
+        assertTrue(cbuf.isEOF());
 
     }
 
