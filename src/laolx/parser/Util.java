@@ -27,5 +27,16 @@
 
 package laolx.parser;
 
+import apfev2.runtime.Accepted;
+
+import static apfev2.runtime.Util.isNonNull;
+
 public class Util {
+    public static String nullAsEmpty(String s) {
+        return isNonNull(s) ? s : "";
+    }
+
+    public static String toString(Accepted accepted) {
+        return isNonNull(accepted) ? accepted.toString() : "";
+    }
 }

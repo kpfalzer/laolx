@@ -28,17 +28,17 @@
 package laolx.parser;
 
 import apfev2.parser.WithSpacing;
-import apfev2.runtime.Accepted;
-import apfev2.runtime.Acceptor;
-import apfev2.runtime.CharBuffer;
-import apfev2.runtime.Location;
+import apfev2.runtime.*;
 
+import static apfev2.runtime.Util.downcast;
+import static apfev2.runtime.Util.isNonNull;
 import static apfev2.runtime.Util.isNull;
+import static laolx.parser.Util.nullAsEmpty;
 
 /**
- * Accept "..." or '...' or %s{...}
+ * Accept /.../i or %r{...}i
  */
-public class XString implements Acceptor {
+public class RegExp implements Acceptor {
     @Override
     public Accepted accept(CharBuffer charBuffer) {
         if (charBuffer.isEOF() || charBuffer.isEOLN()) {
@@ -50,9 +50,9 @@ public class XString implements Acceptor {
         while (true) {
             peek = charBuffer.peekAndCheckUnexpected(close);
             if (isNull(buf)) {
-                if ('"' == peek || '\'' == peek) {
+                if ('/' == peek) {
                     close = peek;
-                } else if (charBuffer.match("%s{")) {
+                } else if (charBuffer.match("%r{")) {
                     charBuffer.accept(1);
                     close = '}';
                 } else {
@@ -67,46 +67,47 @@ public class XString implements Acceptor {
                 }
             } else {
                 charBuffer.accept();
-                return new MyAccepted(start, buf.toString(), close);
+                final CharClass.MyAccepted modifier = downcast(MODIFIER.accept(charBuffer));
+                return new RegExp.MyAccepted(start, buf.toString(), close, modifier);
             }
         }
     }
 
+    private static final CharClass MODIFIER = new CharClass("i");
+
     public static class MyAccepted extends Accepted {
         public enum EType {
-            eSingle, eDouble, eCurlied
+            eSlash, eCurlied
         }
 
-        private MyAccepted(Location loc, String str, char close) {
+        private MyAccepted(Location loc, String str, char close, CharClass.MyAccepted modifier) {
             super(loc);
-            this.string = str;
-            this.type = ('"' == close)
-                    ? EType.eDouble
-                    : (('}' == close)
-                    ? EType.eCurlied
-                    : EType.eSingle);
+            this.regexp = str;
+            this.modifiers = isNonNull(modifier) ? modifier.toString() : null;
+            this.type = ('/' == close)
+                    ? EType.eSlash
+                    : EType.eCurlied;
         }
 
         @Override
         public String toString() {
             final String delim[] = getDelim(type);
-            return delim[0] + string + delim[1];
+            return delim[0] + regexp + delim[1] + nullAsEmpty(modifiers);
         }
 
         private static String[] getDelim(EType type) {
-            if (EType.eSingle == type) {
-                return new String[]{"'", "'"};
+            if (EType.eSlash == type) {
+                return new String[]{"/", "/"};
             }
-            if (EType.eDouble == type) {
-                return new String[]{"\"", "\""};
-            }
-            return new String[]{"%s{", "}"};
+            return new String[]{"%r{", "}"};
         }
 
-        public final String string;
+        public final String regexp;
+        public final String modifiers;
         public final EType type;
 
     }
 
-    public static final Acceptor THE_ONE = new WithSpacing<>(new XString());
+    public static final Acceptor THE_ONE = new WithSpacing<>(new RegExp());
+
 }
