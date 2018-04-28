@@ -46,7 +46,18 @@ public enum Tokens {
     S_SEMI(";"),
     S_LCURLY("{"),
     S_RCURLY("}"),
-    K_CLASS("class")
+    K_CLASS("class"),
+    K_INT("int"),
+    K_FLOAT("float"),
+    K_STRING("string"),
+    K_CHAR("char"),
+    K_SYMBOL("symbol"),
+    S_COLON2("::"),
+    S_COLON(":"),
+    S_LT("<"),
+    S_GT(">"),
+    S_DOT3("..."),
+    S_COMMA(","),
     ;
 
     private Tokens(String text, boolean isKeyword) {
@@ -90,6 +101,6 @@ public enum Tokens {
             }
             return IDENT_OR_KEYWORD;
         }
-        return new Token(code, text, Spacing.THE_ONE);
+        return new WithSpacing<>(new Token(code, text));
     }
 }
