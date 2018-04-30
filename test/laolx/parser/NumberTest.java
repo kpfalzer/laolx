@@ -71,7 +71,7 @@ class NumberTest {
     }
 
     private static void expect(CharBuffer cbuf, String gold, Number.EType type) {
-        Accepted accepted = Number.THE_ONE.accept(cbuf);
+        Accepted accepted = Number.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         WithSpacing.MyAccepted x = downcast(accepted);
         assertTrue(x.hasSpacing());

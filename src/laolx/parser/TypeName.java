@@ -29,6 +29,8 @@ package laolx.parser;
 
 import apfev2.runtime.*;
 
+import static apfev2.runtime.Util.isNull;
+
 public class TypeName implements Acceptor {
     @Override
     public Accepted accept(CharBuffer charBuffer) {
@@ -40,11 +42,18 @@ public class TypeName implements Acceptor {
             new Optional(
                     new Sequence(
                             Tokens.S_LT.acceptor,
-                            new Optional(TemplateArgumentList.THE_ONE),
+                            new Optional(TemplateArgumentList.getTheOne()),
                             Tokens.S_GT.acceptor
                     )
             )
     );
 
-    public static final TypeName THE_ONE = new TypeName();
+    private static TypeName THE_ONE;
+
+    public static TypeName getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new TypeName();
+        }
+        return THE_ONE;
+    }
 }

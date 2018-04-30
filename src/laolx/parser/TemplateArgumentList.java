@@ -29,6 +29,8 @@ package laolx.parser;
 
 import apfev2.runtime.*;
 
+import static apfev2.runtime.Util.isNull;
+
 /**
  * Template argument list which also supports named parameters.
  */
@@ -49,5 +51,13 @@ public class TemplateArgumentList implements Acceptor {
             )
     );
 
-    public static final TemplateArgumentList THE_ONE = new TemplateArgumentList();
+    private static TemplateArgumentList THE_ONE;
+
+    public static TemplateArgumentList getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new TemplateArgumentList();
+        }
+        return THE_ONE;
+    }
+
 }

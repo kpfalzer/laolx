@@ -108,6 +108,12 @@ public class RegExp implements Acceptor {
 
     }
 
-    public static final Acceptor THE_ONE = new WithSpacing<>(new RegExp());
+    private static Acceptor THE_ONE;
 
+    public static Acceptor getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new WithSpacing<>(new RegExp());
+        }
+        return THE_ONE;
+    }
 }

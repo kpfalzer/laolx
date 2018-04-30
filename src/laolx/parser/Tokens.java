@@ -29,15 +29,11 @@ package laolx.parser;
 
 import apfev2.parser.Spacing;
 import apfev2.parser.WithSpacing;
-import apfev2.runtime.Acceptor;
-import apfev2.runtime.IdentOrKeyword;
-import apfev2.runtime.Token;
+import apfev2.runtime.*;
 
 import java.util.HashMap;
 
-import static apfev2.runtime.Util.invariant;
-import static apfev2.runtime.Util.isNonNull;
-import static apfev2.runtime.Util.isNull;
+import static apfev2.runtime.Util.*;
 
 public enum Tokens {
     // These are essentially static vars
@@ -57,8 +53,7 @@ public enum Tokens {
     S_LT("<"),
     S_GT(">"),
     S_DOT3("..."),
-    S_COMMA(","),
-    ;
+    S_COMMA(","),;
 
     private Tokens(String text, boolean isKeyword) {
         this.code = (isNonNull(text)) ? getCode() : IdentOrKeyword.IDENT;
@@ -94,13 +89,34 @@ public enum Tokens {
         IDENT_OR_KEYWORD = new WithSpacing<>(new IdentOrKeyword(CODE_BY_KEYWORD));
     }
 
-    private Acceptor getAcceptor(String text, boolean isKeyword) {
-        if (isKeyword) {
-            if (isNonNull(text)) {
-                CODE_BY_KEYWORD.put(text, code);
+    /**
+     * Acceptor for Ident or Keyword.
+     * Subclass here to check that we matched what we expected.
+     */
+    public /*inner: access code*/ class IdentOrKeywordAcceptor implements Acceptor {
+
+        @Override
+        public Accepted accept(CharBuffer charBuffer) {
+            final CharBuffer.Mark start = charBuffer.getMark();
+            final WithSpacing.MyAccepted accepted = downcast(IDENT_OR_KEYWORD.accept(charBuffer));
+            if (isNonNull(accepted)) {
+                final TokenAccepted actual = downcast(accepted.baseAccepted);
+                if (actual.code == code) {
+                    return accepted;
+                }
             }
-            return IDENT_OR_KEYWORD;
+            charBuffer.setMark(start);
+            return null;
         }
-        return new WithSpacing<>(new Token(code, text));
+    }
+
+    private Acceptor getAcceptor(String text, boolean isKeyword) {
+        if (!isKeyword) {
+            return new WithSpacing<>(new Token(code, text));
+        }
+        if (isNonNull(text)) {
+            CODE_BY_KEYWORD.put(text, code);
+        }
+        return new IdentOrKeywordAcceptor();
     }
 }

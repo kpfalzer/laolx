@@ -27,15 +27,19 @@
 
 package laolx.parser;
 
+import apfev2.parser.WithSpacing;
 import apfev2.runtime.*;
+import sun.java2d.pipe.SpanShapeRenderer;
+
+import static apfev2.runtime.Util.isNull;
 
 public class SimpleTypeSpecifier implements Acceptor {
     @Override
     public Accepted accept(CharBuffer charBuffer) {
-        return null;
+        return MATCHER.accept(charBuffer);
     }
 
-    private static final Acceptor CHOICES = new PrioritizedChoice(
+    private static final Acceptor MATCHER = new PrioritizedChoice(
             Tokens.K_FLOAT.acceptor,
             Tokens.K_INT.acceptor,
             Tokens.K_STRING.acceptor,
@@ -43,10 +47,17 @@ public class SimpleTypeSpecifier implements Acceptor {
             Tokens.K_CHAR.acceptor,
             new Sequence(
                     new Optional(Tokens.S_COLON2.acceptor),
-                    new Optional(NestedNameSpecifier.THE_ONE),
-                    TypeName.THE_ONE
+                    new Optional(NestedNameSpecifier.getTheOne()),
+                    TypeName.getTheOne()
             )
     );
 
-    public static final SimpleTypeSpecifier THE_ONE = new SimpleTypeSpecifier();
+    private static SimpleTypeSpecifier THE_ONE;
+
+    public static Acceptor getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new SimpleTypeSpecifier();
+        }
+        return THE_ONE;
+    }
 }

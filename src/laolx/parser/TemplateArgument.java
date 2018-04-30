@@ -27,7 +27,10 @@
 
 package laolx.parser;
 
+import apfev2.parser.WithSpacing;
 import apfev2.runtime.*;
+
+import static apfev2.runtime.Util.isNull;
 
 public class TemplateArgument implements Acceptor {
     @Override
@@ -36,8 +39,8 @@ public class TemplateArgument implements Acceptor {
     }
 
     private static final Acceptor MATCHER = new PrioritizedChoice(
-        Named.THE_ONE,
-        Positional.THE_ONE
+            Named.getTheOne(),
+            Positional.getTheOne()
     );
 
     public static final TemplateArgument THE_ONE = new TemplateArgument();
@@ -52,11 +55,19 @@ public class TemplateArgument implements Acceptor {
         private static final Acceptor MATCHER = new PrioritizedChoice(
                 // TODO: there is ambiguity here with 'IDENT' as first() of Type|ConstantExpression,
                 // so let's just pull it out?
-                TypeName.THE_ONE, //NO DOT3 yet...
-                ConstantExpression.THE_ONE
+                SimpleTypeSpecifier.getTheOne(), //NO DOT3 yet...
+                ConstantExpression.getTheOne()
         );
 
-        private static final Positional THE_ONE = new Positional();
+        private static Positional THE_ONE;
+
+        public static Positional getTheOne() {
+            if (isNull(THE_ONE)) {
+                THE_ONE = new Positional();
+            }
+            return THE_ONE;
+        }
+
     }
 
     public static class Named implements Acceptor {
@@ -67,12 +78,20 @@ public class TemplateArgument implements Acceptor {
         }
 
         private static final Acceptor MATCHER = new Sequence(
-          Tokens.IDENT.acceptor,
-          Tokens.S_COLON.acceptor,
-          Positional.THE_ONE
+                Tokens.IDENT.acceptor,
+                Tokens.S_COLON.acceptor,
+                Positional.getTheOne()
         );
 
-        private static final Named THE_ONE = new Named();
+        private static Named THE_ONE;
+
+        public static Named getTheOne() {
+            if (isNull(THE_ONE)) {
+                THE_ONE = new Named();
+            }
+            return THE_ONE;
+        }
+
     }
 
 

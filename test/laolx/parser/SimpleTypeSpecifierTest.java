@@ -27,31 +27,36 @@
 
 package laolx.parser;
 
-import apfev2.parser.WithSpacing;
 import apfev2.runtime.Accepted;
 import apfev2.runtime.Acceptor;
 import apfev2.runtime.CharBuffer;
-import apfev2.runtime.CharSequence;
+import org.junit.jupiter.api.Test;
 
-import static apfev2.runtime.Util.isNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * TODO: placeholder for constant expression.
- */
-public class ConstantExpression implements Acceptor {
-    @Override
-    public Accepted accept(CharBuffer charBuffer) {
-        return TODO.accept(charBuffer);
-    }
+class SimpleTypeSpecifierTest {
 
-    private static final Acceptor TODO = new WithSpacing<>(new CharSequence("CEXPR"));
+    @Test
+    void accept() {
+        String DATA =
+                "int "
+                        + "float "
+                        + "string "
+                        + "some_type "
+                + "nmsp1::nmsp2::T1 "
+                + "globnmsp::T2 "
+                + "List<float>"
+                ;
 
-    private static ConstantExpression THE_ONE;
+        CharBuffer cbuf = new CharBuffer(DATA.toCharArray());
 
-    public static ConstantExpression getTheOne() {
-        if (isNull(THE_ONE)) {
-            THE_ONE = new ConstantExpression();
+        Accepted accepted;
+        Acceptor acceptor = SimpleTypeSpecifier.getTheOne();
+
+        while (!cbuf.isEOF()) {
+            accepted = acceptor.accept(cbuf);
+            assertNotNull(accepted);
+            System.out.println("DEBUG: " + accepted.toString());
         }
-        return THE_ONE;
     }
 }

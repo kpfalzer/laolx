@@ -29,6 +29,8 @@ package laolx.parser;
 
 import apfev2.runtime.*;
 
+import static apfev2.runtime.Util.isNull;
+
 public class NestedNameSpecifier implements Acceptor {
     @Override
     public Accepted accept(CharBuffer charBuffer) {
@@ -42,5 +44,12 @@ public class NestedNameSpecifier implements Acceptor {
             )
     );
 
-    public static final NestedNameSpecifier THE_ONE = new NestedNameSpecifier();
+    private static NestedNameSpecifier THE_ONE;
+
+    public static NestedNameSpecifier getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new NestedNameSpecifier();
+        }
+        return THE_ONE;
+    }
 }

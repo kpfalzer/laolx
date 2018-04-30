@@ -56,7 +56,7 @@ class RegExpTest {
         final CharBuffer cbuf = new CharBuffer(DATA.toCharArray());
         Accepted accepted;
 
-        accepted = RegExp.THE_ONE.accept(cbuf);
+        accepted = RegExp.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         {
             WithSpacing.MyAccepted x = downcast(accepted);
@@ -68,7 +68,7 @@ class RegExpTest {
             assertTrue(isNull(y.modifiers));
         }
 
-        accepted = RegExp.THE_ONE.accept(cbuf);
+        accepted = RegExp.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         {
             WithSpacing.MyAccepted x = downcast(accepted);

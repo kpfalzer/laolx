@@ -61,7 +61,7 @@ class XStringTest {
         final CharBuffer cbuf = new CharBuffer(DATA.toCharArray());
         Accepted accepted;
 
-        accepted = XString.THE_ONE.accept(cbuf);
+        accepted = XString.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         {
             WithSpacing.MyAccepted x = downcast(accepted);
@@ -72,7 +72,7 @@ class XStringTest {
             assertTrue(y.type == XString.MyAccepted.EType.eDouble);
         }
 
-        accepted = XString.THE_ONE.accept(cbuf);
+        accepted = XString.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         {
             WithSpacing.MyAccepted x = downcast(accepted);
@@ -83,7 +83,7 @@ class XStringTest {
             assertTrue(y.type == XString.MyAccepted.EType.eSingle);
         }
 
-        accepted = XString.THE_ONE.accept(cbuf);
+        accepted = XString.getTheOne().accept(cbuf);
         assertTrue(isNonNull(accepted));
         {
             WithSpacing.MyAccepted x = downcast(accepted);
@@ -95,7 +95,7 @@ class XStringTest {
         }
 
         try {
-            accepted = XString.THE_ONE.accept(cbuf);
+            accepted = XString.getTheOne().accept(cbuf);
         }
         catch (Exception ex) {
             String s = ex.toString();

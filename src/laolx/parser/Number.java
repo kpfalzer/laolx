@@ -39,6 +39,7 @@ import apfev2.runtime.Sequence;
 
 import static apfev2.runtime.Util.isNonNull;
 import static apfev2.runtime.Util.isNull;
+import apfev2.runtime.Util;
 
 /**
  * integer: [0-9][0-9_]*
@@ -87,7 +88,14 @@ public class Number implements Acceptor {
         return new MyAccepted(start, type, accepted, trailing);
     }
 
-    public static final Acceptor THE_ONE = new WithSpacing<>(new Number());
+    private static Acceptor THE_ONE;
+
+    public static Acceptor getTheOne() {
+        if (isNull(THE_ONE)) {
+            THE_ONE = new WithSpacing<>(new Number());
+        }
+        return THE_ONE;
+    }
 
     public static class MyAccepted extends Accepted {
 

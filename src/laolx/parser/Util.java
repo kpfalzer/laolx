@@ -35,8 +35,4 @@ public class Util {
     public static String nullAsEmpty(String s) {
         return isNonNull(s) ? s : "";
     }
-
-    public static String toString(Accepted accepted) {
-        return isNonNull(accepted) ? accepted.toString() : "";
-    }
 }
