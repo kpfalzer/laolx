@@ -27,31 +27,11 @@
 
 package laolx.parser;
 
-import apfev2.runtime.*;
+import apfev2.parser.ListOfItems;
+import apfev2.runtime.Acceptor;
 
-import static apfev2.runtime.Util.isNull;
-
-/**
- * Template argument list which also supports named parameters.
- */
-public class TemplateArgumentList implements Acceptor {
-    @Override
-    public Accepted accept(CharBuffer charBuffer) {
-        return MATCHER.accept(charBuffer);
+public class CommaSeparatedList extends ListOfItems {
+    public CommaSeparatedList(Acceptor itemType) {
+        super(itemType, Tokens.S_COMMA.acceptor);
     }
-
-    private static final Acceptor MATCHER = new PrioritizedChoice(
-            new CommaSeparatedList(TemplateArgument.Named.getTheOne()),
-            new CommaSeparatedList(TemplateArgument.Positional.getTheOne())
-    );
-
-    private static TemplateArgumentList THE_ONE;
-
-    public static TemplateArgumentList getTheOne() {
-        if (isNull(THE_ONE)) {
-            THE_ONE = new TemplateArgumentList();
-        }
-        return THE_ONE;
-    }
-
 }

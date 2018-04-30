@@ -32,19 +32,10 @@ import apfev2.runtime.*;
 
 import static apfev2.runtime.Util.isNull;
 
-public class TemplateArgument implements Acceptor {
-    @Override
-    public Accepted accept(CharBuffer charBuffer) {
-        return MATCHER.accept(charBuffer);
-    }
-
-    private static final Acceptor MATCHER = new PrioritizedChoice(
-            Named.getTheOne(),
-            Positional.getTheOne()
-    );
-
-    public static final TemplateArgument THE_ONE = new TemplateArgument();
-
+/**
+ * Wrap Positional and Named template arguments types.
+ */
+public abstract class TemplateArgument {
     public static class Positional implements Acceptor {
 
         @Override
