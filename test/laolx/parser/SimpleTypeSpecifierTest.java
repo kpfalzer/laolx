@@ -45,7 +45,8 @@ class SimpleTypeSpecifierTest {
                         + "some_type "
                 + "nmsp1::nmsp2::T1 "
                 + "globnmsp::T2 "
-                + "List<float>"
+                + "List<float, CEXPR> "
+                + "Map<K: string, T: List<float, CEXPR>>"
                 ;
 
         CharBuffer cbuf = new CharBuffer(DATA.toCharArray());

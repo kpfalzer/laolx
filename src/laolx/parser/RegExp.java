@@ -30,10 +30,7 @@ package laolx.parser;
 import apfev2.parser.WithSpacing;
 import apfev2.runtime.*;
 
-import static apfev2.runtime.Util.downcast;
-import static apfev2.runtime.Util.isNonNull;
-import static apfev2.runtime.Util.isNull;
-import static laolx.parser.Util.nullAsEmpty;
+import static apfev2.runtime.Util.*;
 
 /**
  * Accept /.../i or %r{...}i
