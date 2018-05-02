@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="apfev2">
+  <library name="antlr-runtime-4.7.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../apfev2/out/artifacts/jar/apfev2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/antlr-runtime-4.7.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,16 +1,3 @@
 /out/
-/build/
-/dist/
-/laolxcxx/build/
-/laolxcxx/dist/
-/laolxcxx/laolx/build/
-/laolxcxx/laolx/dist/
-/laolxast/build/
-/laolxast/dist/
-/xcode/laolxast/DerivedData
-/xcode/laolxast_test/DerivedData
-/xcode/laolxcxx/DerivedData
-/xcode/laolxast/.DS_Store
-/xcode/.DS_Store
+/src/laolx/parser/
 /.DS_Store
-/laolxcxx/.DS_Store
