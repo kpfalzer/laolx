@@ -1,5 +1,45 @@
 grammar Laolx;
 
+string
+:   SQSTRING
+|   DQSTRING
+;
+
+simpleTypeSpecifier
+:   INT | FLOAT | STRING | SYMBOL | CHAR
+|   COLON2? nestedNamedSpecifier? typeName
+;
+
+nestedNamedSpecifier
+:   (IDENT COLON2)+
+;
+
+typeName
+:   IDENT (LT templateArgumentList? GT)?
+;
+
+templateArgumentList
+:   namedTemplateArgument (COMMA namedTemplateArgument)*
+|   positionalTemplateArgument (COMMA positionalTemplateArgument)*
+;
+
+namedTemplateArgument
+:   IDENT COLON positionalTemplateArgument
+;
+
+positionalTemplateArgument
+:   simpleTypeSpecifier //NOTE: no ... yet
+|   constantExpression
+;
+
+constantExpression
+:   'CEXPR' //TODO: placeholder
+;
+
+number
+:   VINTEGER | VFLOAT | VHEX | VSIZED
+;
+
 // Lexer definition
 //
 AS			: 'as' 			SPACING? ;
@@ -20,6 +60,7 @@ FLOAT		: 'float'		SPACING? ;
 FOR			: 'for'			SPACING? ;
 IF			: 'if'			SPACING? ;
 IMPORT		: 'import' 		SPACING? ;
+IN		    : 'in'   		SPACING? ;
 INT			: 'int'			SPACING? ;
 INTERFACE	: 'interface'	SPACING? ;
 NAMESPACE	: 'namespace'	SPACING? ;
@@ -48,6 +89,7 @@ AND		: '&' SPACING? ;
 AT		: '@' SPACING? ;
 CARET	: '^' SPACING? ;
 COLON	: ':' SPACING? ;
+COLON2	: '::' SPACING? ;
 COMMA	: ',' SPACING? ;
 DOT		: '.' SPACING? ;
 EQ		: '=' SPACING? ;
@@ -72,6 +114,15 @@ STAR	: '*' SPACING? ;
 SQSTRING :	'\'' (ESC | ~['])? '\'' SPACING? ;
 DQSTRING :	'"' (ESC | ~["])* '"' SPACING? ;
 IDENT 	 :	ID_LETTER (ID_LETTER | DIGIT)* SPACING? ;
+
+//
+// Number values
+//
+VINTEGER: INTFRAG SPACING? ;
+fragment INTFRAG: [0-9][0-9_]* ;
+VHEX    : '0x' [0-9a-fA-F][0-9_a-fA-F]* SPACING? ;
+VFLOAT  : INTFRAG '.' INTFRAG ([eE][-+]? INTFRAG)? ;
+VSIZED  : INTFRAG '\'' [bBhHoOdD][0-9a-fA-F][0-9a-fA-F_]* SPACING? ;
 
 SPACING: SPACING_ALTS+ ;
 
