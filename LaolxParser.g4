@@ -4,17 +4,70 @@ options {
 	tokenVocab = LaolxLexer;
 }
 
+simpleDecl
+:   simpleDeclItem (COMMA simpleDeclItem)*
+;
+
+simpleDeclItem
+:   mutability? simpleTypeSpec? IDENT
+;
+
+lambdaTypeSpec
+:   LAMBDA LCURLY lambdaDeclHeading RCURLY
+;
+
+lambdaDeclHeading
+:   lambdaDeclParms RARROW methodReturnType
+;
+
+lambdaDeclParms
+:   LPAREN simpleTypeSpecList? RPAREN
+;
+
+methodReturnType
+:   simpleTypeSpec
+|   VOID
+;
+
+mutability
+:   CONST | VAR
+;
+
 string
 :   SQSTRING
 |   DQSTRING
 ;
 
-simpleTypeSpecifier
-:   INT | FLOAT | STRING | SYMBOL | CHAR
-|   COLON2? nestedNamedSpecifier? typeName
+simpleTypeSpec
+:   INT | FLOAT | STRING | SYMBOL | CHAR | REGEXP
+|   tupleTypeSpec
+|   mapTypeSpec
+|   lambdaTypeSpec
+|   COLON2? nestedNamedSpec? typeName
+|   simpleTypeSpec arrayTypeSpec
 ;
 
-nestedNamedSpecifier
+mapTypeSpec
+:   LCURLY RCURLY
+;
+
+arrayTypeSpec
+:   LBRACK RBRACK
+;
+
+tupleTypeSpec
+:   TUPLE simpleTypeSpecList RCURLY
+;
+
+simpleTypeSpecList
+:   simpleTypeSpecListItem (COMMA simpleTypeSpecListItem)*
+;
+
+simpleTypeSpecListItem
+:   simpleTypeSpec IDENT
+;
+
+nestedNamedSpec
 :   (IDENT COLON2)+
 ;
 
@@ -32,7 +85,7 @@ namedTemplateArgument
 ;
 
 positionalTemplateArgument
-:   simpleTypeSpecifier //NOTE: no ... yet
+:   simpleTypeSpec //NOTE: no ... yet
 |   constantExpression
 ;
 

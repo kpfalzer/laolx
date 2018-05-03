@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8cb86600-7566-4dce-891c-7462d6ba7d28" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Laolx.g4" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LaolxLexer.g4" afterPath="$PROJECT_DIR$/LaolxLexer.g4" />
+      <change beforePath="$PROJECT_DIR$/LaolxParser.g4" afterPath="$PROJECT_DIR$/LaolxParser.g4" />
       <change beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
+      <change beforePath="$PROJECT_DIR$/NOTES.txt" afterPath="$PROJECT_DIR$/NOTES.txt" />
       <change beforePath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" afterPath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -17,33 +19,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LaolxParserTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LaolxParserTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-143">
-              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LaolxParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="152">
+              <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LaolxParser.g4" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NOTES.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NOTES.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="463">
+              <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LaolxLexer.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1653">
+              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LaolxParser.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+            <state relative-caret-position="133">
+              <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -58,6 +68,16 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Declaration</find>
+      <find>Parameter</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Decl</replace>
+      <replace>Parm</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -70,11 +90,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Laolx.g4" />
+        <option value="$PROJECT_DIR$/NOTES.txt" />
+        <option value="$PROJECT_DIR$/LaolxLexer.g4" />
+        <option value="$PROJECT_DIR$/LaolxParser.g4" />
         <option value="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
     <option name="y" value="23" />
     <option name="width" value="1680" />
@@ -180,10 +203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,6 +236,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -421,6 +444,9 @@
     <history-entry file="LaolxParserTest - 2018.05.02 at 17h 01m 23s.xml">
       <configuration name="LaolxParserTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="LaolxParserTest - 2018.05.03 at 10h 44m 07s.xml">
+      <configuration name="LaolxParserTest" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="LaolxParserTest_number - 2018.05.02 at 16h 59m 09s.xml">
       <configuration name="LaolxParserTest.number" configurationId="JUnit" />
     </history-entry>
@@ -443,9 +469,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25885227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26190478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42574257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -469,10 +495,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Laolx.g4">
+    <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="437">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -485,13 +511,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Laolx.g4" />
+    <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -499,52 +540,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="15" />
-          <folding>
-            <marker date="1521908591212" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1521908591212" expanded="false" signature="144:317" ph="..." />
-            <marker date="1521908591212" expanded="true" signature="319:337" ph="/**...*/" />
-            <marker date="1521908591212" expanded="false" signature="624:635" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="646:652" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="696:797" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="872:970" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1029:1073" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1149:1200" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1295:1372" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1440:1507" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1592:1666" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1770:1859" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1940:2733" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="2758:2769" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="2780:2786" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="2814:3061" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="3088:3396" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="3422:3433" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3451:3457" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3481:3492" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3506:3512" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3535:3546" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3560:3566" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3589:3600" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3610:3616" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="3654:3661" ph="{}" />
-            <marker date="1521908591212" expanded="true" signature="3695:3917" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="3964:4219" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="4254:4265" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="4340:4346" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="4376:4387" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="4416:4422" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Laolx.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Laolx.g4" />
     <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxLexer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -565,74 +564,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="15" />
-          <folding>
-            <marker date="1521908591212" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1521908591212" expanded="false" signature="144:317" ph="..." />
-            <marker date="1521908591212" expanded="true" signature="319:337" ph="/**...*/" />
-            <marker date="1521908591212" expanded="false" signature="624:635" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="646:652" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="696:797" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="872:970" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1029:1073" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1149:1200" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1295:1372" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1440:1507" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1592:1666" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1770:1859" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="1940:2733" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="2758:2769" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="2780:2786" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="2814:3061" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="3088:3396" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="3422:3433" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3451:3457" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3481:3492" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3506:3512" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3535:3546" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3560:3566" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="3589:3600" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="3610:3616" ph=" }" />
-            <marker date="1521908591212" expanded="true" signature="3654:3661" ph="{}" />
-            <marker date="1521908591212" expanded="true" signature="3695:3917" ph="{...}" />
-            <marker date="1521908591212" expanded="true" signature="3964:4219" ph="{...}" />
-            <marker date="1521908591212" expanded="false" signature="4254:4265" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="4340:4346" ph=" }" />
-            <marker date="1521908591212" expanded="false" signature="4376:4387" ph=" { " />
-            <marker date="1521908591212" expanded="false" signature="4416:4422" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Laolx.g4">
+    <entry file="file://$PROJECT_DIR$/Laolx.g4" />
+    <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+        <state relative-caret-position="1653">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NOTES.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="-4126">
+          <caret line="147" column="35" lean-forward="false" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxBaseListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        <state relative-caret-position="152">
+          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
           <folding />
         </state>
       </provider>

@@ -31,7 +31,7 @@ simple-declaration
  *  var string s = "bar"
  *  var lambda{(T a, b) -> int} v  //declare v to be function.
  *  const f = lambda ()->float {return 45}  //define f as function
- *  g = %w{a b c}  //const array of words
+ *  g = %w{a b c}  //const array of words/strings
  *  h = %s{d e f}  //const of symbols
  *  int[] j = [1,2,3]   //array of int.  'j = [1,2,3]' would also be ok (since type can be inferred)
  *  v = lambda (T a, b) -> int {return a + b}  //later define v
@@ -40,7 +40,7 @@ simple-declaration
  *  zz = lambda<T,R>(T a, T b)->R {return a + b}  //template-d function
  *  // example usage: result = zz(12,13)
  *  //              : rr = zz(b:123, a:456)  //named arguments
- *  aa = lambda()->%t{r1,r2} {... return %t{v1,v2}}  //define aa as function return tuple.  Tuple is %t{...}
+ *  aa = lambda()->%t{r1,r2} {... return %t{v1,v2}}  //define aa as function return tuple.
  *  bb = lambda<T1,T2=int>(T1 x)->%t{T2 r1, r2} {... return %t{...}}
  *  v1 = C1.new(...) //v1 is instance of class C1
  *
@@ -56,4 +56,6 @@ simple-declaration
  *  2) By default, all declarations are 'const', unless 'var' specified.
  *  3) [] is fixed array for default/const; else vector (for 'var').
  *  4) 'lambda{...}' syntax expresses a type.
+ *  5) Is is confusing to have [] as array of fixed type and also a tuple (i.e., different types)?
+ *     We could use %t{...} to delimit tuple.  Yeah, lets do that.  More explicit.
  */

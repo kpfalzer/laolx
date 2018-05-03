@@ -25,6 +25,7 @@ IMPORT		: 'import' 		 ;
 IN		    : 'in'   		 ;
 INT			: 'int'			 ;
 INTERFACE	: 'interface'	 ;
+LAMBDA      : 'lambda'       ;
 NAMESPACE	: 'namespace'	 ;
 NEW			: 'new'			 ;
 NIL			: 'nil'			 ;
@@ -32,6 +33,7 @@ OPERATOR	: 'operator'	 ;
 PRIVATE		: 'private'		 ;
 PROTECTED	: 'protected'	 ;
 PUBLIC		: 'public'		 ;
+REGEXPK     : 'regexp'       ;
 RETURN  	: 'return'		 ;
 STATIC		: 'static'		 ;
 STRING		: 'string'		 ;
@@ -44,10 +46,12 @@ TYPEDEF		: 'typedef'		 ;
 UNLESS		: 'unless'		 ;
 UNTIL		: 'until'		 ;
 VAR			: 'var'			 ;
+VOID        : 'void'         ;
 WHEN		: 'when'		 ;
 WHILE		: 'while'		 ;
 
 AND		: '&'  ;
+RARROW  : '->' ;
 AT		: '@'  ;
 CARET	: '^'  ;
 COLON	: ':'  ;
@@ -72,10 +76,15 @@ RPAREN	: ')'  ;
 SEMI	: ';'  -> channel(SemiNlChan);
 SLASH	: '/'  ;
 STAR	: '*'  ;
+WORDS   : '%w{' ;
+SYMBOLS : '%s{' ;
+TUPLE   : '%t{' ;
 
 SQSTRING :	'\'' (ESC | ~['])? '\''  ;
 DQSTRING :	'"' (ESC | ~["])* '"'  ;
 IDENT 	 :	ID_LETTER (ID_LETTER | DIGIT)*  ;
+
+REGEXP   : '%r{' (ESC | ~[{])* '}' [i]? ;
 
 //
 // Number values

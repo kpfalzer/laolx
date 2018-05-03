@@ -66,7 +66,7 @@ class LaolxParserTest {
                 "Map<K: string, T: List<float, CEXPR>>"
         };
 
-        runTest(DATA, LaolxParser::simpleTypeSpecifier);
+        runTest(DATA, LaolxParser::simpleTypeSpec);
     }
 
     static void runTest(String[] data, Function<LaolxParser, ParseTree> rule) {
