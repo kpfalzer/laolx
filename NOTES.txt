@@ -51,6 +51,9 @@ simple-declaration
  *  //declare multiple types
  *  T1 v2, T2 v2, T3[] v3
  *
+ *	//sequence unpacking operator (as python):
+ *  foo, *bar, dog = [1,2,3,4]  // bar=[2,3]
+ *
  *  NOTES:
  *  1) In general, lack of specific type is allowed: assuming 'auto' type inference can be done for c++ target.
  *  2) By default, all declarations are 'const', unless 'var' specified.
