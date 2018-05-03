@@ -31,6 +31,9 @@ package laolx.parser;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,7 +50,27 @@ class LaolxParserTest {
                 "8'hFF00 "
         };
 
-        for (String s : DATA) {
+        runTest(DATA, LaolxParser::number);
+    }
+
+    @org.junit.jupiter.api.Test
+    void simpleTypeSpecifier() {
+        final String DATA[] = new String[]{
+                "int",
+                "float",
+                "string",
+                "some_type",
+                "nmsp1::nmsp2::T1 ",
+                "globnmsp::T2 ",
+                "List<float, CEXPR> ",
+                "Map<K: string, T: List<float, CEXPR>>"
+        };
+
+        runTest(DATA, LaolxParser::simpleTypeSpecifier);
+    }
+
+    static void runTest(String[] data, Function<LaolxParser, ParseTree> rule) {
+        for (String s : data) {
             // create a CharStream that reads from standard input
             CharStream input = CharStreams.fromString(s);
             // create a lexer that feeds off of input CharStream
@@ -56,7 +79,7 @@ class LaolxParserTest {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             // create a parser that feeds off the tokens buffer
             LaolxParser parser = new LaolxParser(tokens);
-            ParseTree tree = parser.number(); // begin parsing at init rule
+            ParseTree tree = rule.apply(parser); // begin parsing at init rule
             System.out.println(tree.toStringTree(parser)); // print LISP-style tree
         }
     }
