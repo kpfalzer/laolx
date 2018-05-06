@@ -51,6 +51,7 @@ WHEN		: 'when'		 ;
 WHILE		: 'while'		 ;
 
 AND		: '&'  ;
+AND2    : '&&' ;
 RARROW  : '->' ;
 AT		: '@'  ;
 CARET	: '^'  ;
@@ -59,7 +60,9 @@ COLON2	: '::'  ;
 COMMA	: ','  ;
 DOT		: '.'  ;
 EQ		: '='  ;
+EQ2     : '==' ;
 EXCL	: '!'  ;
+NOTEQ   : '!=' ;
 GT		: '>'  ;
 LBRACK	: '['  ;
 LCURLY	: '{'  ;
@@ -67,6 +70,7 @@ LPAREN	: '('  ;
 LT		: '<'  ;
 MINUS	: '-'  ;
 OR		: '|'  ;
+OR2     : '||' ;
 PCNT	: '%'  ;
 PLUS	: '+'  ;
 QMARK	: '?'  ;
@@ -79,6 +83,17 @@ STAR	: '*'  ;
 WORDS   : '%w{' ;
 SYMBOLS : '%s{' ;
 TUPLE   : '%t{' ;
+STAREQ  : '*='  ;
+SLASHEQ : '/='  ;
+PCNTEQ  : '%='  ;
+PLUSEQ  : '+='  ;
+MINUSEQ : '-='  ;
+//conflict with '>', '>',... in template 	>>=
+// ... 	<<=
+ANDEQ   : '&='  ;
+CARETEQ : '^='  ;
+OREQ    : '|='  ;
+OR2EQ   : '||=' ;   //conditional (!null) assign
 
 SQSTRING :	'\'' (ESC | ~['])? '\''  ;
 DQSTRING :	'"' (ESC | ~["])* '"'  ;

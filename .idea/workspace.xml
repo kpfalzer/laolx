@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cb86600-7566-4dce-891c-7462d6ba7d28" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/LaolxLexer.g4" afterPath="$PROJECT_DIR$/LaolxLexer.g4" />
       <change beforePath="$PROJECT_DIR$/LaolxParser.g4" afterPath="$PROJECT_DIR$/LaolxParser.g4" />
-      <change beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
-      <change beforePath="$PROJECT_DIR$/NOTES.txt" afterPath="$PROJECT_DIR$/NOTES.txt" />
       <change beforePath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" afterPath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,12 +16,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LaolxParserTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LaolxParserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="66">
+              <caret line="80" column="35" lean-forward="false" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,7 +31,7 @@
       <file leaf-file-name="NOTES.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NOTES.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
+            <state relative-caret-position="501">
               <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
               <folding />
             </state>
@@ -42,18 +41,18 @@
       <file leaf-file-name="LaolxLexer.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1653">
-              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state relative-caret-position="281">
+              <caret line="62" column="16" lean-forward="false" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LaolxParser.g4" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LaolxParser.g4" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+            <state relative-caret-position="653">
+              <caret line="245" column="4" lean-forward="true" selection-start-line="245" selection-start-column="4" selection-end-line="245" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -72,10 +71,12 @@
     <findStrings>
       <find>Declaration</find>
       <find>Parameter</find>
+      <find>Expression</find>
     </findStrings>
     <replaceStrings>
       <replace>Decl</replace>
       <replace>Parm</replace>
+      <replace>Expr</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -91,13 +92,14 @@
       <list>
         <option value="$PROJECT_DIR$/Laolx.g4" />
         <option value="$PROJECT_DIR$/NOTES.txt" />
+        <option value="$PROJECT_DIR$/src/laolx/parser/LaolxParser.java" />
+        <option value="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" />
         <option value="$PROJECT_DIR$/LaolxLexer.g4" />
         <option value="$PROJECT_DIR$/LaolxParser.g4" />
-        <option value="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
     <option name="y" value="23" />
     <option name="width" value="1680" />
@@ -203,6 +205,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,9 +241,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -272,7 +274,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LaolxParserTest">
+  <component name="RunManager" selected="JUnit.LaolxParserTest.simpleDecl">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -332,6 +334,56 @@
       <option name="PACKAGE_NAME" value="laolx.parser" />
       <option name="MAIN_CLASS_NAME" value="laolx.parser.LaolxParserTest" />
       <option name="METHOD_NAME" value="number" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="LaolxParserTest.simpleDecl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="laolx.parser.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="laolx" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="laolx.parser" />
+      <option name="MAIN_CLASS_NAME" value="laolx.parser.LaolxParserTest" />
+      <option name="METHOD_NAME" value="simpleDecl" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="LaolxParserTest.simpleTypeSpecifier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="laolx.parser.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="laolx" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="laolx.parser" />
+      <option name="MAIN_CLASS_NAME" value="laolx.parser.LaolxParserTest" />
+      <option name="METHOD_NAME" value="simpleTypeSpecifier" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -404,14 +456,18 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="JUnit.LaolxParserTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.number" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.simpleTypeSpecifier" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.simpleDecl" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.LaolxParserTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.number" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.simpleDecl" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.LaolxParserTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.simpleTypeSpecifier" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LaolxParserTest.number" />
       </list>
     </recent_temporary>
   </component>
@@ -432,23 +488,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LaolxParserTest - 2018.05.02 at 13h 35m 45s.xml">
+    <history-entry file="LaolxParserTest - 2018.05.06 at 14h 56m 12s.xml">
       <configuration name="LaolxParserTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LaolxParserTest - 2018.05.02 at 13h 38m 20s.xml">
-      <configuration name="LaolxParserTest" configurationId="JUnit" />
+    <history-entry file="LaolxParserTest_simpleDecl - 2018.05.06 at 14h 56m 34s.xml">
+      <configuration name="LaolxParserTest.simpleDecl" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LaolxParserTest - 2018.05.02 at 16h 25m 27s.xml">
-      <configuration name="LaolxParserTest" configurationId="JUnit" />
+    <history-entry file="LaolxParserTest_simpleDecl - 2018.05.06 at 14h 56m 59s.xml">
+      <configuration name="LaolxParserTest.simpleDecl" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LaolxParserTest - 2018.05.02 at 17h 01m 23s.xml">
-      <configuration name="LaolxParserTest" configurationId="JUnit" />
+    <history-entry file="LaolxParserTest_simpleDecl - 2018.05.06 at 14h 58m 19s.xml">
+      <configuration name="LaolxParserTest.simpleDecl" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LaolxParserTest - 2018.05.03 at 10h 44m 07s.xml">
-      <configuration name="LaolxParserTest" configurationId="JUnit" />
+    <history-entry file="LaolxParserTest_simpleDecl - 2018.05.06 at 14h 58m 59s.xml">
+      <configuration name="LaolxParserTest.simpleDecl" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LaolxParserTest_number - 2018.05.02 at 16h 59m 09s.xml">
-      <configuration name="LaolxParserTest.number" configurationId="JUnit" />
+    <history-entry file="LaolxParserTest_simpleDecl - 2018.05.06 at 14h 59m 30s.xml">
+      <configuration name="LaolxParserTest.simpleDecl" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LaolxParserTest_simpleTypeSpecifier - 2018.05.06 at 14h 45m 50s.xml">
+      <configuration name="LaolxParserTest.simpleTypeSpecifier" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LaolxParserTest_simpleTypeSpecifier - 2018.05.06 at 14h 47m 01s.xml">
+      <configuration name="LaolxParserTest.simpleTypeSpecifier" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LaolxParserTest_simpleTypeSpecifier - 2018.05.06 at 14h 47m 51s.xml">
+      <configuration name="LaolxParserTest.simpleTypeSpecifier" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LaolxParserTest_simpleTypeSpecifier - 2018.05.06 at 14h 52m 17s.xml">
+      <configuration name="LaolxParserTest.simpleTypeSpecifier" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -469,9 +537,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26190478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26190478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42574257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25274727" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -497,9 +565,45 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1653">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NOTES.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -532,7 +636,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -568,50 +674,45 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Laolx.g4" />
-    <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1653">
-          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxBaseListener.java" />
     <entry file="file://$PROJECT_DIR$/NOTES.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
+        <state relative-caret-position="501">
           <caret line="43" column="61" lean-forward="false" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4126">
-          <caret line="147" column="35" lean-forward="false" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/laolx/parser/LaolxBaseListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+        <state relative-caret-position="186">
+          <caret line="139" column="45" lean-forward="false" selection-start-line="139" selection-start-column="35" selection-end-line="139" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        <state relative-caret-position="66">
+          <caret line="80" column="35" lean-forward="false" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxLexer.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="62" column="16" lean-forward="false" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LaolxParser.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="245" column="4" lean-forward="true" selection-start-line="245" selection-start-column="4" selection-end-line="245" selection-end-column="4" />
           <folding />
         </state>
       </provider>

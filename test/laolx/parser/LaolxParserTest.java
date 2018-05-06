@@ -63,10 +63,25 @@ class LaolxParserTest {
                 "nmsp1::nmsp2::T1 ",
                 "globnmsp::T2 ",
                 "List<float, CEXPR> ",
-                "Map<K: string, T: List<float, CEXPR>>"
+                "Map<K: string, T: List<float, CEXPR>>",
+                "%r{[a-zA-Z_]?regexp$}",
+                "%t{T1 v, int x, float z}",
+                "Tuple<T1: int, T2: float> [][]",
+                "lambda{(a,b)->float}"
         };
 
         runTest(DATA, LaolxParser::simpleTypeSpec);
+    }
+
+    @org.junit.jupiter.api.Test
+    void simpleDecl() {
+        final String DATA[] = new String[]{
+                "lambda{(a,b)->float} v, const float *x",
+                "a,*b,t[] d",
+                "var t1 c, const *f"
+        };
+
+        runTest(DATA, LaolxParser::simpleDecl);
     }
 
     static void runTest(String[] data, Function<LaolxParser, ParseTree> rule) {
