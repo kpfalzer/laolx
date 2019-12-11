@@ -150,6 +150,7 @@ namedInitializerList
 
 bracedInitList
 :   LCURLY namedInitializerList? RCURLY
+|   LBRACK expressions? RBRACK
 ;
 
 initializerClause
@@ -184,7 +185,7 @@ string
 ;
 
 simpleTypeSpec
-:   INT | FLOAT | STRING | SYMBOL | CHAR | REGEXP
+:   INT | FLOAT | STRING | SYMBOL | CHAR | REGEXPK
 |   tupleTypeSpec
 |   mapTypeSpec
 |   lambdaTypeSpec
@@ -244,5 +245,77 @@ number
 
 unaryExpr
 :   TODO
+;
+
+primaryExpr
+:   literal
+|   THIS
+|   LPAREN expression RPAREN
+|   idExpr
+|   lambdaExpr
+;
+
+literal
+:   string
+|   REGEXP
+|   number
+|   bool
+|   NIL
+|   symbol
+|   symbols
+|   words
+|   bracedInitList  //map
+|   tuple
+;
+
+array
+:   LBRACK expressions RBRACK
+;
+
+tuple
+:   TUPLE expressions? RCURLY
+;
+
+expressions
+:   expression (COMMA expression)*
+;
+
+symbol
+:   COLON IDENT
+;
+
+words
+:   WORDS IDENT* RCURLY
+;
+
+symbols
+:   SYMBOLS IDENT* RCURLY
+;
+
+idExpr
+:   unqualifiedId
+|   qualifiedId
+;
+
+unqualifiedId
+:   IDENT
+//todo: c++ allows operator here...
+|   simpleTemplateId
+;
+
+simpleTemplateId
+:   IDENT LT templateArgumentList? GT
+;
+
+qualifiedId
+:   TODO
+;
+
+lambdaExpr
+:   TODO
+;
+
+bool
+:   TRUE | FALSE
 ;
 
