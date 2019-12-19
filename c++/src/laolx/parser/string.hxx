@@ -8,22 +8,42 @@
 #ifndef laolx_parser_string_hxx
 #define laolx_parser_string_hxx
 
-#include "laolx/parser/terminal.hxx"
+#include "laolx/parser/laolx.hxx"
 
 namespace laolx {
 namespace parser {
 
-class String : public _Terminal {
+class String : public _Acceptor {
 public:
-    
-    bool parse(Consumer& consumer, TPNodeCollector collector);
+    explicit String()
+    {}
     
     virtual ~String()
     {}
     
+    static const String& THE_ONE;
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        bool isSquote() const;
+        
+        bool isDquote() const;
+        
+    private:
+        friend class String;
+        
+        explicit Node(const TPNode& node);
+    };
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+    
 };
 
-typedef PTRcObjPtr<String>  TPString;
+typedef PTRcObjPtr<String::Node>  TPStringNode;
 
 }
 }

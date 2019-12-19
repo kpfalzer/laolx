@@ -11,22 +11,29 @@
 namespace laolx {
 namespace parser {
 
-using apfev3::_Acceptor;
-using apfev3::Consumer;
-using apfev3::TPTokens;
-
-class String::__Acceptor : public _Acceptor {
-public:
-    
-protected:
-    TPTokens _accept(Consumer& consumer) const;
-};
-
 //todo: #{expression} as EVALSTRING, actually parses expression.
-static const apfev3::Terminal __evalBegin("#{");
-static const apfev3::Regex __evalBody("([^}\\\\]|\\\\.)*}");
-static const apfev3::Regex __squoted("'([^'\\\\]|\\\\.)*'");
-static const apfev3::Regex __dquoted("\"([^\"\\\\]|\\\\.)*\"");
+
+TPNode
+String::_accept(Consumer& consumer) const {
+    TPNode node = apfev3::token::Quoted::THE_ONE.accept(consumer);
+    return (node.isValid()) ? new Node(node) : node;
+}
+
+bool
+String::Node::isSquote() const {
+    return '\'' == text[0];
+}
+
+bool
+String::Node::isDquote() const {
+    return '"' == text[0];
+}
+
+String::Node::Node(const TPNode& node)
+: _Terminal(node)
+{}
+
+/*static*/ const String& String::THE_ONE = String();
 
 }
 }
