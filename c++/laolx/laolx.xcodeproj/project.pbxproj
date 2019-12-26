@@ -10,6 +10,8 @@
 		5C9BC59F23AAF65F0074E184 /* string.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC59A23AAF65F0074E184 /* string.cxx */; };
 		5C9BC5A023AAF65F0074E184 /* source_file.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC59B23AAF65F0074E184 /* source_file.cxx */; };
 		5C9BC5C723AB18C90074E184 /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC5C623AB18C90074E184 /* main.cxx */; };
+		5CC2499C23B1379B007E648F /* import_stmt.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2499B23B1379B007E648F /* import_stmt.cxx */; };
+		5CC4308523AD9FCC0049BF09 /* token.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4308423AD9FCC0049BF09 /* token.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,11 @@
 		5C9BC59A23AAF65F0074E184 /* string.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string.cxx; sourceTree = "<group>"; };
 		5C9BC59B23AAF65F0074E184 /* source_file.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = source_file.cxx; sourceTree = "<group>"; };
 		5C9BC5C623AB18C90074E184 /* main.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cxx; sourceTree = "<group>"; };
+		5CC2499B23B1379B007E648F /* import_stmt.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import_stmt.cxx; sourceTree = "<group>"; };
+		5CC4306A23AD6DD60049BF09 /* grammar.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grammar.txt; path = ../../grammar.txt; sourceTree = "<group>"; };
+		5CC4308323AD9BF80049BF09 /* token.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = token.hxx; sourceTree = "<group>"; };
+		5CC4308423AD9FCC0049BF09 /* token.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = token.cxx; sourceTree = "<group>"; };
+		5CC4308623ADA5090049BF09 /* import_stmt.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = import_stmt.hxx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +55,7 @@
 		5C9BC57623AAF5DF0074E184 = {
 			isa = PBXGroup;
 			children = (
+				5CC4306A23AD6DD60049BF09 /* grammar.txt */,
 				5C9BC5C623AB18C90074E184 /* main.cxx */,
 				5C9BC58A23AAF65F0074E184 /* src */,
 				5C9BC58023AAF5DF0074E184 /* Products */,
@@ -82,6 +90,10 @@
 		5C9BC59623AAF65F0074E184 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				5CC2499B23B1379B007E648F /* import_stmt.cxx */,
+				5CC4308623ADA5090049BF09 /* import_stmt.hxx */,
+				5CC4308423AD9FCC0049BF09 /* token.cxx */,
+				5CC4308323AD9BF80049BF09 /* token.hxx */,
 				5C9BC59723AAF65F0074E184 /* source_file.hxx */,
 				5C9BC59823AAF65F0074E184 /* laolx.hxx */,
 				5C9BC59923AAF65F0074E184 /* string.hxx */,
@@ -150,7 +162,9 @@
 			files = (
 				5C9BC59F23AAF65F0074E184 /* string.cxx in Sources */,
 				5C9BC5A023AAF65F0074E184 /* source_file.cxx in Sources */,
+				5CC2499C23B1379B007E648F /* import_stmt.cxx in Sources */,
 				5C9BC5C723AB18C90074E184 /* main.cxx in Sources */,
+				5CC4308523AD9FCC0049BF09 /* token.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +283,8 @@
 		5C9BC58723AAF5DF0074E184 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				"HEADER_SEARCH_PATHS[arch=*]" = ../src;
 				"OTHER_LDFLAGS[arch=*]" = ../../../apfev3/debug/Darwin/apfev3.a;
@@ -279,6 +295,8 @@
 		5C9BC58823AAF5DF0074E184 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				"HEADER_SEARCH_PATHS[arch=*]" = ../src;
 				PRODUCT_NAME = "$(TARGET_NAME)";

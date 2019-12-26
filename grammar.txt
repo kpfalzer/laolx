@@ -6,13 +6,15 @@
 
 SourceFile: ImportStatement* (Declaration | Statement)* EOF
 
-ImportStatement: K_IMPORT ImportSpecifierList
-
-String: SQSTRING | DQSTRING | EVALSTRING
+ImportStatement:
+    K_IMPORT ImportSpecifierList S_SEMICOLON
+|   K_FROM ImportSpecifier IMPORT ImportSpecifierList S_SEMICOLON
 
 ImportSpecifierList: ImportSpecifier (COMMA ImportSpecifier)*
 
-ImportSpecifier: IDENT (S_DOT IDENT)* (K_AS IDENT)?
+ImportSpecifier: IDENT (S_DOT IDENT)*
+
+String: SQSTRING | DQSTRING | EVALSTRING
 
 // extern linkage declarations do not have bodies, etc.
 Linkage: K_EXTERN String
