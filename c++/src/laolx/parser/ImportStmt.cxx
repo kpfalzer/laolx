@@ -6,8 +6,8 @@
 //
 
 #include "xyzzy/refcnt.hxx"
-#include "laolx/parser/token.hxx"
-#include "laolx/parser/import_stmt.hxx"
+#include "laolx/parser/Token.hxx"
+#include "laolx/parser/ImportStmt.hxx"
 
 using apfev3::Sequence;
 using apfev3::Repetition;

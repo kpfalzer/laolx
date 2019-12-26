@@ -6,7 +6,7 @@
 //
 
 #include "apfev3/acceptor.hxx"
-#include "laolx/parser/token.hxx"
+#include "laolx/parser/Token.hxx"
 
 namespace laolx {
 namespace parser {

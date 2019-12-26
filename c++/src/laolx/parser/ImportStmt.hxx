@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "laolx/parser/laolx.hxx"
-#include "laolx/parser/token.hxx"
+#include "laolx/parser/Token.hxx"
 
 namespace laolx {
 namespace parser {
