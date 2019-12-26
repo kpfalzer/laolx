@@ -105,9 +105,10 @@ ImportStmt::Node::Node(const TPNode& all, const TPNode& from, const TPNode& impo
 }
 
 ostream&
-ImportStmt::Node::Node::operator<<(ostream& os) const {
+ImportStmt::Node::operator<<(ostream& os) const {
     return NodeVector::operator<<(os);
 }
+
 
 }
 }

@@ -8,8 +8,8 @@
 
 #include <string>
 #include <iostream>
-#include "laolx/parser/string.hxx"
-#include "laolx/parser/import_stmt.hxx"
+#include "laolx/parser/String.hxx"
+#include "laolx/parser/ImportStmt.hxx"
 
 using std::string;
 using std::cout;
