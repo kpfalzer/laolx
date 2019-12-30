@@ -37,6 +37,12 @@ inline TP##_type##Node to##_type##Node(const TPNode& node) {        \
         return xyzzy::downcast<apfev3::_Node, _type::Node>(node);   \
     }
 
+//For inner class
+#define DEF_TO_XXXICNODE(_type, _name) \
+inline TP##_name##Node to##_name##Node(const TPNode& node) {        \
+        return xyzzy::downcast<apfev3::_Node, _type::Node>(node);   \
+    }
+
 }
 }
 

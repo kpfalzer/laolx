@@ -1,24 +1,24 @@
 //
-//  @CLASS@.hxx
+//  ExpressionEle.hxx
 //  
 //
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_@CLASS@_stmt_hxx
-#define laolx_parser_@CLASS@_stmt_hxx
+#ifndef laolx_parser_ExpressionEle_stmt_hxx
+#define laolx_parser_ExpressionEle_stmt_hxx
 
 #include "laolx/parser/laolx.hxx"
 
 namespace laolx {
 namespace parser {
 
-class @CLASS@ : public _Acceptor {
+class ExpressionEle : public _Acceptor {
 public:
-    explicit @CLASS@()
+    explicit ExpressionEle()
     {}
     
-    virtual ~@CLASS@()
+    virtual ~ExpressionEle()
     {}
     
     class Node : public NodeVector {
@@ -29,21 +29,21 @@ public:
         virtual ostream& operator<<(ostream& os) const;
         
     private:
-        friend class @CLASS@;
+        friend class ExpressionEle;
 
 		explicit Node(const TPNode& node);
     };
     
-    static const @CLASS@& THE_ONE;
+    static const ExpressionEle& THE_ONE;
     
 protected:
     TPNode _accept(Consumer& consumer) const;
 };
 
-typedef PTRcObjPtr<@CLASS@::Node> TP@CLASS@Node;
-DEF_TO_XXXNODE(@CLASS@)
+typedef PTRcObjPtr<ExpressionEle::Node> TPExpressionEleNode;
+DEF_TO_XXXNODE(ExpressionEle)
 
 }
 }
 
-#endif /* laolx_parser_@CLASS@_stmt_hxx */
+#endif /* laolx_parser_ExpressionEle_stmt_hxx */

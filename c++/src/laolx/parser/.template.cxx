@@ -13,6 +13,7 @@ namespace parser {
 TPNode
 @CLASS@::_accept(Consumer& consumer) const {
 	//todo
+	TPNode node = nullptr; //todo
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 

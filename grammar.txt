@@ -136,19 +136,19 @@ ExpressionEle:
 
 BinaryOp: //see code directly
 
-UnaryExpression:
-	PostfixExpression
-|	(S_PLUS2 | S_MINUS2) UnaryExpression
-|	UnaryOperator UnaryExpression
+UnaryExpression: UnaryOp? PostfixExpression
 
-UnaryOperator: S_PLUS | S_MINUS | S_EXCLAMATION | S_TILDE
+UnaryOp: S_PLUS2 | S_MINUS2 | S_PLUS | S_MINUS | S_EXCLAMATION | S_TILDE
 
 // NOTE: removed left recursion: 
-// A: A x | y
+// a: a X | Y
 // by
-// A: y A_X?
-// A_X: x A_X?
+// a: Y a_x?
+// a_x: X a_x?
 //
+// what about replace with?
+// a: Y X*
+
 PostfixExpression: PostfixExpressionY PostfixExpressionX?
 
 PostfixExpressionY:
@@ -170,18 +170,13 @@ PrimaryExpression:
 |	IdExpression
 |	LambdaExpression
 
-/**
+//lambda looks like ruby closure
 LambdaExpression:
-	S_OR IDENT (COMMA IDENT)* S_OR 
-		ReturnSpecifier? 
-		S_LCURLY Statement* S_RCURLY
- **/
-// Change to look more method-like
-LambdaExpression:
-	K_DEF Name
-		MethodParametersDeclaration?
+	S_LCURLY
+        S_OR MethodParametersDeclaration S_OR
 		ReturnSpecifier?
-		S_LCURLY MethodBody S_RCURLY
+		MethodBody
+        S_RCURLY
 
 Literal:
 	SYMBOL

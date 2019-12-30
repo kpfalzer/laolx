@@ -12,6 +12,10 @@
 		5C85A44D23B5259C0047F689 /* String.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44723B5259C0047F689 /* String.cxx */; };
 		5C85A44E23B5259C0047F689 /* Token.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44823B5259C0047F689 /* Token.cxx */; };
 		5C9BC5C723AB18C90074E184 /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC5C623AB18C90074E184 /* main.cxx */; };
+		5CFE00B923B6C81E008EAFC7 /* ExpressionEle.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00B723B6C81E008EAFC7 /* ExpressionEle.cxx */; };
+		5CFE00BE23B6C870008EAFC7 /* PostfixExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00BA23B6C870008EAFC7 /* PostfixExpression.cxx */; };
+		5CFE00BF23B6C870008EAFC7 /* UnaryExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00BC23B6C870008EAFC7 /* UnaryExpression.cxx */; };
+		5CFE00C223B6C97C008EAFC7 /* UnaryOp.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +43,14 @@
 		5C9BC57F23AAF5DF0074E184 /* laolx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = laolx; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C9BC5C623AB18C90074E184 /* main.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cxx; sourceTree = "<group>"; };
 		5CC4306A23AD6DD60049BF09 /* grammar.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grammar.txt; path = ../../grammar.txt; sourceTree = "<group>"; };
+		5CFE00B723B6C81E008EAFC7 /* ExpressionEle.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpressionEle.cxx; sourceTree = "<group>"; };
+		5CFE00B823B6C81E008EAFC7 /* ExpressionEle.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExpressionEle.hxx; sourceTree = "<group>"; };
+		5CFE00BA23B6C870008EAFC7 /* PostfixExpression.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PostfixExpression.cxx; sourceTree = "<group>"; };
+		5CFE00BB23B6C870008EAFC7 /* PostfixExpression.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PostfixExpression.hxx; sourceTree = "<group>"; };
+		5CFE00BC23B6C870008EAFC7 /* UnaryExpression.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnaryExpression.cxx; sourceTree = "<group>"; };
+		5CFE00BD23B6C870008EAFC7 /* UnaryExpression.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UnaryExpression.hxx; sourceTree = "<group>"; };
+		5CFE00C023B6C97C008EAFC7 /* UnaryOp.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UnaryOp.hxx; sourceTree = "<group>"; };
+		5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnaryOp.cxx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +102,14 @@
 		5C9BC59623AAF65F0074E184 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */,
+				5CFE00C023B6C97C008EAFC7 /* UnaryOp.hxx */,
+				5CFE00BA23B6C870008EAFC7 /* PostfixExpression.cxx */,
+				5CFE00BB23B6C870008EAFC7 /* PostfixExpression.hxx */,
+				5CFE00BC23B6C870008EAFC7 /* UnaryExpression.cxx */,
+				5CFE00BD23B6C870008EAFC7 /* UnaryExpression.hxx */,
+				5CFE00B723B6C81E008EAFC7 /* ExpressionEle.cxx */,
+				5CFE00B823B6C81E008EAFC7 /* ExpressionEle.hxx */,
 				5C85A44223B5259C0047F689 /* ImportStmt.cxx */,
 				5C85A44423B5259C0047F689 /* ImportStmt.hxx */,
 				5C85A44923B5259C0047F689 /* laolx.hxx */,
@@ -161,10 +181,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C85A44C23B5259C0047F689 /* SourceFile.cxx in Sources */,
+				5CFE00BE23B6C870008EAFC7 /* PostfixExpression.cxx in Sources */,
 				5C85A44B23B5259C0047F689 /* ImportStmt.cxx in Sources */,
+				5CFE00BF23B6C870008EAFC7 /* UnaryExpression.cxx in Sources */,
 				5C85A44D23B5259C0047F689 /* String.cxx in Sources */,
 				5C85A44E23B5259C0047F689 /* Token.cxx in Sources */,
+				5CFE00B923B6C81E008EAFC7 /* ExpressionEle.cxx in Sources */,
 				5C9BC5C723AB18C90074E184 /* main.cxx in Sources */,
+				5CFE00C223B6C97C008EAFC7 /* UnaryOp.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

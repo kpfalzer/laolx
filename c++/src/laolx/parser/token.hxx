@@ -40,11 +40,22 @@ public:
         enum EType {
             eS_AND,
             eS_AND2,
+            eS_COLON,
             eS_COMMA,
             eS_DOT,
+            eS_EXCLAMATION,
             eS_LT,
+            eS_LBRACK,
+            eS_LPAREN,
             eS_GT,
+            eS_MINUS,
+            eS_MINUS2,
+            eS_PLUS,
+            eS_PLUS2,
+            eS_RBRACK,
+            eS_RPAREN,
             eS_SEMICOLON,
+            eS_TILDE,
             //
             //keywords
             eK_FROM,
@@ -84,10 +95,21 @@ private:
 extern const Token
     S_AND,
     S_AND2,
+    S_COLON,
     S_COMMA,
     S_DOT,
     S_LT,
     S_GT,
+    S_LBRACK,
+    S_LPAREN,
+    S_MINUS,
+    S_MINUS2,
+    S_PLUS,
+    S_PLUS2,
+    S_RBRACK,
+    S_RPAREN,
+    S_TILDE,
+    S_EXCLAMATION,
     S_SEMICOLON,
     //
     // keywords
@@ -96,6 +118,7 @@ extern const Token
     K_IMPORT
 ;
 
+typedef Token::Node              TokenNode;
 typedef PTRcObjPtr<Token::Node>  TPTokenNode;
 typedef PTRcObjPtr<Ident::Node>  TPIdentNode;
 
