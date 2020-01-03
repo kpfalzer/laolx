@@ -13,6 +13,36 @@
 namespace laolx {
 namespace parser {
 
+class Regexp : public _Acceptor {
+public:
+    explicit Regexp()
+    {}
+    
+    virtual ~Regexp()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+    private:
+        friend class Regexp;
+
+		explicit Node(const TPNode& node)
+        : _Terminal(node)
+        {}
+    };
+    
+    static const Regexp& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Regexp::Node> TPRegexpNode;
+DEF_TO_XXXNODE(Regexp)
+
 class Ident : public _Acceptor {
 public:
     class Node : public _Terminal {

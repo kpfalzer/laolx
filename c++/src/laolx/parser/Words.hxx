@@ -73,36 +73,6 @@ protected:
 typedef PTRcObjPtr<Symbols::Node> TPSymbolsNode;
 DEF_TO_XXXNODE(Symbols)
 
-class Regexp : public _Acceptor {
-public:
-    explicit Regexp()
-    {}
-    
-    virtual ~Regexp()
-    {}
-    
-    class Node : public NodeVector {
-    public:
-        virtual ~Node()
-        {}
-        
-        virtual ostream& operator<<(ostream& os) const;
-        
-    private:
-        friend class Regexp;
-
-		explicit Node(const TPNode& node);
-    };
-    
-    static const Regexp& THE_ONE;
-    
-protected:
-    TPNode _accept(Consumer& consumer) const;
-};
-
-typedef PTRcObjPtr<Regexp::Node> TPRegexpNode;
-DEF_TO_XXXNODE(Regexp)
-
 }
 }
 

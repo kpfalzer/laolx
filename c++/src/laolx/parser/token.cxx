@@ -11,6 +11,45 @@
 namespace laolx {
 namespace parser {
 
+using apfev3::token::CharSequence;
+using apfev3::token::Spacing;
+
+// accept : /.../ or %r{...}
+TPNode
+Regexp::_accept(Consumer& consumer) const {
+    TPNode node;
+    if (consumer[0] == '/') {
+        const char opening = consumer[0];
+        size_t n = 1;
+        for (; !(consumer[n] == opening) && !consumer.isEOF(n); ++n) {
+            if (consumer[n] == '\\') ++n;
+        }
+        node = toNode(consumer.accept(n+1)); //todo
+    } else {
+        static const char* OPEN = "%r{";
+        static const CharSequence R1(OPEN);
+        const Mark start = consumer.mark();
+        node = R1.accept(consumer);
+        if (node.isValid()) {
+            size_t n = 0;
+            for (; !(consumer[n] == '}') && !consumer.isEOF(n); ++n) {
+                if (consumer[n] == '\\') ++n;
+            }
+            INVARIANT(!consumer.isEOF(n));
+            consumer.rewind(start);
+            n += strlen(OPEN);
+            node = toNode(consumer.accept(n+1));
+        }
+    }
+    if (node.isValid()) {
+        node = new Node(node);
+        Spacing::THE_ONE.accept(consumer);
+    }
+    return (node.isValid()) ? node : nullptr;
+}
+
+/*static*/ const Regexp& Regexp::THE_ONE = Regexp();
+
 TPNode
 Ident::_accept(Consumer& consumer) const {
     TPNode node = apfev3::token::Ident::THE_ONE.accept(consumer);

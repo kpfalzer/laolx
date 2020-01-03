@@ -48,24 +48,5 @@ Symbols::Node::operator<<(ostream& os) const {
     return os;
 }
 
-TPNode
-Regexp::_accept(Consumer& consumer) const {
-	//todo
-	TPNode node = nullptr; //todo
-    return (node.isValid()) ? new Node(node) : nullptr;
-}
-
-/*static*/ const Regexp& Regexp::THE_ONE = Regexp();
-
-Regexp::Node::Node(const TPNode& node) {
-    //todo
-}
-
-ostream&
-Regexp::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
-}
-
 }
 }

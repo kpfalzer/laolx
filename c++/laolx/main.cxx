@@ -31,6 +31,7 @@ USING(ImportSpecifier);
 USING(ImportSpecifierList);
 USING(ImportStmt);
 USING(Bool);
+USING(Regexp);
 //
 
 int main(int argc, const char** argv) {
@@ -88,6 +89,14 @@ int main(int argc, const char** argv) {
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match6=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Regexp::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("/foobar.*$/ %r{and\\s+this\\}or}");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match7=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;
