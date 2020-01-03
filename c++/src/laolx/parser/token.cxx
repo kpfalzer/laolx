@@ -36,20 +36,33 @@ const Token
     S_EXCLAMATION("!", Token::Node::eS_EXCLAMATION),
     S_TILDE("~", Token::Node::eS_TILDE),
     S_LBRACK("[", Token::Node::eS_LBRACK),
+    S_LCURLY("{", Token::Node::eS_LCURLY),
     S_LPAREN("(", Token::Node::eS_LPAREN),
     S_LT("<", Token::Node::eS_LT),
     S_MINUS("-", Token::Node::eS_MINUS),
     S_MINUS2("--", Token::Node::eS_MINUS2),
+    S_OR("|", Token::Node::eS_OR),
     S_PLUS("+", Token::Node::eS_PLUS),
     S_PLUS2("++", Token::Node::eS_PLUS2),
     S_GT(">", Token::Node::eS_GT),
     S_DOT(".", Token::Node::eS_DOT),
     S_RBRACK("]", Token::Node::eS_RBRACK),
+    S_RCURLY("}", Token::Node::eS_RCURLY),
     S_RPAREN(")", Token::Node::eS_RPAREN),
     S_SEMICOLON(";", Token::Node::eS_SEMICOLON),
     //
+    K_BOOL("bool", Token::Node::eK_BOOL),
+    K_CHAR("char", Token::Node::eK_CHAR),
+    K_FALSE("false", Token::Node::eK_FALSE),
+    K_FLOAT("float", Token::Node::eK_FLOAT),
     K_FROM("from", Token::Node::eK_FROM),
-    K_IMPORT("import", Token::Node::eK_IMPORT)
+    K_IMPORT("import", Token::Node::eK_IMPORT),
+    K_INT("int", Token::Node::eK_INT),
+    K_NIL("nil", Token::Node::eK_NIL),
+    K_STRING("string", Token::Node::eK_STRING),
+    K_SYMBOL("symbol", Token::Node::eK_SYMBOL),
+    K_THIS("this", Token::Node::eK_THIS),
+    K_TRUE("true", Token::Node::eK_TRUE)
 ;
 
 ostream&

@@ -46,20 +46,33 @@ public:
             eS_EXCLAMATION,
             eS_LT,
             eS_LBRACK,
+            eS_LCURLY,
             eS_LPAREN,
             eS_GT,
             eS_MINUS,
             eS_MINUS2,
+            eS_OR,
             eS_PLUS,
             eS_PLUS2,
             eS_RBRACK,
+            eS_RCURLY,
             eS_RPAREN,
             eS_SEMICOLON,
             eS_TILDE,
             //
             //keywords
+            eK_BOOL,
+            eK_CHAR,
+            eK_FALSE,
+            eK_FLOAT,
             eK_FROM,
-            eK_IMPORT
+            eK_IMPORT,
+            eK_INT,
+            eK_NIL,
+            eK_STRING,
+            eK_SYMBOL,
+            eK_THIS,
+            eK_TRUE,
         };
         
         const EType type;
@@ -101,12 +114,15 @@ extern const Token
     S_LT,
     S_GT,
     S_LBRACK,
+    S_LCURLY,
     S_LPAREN,
     S_MINUS,
     S_MINUS2,
+    S_OR,
     S_PLUS,
     S_PLUS2,
     S_RBRACK,
+    S_RCURLY,
     S_RPAREN,
     S_TILDE,
     S_EXCLAMATION,
@@ -114,8 +130,18 @@ extern const Token
     //
     // keywords
     //
+    K_BOOL,
+    K_CHAR,
+    K_FALSE,
+    K_FLOAT,
     K_FROM,
-    K_IMPORT
+    K_IMPORT,
+    K_INT,
+    K_NIL,
+    K_STRING,
+    K_SYMBOL,
+    K_THIS,
+    K_TRUE
 ;
 
 typedef Token::Node              TokenNode;

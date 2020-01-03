@@ -9,6 +9,7 @@ foreach cls (${*})
 			echo "${dest}: generating ..."
 			sed "s/@CLASS@/${cls}/g" .template${sfx} >! ${dest}
 			if ($status) exit 1
+			git add ${dest}
 		endif
 	end
 end

@@ -10,6 +10,7 @@
 #include <iostream>
 #include "laolx/parser/String.hxx"
 #include "laolx/parser/ImportStmt.hxx"
+#include "laolx/parser/Bool.hxx"
 
 using std::string;
 using std::cout;
@@ -17,18 +18,20 @@ using std::endl;
 using apfev3::TPNode;
 using apfev3::Consumer;
 using apfev3::CharBuf;
+using apfev3::Repetition;
 using laolx::parser::String;
 using laolx::parser::TPIdentNode;
-using laolx::parser::toImportSpecifierNode;
-using laolx::parser::TPImportSpecifierNode;
-using laolx::parser::ImportSpecifier;
-using laolx::parser::toImportSpecifierListNode;
-using laolx::parser::TPImportSpecifierListNode;
-using laolx::parser::ImportSpecifierList;
-using laolx::parser::ImportStmt;
-using laolx::parser::toImportStmtNode;
-using laolx::parser::TPImportStmtNode;
-using laolx::parser::ImportStmt;
+
+#define USING(_x) \
+using laolx::parser::to##_x##Node; \
+using laolx::parser::TP##_x##Node; \
+using laolx::parser::_x
+//
+USING(ImportSpecifier);
+USING(ImportSpecifierList);
+USING(ImportStmt);
+USING(Bool);
+//
 
 int main(int argc, const char** argv) {
     {
@@ -77,6 +80,14 @@ int main(int argc, const char** argv) {
         Consumer consumer(INPUT);
         TPNode match = ImportStmt::THE_ONE.accept(consumer);
         cout << "match5=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Bool::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("false true false");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match6=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;

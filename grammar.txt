@@ -61,15 +61,15 @@ TemplateParameterList:
 
 TemplateParameter: IDENT (S_EQ TemplateArgument)?
 
-MethodParametersDeclaration:
-	S_LPAREN MethodParameterList? S_RPAREN
-
-MethodParameterList:
-	MethodParameter (COMMA MethodParameter)*
-
 MethodParameter:
 	Access? Mutability? SimpleTypeSpecifier 
 		VarOrAttrName (S_EQ InitializerClause)?
+
+MethodParameterList:
+    MethodParameter (COMMA MethodParameter)*
+
+MethodParametersDeclaration:
+    S_LPAREN MethodParameterList? S_RPAREN
 
 Mutability: K_CONST | K_VAR
 
@@ -108,7 +108,7 @@ BaseTypeSpecifier:
 // class | interface name
 BaseName: IDENT | SimpleTemplateId
 
-InitializerClause: AssignmentExpression | BracedInitList
+InitializerClause: ConditionalExpression | BracedInitList
 
 BracedInitList: 
 //	S_LCURLY InitializerList COMMA? S_RCURLY
@@ -120,15 +120,13 @@ BracedInitList:
 InitializerList:
 	InitializerClause (S_COMMA InitializerClause)*
 
-AssignmentExpression: ConditionalExpression
-
 ConditionalExpression:
 	ExpressionEle (S_QMARK Expression S_COLON Expression)?
 
 // NOTE: Semantics of comma operator here are not same as c++/default.
 // Here, we are like ruby and create collection.
 // (c++: http://en.cppreference.com/w/cpp/language/operator_other)
-Expression: AssignmentExpression //kiss: (S_COMMA AssignmentExpression)*
+Expression: ConditionalExpression //kiss: (S_COMMA ConditionalExpression)*
 
 // NOTE: ExpressionEle is simplified logical-or-expression of c++ grammar
 ExpressionEle:
@@ -175,7 +173,7 @@ LambdaExpression:
 	S_LCURLY
         S_OR MethodParametersDeclaration S_OR
 		ReturnSpecifier?
-		MethodBody
+		Statement*
         S_RCURLY
 
 Literal:
