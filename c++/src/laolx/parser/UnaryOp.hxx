@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_UnaryOp_stmt_hxx
-#define laolx_parser_UnaryOp_stmt_hxx
+#ifndef laolx_parser_UnaryOp_hxx
+#define laolx_parser_UnaryOp_hxx
 
 #include "laolx/parser/laolx.hxx"
 #include "laolx/parser/Token.hxx"
@@ -55,4 +55,4 @@ DEF_TO_XXXNODE(UnaryOp)
 }
 }
 
-#endif /* laolx_parser_UnaryOp_stmt_hxx */
+#endif /* laolx_parser_UnaryOp_hxx */

@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_PostfixExpression_stmt_hxx
-#define laolx_parser_PostfixExpression_stmt_hxx
+#ifndef laolx_parser_PostfixExpression_hxx
+#define laolx_parser_PostfixExpression_hxx
 
 #include "laolx/parser/laolx.hxx"
 
@@ -103,4 +103,4 @@ DEF_TO_XXXICNODE(PostfixExpression::Y, PostfixExpressionY)
 }
 }
 
-#endif /* laolx_parser_PostfixExpression_stmt_hxx */
+#endif /* laolx_parser_PostfixExpression_hxx */

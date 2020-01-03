@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_SimpleTypeSpecifier_stmt_hxx
-#define laolx_parser_SimpleTypeSpecifier_stmt_hxx
+#ifndef laolx_parser_SimpleTypeSpecifier_hxx
+#define laolx_parser_SimpleTypeSpecifier_hxx
 
 #include "laolx/parser/laolx.hxx"
 
@@ -46,4 +46,4 @@ DEF_TO_XXXNODE(SimpleTypeSpecifier)
 }
 }
 
-#endif /* laolx_parser_SimpleTypeSpecifier_stmt_hxx */
+#endif /* laolx_parser_SimpleTypeSpecifier_hxx */

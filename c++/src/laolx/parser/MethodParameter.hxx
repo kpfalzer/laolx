@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_MethodParameter_stmt_hxx
-#define laolx_parser_MethodParameter_stmt_hxx
+#ifndef laolx_parser_MethodParameter_hxx
+#define laolx_parser_MethodParameter_hxx
 
 #include "laolx/parser/laolx.hxx"
 
@@ -106,4 +106,4 @@ DEF_TO_XXXNODE(MethodParametersDeclaration)
 }
 }
 
-#endif /* laolx_parser_MethodParameterList_stmt_hxx */
+#endif /* laolx_parser_MethodParameterList_hxx */

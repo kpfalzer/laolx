@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_UnaryExpression_stmt_hxx
-#define laolx_parser_UnaryExpression_stmt_hxx
+#ifndef laolx_parser_UnaryExpression_hxx
+#define laolx_parser_UnaryExpression_hxx
 
 #include "laolx/parser/laolx.hxx"
 #include "laolx/parser/PostfixExpression.hxx"
@@ -51,4 +51,4 @@ DEF_TO_XXXNODE(UnaryExpression)
 }
 }
 
-#endif /* laolx_parser_UnaryExpression_stmt_hxx */
+#endif /* laolx_parser_UnaryExpression_hxx */

@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_Bool_stmt_hxx
-#define laolx_parser_Bool_stmt_hxx
+#ifndef laolx_parser_Bool_hxx
+#define laolx_parser_Bool_hxx
 
 #include "laolx/parser/laolx.hxx"
 
@@ -52,4 +52,4 @@ DEF_TO_XXXNODE(Bool)
 }
 }
 
-#endif /* laolx_parser_Bool_stmt_hxx */
+#endif /* laolx_parser_Bool_hxx */

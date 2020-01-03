@@ -5,8 +5,8 @@
 //  Created by Karl W Pfalzer.
 //
 
-#ifndef laolx_parser_@CLASS@_stmt_hxx
-#define laolx_parser_@CLASS@_stmt_hxx
+#ifndef laolx_parser_@CLASS@_hxx
+#define laolx_parser_@CLASS@_hxx
 
 #include "laolx/parser/laolx.hxx"
 
