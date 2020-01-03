@@ -12,6 +12,7 @@
 		5C85A44D23B5259C0047F689 /* String.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44723B5259C0047F689 /* String.cxx */; };
 		5C85A44E23B5259C0047F689 /* Token.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44823B5259C0047F689 /* Token.cxx */; };
 		5C9BC5C723AB18C90074E184 /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC5C623AB18C90074E184 /* main.cxx */; };
+		5CB4D29B23BFC02700492FCD /* Words.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4D29923BFC02700492FCD /* Words.cxx */; };
 		5CFE00B923B6C81E008EAFC7 /* ExpressionEle.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00B723B6C81E008EAFC7 /* ExpressionEle.cxx */; };
 		5CFE00BE23B6C870008EAFC7 /* PostfixExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00BA23B6C870008EAFC7 /* PostfixExpression.cxx */; };
 		5CFE00BF23B6C870008EAFC7 /* UnaryExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00BC23B6C870008EAFC7 /* UnaryExpression.cxx */; };
@@ -54,6 +55,8 @@
 		5C85A44A23B5259C0047F689 /* Token.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Token.hxx; sourceTree = "<group>"; };
 		5C9BC57F23AAF5DF0074E184 /* laolx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = laolx; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C9BC5C623AB18C90074E184 /* main.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cxx; sourceTree = "<group>"; };
+		5CB4D29923BFC02700492FCD /* Words.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Words.cxx; sourceTree = "<group>"; };
+		5CB4D29A23BFC02700492FCD /* Words.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Words.hxx; sourceTree = "<group>"; };
 		5CC4306A23AD6DD60049BF09 /* grammar.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grammar.txt; path = ../../grammar.txt; sourceTree = "<group>"; };
 		5CFE00B723B6C81E008EAFC7 /* ExpressionEle.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpressionEle.cxx; sourceTree = "<group>"; };
 		5CFE00B823B6C81E008EAFC7 /* ExpressionEle.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExpressionEle.hxx; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 		5C9BC59623AAF65F0074E184 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				5CB4D29923BFC02700492FCD /* Words.cxx */,
+				5CB4D29A23BFC02700492FCD /* Words.hxx */,
 				5CFE00EA23BED03A008EAFC7 /* Bool.cxx */,
 				5CFE00EB23BED03A008EAFC7 /* Bool.hxx */,
 				5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */,
@@ -251,6 +256,7 @@
 				5CFE00C523BEA906008EAFC7 /* Expression.cxx in Sources */,
 				5CFE00BF23B6C870008EAFC7 /* UnaryExpression.cxx in Sources */,
 				5CFE00E023BEC395008EAFC7 /* Literal.cxx in Sources */,
+				5CB4D29B23BFC02700492FCD /* Words.cxx in Sources */,
 				5C85A44D23B5259C0047F689 /* String.cxx in Sources */,
 				5CFE00EC23BED03A008EAFC7 /* Bool.cxx in Sources */,
 				5CFE00E823BEC98D008EAFC7 /* Statement.cxx in Sources */,

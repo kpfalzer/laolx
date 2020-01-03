@@ -50,6 +50,8 @@ const Token
     S_RCURLY("}", Token::Node::eS_RCURLY),
     S_RPAREN(")", Token::Node::eS_RPAREN),
     S_SEMICOLON(";", Token::Node::eS_SEMICOLON),
+    S_SYMBOLS("%s{", Token::Node::eS_SYMBOLS),
+    S_WORDS("%w{", Token::Node::eS_WORDS),
     //
     K_BOOL("bool", Token::Node::eK_BOOL),
     K_CHAR("char", Token::Node::eK_CHAR),

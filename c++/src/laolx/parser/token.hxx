@@ -58,7 +58,9 @@ public:
             eS_RCURLY,
             eS_RPAREN,
             eS_SEMICOLON,
+            eS_SYMBOLS,
             eS_TILDE,
+            eS_WORDS,
             //
             //keywords
             eK_BOOL,
@@ -124,9 +126,11 @@ extern const Token
     S_RBRACK,
     S_RCURLY,
     S_RPAREN,
+    S_SYMBOLS,
     S_TILDE,
     S_EXCLAMATION,
     S_SEMICOLON,
+    S_WORDS,
     //
     // keywords
     //

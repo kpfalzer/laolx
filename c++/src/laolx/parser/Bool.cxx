@@ -23,6 +23,7 @@ Bool::_accept(Consumer& consumer) const {
 /*static*/ const Bool& Bool::THE_ONE = Bool();
 
 Bool::Node::Node(const TPNode& node) {
+    push_back(node);
     __isTrue = toTokenNode(toAlternativeNode(node)->actual())->type == Token::Node::eK_TRUE;
 }
 
