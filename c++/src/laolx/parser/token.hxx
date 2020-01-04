@@ -13,6 +13,42 @@
 namespace laolx {
 namespace parser {
 
+class Bool : public _Acceptor {
+public:
+    explicit Bool()
+    {}
+    
+    virtual ~Bool()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+        bool isTrue() {
+            return __isTrue;
+        }
+        
+    private:
+        friend class Bool;
+
+		explicit Node(const TPNode& node);
+        
+        bool __isTrue;
+    };
+    
+    static const Bool& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Bool::Node> TPBoolNode;
+DEF_TO_XXXNODE(Bool)
+
 class Regexp : public _Acceptor {
 public:
     explicit Regexp()
@@ -61,6 +97,36 @@ public:
 protected:
     TPNode _accept(Consumer& consumer) const;
 };
+
+class Symbol : public _Acceptor {
+public:
+    explicit Symbol()
+    {}
+    
+    virtual ~Symbol()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+    private:
+        friend class Symbol;
+
+        explicit Node(const TPNode& node);
+    };
+    
+    static const Symbol& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Symbol::Node> TPSymbolNode;
+DEF_TO_XXXNODE(Symbol)
 
 class Token : public _Acceptor {
 public:

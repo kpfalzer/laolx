@@ -10,7 +10,6 @@
 #include <iostream>
 #include "laolx/parser/String.hxx"
 #include "laolx/parser/ImportStmt.hxx"
-#include "laolx/parser/Bool.hxx"
 
 using std::string;
 using std::cout;
@@ -32,6 +31,7 @@ USING(ImportSpecifierList);
 USING(ImportStmt);
 USING(Bool);
 USING(Regexp);
+USING(Symbol);
 //
 
 int main(int argc, const char** argv) {
@@ -97,6 +97,14 @@ int main(int argc, const char** argv) {
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match7=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Symbol::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT(":sym1 :_symb1234");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match8=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;

@@ -13,6 +13,58 @@ namespace parser {
 
 using apfev3::token::CharSequence;
 using apfev3::token::Spacing;
+using apfev3::toAlternativeNode;
+
+TPNode
+Symbol::_accept(Consumer& consumer) const {
+    static const apfev3::Regex IDENT("([_a-zA-Z][_a-zA-Z\\d]*)");
+    TPNode node;
+    const Mark start = consumer.mark();
+    if (consumer[0] == ':') {
+        consumer.accept(1);
+        node = IDENT.accept(consumer);
+        if (node.isNull()) {
+            consumer.rewind(start);
+            return nullptr;
+        }
+        const size_t n = consumer.mark() - start;
+        consumer.rewind(start);
+        node = toNode(consumer.accept(n));  //no -1 since we already account for :
+        node = new Node(node);
+        Spacing::THE_ONE.accept(consumer);
+    }
+    return (node.isValid()) ? node : nullptr;
+}
+
+/*static*/ const Symbol& Symbol::THE_ONE = Symbol();
+
+Symbol::Node::Node(const TPNode& node)
+: _Terminal(node)
+{}
+
+ostream&
+Symbol::Node::operator<<(ostream& os) const {
+	return os << text;
+}
+
+TPNode
+Bool::_accept(Consumer& consumer) const {
+    static const Alternatives GRAM({&K_FALSE, &K_TRUE});
+	TPNode node = GRAM.accept(consumer);
+    return (node.isValid()) ? new Node(node) : nullptr;
+}
+
+/*static*/ const Bool& Bool::THE_ONE = Bool();
+
+Bool::Node::Node(const TPNode& node)
+: _Terminal(toAlternativeNode(node)->actual()) {
+    __isTrue = (text == "true");
+}
+
+ostream&
+Bool::Node::operator<<(ostream& os) const {
+	return os << text;
+}
 
 // accept : /.../ or %r{...}
 TPNode

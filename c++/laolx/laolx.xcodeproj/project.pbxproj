@@ -28,7 +28,6 @@
 		5CFE00E323BEC679008EAFC7 /* MethodParameter.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E123BEC678008EAFC7 /* MethodParameter.cxx */; };
 		5CFE00E823BEC98D008EAFC7 /* Statement.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E423BEC98C008EAFC7 /* Statement.cxx */; };
 		5CFE00E923BEC98D008EAFC7 /* ReturnSpecifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */; };
-		5CFE00EC23BED03A008EAFC7 /* Bool.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00EA23BED03A008EAFC7 /* Bool.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,8 +87,6 @@
 		5CFE00E523BEC98D008EAFC7 /* ReturnSpecifier.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReturnSpecifier.hxx; sourceTree = "<group>"; };
 		5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReturnSpecifier.cxx; sourceTree = "<group>"; };
 		5CFE00E723BEC98D008EAFC7 /* Statement.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Statement.hxx; sourceTree = "<group>"; };
-		5CFE00EA23BED03A008EAFC7 /* Bool.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bool.cxx; sourceTree = "<group>"; };
-		5CFE00EB23BED03A008EAFC7 /* Bool.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bool.hxx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +140,6 @@
 			children = (
 				5CB4D29923BFC02700492FCD /* Words.cxx */,
 				5CB4D29A23BFC02700492FCD /* Words.hxx */,
-				5CFE00EA23BED03A008EAFC7 /* Bool.cxx */,
-				5CFE00EB23BED03A008EAFC7 /* Bool.hxx */,
 				5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */,
 				5CFE00E523BEC98D008EAFC7 /* ReturnSpecifier.hxx */,
 				5CFE00E423BEC98C008EAFC7 /* Statement.cxx */,
@@ -258,7 +253,6 @@
 				5CFE00E023BEC395008EAFC7 /* Literal.cxx in Sources */,
 				5CB4D29B23BFC02700492FCD /* Words.cxx in Sources */,
 				5C85A44D23B5259C0047F689 /* String.cxx in Sources */,
-				5CFE00EC23BED03A008EAFC7 /* Bool.cxx in Sources */,
 				5CFE00E823BEC98D008EAFC7 /* Statement.cxx in Sources */,
 				5CFE00D123BEAB16008EAFC7 /* ExpressionList.cxx in Sources */,
 				5CFE00E923BEC98D008EAFC7 /* ReturnSpecifier.cxx in Sources */,
