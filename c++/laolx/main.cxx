@@ -32,6 +32,7 @@ USING(ImportStmt);
 USING(Bool);
 USING(Regexp);
 USING(Symbol);
+USING(Sized);
 //
 
 int main(int argc, const char** argv) {
@@ -105,6 +106,14 @@ int main(int argc, const char** argv) {
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match8=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Sized::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("1'd0 16'b001_110 32'hDEAD_beef    32'd12_34");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match9=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;

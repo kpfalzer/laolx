@@ -11,9 +11,70 @@
 namespace laolx {
 namespace parser {
 
+using apfev3::Regex;
 using apfev3::token::CharSequence;
 using apfev3::token::Spacing;
 using apfev3::toAlternativeNode;
+using apfev3::TPTerminal;
+
+/**
+ Sized: DEC'BASEvalue
+ */
+TPNode
+Sized::_accept(Consumer& consumer) const {
+    static const Regex HEX("[0-9a-fA-F][_0-9a-fA-F]*");
+    static const Regex OCT("[0-7][_0-7]*");
+    static const Regex DEC("[0-9][_0-9]*");
+    static const Regex BIN("[01][_01]*");
+    const Mark start = consumer.mark();
+    TPNode size = DEC.accept(consumer);
+    if (size.isNull()) return nullptr;
+    if ('\'' == consumer[0]) {
+        consumer.accept(1);
+        char base = consumer[0];
+        const Regex *rex = nullptr;
+        switch(base) {
+            case 'h': case 'H':
+                rex = &HEX;
+                break;
+            case 'o': case 'O':
+                rex = &OCT;
+                break;
+            case 'd': case 'D':
+                rex = &DEC;
+                break;
+            case 'b': case 'B':
+                rex = &BIN;
+                break;
+            default:
+                break;
+        }
+        if (nullptr != rex) {
+            consumer.accept(1);
+            TPNode val = rex->accept(consumer);
+            if (val.isValid()) {
+                Spacing::THE_ONE.accept(consumer);
+                return new Node(size, base, val);
+            }
+        }
+    }
+    consumer.rewind(start);
+    return nullptr;
+}
+
+/*static*/ const Sized& Sized::THE_ONE = Sized();
+
+Sized::Node::Node(const TPNode& _size, char _base, const TPNode& _val) {
+    TPTerminal size = toTerminal(_size);
+    TPTerminal val = toTerminal(_val);
+    std::string text = size->text + '\'' + _base + val->text;
+    _set(text, size->location);
+}
+
+ostream&
+Sized::Node::operator<<(ostream& os) const {
+	return os << text;
+}
 
 TPNode
 Symbol::_accept(Consumer& consumer) const {

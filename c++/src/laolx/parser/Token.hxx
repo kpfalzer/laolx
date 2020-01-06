@@ -13,6 +13,36 @@
 namespace laolx {
 namespace parser {
 
+class Sized : public _Acceptor {
+public:
+    explicit Sized()
+    {}
+    
+    virtual ~Sized()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+    private:
+        friend class Sized;
+
+		explicit Node(const TPNode& size, char base, const TPNode& val);
+    };
+    
+    static const Sized& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Sized::Node> TPSizedNode;
+DEF_TO_XXXNODE(Sized)
+
 class Bool : public _Acceptor {
 public:
     explicit Bool()

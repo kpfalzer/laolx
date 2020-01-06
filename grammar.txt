@@ -185,6 +185,7 @@ Literal:
 |	Words
 |	Symbols
 |	K_NIL
+|   SIZED
 |	Bool
 
 Bool: K_TRUE | K_FALSE
