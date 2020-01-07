@@ -17,7 +17,7 @@ NestedNameSpecifier::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const NestedNameSpecifier& NestedNameSpecifier::THE_ONE = NestedNameSpecifier();
+WITH_NODE_DEFINE(NestedNameSpecifier);
 
 NestedNameSpecifier::Node::Node(const TPNode& node) {
     //todo

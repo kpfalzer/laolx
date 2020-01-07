@@ -20,7 +20,7 @@ UnaryOp::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const UnaryOp& UnaryOp::THE_ONE = UnaryOp();
+WITH_NODE_DEFINE(UnaryOp);
 
 UnaryOp::Node::Node(const TPNode& node) {
     push_back(node);

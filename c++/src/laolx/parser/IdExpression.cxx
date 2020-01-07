@@ -17,7 +17,7 @@ IdExpression::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const IdExpression& IdExpression::THE_ONE = IdExpression();
+WITH_NODE_DEFINE(IdExpression);
 
 IdExpression::Node::Node(const TPNode& node) {
     //todo

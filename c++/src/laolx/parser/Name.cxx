@@ -17,7 +17,7 @@ Name::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Name& Name::THE_ONE = Name();
+WITH_NODE_DEFINE(Name);
 
 Name::Node::Node(const TPNode& node) {
     //todo

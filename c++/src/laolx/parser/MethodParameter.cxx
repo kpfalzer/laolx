@@ -17,7 +17,7 @@ MethodParameter::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const MethodParameter& MethodParameter::THE_ONE = MethodParameter();
+WITH_NODE_DEFINE(MethodParameter);
 
 MethodParameter::Node::Node(const TPNode& node) {
     //todo
@@ -36,7 +36,7 @@ MethodParameterList::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const MethodParameterList& MethodParameterList::THE_ONE = MethodParameterList();
+WITH_NODE_DEFINE(MethodParameterList);
 
 MethodParameterList::Node::Node(const TPNode& node) {
     //todo
@@ -55,7 +55,7 @@ MethodParametersDeclaration::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const MethodParametersDeclaration& MethodParametersDeclaration::THE_ONE = MethodParametersDeclaration();
+WITH_NODE_DEFINE(MethodParametersDeclaration);
 
 MethodParametersDeclaration::Node::Node(const TPNode& node) {
     //todo

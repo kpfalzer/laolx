@@ -28,6 +28,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class Words;
 
@@ -58,6 +60,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+
     private:
         friend class Symbols;
 

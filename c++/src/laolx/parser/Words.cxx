@@ -17,7 +17,7 @@ Words::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Words& Words::THE_ONE = Words();
+WITH_NODE_DEFINE(Words);
 
 Words::Node::Node(const TPNode& node) {
     //todo
@@ -36,7 +36,7 @@ Symbols::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Symbols& Symbols::THE_ONE = Symbols();
+WITH_NODE_DEFINE(Symbols);
 
 Symbols::Node::Node(const TPNode& node) {
     //todo

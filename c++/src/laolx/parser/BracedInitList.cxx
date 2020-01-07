@@ -17,7 +17,7 @@ BracedInitList::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const BracedInitList& BracedInitList::THE_ONE = BracedInitList();
+WITH_NODE_DEFINE(BracedInitList);
 
 BracedInitList::Node::Node(const TPNode& node) {
     //todo

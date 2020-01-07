@@ -33,7 +33,7 @@ String::Node::Node(const TPNode& node)
 : _Terminal(node)
 {}
 
-/*static*/ const String& String::THE_ONE = String();
+WITH_NODE_DEFINE(String);
 
 }
 }

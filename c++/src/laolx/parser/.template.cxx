@@ -17,7 +17,7 @@ TPNode
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const @CLASS@& @CLASS@::THE_ONE = @CLASS@();
+WITH_NODE_DEFINE(@CLASS@);
 
 @CLASS@::Node::Node(const TPNode& node) {
     //todo

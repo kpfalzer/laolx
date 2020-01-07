@@ -17,7 +17,7 @@ ReturnSpecifier::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const ReturnSpecifier& ReturnSpecifier::THE_ONE = ReturnSpecifier();
+WITH_NODE_DEFINE(ReturnSpecifier);
 
 ReturnSpecifier::Node::Node(const TPNode& node) {
     //todo

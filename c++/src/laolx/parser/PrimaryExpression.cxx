@@ -31,7 +31,7 @@ PrimaryExpression::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const PrimaryExpression& PrimaryExpression::THE_ONE = PrimaryExpression();
+WITH_NODE_DEFINE(PrimaryExpression);
 
 PrimaryExpression::Node::Node(const TPNode& node) {
     //todo

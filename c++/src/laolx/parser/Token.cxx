@@ -17,6 +17,8 @@ using apfev3::token::Spacing;
 using apfev3::toAlternativeNode;
 using apfev3::TPTerminal;
 
+static_assert(Token::Node::eK_LAST_UNUSED < apfev3::_Node::TOKEN_MAX_TYPE_CODE, "unexpected");
+
 TPNode
 Int::_accept(Consumer& consumer) const {
     static const Regex DEC("[0-9][_0-9]*");
@@ -28,7 +30,7 @@ Int::_accept(Consumer& consumer) const {
     return nullptr;
 }
 
-/*static*/ const Int& Int::THE_ONE = Int();
+WITH_NODE_DEFINE(Int);
 
 Int::Node::Node(const TPNode& _val) :
 _Terminal(_val)
@@ -71,7 +73,7 @@ Float::_accept(Consumer& consumer) const {
     return nullptr;
 }
 
-/*static*/ const Float& Float::THE_ONE = Float();
+WITH_NODE_DEFINE(Float);
 
 Float::Node::Node(const TPNode& _mant1, const TPNode& _mant2, const TPNode& _exp) {
     TPTerminal term = toTerminal(_mant1);
@@ -138,7 +140,7 @@ Sized::_accept(Consumer& consumer) const {
     return nullptr;
 }
 
-/*static*/ const Sized& Sized::THE_ONE = Sized();
+WITH_NODE_DEFINE(Sized);
 
 Sized::Node::Node(const TPNode& _size, char _base, const TPNode& _val) {
     TPTerminal size = toTerminal(_size);
@@ -173,7 +175,7 @@ Symbol::_accept(Consumer& consumer) const {
     return (node.isValid()) ? node : nullptr;
 }
 
-/*static*/ const Symbol& Symbol::THE_ONE = Symbol();
+WITH_NODE_DEFINE(Symbol);
 
 Symbol::Node::Node(const TPNode& node)
 : _Terminal(node)
@@ -191,7 +193,7 @@ Bool::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Bool& Bool::THE_ONE = Bool();
+WITH_NODE_DEFINE(Bool);
 
 Bool::Node::Node(const TPNode& node)
 : TokenNode(toTokenNode(toAlternativeNode(node)->actual()).asT())
@@ -236,7 +238,7 @@ Regexp::_accept(Consumer& consumer) const {
     return (node.isValid()) ? node : nullptr;
 }
 
-/*static*/ const Regexp& Regexp::THE_ONE = Regexp();
+WITH_NODE_DEFINE(Regexp);
 
 TPNode
 Ident::_accept(Consumer& consumer) const {
@@ -244,7 +246,7 @@ Ident::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Ident& Ident::THE_ONE = Ident();
+WITH_NODE_DEFINE(Ident);
 
 TPNode
 Token::_accept(Consumer& consumer) const {

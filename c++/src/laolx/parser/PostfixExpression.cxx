@@ -25,7 +25,7 @@ PostfixExpression::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const PostfixExpression& PostfixExpression::THE_ONE = PostfixExpression();
+WITH_NODE_DEFINE(PostfixExpression);
 
 PostfixExpression::Node::Node(const TPNode& node) {
     //todo

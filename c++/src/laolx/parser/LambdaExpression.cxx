@@ -37,7 +37,7 @@ LambdaExpression::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const LambdaExpression& LambdaExpression::THE_ONE = LambdaExpression();
+WITH_NODE_DEFINE(LambdaExpression);
 
 LambdaExpression::Node::Node(const TPNode& node) {
     //todo

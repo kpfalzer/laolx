@@ -32,6 +32,8 @@ public:
         
         bool isDquote() const;
         
+		NODE_TYPE_DECLARE;
+
     private:
         friend class String;
         

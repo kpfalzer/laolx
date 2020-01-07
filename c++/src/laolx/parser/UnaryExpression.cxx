@@ -26,7 +26,7 @@ UnaryExpression::_accept(Consumer& consumer) const {
     return (expr.isValid()) ? new Node(op, expr) : nullptr;
 }
 
-/*static*/ const UnaryExpression& UnaryExpression::THE_ONE = UnaryExpression();
+WITH_NODE_DEFINE(UnaryExpression);
 
 UnaryExpression::Node::Node(const TPNode& _op, const TPNode& _expr)
 : op(_op.isValid() ? toUnaryOpNode(_op) : nullptr),

@@ -17,7 +17,7 @@ ExpressionList::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const ExpressionList& ExpressionList::THE_ONE = ExpressionList();
+WITH_NODE_DEFINE(ExpressionList);
 
 ExpressionList::Node::Node(const TPNode& node) {
     //todo

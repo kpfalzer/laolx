@@ -33,18 +33,29 @@ using apfev3::Mark;
 using apfev3::toTerminal;
 using apfev3::toNonTerminal;
 using apfev3::toNodeVector;
+using apfev3::getTypeCode;
 
-
-#define DEF_TO_XXXNODE(_type) \
+#define DEF_TO_XXXNODE(_type)                                       \
 inline TP##_type##Node to##_type##Node(const TPNode& node) {        \
         return xyzzy::downcast<apfev3::_Node, _type::Node>(node);   \
     }
 
 //For inner class
-#define DEF_TO_XXXICNODE(_type, _name) \
+#define DEF_TO_XXXICNODE(_type, _name)                              \
 inline TP##_name##Node to##_name##Node(const TPNode& node) {        \
         return xyzzy::downcast<apfev3::_Node, _type::Node>(node);   \
     }
+
+#define NODE_TYPE_DECLARE                   \
+    virtual std::size_t typeCode() const {  \
+        return TYPE_CODE;                   \
+    }                                       \
+    static const std::size_t TYPE_CODE
+
+#define WITH_NODE_DEFINE(_cls)                                          \
+    const _cls& _cls::THE_ONE = _cls();                                 \
+    const std::size_t _cls::Node::TYPE_CODE = getTypeCode<_cls::Node>()
+
 
 }
 }

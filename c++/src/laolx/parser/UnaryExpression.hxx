@@ -30,6 +30,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+		NODE_TYPE_DECLARE;
+
         const TPUnaryOpNode op;
         const TPPostfixExpressionNode expr;
         

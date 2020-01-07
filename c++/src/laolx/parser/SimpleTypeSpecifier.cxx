@@ -17,7 +17,7 @@ SimpleTypeSpecifier::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const SimpleTypeSpecifier& SimpleTypeSpecifier::THE_ONE = SimpleTypeSpecifier();
+WITH_NODE_DEFINE(SimpleTypeSpecifier);
 
 SimpleTypeSpecifier::Node::Node(const TPNode& node) {
     //todo

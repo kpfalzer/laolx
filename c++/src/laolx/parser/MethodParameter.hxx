@@ -28,6 +28,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class MethodParameter;
 
@@ -58,6 +60,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class MethodParameterList;
 
@@ -87,6 +91,8 @@ public:
         {}
         
         virtual ostream& operator<<(ostream& os) const;
+        
+        NODE_TYPE_DECLARE;
         
     private:
         friend class MethodParametersDeclaration;

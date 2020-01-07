@@ -28,6 +28,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class Int;
 
@@ -57,6 +59,8 @@ public:
         {}
         
         virtual ostream& operator<<(ostream& os) const;
+        
+        NODE_TYPE_DECLARE;
         
     private:
         friend class Float;
@@ -88,6 +92,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class Sized;
 
@@ -116,6 +122,8 @@ public:
         virtual ~Node()
         {}
         
+        NODE_TYPE_DECLARE;
+        
     private:
         friend class Regexp;
 
@@ -136,6 +144,10 @@ DEF_TO_XXXNODE(Regexp)
 class Ident : public _Acceptor {
 public:
     class Node : public _Terminal {
+    public:
+        NODE_TYPE_DECLARE;
+        
+    private:
         friend class Ident;
         
         explicit Node(const TPNode& node)
@@ -166,6 +178,8 @@ public:
         {}
         
         virtual ostream& operator<<(ostream& os) const;
+        
+        NODE_TYPE_DECLARE;
         
     private:
         friend class Symbol;
@@ -225,6 +239,9 @@ public:
             eK_SYMBOL,
             eK_THIS,
             eK_TRUE,
+            //
+            //keep this LAST_UNSUSED since measured for termcode value.
+            eK_LAST_UNUSED
         };
         
         const EType type;
@@ -234,6 +251,10 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
 
+        virtual std::size_t typeCode() const {
+            return type;
+        }
+        
     private:
         friend class Token;
         
@@ -326,6 +347,8 @@ public:
         bool isTrue() {
             return TokenNode::eK_TRUE == type;
         }
+        
+        NODE_TYPE_DECLARE;
         
     private:
         friend class Bool;

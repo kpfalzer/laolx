@@ -17,7 +17,7 @@ Literal::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Literal& Literal::THE_ONE = Literal();
+WITH_NODE_DEFINE(Literal);
 
 Literal::Node::Node(const TPNode& node) {
     //todo

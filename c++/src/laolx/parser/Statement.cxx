@@ -17,7 +17,7 @@ Statement::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const Statement& Statement::THE_ONE = Statement();
+WITH_NODE_DEFINE(Statement);
 
 Statement::Node::Node(const TPNode& node) {
     //todo

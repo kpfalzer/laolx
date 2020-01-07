@@ -41,6 +41,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
 
+		NODE_TYPE_DECLARE;
+
     private:
         friend class ImportSpecifier;
         
@@ -83,6 +85,8 @@ public:
 
         virtual ostream& operator<<(ostream& os) const;
 
+		NODE_TYPE_DECLARE;
+
     private:
         friend class ImportSpecifierList;
         
@@ -122,6 +126,8 @@ public:
         
         virtual ostream& operator<<(ostream& os) const;
         
+		NODE_TYPE_DECLARE;
+
         const TPImportSpecifierNode       __from;
         const TPImportSpecifierListNode   __imports;
         

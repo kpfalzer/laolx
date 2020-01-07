@@ -25,7 +25,7 @@ ImportSpecifier::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
-/*static*/ const ImportSpecifier& ImportSpecifier::THE_ONE = ImportSpecifier();
+WITH_NODE_DEFINE(ImportSpecifier);
 
 ImportSpecifier::Node::Node(const TPNode& node) {
     initFromOneOrMore(node);
@@ -50,7 +50,7 @@ ImportSpecifierList::_accept(Consumer& consumer) const {
     return (node.isValid()) ? new Node(node) : nullptr;
 }
  
-/*static*/ const ImportSpecifierList& ImportSpecifierList::THE_ONE = ImportSpecifierList();
+WITH_NODE_DEFINE(ImportSpecifierList);
 
 ImportSpecifierList::Node::Node(const TPNode& node) {
     initFromOneOrMore(node);
@@ -92,7 +92,7 @@ ImportStmt::_accept(Consumer &consumer) const {
     return nullptr;
 }
 
-/*static*/ const ImportStmt& ImportStmt::THE_ONE = ImportStmt();
+WITH_NODE_DEFINE(ImportStmt);
 
 ImportStmt::Node::Node(const TPNode& all, const TPNode& imports)
 : Node(all, nullptr, imports) {
