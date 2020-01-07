@@ -43,42 +43,6 @@ protected:
 typedef PTRcObjPtr<Sized::Node> TPSizedNode;
 DEF_TO_XXXNODE(Sized)
 
-class Bool : public _Acceptor {
-public:
-    explicit Bool()
-    {}
-    
-    virtual ~Bool()
-    {}
-    
-    class Node : public _Terminal {
-    public:
-        virtual ~Node()
-        {}
-        
-        virtual ostream& operator<<(ostream& os) const;
-        
-        bool isTrue() {
-            return __isTrue;
-        }
-        
-    private:
-        friend class Bool;
-
-		explicit Node(const TPNode& node);
-        
-        bool __isTrue;
-    };
-    
-    static const Bool& THE_ONE;
-    
-protected:
-    TPNode _accept(Consumer& consumer) const;
-};
-
-typedef PTRcObjPtr<Bool::Node> TPBoolNode;
-DEF_TO_XXXNODE(Bool)
-
 class Regexp : public _Acceptor {
 public:
     explicit Regexp()
@@ -216,6 +180,9 @@ public:
         explicit Node(const TPNode& node, EType type)
         : _Terminal(node), type(type)
         {}
+        
+    protected:
+        explicit Node(const Node& node) = default;
     };
     
     virtual ~Token()
@@ -280,6 +247,40 @@ typedef PTRcObjPtr<Ident::Node>  TPIdentNode;
 
 DEF_TO_XXXNODE(Token)
 DEF_TO_XXXNODE(Ident)
+
+class Bool : public _Acceptor {
+public:
+    explicit Bool()
+    {}
+    
+    virtual ~Bool()
+    {}
+    
+    class Node : public TokenNode {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+        bool isTrue() {
+            return TokenNode::eK_TRUE == type;
+        }
+        
+    private:
+        friend class Bool;
+
+        explicit Node(const TPNode& node);
+    };
+    
+    static const Bool& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Bool::Node> TPBoolNode;
+DEF_TO_XXXNODE(Bool)
 
 }
 }

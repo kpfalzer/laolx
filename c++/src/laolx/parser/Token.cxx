@@ -118,9 +118,8 @@ Bool::_accept(Consumer& consumer) const {
 /*static*/ const Bool& Bool::THE_ONE = Bool();
 
 Bool::Node::Node(const TPNode& node)
-: _Terminal(toAlternativeNode(node)->actual()) {
-    __isTrue = (text == "true");
-}
+: TokenNode(toTokenNode(toAlternativeNode(node)->actual()).asT())
+{}
 
 ostream&
 Bool::Node::operator<<(ostream& os) const {
