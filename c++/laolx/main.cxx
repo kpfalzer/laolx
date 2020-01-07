@@ -33,6 +33,8 @@ USING(Bool);
 USING(Regexp);
 USING(Symbol);
 USING(Sized);
+USING(Int);
+USING(Float);
 //
 
 int main(int argc, const char** argv) {
@@ -114,6 +116,22 @@ int main(int argc, const char** argv) {
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match9=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Int::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("123_456 4 000 98888_0");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match10=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    {
+        const Repetition GRAM(Float::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("123.4 56e09 78.0e+1");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match11=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;

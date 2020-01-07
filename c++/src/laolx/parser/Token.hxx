@@ -13,6 +13,66 @@
 namespace laolx {
 namespace parser {
 
+class Int : public _Acceptor {
+public:
+    explicit Int()
+    {}
+    
+    virtual ~Int()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+    private:
+        friend class Int;
+
+		explicit Node(const TPNode& val);
+    };
+    
+    static const Int& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Int::Node> TPIntNode;
+DEF_TO_XXXNODE(Int)
+
+class Float : public _Acceptor {
+public:
+    explicit Float()
+    {}
+    
+    virtual ~Float()
+    {}
+    
+    class Node : public _Terminal {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+    private:
+        friend class Float;
+
+		explicit Node(const TPNode& mant1, const TPNode& mant2, const TPNode& exp);
+    };
+    
+    static const Float& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Float::Node> TPFloatNode;
+DEF_TO_XXXNODE(Float)
+
 class Sized : public _Acceptor {
 public:
     explicit Sized()

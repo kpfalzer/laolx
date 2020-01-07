@@ -17,6 +17,82 @@ using apfev3::token::Spacing;
 using apfev3::toAlternativeNode;
 using apfev3::TPTerminal;
 
+TPNode
+Int::_accept(Consumer& consumer) const {
+    static const Regex DEC("[0-9][_0-9]*");
+    TPNode node = DEC.accept(consumer);
+    if (node.isValid()) {
+        Spacing::THE_ONE.accept(consumer);
+        return new Node(node);
+    }
+    return nullptr;
+}
+
+/*static*/ const Int& Int::THE_ONE = Int();
+
+Int::Node::Node(const TPNode& _val) :
+_Terminal(_val)
+{}
+
+ostream&
+Int::Node::operator<<(ostream& os) const {
+    return os << text;
+}
+
+TPNode
+Float::_accept(Consumer& consumer) const {
+    static const Regex MANT("[0-9][0-9_]*");
+    //NOTE: the EXP regexp has optionals since we do one-at-time matching
+    static const Regex EXP("[eE][\\-\\+]?[0-9]*");
+    const Mark start = consumer.mark();
+    TPNode mant1 = MANT.accept(consumer);
+    if (mant1.isNull()) return nullptr;
+    TPNode mant2, exp; //not required
+    bool ok = true;
+    if ('.' == consumer[0]) {
+        consumer.accept(1);
+        mant2 = MANT.accept(consumer);
+        ok = mant2.isValid();
+    }
+    if (ok) {
+        exp = EXP.accept(consumer);
+        ok = exp.isValid() && (1 < exp->depth());
+        if (ok) {
+            std::string exptext = toTerminal(exp)->text;
+            if (2 == exptext.length()) ok = isdigit(exptext[1]);
+        }
+    }
+    ok = mant2.isValid() || exp.isValid();
+    if (ok) {
+        Spacing::THE_ONE.accept(consumer);
+        return new Node(mant1, mant2, exp);
+    }
+    consumer.rewind(start);
+    return nullptr;
+}
+
+/*static*/ const Float& Float::THE_ONE = Float();
+
+Float::Node::Node(const TPNode& _mant1, const TPNode& _mant2, const TPNode& _exp) {
+    TPTerminal term = toTerminal(_mant1);
+    const Location start = term->location;
+    std::string text = term->text;
+    if (_mant2.isValid()) {
+        term = toTerminal(_mant2);
+        text += '.' + term->text;
+    }
+    if (_exp.isValid()) {
+        term = toTerminal(_exp);
+        text += term->text;
+    }
+    _set(text, start);
+}
+
+ostream&
+Float::Node::operator<<(ostream& os) const {
+    return os << text;
+}
+
 /**
  Sized: DEC'BASEvalue
  */
