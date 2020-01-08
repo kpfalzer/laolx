@@ -209,7 +209,7 @@
 		5C9BC57723AAF5DF0074E184 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "George P. Burdell";
 				TargetAttributes = {
 					5C9BC57E23AAF5DF0074E184 = {
@@ -381,6 +381,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				"HEADER_SEARCH_PATHS[arch=*]" = ../src;
 				"OTHER_LDFLAGS[arch=*]" = ../../../apfev3/debug/Darwin/apfev3.a;
@@ -393,6 +394,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				"HEADER_SEARCH_PATHS[arch=*]" = ../src;
 				PRODUCT_NAME = "$(TARGET_NAME)";

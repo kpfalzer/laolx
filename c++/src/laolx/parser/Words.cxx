@@ -11,10 +11,10 @@
 namespace laolx {
 namespace parser {
 
-static const Repetition IDENTS(Ident::THE_ONE, Repetition::eZeroOrMore);
 
 TPNode
 Words::_accept(Consumer& consumer) const {
+    static const Repetition IDENTS(Ident::THE_ONE, Repetition::eZeroOrMore);
     static const Sequence GRAM({&S_WORDS, &IDENTS, &S_RCURLY});
 	TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
@@ -34,6 +34,7 @@ Words::Node::operator<<(ostream& os) const {
 
 TPNode
 Symbols::_accept(Consumer& consumer) const {
+    static const Repetition IDENTS(Ident::THE_ONE, Repetition::eZeroOrMore);
     static const Sequence GRAM({&S_SYMBOLS, &IDENTS, &S_RCURLY});
     TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
