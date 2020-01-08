@@ -32,7 +32,7 @@ Literal::_accept(Consumer& consumer) const {
     static const Sequence FLOAT({&SIGN_OPT, &Float::THE_ONE});
     static const Sequence SIZED({&SIGN_OPT, &Sized::THE_ONE});
     static const Alternatives GRAM({
-       &Symbol::THE_ONE,
+        &Symbol::THE_ONE,
         &INT,
         &FLOAT,
         &SIZED,
@@ -43,20 +43,20 @@ Literal::_accept(Consumer& consumer) const {
         &K_NIL,
         &Bool::THE_ONE
     });
+    // node (if valid) is AlternativeNode
     TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
 WITH_NODE_DEFINE(Literal);
 
-Literal::Node::Node(const TPNode& node) {
-    //todo
-}
+Literal::Node::Node(const TPNode& node)
+: AlternativeNode(toAlternativeNode(node).asT())
+{}
 
 ostream&
 Literal::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return os << *actual();
 }
 
 }

@@ -34,6 +34,7 @@ using apfev3::toTerminal;
 using apfev3::toNonTerminal;
 using apfev3::toNodeVector;
 using apfev3::getTypeCode;
+using apfev3::AlternativeNode;
 
 #define DEF_TO_XXXNODE(_type)                                       \
 inline TP##_type##Node to##_type##Node(const TPNode& node) {        \
