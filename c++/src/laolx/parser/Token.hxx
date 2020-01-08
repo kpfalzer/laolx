@@ -143,6 +143,12 @@ DEF_TO_XXXNODE(Regexp)
 
 class Ident : public _Acceptor {
 public:
+    explicit Ident()
+    {}
+    
+    virtual ~Ident()
+    {}
+    
     class Node : public _Terminal {
     public:
         NODE_TYPE_DECLARE;
@@ -154,9 +160,6 @@ public:
         : _Terminal(node)
         {}
     };
-    
-    virtual ~Ident()
-    {}
     
     static const Ident& THE_ONE;
     
@@ -364,6 +367,46 @@ protected:
 
 typedef PTRcObjPtr<Bool::Node> TPBoolNode;
 DEF_TO_XXXNODE(Bool)
+
+class Sign : public _Acceptor {
+public:
+    explicit Sign()
+    {}
+    
+    virtual ~Sign()
+    {}
+    
+    class Node : public TokenNode {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+        bool isPlus() {
+            return TokenNode::eS_PLUS == type;
+        }
+        
+        bool isMinus() {
+            return TokenNode::eS_MINUS == type;
+        }
+        
+        NODE_TYPE_DECLARE;
+        
+    private:
+        friend class Sign;
+
+        explicit Node(const TPNode& node);
+    };
+    
+    static const Sign& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<Sign::Node> TPSignNode;
+DEF_TO_XXXNODE(Sign)
 
 }
 }

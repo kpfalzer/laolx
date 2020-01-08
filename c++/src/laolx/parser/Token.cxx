@@ -204,6 +204,24 @@ Bool::Node::operator<<(ostream& os) const {
 	return os << text;
 }
 
+TPNode
+Sign::_accept(Consumer& consumer) const {
+    static const Alternatives GRAM({&S_PLUS, &S_MINUS});
+	TPNode node = GRAM.accept(consumer);
+    return (node.isValid()) ? new Node(node) : nullptr;
+}
+
+WITH_NODE_DEFINE(Sign);
+
+Sign::Node::Node(const TPNode& node)
+: TokenNode(toTokenNode(toAlternativeNode(node)->actual()).asT())
+{}
+
+ostream&
+Sign::Node::operator<<(ostream& os) const {
+	return os << text;
+}
+
 // accept : /.../ or %r{...}
 TPNode
 Regexp::_accept(Consumer& consumer) const {

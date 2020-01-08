@@ -9,6 +9,7 @@
 #define laolx_parser_Literal_hxx
 
 #include "laolx/parser/laolx.hxx"
+#include "laolx/parser/Token.hxx"
 
 namespace laolx {
 namespace parser {
