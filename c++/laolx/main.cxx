@@ -11,6 +11,7 @@
 #include "laolx/parser/String.hxx"
 #include "laolx/parser/ImportStmt.hxx"
 #include "laolx/parser/Literal.hxx"
+#include "laolx/parser/Number.hxx"
 
 using std::string;
 using std::cout;
@@ -37,6 +38,7 @@ USING(Sized);
 USING(Int);
 USING(Float);
 USING(Literal);
+USING(Number);
 //
 
 int main(int argc, const char** argv) {
@@ -138,11 +140,17 @@ int main(int argc, const char** argv) {
     }
     {
         const Repetition GRAM(Literal::THE_ONE, Repetition::eOneOrMore);
-        CharBuf INPUT("123.4 12'b000111 'string' :sym1  %w{word1 word}");
+        CharBuf INPUT("123.4 12'b000111 'string' :sym1  %w{word1 word} 1234 %s{sym1 _s1}");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match12=" << *match << endl;
         INVARIANT(consumer.isEOF());
+        {
+            const TPLiteralNode litNode = toLiteralNode(toNodeVector(match)->at(0));
+            INVARIANT(litNode->typeCode() == Literal::Node::TYPE_CODE);
+            const TPNumberNode numNode = toNumberNode(litNode->actual());
+            INVARIANT(toNodeVector(numNode->actual())->at(1)->typeCode() == Float::Node::TYPE_CODE);
+        }
     }
     return 0;
 }

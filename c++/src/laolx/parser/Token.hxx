@@ -228,6 +228,9 @@ public:
             eS_SYMBOLS,
             eS_TILDE,
             eS_WORDS,
+            eS_ARRAY,
+			eS_VECTOR,
+			eS_MAP,
             //
             //keywords
             eK_BOOL,
@@ -308,6 +311,9 @@ extern const Token
     S_EXCLAMATION,
     S_SEMICOLON,
     S_WORDS,
+    S_ARRAY,
+	S_VECTOR,
+	S_MAP,
     //
     // keywords
     //

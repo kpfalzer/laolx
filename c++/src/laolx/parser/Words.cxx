@@ -41,14 +41,13 @@ Symbols::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Symbols);
 
-Symbols::Node::Node(const TPNode& node) {
-    //todo
-}
+Symbols::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Symbols::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

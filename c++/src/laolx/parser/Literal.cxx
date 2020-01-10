@@ -8,6 +8,8 @@
 #include "laolx/parser/Literal.hxx"
 #include "laolx/parser/String.hxx"
 #include "laolx/parser/Words.hxx"
+#include "laolx/parser/Number.hxx"
+#include "laolx/parser/Collection.hxx"
 
 namespace laolx {
 namespace parser {
@@ -15,15 +17,16 @@ namespace parser {
 /**
 Literal:
 	SYMBOL
-|	Sign? INT
-|	Sign? FLOAT
-|        Sign? SIZED
+|	Number
 |	String
 |	REGEXP
 |	Words
 |	Symbols
 |	K_NIL
 |	Bool
+|        Array
+|        Vector
+|        Map
 */
 TPNode
 Literal::_accept(Consumer& consumer) const {
@@ -33,7 +36,7 @@ Literal::_accept(Consumer& consumer) const {
     static const Sequence SIZED({&SIGN_OPT, &Sized::THE_ONE});
     static const Alternatives GRAM({
         &Symbol::THE_ONE,
-        &INT,
+        &Number::THE_ONE,
         &FLOAT,
         &SIZED,
         &String::THE_ONE,
@@ -41,7 +44,10 @@ Literal::_accept(Consumer& consumer) const {
         &Words::THE_ONE,
         &Symbols::THE_ONE,
         &K_NIL,
-        &Bool::THE_ONE
+        &Bool::THE_ONE,
+        &Array::THE_ONE,
+        &Vector::THE_ONE,
+        &Map::THE_ONE
     });
     // node (if valid) is AlternativeNode
     TPNode node = GRAM.accept(consumer);

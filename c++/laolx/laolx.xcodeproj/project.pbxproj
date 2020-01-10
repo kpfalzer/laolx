@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C64ADD123C7A630005755AC /* Number.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C64ADCC23C7A62F005755AC /* Number.cxx */; };
+		5C64ADD223C7A630005755AC /* Name.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C64ADCF23C7A630005755AC /* Name.cxx */; };
+		5C64ADD323C7A630005755AC /* NestedNameSpecifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C64ADD023C7A630005755AC /* NestedNameSpecifier.cxx */; };
+		5C64ADD623C7EF76005755AC /* Collection.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C64ADD523C7EF76005755AC /* Collection.cxx */; };
 		5C85A44B23B5259C0047F689 /* ImportStmt.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44223B5259C0047F689 /* ImportStmt.cxx */; };
 		5C85A44C23B5259C0047F689 /* SourceFile.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44523B5259C0047F689 /* SourceFile.cxx */; };
 		5C85A44D23B5259C0047F689 /* String.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A44723B5259C0047F689 /* String.cxx */; };
@@ -18,7 +22,6 @@
 		5CFE00BF23B6C870008EAFC7 /* UnaryExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00BC23B6C870008EAFC7 /* UnaryExpression.cxx */; };
 		5CFE00C223B6C97C008EAFC7 /* UnaryOp.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */; };
 		5CFE00C523BEA906008EAFC7 /* Expression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00C423BEA906008EAFC7 /* Expression.cxx */; };
-		5CFE00CE23BEAA39008EAFC7 /* BracedInitList.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00CC23BEAA39008EAFC7 /* BracedInitList.cxx */; };
 		5CFE00D123BEAB16008EAFC7 /* ExpressionList.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00D023BEAB16008EAFC7 /* ExpressionList.cxx */; };
 		5CFE00D423BEAB6F008EAFC7 /* IdExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00D323BEAB6F008EAFC7 /* IdExpression.cxx */; };
 		5CFE00D923BEB082008EAFC7 /* PrimaryExpression.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00D623BEB082008EAFC7 /* PrimaryExpression.cxx */; };
@@ -43,6 +46,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5C64ADCB23C7A62F005755AC /* Name.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Name.hxx; sourceTree = "<group>"; };
+		5C64ADCC23C7A62F005755AC /* Number.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Number.cxx; sourceTree = "<group>"; };
+		5C64ADCD23C7A630005755AC /* Number.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Number.hxx; sourceTree = "<group>"; };
+		5C64ADCE23C7A630005755AC /* NestedNameSpecifier.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NestedNameSpecifier.hxx; sourceTree = "<group>"; };
+		5C64ADCF23C7A630005755AC /* Name.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Name.cxx; sourceTree = "<group>"; };
+		5C64ADD023C7A630005755AC /* NestedNameSpecifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NestedNameSpecifier.cxx; sourceTree = "<group>"; };
+		5C64ADD423C7EF75005755AC /* Collection.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Collection.hxx; sourceTree = "<group>"; };
+		5C64ADD523C7EF76005755AC /* Collection.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collection.cxx; sourceTree = "<group>"; };
 		5C85A44223B5259C0047F689 /* ImportStmt.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImportStmt.cxx; sourceTree = "<group>"; };
 		5C85A44323B5259C0047F689 /* String.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = String.hxx; sourceTree = "<group>"; };
 		5C85A44423B5259C0047F689 /* ImportStmt.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImportStmt.hxx; sourceTree = "<group>"; };
@@ -67,8 +78,6 @@
 		5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnaryOp.cxx; sourceTree = "<group>"; };
 		5CFE00C323BEA906008EAFC7 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Expression.hxx; sourceTree = "<group>"; };
 		5CFE00C423BEA906008EAFC7 /* Expression.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Expression.cxx; sourceTree = "<group>"; };
-		5CFE00CC23BEAA39008EAFC7 /* BracedInitList.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BracedInitList.cxx; sourceTree = "<group>"; };
-		5CFE00CD23BEAA39008EAFC7 /* BracedInitList.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BracedInitList.hxx; sourceTree = "<group>"; };
 		5CFE00CF23BEAB16008EAFC7 /* ExpressionList.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExpressionList.hxx; sourceTree = "<group>"; };
 		5CFE00D023BEAB16008EAFC7 /* ExpressionList.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpressionList.cxx; sourceTree = "<group>"; };
 		5CFE00D223BEAB6F008EAFC7 /* IdExpression.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IdExpression.hxx; sourceTree = "<group>"; };
@@ -138,6 +147,14 @@
 		5C9BC59623AAF65F0074E184 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				5C64ADD523C7EF76005755AC /* Collection.cxx */,
+				5C64ADD423C7EF75005755AC /* Collection.hxx */,
+				5C64ADCF23C7A630005755AC /* Name.cxx */,
+				5C64ADCB23C7A62F005755AC /* Name.hxx */,
+				5C64ADD023C7A630005755AC /* NestedNameSpecifier.cxx */,
+				5C64ADCE23C7A630005755AC /* NestedNameSpecifier.hxx */,
+				5C64ADCC23C7A62F005755AC /* Number.cxx */,
+				5C64ADCD23C7A630005755AC /* Number.hxx */,
 				5CB4D29923BFC02700492FCD /* Words.cxx */,
 				5CB4D29A23BFC02700492FCD /* Words.hxx */,
 				5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */,
@@ -158,8 +175,6 @@
 				5CFE00D223BEAB6F008EAFC7 /* IdExpression.hxx */,
 				5CFE00D023BEAB16008EAFC7 /* ExpressionList.cxx */,
 				5CFE00CF23BEAB16008EAFC7 /* ExpressionList.hxx */,
-				5CFE00CC23BEAA39008EAFC7 /* BracedInitList.cxx */,
-				5CFE00CD23BEAA39008EAFC7 /* BracedInitList.hxx */,
 				5CFE00C423BEA906008EAFC7 /* Expression.cxx */,
 				5CFE00C323BEA906008EAFC7 /* Expression.hxx */,
 				5CFE00C123B6C97C008EAFC7 /* UnaryOp.cxx */,
@@ -244,8 +259,10 @@
 				5C85A44C23B5259C0047F689 /* SourceFile.cxx in Sources */,
 				5CFE00E323BEC679008EAFC7 /* MethodParameter.cxx in Sources */,
 				5CFE00BE23B6C870008EAFC7 /* PostfixExpression.cxx in Sources */,
+				5C64ADD123C7A630005755AC /* Number.cxx in Sources */,
+				5C64ADD623C7EF76005755AC /* Collection.cxx in Sources */,
 				5CFE00D423BEAB6F008EAFC7 /* IdExpression.cxx in Sources */,
-				5CFE00CE23BEAA39008EAFC7 /* BracedInitList.cxx in Sources */,
+				5C64ADD323C7A630005755AC /* NestedNameSpecifier.cxx in Sources */,
 				5C85A44B23B5259C0047F689 /* ImportStmt.cxx in Sources */,
 				5CFE00DF23BEC395008EAFC7 /* LambdaExpression.cxx in Sources */,
 				5CFE00C523BEA906008EAFC7 /* Expression.cxx in Sources */,
@@ -261,6 +278,7 @@
 				5CFE00DA23BEB082008EAFC7 /* SimpleTypeSpecifier.cxx in Sources */,
 				5C9BC5C723AB18C90074E184 /* main.cxx in Sources */,
 				5CFE00C223B6C97C008EAFC7 /* UnaryOp.cxx in Sources */,
+				5C64ADD223C7A630005755AC /* Name.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

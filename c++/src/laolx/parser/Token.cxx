@@ -299,6 +299,9 @@ const Token
     S_SEMICOLON(";", Token::Node::eS_SEMICOLON),
     S_SYMBOLS("%s{", Token::Node::eS_SYMBOLS),
     S_WORDS("%w{", Token::Node::eS_WORDS),
+    S_ARRAY("%a{", Token::Node::eS_ARRAY),
+    S_VECTOR("%v{", Token::Node::eS_VECTOR),
+    S_MAP("%m{", Token::Node::eS_MAP),
     //
     K_BOOL("bool", Token::Node::eK_BOOL),
     K_CHAR("char", Token::Node::eK_CHAR),

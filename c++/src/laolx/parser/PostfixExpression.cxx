@@ -7,7 +7,6 @@
 
 #include "laolx/parser/PostfixExpression.hxx"
 #include "laolx/parser/IdExpression.hxx"
-#include "laolx/parser/BracedInitList.hxx"
 #include "laolx/parser/ExpressionList.hxx"
 #include "laolx/parser/Token.hxx"
 #include "laolx/parser/Expression.hxx"
@@ -17,6 +16,9 @@
 namespace laolx {
 namespace parser {
 
+/**
+ PostfixExpression: PostfixExpressionY PostfixExpressionX?
+ */
 TPNode
 PostfixExpression::_accept(Consumer& consumer) const {
     static const Repetition XSTAR(X::THE_ONE, Repetition::eZeroOrMore);
@@ -40,7 +42,6 @@ PostfixExpression::Node::operator<<(ostream& os) const {
 /**
  PostfixExpressionX
     S_LBRACK Expression S_RBRACK
- |      S_LBRACK BracedInitList? S_RBRACK
  |      S_LPAREN ExpressionList? S_RPAREN
  |      DOT IdExpression
  |      (S_PLUS2 | S_MINUS2) 
@@ -48,13 +49,11 @@ PostfixExpression::Node::operator<<(ostream& os) const {
 TPNode
 PostfixExpression::X::_accept(Consumer& consumer) const {
     static const Sequence S1({&S_LBRACK, &Expression::THE_ONE, &S_RBRACK});
-    static const Repetition BIL_OPT(BracedInitList::THE_ONE, Repetition::eOptional);
-    static const Sequence S2({&S_LBRACK, &BIL_OPT, &S_RBRACK});
     static const Repetition EL_OPT(ExpressionList::THE_ONE, Repetition::eOptional);
-    static const Sequence S3({&S_LPAREN, &EL_OPT, &S_RPAREN});
-    static const Sequence S4({&S_DOT, &IdExpression::THE_ONE});
-    static const Alternatives S5({&S_PLUS2, &S_MINUS2});
-    static const Alternatives GRAM({&S1,&S2,&S3,&S4,&S5});
+    static const Sequence S2({&S_LPAREN, &EL_OPT, &S_RPAREN});
+    static const Sequence S3({&S_DOT, &IdExpression::THE_ONE});
+    static const Alternatives S4({&S_PLUS2, &S_MINUS2});
+    static const Alternatives GRAM({&S1,&S2,&S3,&S4});
     TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
 }
@@ -75,14 +74,13 @@ PostfixExpression::X::Node::operator<<(ostream& os) const {
  PostfixExpressionY:
     PrimaryExpression
  |      SimpleTypeSpecifier S_LPAREN ExpressionList? S_RPAREN
- |      SimpleTypeSpecifier BracedInitList
+ |      SimpleTypeSpecifier
  */
 TPNode
 PostfixExpression::Y::_accept(Consumer& consumer) const {
     static const Repetition EL_OPT(ExpressionList::THE_ONE, Repetition::eOptional);
     static const Sequence S2({&SimpleTypeSpecifier::THE_ONE, &S_LPAREN, &EL_OPT, &S_RPAREN});
-    static const Sequence S3({&SimpleTypeSpecifier::THE_ONE, &BracedInitList::THE_ONE});
-    static const Alternatives GRAM({&PrimaryExpression::THE_ONE, &S2, &S3});
+    static const Alternatives GRAM({&PrimaryExpression::THE_ONE, &S2, &SimpleTypeSpecifier::THE_ONE});
     TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
 }

@@ -108,17 +108,7 @@ BaseTypeSpecifier:
 // class | interface name
 BaseName: IDENT | SimpleTemplateId
 
-InitializerClause: ConditionalExpression | BracedInitList
-
-BracedInitList: 
-//	S_LCURLY InitializerList COMMA? S_RCURLY
-	S_LCURLY InitializerList S_RCURLY
-|	S_LCURLY S_RCURLY
-
-// NOTE: see:
-// http://en.cppreference.com/w/cpp/language/list_initialization.html
-InitializerList:
-	InitializerClause (S_COMMA InitializerClause)*
+InitializerClause: ConditionalExpression
 
 ConditionalExpression:
 	ExpressionEle (S_QMARK Expression S_COLON Expression)?
@@ -152,11 +142,10 @@ PostfixExpression: PostfixExpressionY PostfixExpressionX?
 PostfixExpressionY:
 	PrimaryExpression
 |	SimpleTypeSpecifier S_LPAREN ExpressionList? S_RPAREN
-|	SimpleTypeSpecifier BracedInitList
+|	SimpleTypeSpecifier 
 
 PostfixExpressionX
 	S_LBRACK Expression S_RBRACK PostfixExpressionX?
-|	S_LBRACK BracedInitList? S_RBRACK PostfixExpressionX?
 |	S_LPAREN ExpressionList? S_RPAREN PostfixExpressionX?
 |	DOT IdExpression PostfixExpressionX?
 |	(S_PLUS2 | S_MINUS2) PostfixExpressionX?
@@ -176,17 +165,33 @@ LambdaExpression:
 		Statement*
         S_RCURLY
 
-Literal:
-	SYMBOL
+Number:
 |	Sign? INT
 |	Sign? FLOAT
 |   Sign? SIZED
+
+Array: S_ARRAY ExpressionList? S_RCURLY
+    
+Vector: S_VECTOR ExpressionList? S_RCURLY
+
+Map: S_MAP MapEntryList? S_RCURLY
+    
+MapEntryList: MapEntry (S_COMMA MapEntry)*
+
+MapEntry: Ident S_COLON Expression
+    
+Literal:
+	SYMBOL
+|	Number
 |	String
 |	REGEXP
 |	Words
 |	Symbols
 |	K_NIL
 |	Bool
+|   Array
+|   Vector
+|   Map
 
 Sign: S_PLUS | S_MINUS
 
@@ -196,7 +201,7 @@ Words: S_WORDS IDENT* S_RCURLY
 
 Symbols: S_SYMBOLS IDENT* S_RCURLY
 
-ExpressionList: InitializerList
+ExpressionList: Expression (S_COMMA Expression)*
 
 SimpleTypeSpecifier: SimpleTypeSpecifierX ArraySpecifier*
 
@@ -303,7 +308,7 @@ IterationStatement:
 JumpStatement:
 	K_BREAK
 |	K_CONTINUE
-|	K_RETURN (Expression | BracedInitList)?
+|	K_RETURN Expression?
 
 IfStatement:
 	K_IF Condition Statement

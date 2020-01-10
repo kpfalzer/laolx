@@ -3,4 +3,70 @@
    uuid = "288A07A6-7DF1-4486-8361-06BDD6FD020B"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32BEEBDD-C878-4BE8-8DB3-D743D37E3B08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../apfev3/src/apfev3/node.cxx"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "_Node::typeCode()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF2B4350-4145-4910-BE4C-0A1F7BC52C2D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/laolx/parser/Literal.cxx"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "Literal::Node::Node(node)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EF2B4350-4145-4910-BE4C-0A1F7BC52C2D - 95f64d0afc38b8b8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "laolx::parser::Literal::Node::Node(xyzzy::PTRcObjPtr&lt;apfev3::_Node&gt; const&amp;)"
+                  moduleName = "laolx"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gburdell/projects/laolx/c++/src/laolx/parser/Literal.cxx"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  uuid = "EF2B4350-4145-4910-BE4C-0A1F7BC52C2D - 95f64d0afc38b8b8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "laolx::parser::Literal::Node::Node(xyzzy::PTRcObjPtr&lt;apfev3::_Node&gt; const&amp;)"
+                  moduleName = "laolx"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gburdell/projects/laolx/c++/src/laolx/parser/Literal.cxx"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
