@@ -38,6 +38,64 @@ public:
     
     static const NestedNameSpecifier& THE_ONE;
     
+	class X : public _Acceptor {
+	public:
+	    explicit X()
+	    {}
+	    
+	    virtual ~X()
+	    {}
+	    
+	    class Node : public NodeVector {
+	    public:
+	        virtual ~Node()
+	        {}
+	        
+	        virtual ostream& operator<<(ostream& os) const;
+	        
+			NODE_TYPE_DECLARE;
+	
+	    private:
+	        friend class X;
+	
+			explicit Node(const TPNode& node);
+	    };
+	    
+	    static const X& THE_ONE;
+	    
+	protected:
+	    TPNode _accept(Consumer& consumer) const;
+	};
+
+	class Y : public _Acceptor {
+	public:
+	    explicit Y()
+	    {}
+	    
+	    virtual ~Y()
+	    {}
+	    
+	    class Node : public NodeVector {
+	    public:
+	        virtual ~Node()
+	        {}
+	        
+	        virtual ostream& operator<<(ostream& os) const;
+	        
+			NODE_TYPE_DECLARE;
+	
+	    private:
+	        friend class Y;
+	
+			explicit Node(const TPNode& node);
+	    };
+	    
+	    static const Y& THE_ONE;
+	    
+	protected:
+	    TPNode _accept(Consumer& consumer) const;
+	};
+
 protected:
     TPNode _accept(Consumer& consumer) const;
 };

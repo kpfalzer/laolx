@@ -31,6 +31,7 @@
 		5CFE00E323BEC679008EAFC7 /* MethodParameter.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E123BEC678008EAFC7 /* MethodParameter.cxx */; };
 		5CFE00E823BEC98D008EAFC7 /* Statement.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E423BEC98C008EAFC7 /* Statement.cxx */; };
 		5CFE00E923BEC98D008EAFC7 /* ReturnSpecifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */; };
+		F431ABDA23C93F4300D7D5A0 /* TemplateSpecifier.cxx in Sources */ = {isa = PBXBuildFile; fileRef = F431ABD923C93F4300D7D5A0 /* TemplateSpecifier.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +97,8 @@
 		5CFE00E523BEC98D008EAFC7 /* ReturnSpecifier.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReturnSpecifier.hxx; sourceTree = "<group>"; };
 		5CFE00E623BEC98D008EAFC7 /* ReturnSpecifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReturnSpecifier.cxx; sourceTree = "<group>"; };
 		5CFE00E723BEC98D008EAFC7 /* Statement.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Statement.hxx; sourceTree = "<group>"; };
+		F431ABD823C93F4300D7D5A0 /* TemplateSpecifier.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TemplateSpecifier.hxx; sourceTree = "<group>"; };
+		F431ABD923C93F4300D7D5A0 /* TemplateSpecifier.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TemplateSpecifier.cxx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 		5C9BC59623AAF65F0074E184 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				F431ABD923C93F4300D7D5A0 /* TemplateSpecifier.cxx */,
+				F431ABD823C93F4300D7D5A0 /* TemplateSpecifier.hxx */,
 				5C64ADD523C7EF76005755AC /* Collection.cxx */,
 				5C64ADD423C7EF75005755AC /* Collection.hxx */,
 				5C64ADCF23C7A630005755AC /* Name.cxx */,
@@ -261,6 +266,7 @@
 				5CFE00BE23B6C870008EAFC7 /* PostfixExpression.cxx in Sources */,
 				5C64ADD123C7A630005755AC /* Number.cxx in Sources */,
 				5C64ADD623C7EF76005755AC /* Collection.cxx in Sources */,
+				F431ABDA23C93F4300D7D5A0 /* TemplateSpecifier.cxx in Sources */,
 				5CFE00D423BEAB6F008EAFC7 /* IdExpression.cxx in Sources */,
 				5C64ADD323C7A630005755AC /* NestedNameSpecifier.cxx in Sources */,
 				5C85A44B23B5259C0047F689 /* ImportStmt.cxx in Sources */,

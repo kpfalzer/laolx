@@ -245,6 +245,8 @@ public:
             eK_SYMBOL,
             eK_THIS,
             eK_TRUE,
+            eK_VECTOR,
+            eK_MAP,
             //
             //keep this LAST_UNSUSED since measured for termcode value.
             eK_LAST_UNUSED
@@ -328,7 +330,9 @@ extern const Token
     K_STRING,
     K_SYMBOL,
     K_THIS,
-    K_TRUE
+    K_TRUE,
+    K_MAP,
+    K_VECTOR
 ;
 
 typedef Token::Node              TokenNode;

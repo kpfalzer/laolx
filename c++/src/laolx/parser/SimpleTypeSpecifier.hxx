@@ -13,6 +13,65 @@
 namespace laolx {
 namespace parser {
 
+class ArraySpecifier : public _Acceptor {
+public:
+    explicit ArraySpecifier()
+    {}
+    
+    virtual ~ArraySpecifier()
+    {}
+    
+    class Node : public NodeVector {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+		NODE_TYPE_DECLARE;
+
+    private:
+        friend class ArraySpecifier;
+
+		explicit Node(const TPNode& node);
+    };
+    
+    static const ArraySpecifier& THE_ONE;
+
+	class X : public _Acceptor {
+	public:
+	    explicit X()
+	    {}
+	    
+	    virtual ~X()
+	    {}
+	    
+	    class Node : public NodeVector {
+	    public:
+	        virtual ~Node()
+	        {}
+	        
+	        virtual ostream& operator<<(ostream& os) const;
+	        
+	    private:
+	        friend class X;
+	
+			explicit Node(const TPNode& node);
+	    };
+	    
+	    static const X& THE_ONE;
+	    
+	protected:
+	    TPNode _accept(Consumer& consumer) const;
+	};
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<ArraySpecifier::Node> TPArraySpecifierNode;
+DEF_TO_XXXNODE(ArraySpecifier)
+
 class SimpleTypeSpecifier : public _Acceptor {
 public:
     explicit SimpleTypeSpecifier()
@@ -37,6 +96,33 @@ public:
     };
     
     static const SimpleTypeSpecifier& THE_ONE;
+
+	class X : public _Acceptor {
+	public:
+	    explicit X()
+	    {}
+	    
+	    virtual ~X()
+	    {}
+	    
+	    class Node : public NodeVector {
+	    public:
+	        virtual ~Node()
+	        {}
+	        
+	        virtual ostream& operator<<(ostream& os) const;
+	        
+	    private:
+	        friend class X;
+	
+			explicit Node(const TPNode& node);
+	    };
+	    
+	    static const X& THE_ONE;
+	    
+	protected:
+	    TPNode _accept(Consumer& consumer) const;
+	};
     
 protected:
     TPNode _accept(Consumer& consumer) const;

@@ -203,7 +203,8 @@ Symbols: S_SYMBOLS IDENT* S_RCURLY
 
 ExpressionList: Expression (S_COMMA Expression)*
 
-SimpleTypeSpecifier: SimpleTypeSpecifierX ArraySpecifier*
+//NOTE: Lets keep Array spec simple. ? instead of *
+SimpleTypeSpecifier: SimpleTypeSpecifierX ArraySpecifier?
 
 SimpleTypeSpecifierX:
 	NestedNameSpecifier? Name
@@ -213,6 +214,8 @@ SimpleTypeSpecifierX:
 |	K_CHAR
 |	K_BOOL
 |	K_SYMBOL
+|   K_VECTOR TemplateSpecifier?
+|   K_MAP TemplateSpecifier?
 
 ArraySpecifier: S_LBRACK S_RBRACK
 
@@ -227,25 +230,26 @@ UnqualifiedId:
 
 QualifiedId: NestedNameSpecifier UnqualifiedId
 
-NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX?
+NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX*
 
 NestedNameSpecifierY: Name S_DOT
 
 NestedNameSpecifierX:
-	IDENT S_DOT NestedNameSpecifierX?
-|	SimpleTemplateId S_DOT NestedNameSpecifierX?
+	IDENT S_DOT
+|	SimpleTemplateId S_DOT
 
 Name: IDENT | SimpleTemplateId
 
-SimpleTemplateId: IDENT S_LT TemplateArgumentList? S_GT
+SimpleTemplateId: IDENT TemplateSpecifier
 
 // NOTE: we'll use special templates: VARIANT and LAMBDA as needed.
 TemplateId:
 	SimpleTemplateId
-|	OperatorFunctionId S_LT TemplateArgumentList? S_GT
+|	OperatorFunctionId TemplateSpecifier
 
-TemplateArgumentList:
-	TemplateArgument (S_COMMA TemplateArgument)*
+TemplateSpecifier: S_LT TemplateArgumentList? S_GT
+
+TemplateArgumentList: TemplateArgument (S_COMMA TemplateArgument)*
 	
 // NOTE: While syntax is a bit loose: semantics require all named/bound
 //       or all positional; cannot mix these.

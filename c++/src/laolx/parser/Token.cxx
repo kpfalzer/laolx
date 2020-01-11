@@ -314,7 +314,9 @@ const Token
     K_STRING("string", Token::Node::eK_STRING),
     K_SYMBOL("symbol", Token::Node::eK_SYMBOL),
     K_THIS("this", Token::Node::eK_THIS),
-    K_TRUE("true", Token::Node::eK_TRUE)
+    K_TRUE("true", Token::Node::eK_TRUE),
+    K_MAP("map", Token::Node::eK_MAP),
+    K_VECTOR("vector", Token::Node::eK_VECTOR)
 ;
 
 ostream&
