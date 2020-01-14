@@ -232,11 +232,13 @@ QualifiedId: NestedNameSpecifier UnqualifiedId
 
 NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX*
 
-NestedNameSpecifierY: Name S_DOT
+DotOp: S_DOT | S_DOT_QMARK
+
+NestedNameSpecifierY: Name DotOp
 
 NestedNameSpecifierX:
-	IDENT S_DOT
-|	SimpleTemplateId S_DOT
+	IDENT DotOp
+|	SimpleTemplateId DotOp
 
 Name: IDENT | SimpleTemplateId
 
@@ -255,7 +257,7 @@ TemplateArgumentList: TemplateArgument (S_COMMA TemplateArgument)*
 //       or all positional; cannot mix these.
 TemplateArgument:
 	(IDENT S_COLON)?
-		(	ConstantExpression
+		(	Expression
 		|	SimpleTypeSpecifier
 		)
 
@@ -289,8 +291,11 @@ ReturnSpecifier:
 	S_EQGT SimpleTypeSpecifier
 |	S_EQGT S_LPAREN SimpleTypeSpecifierList S_RPAREN
 
+AssignStatement: PostfixExpression AssignOp Expression
+
 Statement:
 	Expression
+|	AssignStatement
 |	CompoundStatement
 |	IfStatement
 |	CaseStatement

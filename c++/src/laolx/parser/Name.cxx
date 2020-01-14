@@ -6,10 +6,15 @@
 //
 
 #include "laolx/parser/Name.hxx"
+#include "laolx/parser/Token.hxx"
+#include "laolx/parser/Template.hxx"
 
 namespace laolx {
 namespace parser {
 
+/**
+ Name: IDENT | SimpleTemplateId
+ */
 TPNode
 Name::_accept(Consumer& consumer) const {
 	//todo

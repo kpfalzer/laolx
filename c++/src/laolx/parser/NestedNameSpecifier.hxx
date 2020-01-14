@@ -13,6 +13,39 @@
 namespace laolx {
 namespace parser {
 
+class DotOp : public _Acceptor {
+public:
+    explicit DotOp()
+    {}
+    
+    virtual ~DotOp()
+    {}
+    
+    class Node : public NodeVector {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+		NODE_TYPE_DECLARE;
+
+    private:
+        friend class DotOp;
+
+		explicit Node(const TPNode& node);
+        
+    };
+    
+    static const DotOp& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<DotOp::Node> TPDotOpNode;
+DEF_TO_XXXNODE(DotOp)
+
 class NestedNameSpecifier : public _Acceptor {
 public:
     explicit NestedNameSpecifier()
@@ -34,6 +67,7 @@ public:
         friend class NestedNameSpecifier;
 
 		explicit Node(const TPNode& node);
+        
     };
     
     static const NestedNameSpecifier& THE_ONE;
@@ -98,6 +132,9 @@ public:
 
 protected:
     TPNode _accept(Consumer& consumer) const;
+    
+private:
+    LEFT_RECURSION_DECLARE;
 };
 
 typedef PTRcObjPtr<NestedNameSpecifier::Node> TPNestedNameSpecifierNode;

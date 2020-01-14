@@ -9,7 +9,7 @@
 #include "laolx/parser/Token.hxx"
 #include "laolx/parser/Name.hxx"
 #include "laolx/parser/NestedNameSpecifier.hxx"
-#include "laolx/parser/TemplateSpecifier.hxx"
+#include "laolx/parser/Template.hxx"
 
 namespace laolx {
 namespace parser {
@@ -36,6 +36,18 @@ SimpleTypeSpecifier::Node::Node(const TPNode& node) {
 ostream&
 SimpleTypeSpecifier::Node::operator<<(ostream& os) const {
 	//todo
+    return os;
+}
+
+WITH_NODE_DEFINE(SimpleTypeSpecifier::X);
+
+SimpleTypeSpecifier::X::Node::Node(const TPNode& node) {
+    //todo
+}
+
+ostream&
+SimpleTypeSpecifier::X::Node::operator<<(ostream& os) const {
+    //todo
     return os;
 }
 
