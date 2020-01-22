@@ -26,14 +26,13 @@ Array::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Array);
 
-Array::Node::Node(const TPNode& node) {
-    //todo
-}
+Array::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Array::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -49,14 +48,13 @@ Vector::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Vector);
 
-Vector::Node::Node(const TPNode& node) {
-    //todo
-}
+Vector::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Vector::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -72,14 +70,13 @@ Map::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Map);
 
-Map::Node::Node(const TPNode& node) {
-    //todo
-}
+Map::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Map::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -94,14 +91,13 @@ MapEntry::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(MapEntry);
 
-MapEntry::Node::Node(const TPNode& node) {
-    //todo
-}
+MapEntry::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 MapEntry::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -118,14 +114,13 @@ MapEntryList::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(MapEntryList);
 
-MapEntryList::Node::Node(const TPNode& node) {
-    //todo
-}
+MapEntryList::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 MapEntryList::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

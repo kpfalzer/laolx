@@ -19,14 +19,13 @@ OverloadableOperator::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(OverloadableOperator);
 
-OverloadableOperator::Node::Node(const TPNode& node) {
-    //todo
-}
+OverloadableOperator::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 OverloadableOperator::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 TPNode
@@ -38,14 +37,13 @@ OperatorFunctionId::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(OperatorFunctionId);
 
-OperatorFunctionId::Node::Node(const TPNode& node) {
-    //todo
-}
+OperatorFunctionId::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 OperatorFunctionId::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

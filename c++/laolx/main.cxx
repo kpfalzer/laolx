@@ -12,6 +12,8 @@
 #include "laolx/parser/ImportStmt.hxx"
 #include "laolx/parser/Literal.hxx"
 #include "laolx/parser/Number.hxx"
+#include "laolx/parser/UnaryExpression.hxx"
+#include "laolx/parser/Expression.hxx"
 
 using std::string;
 using std::cout;
@@ -39,6 +41,8 @@ USING(Int);
 USING(Float);
 USING(Literal);
 USING(Number);
+USING(UnaryExpression);
+USING(Expression);
 //
 
 int main(int argc, const char** argv) {
@@ -151,6 +155,22 @@ int main(int argc, const char** argv) {
             const TPNumberNode numNode = toNumberNode(litNode->actual());
             INVARIANT(toNodeVector(numNode->actual())->at(1)->typeCode() == Float::Node::TYPE_CODE);
         }
+    }
+    {
+        const Repetition GRAM(UnaryExpression::THE_ONE, Repetition::eOneOrMore);
+        CharBuf INPUT("123 456");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        cout << "match13=" << *match << endl;
+        INVARIANT(consumer.isEOF());
+    }
+    if (false){
+        const Expression& GRAM = Expression::THE_ONE;
+        CharBuf INPUT("a+b-c");
+        Consumer consumer(INPUT);
+        TPNode match = GRAM.accept(consumer);
+        //cout << "match14=" << *match << endl;
+        INVARIANT(consumer.isEOF());
     }
     return 0;
 }

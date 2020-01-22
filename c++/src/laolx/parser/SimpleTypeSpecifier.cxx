@@ -29,26 +29,24 @@ SimpleTypeSpecifier::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(SimpleTypeSpecifier);
 
-SimpleTypeSpecifier::Node::Node(const TPNode& node) {
-    //todo
-}
+SimpleTypeSpecifier::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 SimpleTypeSpecifier::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 WITH_NODE_DEFINE(SimpleTypeSpecifier::X);
 
-SimpleTypeSpecifier::X::Node::Node(const TPNode& node) {
-    //todo
-}
+SimpleTypeSpecifier::X::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 SimpleTypeSpecifier::X::Node::operator<<(ostream& os) const {
-    //todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 TPNode
@@ -60,14 +58,13 @@ ArraySpecifier::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(ArraySpecifier);
 
-ArraySpecifier::Node::Node(const TPNode& node) {
-    //todo
-}
+ArraySpecifier::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 ArraySpecifier::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**

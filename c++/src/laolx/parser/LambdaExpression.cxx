@@ -39,14 +39,13 @@ LambdaExpression::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(LambdaExpression);
 
-LambdaExpression::Node::Node(const TPNode& node) {
-    //todo
-}
+LambdaExpression::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 LambdaExpression::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

@@ -21,7 +21,7 @@ public:
     virtual ~PrimaryExpression()
     {}
     
-    class Node : public NodeVector {
+    class Node : public AlternativeNode {
     public:
         virtual ~Node()
         {}

@@ -22,21 +22,20 @@ namespace parser {
 TPNode
 PostfixExpression::_accept(Consumer& consumer) const {
     static const Repetition XSTAR(X::THE_ONE, Repetition::eZeroOrMore);
-    static const Sequence Y_XSTAR({&Y::THE_ONE, &XSTAR});
-    TPNode node = Y_XSTAR.accept(consumer);
+    static const Sequence GRAM({&Y::THE_ONE, &XSTAR});
+    TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
 WITH_NODE_DEFINE(PostfixExpression);
 
-PostfixExpression::Node::Node(const TPNode& node) {
-    //todo
-}
+PostfixExpression::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 PostfixExpression::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -60,14 +59,13 @@ PostfixExpression::X::_accept(Consumer& consumer) const {
 
 /*static*/ const PostfixExpression::X& PostfixExpression::X::THE_ONE = PostfixExpression::X();
 
-PostfixExpression::X::Node::Node(const TPNode& node) {
-    //todo
-}
+PostfixExpression::X::Node::Node(const TPNode& node) 
+: NodeVector(node)
+{}
 
 ostream&
 PostfixExpression::X::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -87,14 +85,13 @@ PostfixExpression::Y::_accept(Consumer& consumer) const {
 
 /*static*/ const PostfixExpression::Y& PostfixExpression::Y::THE_ONE = PostfixExpression::Y();
 
-PostfixExpression::Y::Node::Node(const TPNode& node) {
-    //todo
-}
+PostfixExpression::Y::Node::Node(const TPNode& node)
+: AlternativeNode(node)
+{}
 
 ostream&
 PostfixExpression::Y::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return AlternativeNode::operator<<(os);
 }
 
 }

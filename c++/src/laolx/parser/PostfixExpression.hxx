@@ -73,7 +73,7 @@ public:
 	    virtual ~Y()
 	    {}
 	    
-	    class Node : public NodeVector {
+	    class Node : public AlternativeNode {
 	    public:
 	        virtual ~Node()
 	        {}

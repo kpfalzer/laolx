@@ -16,24 +16,23 @@ namespace parser {
 /**
  NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX*
  */
-LEFT_RECURSION_DEFINE(NestedNameSpecifier);
-
 TPNode
 NestedNameSpecifier::_accept(Consumer& consumer) const {
-	TPNode node = __GRAM.accept(consumer);
+    static const Repetition XSTAR(X::THE_ONE, Repetition::eZeroOrMore);
+    static const Sequence GRAM({&Y::THE_ONE, &XSTAR});
+	TPNode node = GRAM.accept(consumer);
     return (node.isValid()) ? new Node(node) : nullptr;
 }
 
 WITH_NODE_DEFINE(NestedNameSpecifier);
 
-NestedNameSpecifier::Node::Node(const TPNode& node) {
-    //todo
-}
+NestedNameSpecifier::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 NestedNameSpecifier::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 TPNode
@@ -45,14 +44,13 @@ DotOp::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(DotOp);
 
-DotOp::Node::Node(const TPNode& node) {
-    //todo
-}
+DotOp::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 DotOp::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -73,14 +71,13 @@ NestedNameSpecifier::X::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(NestedNameSpecifier::X);
 
-NestedNameSpecifier::X::Node::Node(const TPNode& node) {
-    //todo
-}
+NestedNameSpecifier::X::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 NestedNameSpecifier::X::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -95,14 +92,13 @@ NestedNameSpecifier::Y::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(NestedNameSpecifier::Y);
 
-NestedNameSpecifier::Y::Node::Node(const TPNode& node) {
-    //todo
-}
+NestedNameSpecifier::Y::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 NestedNameSpecifier::Y::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

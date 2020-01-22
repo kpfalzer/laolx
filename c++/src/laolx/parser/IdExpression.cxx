@@ -19,14 +19,13 @@ IdExpression::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(IdExpression);
 
-IdExpression::Node::Node(const TPNode& node) {
-    //todo
-}
+IdExpression::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 IdExpression::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

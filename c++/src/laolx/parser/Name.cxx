@@ -24,14 +24,13 @@ Name::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Name);
 
-Name::Node::Node(const TPNode& node) {
-    //todo
-}
+Name::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Name::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

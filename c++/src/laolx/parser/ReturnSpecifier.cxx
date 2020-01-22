@@ -19,14 +19,13 @@ ReturnSpecifier::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(ReturnSpecifier);
 
-ReturnSpecifier::Node::Node(const TPNode& node) {
-    //todo
-}
+ReturnSpecifier::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 ReturnSpecifier::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

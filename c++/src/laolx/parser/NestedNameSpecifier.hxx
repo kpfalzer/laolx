@@ -132,9 +132,6 @@ public:
 
 protected:
     TPNode _accept(Consumer& consumer) const;
-    
-private:
-    LEFT_RECURSION_DECLARE;
 };
 
 typedef PTRcObjPtr<NestedNameSpecifier::Node> TPNestedNameSpecifierNode;

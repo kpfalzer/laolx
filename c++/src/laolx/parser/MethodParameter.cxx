@@ -19,14 +19,13 @@ MethodParameter::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(MethodParameter);
 
-MethodParameter::Node::Node(const TPNode& node) {
-    //todo
-}
+MethodParameter::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 MethodParameter::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 TPNode
@@ -38,14 +37,13 @@ MethodParameterList::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(MethodParameterList);
 
-MethodParameterList::Node::Node(const TPNode& node) {
-    //todo
-}
+MethodParameterList::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 MethodParameterList::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 TPNode
@@ -57,14 +55,13 @@ MethodParametersDeclaration::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(MethodParametersDeclaration);
 
-MethodParametersDeclaration::Node::Node(const TPNode& node) {
-    //todo
-}
+MethodParametersDeclaration::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 MethodParametersDeclaration::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

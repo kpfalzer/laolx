@@ -19,14 +19,13 @@ ExpressionList::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(ExpressionList);
 
-ExpressionList::Node::Node(const TPNode& node) {
-    //todo
-}
+ExpressionList::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 ExpressionList::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

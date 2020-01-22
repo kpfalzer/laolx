@@ -26,14 +26,13 @@ TemplateSpecifier::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(TemplateSpecifier);
 
-TemplateSpecifier::Node::Node(const TPNode& node) {
-    //todo
-}
+TemplateSpecifier::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 TemplateSpecifier::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -51,14 +50,13 @@ TemplateId::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(TemplateId);
 
-TemplateId::Node::Node(const TPNode& node) {
-    //todo
-}
+TemplateId::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 TemplateId::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -75,14 +73,13 @@ TemplateArgumentList::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(TemplateArgumentList);
 
-TemplateArgumentList::Node::Node(const TPNode& node) {
-    //todo
-}
+TemplateArgumentList::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 TemplateArgumentList::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -106,14 +103,13 @@ TemplateArgument::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(TemplateArgument);
 
-TemplateArgument::Node::Node(const TPNode& node) {
-    //todo
-}
+TemplateArgument::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 TemplateArgument::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 /**
@@ -128,14 +124,13 @@ SimpleTemplateId::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(SimpleTemplateId);
 
-SimpleTemplateId::Node::Node(const TPNode& node) {
-    //todo
-}
+SimpleTemplateId::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 SimpleTemplateId::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

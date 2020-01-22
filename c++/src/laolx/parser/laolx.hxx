@@ -57,14 +57,6 @@ inline TP##_name##Node to##_name##Node(const TPNode& node) {        \
     const _cls& _cls::THE_ONE = _cls();                                 \
     const std::size_t _cls::Node::TYPE_CODE = getTypeCode<_cls::Node>()
 
-#define LEFT_RECURSION_DECLARE          \
-    static const Repetition __X_STAR;   \
-    static const Sequence __GRAM
-
-#define LEFT_RECURSION_DEFINE(_cls)                                                     \
-    /*static*/ const Repetition _cls::__X_STAR(X::THE_ONE, Repetition::eZeroOrMore);    \
-    /*static*/ const Sequence _cls::__GRAM({&Y::THE_ONE, &__X_STAR})
-
 }
 }
 

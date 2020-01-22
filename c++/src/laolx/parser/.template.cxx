@@ -19,14 +19,13 @@ TPNode
 
 WITH_NODE_DEFINE(@CLASS@);
 
-@CLASS@::Node::Node(const TPNode& node) {
-    //todo
-}
+@CLASS@::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 @CLASS@::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

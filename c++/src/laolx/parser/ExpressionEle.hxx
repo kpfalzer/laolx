@@ -13,6 +13,38 @@
 namespace laolx {
 namespace parser {
 
+class BinaryOp : public _Acceptor {
+public:
+    explicit BinaryOp()
+    {}
+    
+    virtual ~BinaryOp()
+    {}
+    
+    class Node : public NodeVector {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+		NODE_TYPE_DECLARE;
+
+    private:
+        friend class BinaryOp;
+
+		explicit Node(const TPNode& node);
+    };
+    
+    static const BinaryOp& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<BinaryOp::Node> TPBinaryOpNode;
+DEF_TO_XXXNODE(BinaryOp)
+
 class ExpressionEle : public _Acceptor {
 public:
     explicit ExpressionEle()

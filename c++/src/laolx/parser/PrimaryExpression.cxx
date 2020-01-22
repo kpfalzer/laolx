@@ -33,14 +33,13 @@ PrimaryExpression::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(PrimaryExpression);
 
-PrimaryExpression::Node::Node(const TPNode& node) {
-    //todo
-}
+PrimaryExpression::Node::Node(const TPNode& node)
+: AlternativeNode(node)
+{}
 
 ostream&
 PrimaryExpression::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return AlternativeNode::operator<<(os);
 }
 
 }

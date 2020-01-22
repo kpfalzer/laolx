@@ -19,14 +19,13 @@ Statement::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(Statement);
 
-Statement::Node::Node(const TPNode& node) {
-    //todo
-}
+Statement::Node::Node(const TPNode& node)
+: NodeVector(node)
+{}
 
 ostream&
 Statement::Node::operator<<(ostream& os) const {
-	//todo
-    return os;
+    return NodeVector::operator<<(os);
 }
 
 }

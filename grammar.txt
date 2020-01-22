@@ -110,8 +110,7 @@ BaseName: IDENT | SimpleTemplateId
 
 InitializerClause: ConditionalExpression
 
-ConditionalExpression:
-	ExpressionEle (S_QMARK Expression S_COLON Expression)?
+ConditionalExpression: ExpressionEle (S_QMARK Expression S_COLON Expression)?
 
 // NOTE: Semantics of comma operator here are not same as c++/default.
 // Here, we are like ruby and create collection.
@@ -230,9 +229,9 @@ UnqualifiedId:
 
 QualifiedId: NestedNameSpecifier UnqualifiedId
 
-NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX*
-
 DotOp: S_DOT | S_DOT_QMARK
+
+NestedNameSpecifier: NestedNameSpecifierY NestedNameSpecifierX*
 
 NestedNameSpecifierY: Name DotOp
 
