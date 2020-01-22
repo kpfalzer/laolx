@@ -1,3 +1,5 @@
 /out/
 /src/laolx/parser/
 /.DS_Store
+/c++/netbeans/laolx/build/
+/c++/netbeans/laolx/dist/
