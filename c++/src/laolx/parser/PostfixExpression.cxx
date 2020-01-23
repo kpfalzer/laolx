@@ -60,12 +60,12 @@ PostfixExpression::X::_accept(Consumer& consumer) const {
 /*static*/ const PostfixExpression::X& PostfixExpression::X::THE_ONE = PostfixExpression::X();
 
 PostfixExpression::X::Node::Node(const TPNode& node) 
-: NodeVector(node)
+: AlternativeNode(node)
 {}
 
 ostream&
 PostfixExpression::X::Node::operator<<(ostream& os) const {
-    return NodeVector::operator<<(os);
+    return AlternativeNode::operator<<(os);
 }
 
 /**

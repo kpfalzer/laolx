@@ -13,6 +13,70 @@
 namespace laolx {
 namespace parser {
 
+class UnqualifiedId : public _Acceptor {
+public:
+    explicit UnqualifiedId()
+    {}
+    
+    virtual ~UnqualifiedId()
+    {}
+    
+    class Node : public AlternativeNode {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+		NODE_TYPE_DECLARE;
+
+    private:
+        friend class UnqualifiedId;
+
+		explicit Node(const TPNode& node);
+    };
+    
+    static const UnqualifiedId& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<UnqualifiedId::Node> TPUnqualifiedIdNode;
+DEF_TO_XXXNODE(UnqualifiedId)
+
+class QualifiedId : public _Acceptor {
+public:
+    explicit QualifiedId()
+    {}
+    
+    virtual ~QualifiedId()
+    {}
+    
+    class Node : public NodeVector {
+    public:
+        virtual ~Node()
+        {}
+        
+        virtual ostream& operator<<(ostream& os) const;
+        
+		NODE_TYPE_DECLARE;
+
+    private:
+        friend class QualifiedId;
+
+		explicit Node(const TPNode& node);
+    };
+    
+    static const QualifiedId& THE_ONE;
+    
+protected:
+    TPNode _accept(Consumer& consumer) const;
+};
+
+typedef PTRcObjPtr<QualifiedId::Node> TPQualifiedIdNode;
+DEF_TO_XXXNODE(QualifiedId)
+
 class IdExpression : public _Acceptor {
 public:
     explicit IdExpression()
@@ -21,7 +85,7 @@ public:
     virtual ~IdExpression()
     {}
     
-    class Node : public NodeVector {
+    class Node : public AlternativeNode {
     public:
         virtual ~Node()
         {}

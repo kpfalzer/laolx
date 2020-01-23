@@ -22,11 +22,12 @@ public:
     virtual ~UnaryOp()
     {}
     
-    class Node : public NodeVector {
+    class Node : public AlternativeNode {
     public:
         virtual ~Node()
         {}
         
+        /*
         const TokenNode& asToken() const {
             return toTokenNode(at(0)).asT();
         }
@@ -34,6 +35,7 @@ public:
         operator const TokenNode&() const {
             return asToken();
         }
+        */
         
         virtual ostream& operator<<(ostream& os) const;
         

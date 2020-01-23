@@ -50,14 +50,14 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("\"we are here\"");
         Consumer consumer(INPUT);
         TPNode match = String::THE_ONE.accept(consumer);
-        cout << "match1=" << *match << endl;
+        cout << "String=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
         CharBuf INPUT("p1.p2.p3");
         Consumer consumer(INPUT);
         TPNode match = ImportSpecifier::THE_ONE.accept(consumer);
-        cout << "match2=" << *match << endl;
+        cout << "ImportSpecified=" << *match << endl;
         INVARIANT(consumer.isEOF());
         {
             const ImportSpecifier::Node& ids = toImportSpecifierNode(match).asT();
@@ -70,13 +70,13 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("p1.p2.p3 , q.r,t.uuuu");
         Consumer consumer(INPUT);
         TPNode match = ImportSpecifierList::THE_ONE.accept(consumer);
-        cout << "match3=" << *match << endl;
+        cout << "ImportSpecifierList=" << *match << endl;
         INVARIANT(consumer.isEOF());
         {
             const ImportSpecifierList::Node& specs = toImportSpecifierListNode(match).asT();
             for (size_t i = 0; i < specs.size(); ++i) {
                 TPImportSpecifierNode sn = specs[i];
-                cout << "match3." << i << ": " << *sn << endl;
+                cout << "ImportSpecifierList." << i << ": " << *sn << endl;
             }
         }
     }
@@ -84,14 +84,14 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("import a,b,c, p1.ALL;");
         Consumer consumer(INPUT);
         TPNode match = ImportStmt::THE_ONE.accept(consumer);
-        cout << "match4=" << *match << endl;
+        cout << "ImportStmt=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
         CharBuf INPUT("from p1.p2 import a,b,c;");
         Consumer consumer(INPUT);
         TPNode match = ImportStmt::THE_ONE.accept(consumer);
-        cout << "match5=" << *match << endl;
+        cout << "ImportStmt.2=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -99,7 +99,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("false true false");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match6=" << *match << endl;
+        cout << "Bool=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -107,7 +107,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("/foobar.*$/ %r{and\\s+this\\}or}");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match7=" << *match << endl;
+        cout << "Regexp=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -115,7 +115,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT(":sym1 :_symb1234");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match8=" << *match << endl;
+        cout << "Symbol=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -123,7 +123,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("1'd0 16'b001_110 32'hDEAD_beef    32'd12_34");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match9=" << *match << endl;
+        cout << "Sized=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -131,7 +131,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("123_456 4 000 98888_0");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match10=" << *match << endl;
+        cout << "Int=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -139,7 +139,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("123.4 56e09 78.0e+1");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match11=" << *match << endl;
+        cout << "Float=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     {
@@ -147,7 +147,7 @@ int main(int argc, const char** argv) {
         CharBuf INPUT("123.4 12'b000111 'string' :sym1  %w{word1 word} 1234 %s{sym1 _s1}");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match12=" << *match << endl;
+        cout << "Literal=" << *match << endl;
         INVARIANT(consumer.isEOF());
         {
             const TPLiteralNode litNode = toLiteralNode(toNodeVector(match)->at(0));
@@ -158,18 +158,18 @@ int main(int argc, const char** argv) {
     }
     {
         const Repetition GRAM(UnaryExpression::THE_ONE, Repetition::eOneOrMore);
-        CharBuf INPUT("123 456");
+        CharBuf INPUT("123 456 -a");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        cout << "match13=" << *match << endl;
+        cout << "UnaryExpression=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
-    if (false){
+    {
         const Expression& GRAM = Expression::THE_ONE;
-        CharBuf INPUT("a+b-c");
+        CharBuf INPUT("a+b-c[3]");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
-        //cout << "match14=" << *match << endl;
+        cout << "Expression=" << *match << endl;
         INVARIANT(consumer.isEOF());
     }
     return 0;

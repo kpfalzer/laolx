@@ -22,14 +22,13 @@ UnaryOp::_accept(Consumer& consumer) const {
 
 WITH_NODE_DEFINE(UnaryOp);
 
-UnaryOp::Node::Node(const TPNode& node) {
-    push_back(node);
-}
+UnaryOp::Node::Node(const TPNode& node)
+:   AlternativeNode(node)
+{}
 
 ostream&
 UnaryOp::Node::operator<<(ostream& os) const {
-    os << asToken();
-    return os;
+    return AlternativeNode::operator<<(os);
 }
 
 }

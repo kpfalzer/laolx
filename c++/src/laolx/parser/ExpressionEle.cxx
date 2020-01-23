@@ -67,12 +67,12 @@ BinaryOp::_accept(Consumer& consumer) const {
 WITH_NODE_DEFINE(BinaryOp);
 
 BinaryOp::Node::Node(const TPNode& node)
-: NodeVector(node)
+: AlternativeNode(node)
 {}
 
 ostream&
 BinaryOp::Node::operator<<(ostream& os) const {
-    return NodeVector::operator<<(os);
+    return AlternativeNode::operator<<(os);
 }
 
 }
