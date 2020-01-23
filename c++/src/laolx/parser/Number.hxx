@@ -48,4 +48,4 @@ DEF_TO_XXXNODE(Number)
 }
 }
 
-#endif /* laolx_parser_Number_stmt_hxx */
+#endif /* laolx_parser_Number_hxx */

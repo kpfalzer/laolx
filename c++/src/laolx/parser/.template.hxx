@@ -48,4 +48,4 @@ DEF_TO_XXXNODE(@CLASS@)
 }
 }
 
-#endif /* laolx_parser_@CLASS@_stmt_hxx */
+#endif /* laolx_parser_@CLASS@_hxx */
