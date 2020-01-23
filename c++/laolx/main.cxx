@@ -158,7 +158,7 @@ int main(int argc, const char** argv) {
     }
     {
         const Repetition GRAM(UnaryExpression::THE_ONE, Repetition::eOneOrMore);
-        CharBuf INPUT("123 456");
+        CharBuf INPUT("123 456 -a");
         Consumer consumer(INPUT);
         TPNode match = GRAM.accept(consumer);
         cout << "match13=" << *match << endl;
