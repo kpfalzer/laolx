@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="laolx" displayName="laolx" projectFiles="true">
+        <logicalFolder name="parser" displayName="parser" projectFiles="true">
+          <itemPath>../../src/laolx/parser/Collection.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Collection.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Expression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Expression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/ExpressionEle.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/ExpressionEle.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/ExpressionList.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/ExpressionList.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/IdExpression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/IdExpression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/ImportStmt.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/ImportStmt.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/LambdaExpression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/LambdaExpression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Literal.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Literal.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/MethodParameter.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/MethodParameter.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Name.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Name.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/NestedNameSpecifier.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/NestedNameSpecifier.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Number.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Number.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/OperatorFunctionId.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/OperatorFunctionId.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/PostfixExpression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/PostfixExpression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/PrimaryExpression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/PrimaryExpression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/ReturnSpecifier.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/ReturnSpecifier.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/SimpleTypeSpecifier.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/SimpleTypeSpecifier.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/SourceFile.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/SourceFile.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Statement.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Statement.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/String.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/String.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Template.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Template.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Token.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Token.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/UnaryExpression.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/UnaryExpression.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/UnaryOp.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/UnaryOp.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/Words.cxx</itemPath>
+          <itemPath>../../src/laolx/parser/Words.hxx</itemPath>
+          <itemPath>../../src/laolx/parser/laolx.hxx</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <itemPath>../../laolx/main.cxx</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../../src/laolx</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>../../src</pElem>
+          </incDir>
+          <commandLine>-std=c++11</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibFileItem>../../../../apfev3/netbeans/apfev3/dist/Debug/GNU-Linux/libapfev3.a</linkerLibFileItem>
+          </linkerLibItems>
+          <commandLine>-static-libstdc++</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="../../laolx/main.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Collection.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Collection.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Expression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Expression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionEle.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionEle.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionList.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionList.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/IdExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/IdExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ImportStmt.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ImportStmt.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/LambdaExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/LambdaExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Literal.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Literal.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/MethodParameter.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/MethodParameter.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/NestedNameSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/NestedNameSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Number.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Number.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/OperatorFunctionId.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/OperatorFunctionId.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PostfixExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PostfixExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PrimaryExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PrimaryExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ReturnSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ReturnSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SimpleTypeSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SimpleTypeSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SourceFile.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SourceFile.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Statement.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Statement.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/String.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/String.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Template.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Template.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Token.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Token.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryOp.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryOp.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Words.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Words.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/laolx.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>../../src</pElem>
+          </incDir>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="../../laolx/main.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Collection.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Collection.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Expression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Expression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionEle.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionEle.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionList.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ExpressionList.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/IdExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/IdExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ImportStmt.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ImportStmt.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/LambdaExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/LambdaExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Literal.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Literal.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/MethodParameter.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/MethodParameter.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Name.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Name.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/NestedNameSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/NestedNameSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Number.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Number.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/OperatorFunctionId.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/OperatorFunctionId.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PostfixExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PostfixExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PrimaryExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/PrimaryExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ReturnSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/ReturnSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SimpleTypeSpecifier.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SimpleTypeSpecifier.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SourceFile.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/SourceFile.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Statement.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Statement.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/String.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/String.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Template.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Template.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Token.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Token.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryExpression.cxx"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryExpression.hxx"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryOp.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/UnaryOp.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Words.cxx" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/Words.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/laolx/parser/laolx.hxx" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
