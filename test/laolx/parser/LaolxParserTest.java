@@ -84,6 +84,16 @@ class LaolxParserTest {
         runTest(DATA, LaolxParser::simpleDecl);
     }
 
+    @org.junit.jupiter.api.Test
+    void expression() {
+        final String DATA[] = new String[]{
+                "a+b-456.7",
+                "a+b.?foo(\"abc\")"
+        };
+
+        runTest(DATA, LaolxParser::expression);
+    }
+
     static void runTest(String[] data, Function<LaolxParser, ParseTree> rule) {
         for (String s : data) {
             // create a CharStream that reads from standard input

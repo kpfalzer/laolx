@@ -5,7 +5,8 @@ options {
 }
 
 /**
- *  The syntax of simpleDecl is different than c++ (and more like python/ruby) where
+ *  The syntax of simpleDecl is different than c++ 
+ *  (and more like python/ruby) where
  *  there is single RHS which can be "splat" to multiple LHS.
  *  (In c++, there can be 'T1 v = 12, v2 = 13')
  */
@@ -150,7 +151,7 @@ namedInitializerList
 
 bracedInitList
 :   LCURLY namedInitializerList? RCURLY
-|   LBRACK expressions? RBRACK
+|   LBRACK exprList? RBRACK
 ;
 
 initializerClause
@@ -243,8 +244,29 @@ number
 :   VINTEGER | VFLOAT | VHEX | VSIZED
 ;
 
+unaryOp
+:	STAR
+|	AND
+|	PLUS
+|	MINUS
+|	EXCL
+|	TILDE
+;
+
 unaryExpr
-:   TODO
+:   postfixExpr
+|	(PLUS2 | MINUS2) unaryExpr
+|	unaryOp unaryExpr
+;
+
+postfixExpr
+:	primaryExpr
+|	postfixExpr LBRACK expression RBRACK
+//todo: range access [expr..expr]
+|	postfixExpr LPAREN exprList? RPAREN
+//todo: named association?
+|	postfixExpr (DOT | DOTQ) idExpr
+|	postfixExpr (PLUS2 | MINUS2)
 ;
 
 primaryExpr
@@ -269,14 +291,14 @@ literal
 ;
 
 array
-:   LBRACK expressions RBRACK
+:   LBRACK exprList RBRACK
 ;
 
 tuple
-:   TUPLE expressions? RCURLY
+:   TUPLE exprList? RCURLY
 ;
 
-expressions
+exprList
 :   expression (COMMA expression)*
 ;
 
