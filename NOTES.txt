@@ -29,20 +29,21 @@ simple-declaration
  * Some examples:
  *  const int a
  *  var string s = "bar"
- *  var lambda{(T a, b) -> int} v  //declare v to be function.
- *  const f = lambda ()->float {return 45}  //define f as function
+ *  var function{(T a, b) -> int} v  //declare v to be function.
+ *  const f = function ()->float {return 45}  //define f as function
  *  g = %w{a b c}  //const array of words/strings
  *  h = %s{d e f}  //const of symbols
  *  int[] j = [1,2,3]   //array of int.  'j = [1,2,3]' would also be ok (since type can be inferred)
- *  v = lambda (T a, b) -> int {return a + b}  //later define v
- *  xx = lambda()->void {...}  //define xx as function with no return value
- *  yy = lambda(){...}  //define yy as function with no return value
- *  zz = lambda<T,R>(T a, T b)->R {return a + b}  //template-d function
+ *  v = function (T a, b) -> int {return a + b}  //later define v
+ *  xx = function()->void {...}  //define xx as function with no return value
+ *  yy = function(){...}  //define yy as function with no return value
+ *  zz = function<T,R>(T a, T b)->R {return a + b}  //template-d function
  *  // example usage: result = zz(12,13)
  *  //              : rr = zz(b:123, a:456)  //named arguments
- *  aa = lambda()->%t{r1,r2} {... return %t{v1,v2}}  //define aa as function return tuple.
- *  bb = lambda<T1,T2=int>(T1 x)->%t{T2 r1, r2} {... return %t{...}}
+ *  aa = function()->%t{r1,r2} {... return %t{v1,v2}}  //define aa as function return tuple.
+ *  bb = function<T1,T2=int>(T1 x)->%t{T2 r1, r2} {... return %t{...}}
  *  v1 = C1.new(...) //v1 is instance of class C1
+ *  TODO: or drop new: and v1 = C1(...) is instance of C1
  *
  *  //structured binding
  *  v1, v2 = bb(...)  //bb return tuple (i.e., pair) and splat to v1 and v2
@@ -58,7 +59,7 @@ simple-declaration
  *  1) In general, lack of specific type is allowed: assuming 'auto' type inference can be done for c++ target.
  *  2) By default, all declarations are 'const', unless 'var' specified.
  *  3) [] is fixed array for default/const; else vector (for 'var').
- *  4) 'lambda{...}' syntax expresses a type.
+ *  4) 'function{...}' syntax expresses a type.
  *  5) Is is confusing to have [] as array of fixed type and also a tuple (i.e., different types)?
  *     We could use %t{...} to delimit tuple.  Yeah, lets do that.  More explicit.
  */

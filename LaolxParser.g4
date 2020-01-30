@@ -159,15 +159,15 @@ initializerClause
 |   bracedInitList
 ;
 
-lambdaTypeSpec
-:   LAMBDA LCURLY lambdaDeclHeading RCURLY
+functionTypeSpec
+:   FUNCTION LCURLY functionDeclHeading RCURLY
 ;
 
-lambdaDeclHeading
-:   lambdaDeclParms RARROW methodReturnType
+functionDeclHeading
+:   functionDeclParms RARROW methodReturnType
 ;
 
-lambdaDeclParms
+functionDeclParms
 :   LPAREN simpleDecl? RPAREN
 ;
 
@@ -189,8 +189,8 @@ simpleTypeSpec
 :   INT | FLOAT | STRING | SYMBOL | CHAR | REGEXPK
 |   tupleTypeSpec
 |   mapTypeSpec
-|   lambdaTypeSpec
-|   COLON2? nestedNamedSpec? typeName
+|   functionTypeSpec
+|   COLON2? nestedNameSpec? typeName
 |   simpleTypeSpec arrayTypeSpec
 ;
 
@@ -214,7 +214,7 @@ simpleTypeSpecListItem
 :   simpleTypeSpec IDENT
 ;
 
-nestedNamedSpec
+nestedNameSpec
 :   (IDENT COLON2)+
 ;
 
@@ -233,11 +233,7 @@ namedTemplateArgument
 
 positionalTemplateArgument
 :   simpleTypeSpec //NOTE: no ... yet
-|   constantExpression
-;
-
-constantExpression
-:   IDENT //TODO: placeholder
+|   expression
 ;
 
 number
@@ -274,7 +270,7 @@ primaryExpr
 |   THIS
 |   LPAREN expression RPAREN
 |   idExpr
-|   lambdaExpr
+|   functionExpr
 ;
 
 literal
@@ -329,11 +325,25 @@ simpleTemplateId
 :   IDENT LT templateArgumentList? GT
 ;
 
-qualifiedId
-:   TODO
+overloadableOperator
+:	PLUS | MINUS | STAR | SLASH | PCNT | CARET | AND | OR | TILDE | EXCL 
+|	assignmentOp 
+|	rightShiftOp
+|	leftShiftOp
+|	AND2 | OR2 | PLUS2 | MINUS2
+|	(LPAREN RPAREN)
+|	(LBRACK RBRACK)
 ;
 
-lambdaExpr
+operatorFunctionId
+:	OPERATOR overloadableOperator
+;
+
+qualifiedId
+:   COLON2? nestedNameSpec unqualifiedId
+;
+
+functionExpr
 :   TODO
 ;
 
