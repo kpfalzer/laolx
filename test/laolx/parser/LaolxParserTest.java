@@ -88,7 +88,8 @@ class LaolxParserTest {
     void expression() {
         final String DATA[] = new String[]{
                 "a+b-456.7",
-                "a+b.?foo(\"abc\")"
+                "a+b.?foo(\"abc\")",
+                "a?b:c"
         };
 
         runTest(DATA, LaolxParser::expression);

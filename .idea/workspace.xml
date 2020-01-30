@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3af207cd-ffbe-47ef-9bac-64667fe9cc71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LaolxLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LaolxLexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LaolxLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/LaolxLexer.tokens" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LaolxParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LaolxParser.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOTES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NOTES.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,7 +38,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Parser">
+  <component name="RunManager" selected="JUnit.LaolxParserTest.expression">
     <configuration name="LaolxParserTest.expression" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="laolx" />
       <extension name="coverage">
@@ -92,8 +89,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LaolxParserTest.simpleTypeSpecifier" />
         <item itemvalue="JUnit.LaolxParserTest.expression" />
+        <item itemvalue="JUnit.LaolxParserTest.simpleTypeSpecifier" />
       </list>
     </recent_temporary>
   </component>

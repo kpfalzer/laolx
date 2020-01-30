@@ -270,7 +270,6 @@ primaryExpr
 |   THIS
 |   LPAREN expression RPAREN
 |   idExpr
-|   functionExpr
 ;
 
 literal
@@ -317,7 +316,7 @@ idExpr
 
 unqualifiedId
 :   IDENT
-//todo: c++ allows operator here...
+|	operatorFunctionId
 |   simpleTemplateId
 ;
 
@@ -341,10 +340,6 @@ operatorFunctionId
 
 qualifiedId
 :   COLON2? nestedNameSpec unqualifiedId
-;
-
-functionExpr
-:   TODO
 ;
 
 bool
