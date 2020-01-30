@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3af207cd-ffbe-47ef-9bac-64667fe9cc71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LaolxParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LaolxParser.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/laolx/parser/LaolxParserTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,6 +20,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
